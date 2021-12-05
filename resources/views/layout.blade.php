@@ -19,21 +19,15 @@
 
 
   <section>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  
+
+  <div>
+    @yield('content')
+</div>
+
   </section>
 
   <footer>
     <div id="footer"></div>
-
   </footer>
 
 

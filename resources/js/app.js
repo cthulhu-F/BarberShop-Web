@@ -1,13 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Hola from "./components/componentsHome/Hola";
+import Header from "./components/componentsBody/Header";
+import Footer from "./components/componentsBody/Footer";
 
 require('./bootstrap');
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Hola/>
+    <Header/>
   </React.StrictMode>,
-  document.getElementById("hola")
+  document.getElementById("header")
+);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Footer/>
+  </React.StrictMode>,
+  document.getElementById("footer")
 );
