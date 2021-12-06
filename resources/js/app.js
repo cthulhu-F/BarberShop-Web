@@ -9,14 +9,12 @@ import Item from "./components/componentsHome/Item";
  * includes React and other helpers. It's a great starting point while
  * building robust, powerful web applications using React + Laravel.
  */
+import Header from "./components/componentsBody/Header";
+import Footer from "./components/componentsBody/Footer";
+import Dropdown from "./components/componentsBody/Dropdown";
 
 require('./bootstrap');
 
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 
 
@@ -27,4 +25,25 @@ require('./bootstrap');
   document.getElementById("home")
 );
 
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Header/>
+  </React.StrictMode>,
+  document.getElementById("header")
+);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Footer/>
+  </React.StrictMode>,
+  document.getElementById("footer")
+);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Dropdown/>
+  </React.StrictMode>,
+  document.getElementById("drop-down")
+);
 
