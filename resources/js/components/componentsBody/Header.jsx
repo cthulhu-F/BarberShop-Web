@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
 import imagenes from '../../../img/images';
+import { Link } from 'react-router-dom';
 
 
 
@@ -19,7 +20,7 @@ const Header = () => {
     
         <ul className="header-menu col-xl-4 col-lg-4 col-md-6 row col-sm-6 col-6 navbar navbar-expand-lg" >
             <li className="menu-item col-xl-4 col-lg-4 col-md-4 col-sm-4" ><a href="{{ route('home') }}">Home</a></li>
-            <li className="menu-item col-xl-4 col-lg-4 col-md-4 col-sm-4" ><a href="{{ route('shop.index') }}">Shop</a></li>
+            <li className="menu-item col-xl-4 col-lg-4 col-md-4 col-sm-4" ><a href="#">Shop</a></li>
             <li className="menu-item col-xl-4 col-lg-4 col-md-4 col-sm-4" ><a href="{{ route('calendar') }}">Calendar</a></li>
         </ul>
 

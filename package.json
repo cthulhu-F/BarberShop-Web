@@ -24,8 +24,10 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "boostrap": "^2.0.0",
         "bootstrap-icons": "^1.7.2",
         "react-bootstrap": "^2.0.3",
+        "react-bootstrap-validation": "^0.1.11",
         "react-router-dom": "^6.0.2"
     }
 }

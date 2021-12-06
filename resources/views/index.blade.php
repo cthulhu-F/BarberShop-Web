@@ -7,7 +7,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <title>Home / WebShopping</title>
 
 </head>
@@ -17,24 +16,12 @@
   <header></header>
   
   <section>
+    <div id="header"></div>
+    <div id="drop-down" ></div>
     <div id="home"></div>
   </section>
 
-  <footer></footer>
 
-
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
-        crossorigin="anonymous"></script>    
-  <heaeder>
-     <div id="header"></div>
-     <div id="drop-down" ></div>
-  </header>
-
-
-  <section>
   </br>
   </br>
   </br>
@@ -45,7 +32,6 @@
   </br>
   </br>
 
-  </section>
 
   <footer>
     <div id="footer"></div>
