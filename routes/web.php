@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+Route::view('/', 'home')->name('home');
+Route::view('calendar', 'calendar')->name('calendar');
+
+Route::get('/product/{value}', function ($value) {
+    return view('product', ["value" => $value]);
 });
+
