@@ -1,7 +1,41 @@
-@extends('layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@section('content')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-    <h1>contenido de home</h1>
+    <title>Home / WebShopping</title>
 
-@endsection
+</head>
+
+<body>
+
+  <header>
+    <div id="header"></div>
+  </header>
+  
+  <section>
+    <div id="home"></div>
+  </section>
+
+
+
+  <footer>
+    <div id="footer"></div>
+  </footer>
+
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9%22%3E"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+</body>
+
+
+
+
+</html>

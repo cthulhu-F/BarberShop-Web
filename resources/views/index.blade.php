@@ -13,29 +13,17 @@
 
 <body>
 
-  <header></header>
+  <header>
+    <div id="header"></div>
+  </header>
   
   <section>
-    <div id="header"></div>
-    <div id="drop-down" ></div>
     <div id="home"></div>
   </section>
 
 
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-
-
   <footer>
     <div id="footer"></div>
-
   </footer>
 
 

@@ -1,0 +1,76 @@
+/* BACKGROUND COLOR */
+
+/* BG COLOR EXTRA */
+
+.bg-black {
+    background-color: #000000!important;
+}
+
+.bg-oxfordBlue{
+    background-color: #14213D!important;
+}
+
+.bg-orangeWeb{
+    background-color: #FCA311!important;
+}
+
+.bg-platinum{
+    background-color: #E5E5E5!important;
+}
+
+/* TEXT COLOR EXTRA */
+
+.text-black {
+    background-color: #000000!important;
+}
+
+.text-oxfordBlue{
+    background-color: #14213D!important;
+}
+
+.text-orangeWeb{
+    background-color: #FCA311!important;
+}
+
+.text-platinum{
+    background-color: #E5E5E5!important;
+}
+
+/* BTN COLOR EXTRA */
+
+.btn-black{
+    background-color: #000000;
+    color: white;
+
+    transition: 0.5s;
+}
+
+.btn-black:hover{
+    color: #E5E5E5!important;
+    border: 1px solid white!important;
+}
+
+/* LINK COLOR EXTRA */
+
+
+.link-white{
+    color: white;
+
+    transition: 0.5s;
+}
+
+.link-white:hover{
+    color: #E5E5E5!important;
+}
+
+.link-black{
+    color: #000000;
+
+    transition: 0.5s;
+}
+
+.link-black:hover{
+    color: #E5E5E5!important;
+}
+
+

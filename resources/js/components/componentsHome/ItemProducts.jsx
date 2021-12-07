@@ -6,9 +6,6 @@ const ItemProducts = ({data}) => {
 
   const urlImg = require.context('../../../asset/product', true);
 
-
-
-
   return(
     <div className="col border-0">
           <div className="card p-2 border-0 shadow-sm" style={{borderRadius : "20px"}}>

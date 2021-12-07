@@ -4,11 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemProducts from './itemProducts';
 import { ITEM_PRODUCTS } from '../../constans/ConstItem';
 
-const Home = () => {
+const Shop = () => {
 
   const products = ITEM_PRODUCTS.products;
-
-
+  
   return (
     <div className="container-fluid bg-light p-2">
       <div className="container-md">
@@ -38,7 +37,7 @@ const Home = () => {
   );
 }
 
-export default Home
+export default Shop
 
 
 

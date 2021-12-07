@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,11 +13,11 @@
 
 <body>
 
-  <header></header>
+  <header>
+    <div id="header"></div>
+  </header>
   
   <section>
-    <div id="header"></div>
-    <div id="drop-down" ></div>
     <div id="home"></div>
   </section>
 
@@ -35,7 +35,6 @@
 
   <footer>
     <div id="footer"></div>
-
   </footer>
 
 
@@ -49,4 +48,4 @@
 
 
 
-</html>
+</html> -->

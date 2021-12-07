@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 Route::view('calendar', 'calendar')->name('calendar');
+Route::view('shop', 'shop')->name('shop');
+
 
 Route::get('/product/{value}', function ($value) {
     return view('product', ["value" => $value]);
 });
-

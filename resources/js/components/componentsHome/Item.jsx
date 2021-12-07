@@ -7,7 +7,6 @@ import { ITEM_PRODUCTS } from '../../constans/ConstItem';
 
 
 const Item = () => {
-
   let URL = window.location.pathname;
   URL = URL.split('/');
   let URLproduct = URL[2];
@@ -123,7 +122,7 @@ export default Item;
 if (document.getElementById("item")) {
   ReactDOM.render(
       <React.StrictMode>
-          <Item />
+          <Item/>
       </React.StrictMode>,
       document.getElementById("item")
   );

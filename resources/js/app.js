@@ -1,29 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Home from "./components/componentsHome/Home";
-import Item from "./components/componentsHome/Item";
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes React and other helpers. It's a great starting point while
  * building robust, powerful web applications using React + Laravel.
  */
+
 import Header from "./components/componentsBody/Header";
 import Footer from "./components/componentsBody/Footer";
-import Dropdown from "./components/componentsBody/Dropdown";
+
+import Shop from "./components/componentsHome/Shop";
+import Item from "./components/componentsHome/Item";
+
+// import ImportBoostrap from "./importBoostrap"
 
 require('./bootstrap');
 
-
-
-
- ReactDOM.render(
-  <React.StrictMode>
-      <Home/>
-  </React.StrictMode>,
-  document.getElementById("home")
-);
+//  ReactDOM.render(
+//   <React.StrictMode>
+//       <Home/>
+//   </React.StrictMode>,
+//   document.getElementById("home")
+// );
 
 
 ReactDOM.render(
@@ -40,10 +39,20 @@ ReactDOM.render(
   document.getElementById("footer")
 );
 
+
 ReactDOM.render(
   <React.StrictMode>
-    <Dropdown/>
+    <Shop/>
   </React.StrictMode>,
-  document.getElementById("drop-down")
+  document.getElementById("shop")
 );
+
+
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <ImportBoostrap/>
+//   </React.StrictMode>,
+//   document.getElementById("import-boostrap")
+// );
 
