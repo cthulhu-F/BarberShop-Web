@@ -4,6 +4,9 @@ import ItemProducts from './itemProducts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ITEM_PRODUCTS } from '../../constans/ConstItem';
 
+import Counter from "../../counter";
+
+
 
 
 const Item = () => {
@@ -64,22 +67,24 @@ const Item = () => {
                 <li className="list-group-item border-0">
                   <div>
                     <span className="text-muted fs-5">
-                      Detalles del producto Detalles del producto Detalles del producto Detalles del producto </span>
+                    {products[0].description} </span>
                   </div>
                 </li>
                 <li className="list-group-item border-0">
-                  <span className="text-muted fs-6">SKU: 123456789</span>
+                  <span className="text-muted fs-6">Stock: {products[0].stock} </span>
                 </li>
                 <li className="list-group-item border-0">
-                  <span className="text-dark fw-bold fs-3">$10.99</span>
+                  <span className="text-dark fw-bold fs-3">{products[0].price}</span>
                 </li>
                 <li className="list-group-item border-0">
                   <ul className="list-group list-group-horizontal border-0 border-top border-bottom py-4">
-                    <li className="list-group-item border-0 p-0 pe-1 w-50 d-flex">
+                    {/* <li className="list-group-item border-0 p-0 pe-1 w-50 d-flex">
                       <button className="btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold " style={{ zIndex: "2"}}><i className="bi bi-dash"></i></button>
                       <input className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3" placeholder="1" type="number" disabled />
                       <button className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
-                    </li>
+                    </li> */}
+                    <Counter></Counter>
+                    {/* <li className="counter"></li> */}
                     <li className="list-group-item border-0  p-0 ps-1 w-50">
                       <button className="btn btn-dark h-100 w-100 fs-3"><i className="bi bi-cart-plus"></i></button>
                     </li>

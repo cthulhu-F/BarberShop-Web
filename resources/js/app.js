@@ -12,6 +12,7 @@ import Footer from "./components/componentsBody/Footer";
 
 import Shop from "./components/componentsHome/Shop";
 import Item from "./components/componentsHome/Item";
+import Counter from "./counter";
 
 // import ImportBoostrap from "./importBoostrap"
 
