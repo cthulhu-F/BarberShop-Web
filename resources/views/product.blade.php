@@ -18,7 +18,7 @@
   </header>
   
   <section>
-    <div id="item"></div>
+    <div id="item" style="margin:50px;"></div>
   </section>
 
 

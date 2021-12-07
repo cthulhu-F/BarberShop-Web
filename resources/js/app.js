@@ -12,18 +12,12 @@ import Footer from "./components/componentsBody/Footer";
 
 import Shop from "./components/componentsHome/Shop";
 import Item from "./components/componentsHome/Item";
+import Home from "./components/componentsHome/Home";
 import Counter from "./counter";
 
 // import ImportBoostrap from "./importBoostrap"
 
 require('./bootstrap');
-
-//  ReactDOM.render(
-//   <React.StrictMode>
-//       <Home/>
-//   </React.StrictMode>,
-//   document.getElementById("home")
-// );
 
 
 ReactDOM.render(
@@ -47,6 +41,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("shop")
 );
+
+
 
 
 

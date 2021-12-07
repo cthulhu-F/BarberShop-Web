@@ -7285,8 +7285,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_componentsBody_Footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/componentsBody/Footer */ "./resources/js/components/componentsBody/Footer.jsx");
 /* harmony import */ var _components_componentsHome_Shop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/componentsHome/Shop */ "./resources/js/components/componentsHome/Shop.jsx");
 /* harmony import */ var _components_componentsHome_Item__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/componentsHome/Item */ "./resources/js/components/componentsHome/Item.jsx");
-/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./counter */ "./resources/js/counter.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_componentsHome_Home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/componentsHome/Home */ "./resources/js/components/componentsHome/Home.jsx");
+/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./counter */ "./resources/js/counter.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 /**
@@ -7299,26 +7300,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
  // import ImportBoostrap from "./importBoostrap"
 
 
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //  ReactDOM.render(
-//   <React.StrictMode>
-//       <Home/>
-//   </React.StrictMode>,
-//   document.getElementById("home")
-// );
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_componentsBody_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_componentsBody_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {})
 }), document.getElementById("header"));
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_componentsBody_Footer__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_componentsBody_Footer__WEBPACK_IMPORTED_MODULE_3__["default"], {})
 }), document.getElementById("footer"));
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_componentsHome_Shop__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_componentsHome_Shop__WEBPACK_IMPORTED_MODULE_4__["default"], {})
 }), document.getElementById("shop")); // ReactDOM.render(
 //   <React.StrictMode>
 //     <ImportBoostrap/>
@@ -7382,8 +7378,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var style = {
-  backgroundColor: "#000000 !important"
+  backgroundColor: "#000000 !important",
+  borderRadius: "0px 0px 250px 250px",
+  height: "220px"
 };
 
 var Footer = function Footer() {
@@ -7398,16 +7397,19 @@ var Footer = function Footer() {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "row g-3",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-              className: "col-12 col-xl-3 d-flex justify-content-xl-start justify-content-center footer-column",
+              className: "col-12 col-xl-3 d-flex justify-content-xl-center justify-content-center footer-column",
+              style: {
+                alignSelf: "start",
+                margin: "0px 0px 30px 0px"
+              },
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-                className: "navbar-brand text-dark p-2  rounded-circle overflow-hidden",
+                className: "w-100 d-flex justify-content-center",
                 style: style,
                 href: "#",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                   src: _img_images__WEBPACK_IMPORTED_MODULE_1__["default"].logo,
                   alt: "",
-                  width: "200",
-                  height: "200"
+                  style: style
                 })
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -7670,6 +7672,39 @@ var Header = function Header() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Header);
+
+/***/ }),
+
+/***/ "./resources/js/components/componentsHome/Home.jsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/componentsHome/Home.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var Home = function Home() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+    children: " HOLA "
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home); // if (document.getElementById("home")) {
+//     ReactDOM.render(
+//         <React.StrictMode>
+//         <Home/>
+//         </React.StrictMode>,
+//         document.getElementById("home")
+//     );
+// }
 
 /***/ }),
 

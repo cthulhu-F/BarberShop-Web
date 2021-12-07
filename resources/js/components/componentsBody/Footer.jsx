@@ -1,8 +1,11 @@
+import { start } from '@popperjs/core';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagenes from '../../../img/images';
 
 const style= {
     backgroundColor: "#000000 !important",
+    borderRadius: "0px 0px 250px 250px",
+    height: "220px",
 }
 
 const Footer = () => {
@@ -14,9 +17,9 @@ const Footer = () => {
                     <div className="container">
                         <div className="row g-3">
 
-                        <div className="col-12 col-xl-3 d-flex justify-content-xl-start justify-content-center footer-column">
-                            <a className="navbar-brand text-dark p-2  rounded-circle overflow-hidden" style={style} href="#">
-                            <img src={imagenes.logo} alt="" width="200" height="200"></img>
+                        <div className="col-12 col-xl-3 d-flex justify-content-xl-center justify-content-center footer-column" style={{alignSelf:"start", margin:"0px 0px 30px 0px"}}>
+                            <a className="w-100 d-flex justify-content-center" style={style} href="#">
+                            <img src={imagenes.logo} alt=""  style={style} ></img>
                             </a>
                         </div>
 

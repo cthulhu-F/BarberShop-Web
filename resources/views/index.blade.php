@@ -18,7 +18,6 @@
   </header>
   
   <section>
-    <div id="home"></div>
   </section>
 
 
