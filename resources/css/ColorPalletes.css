@@ -21,19 +21,19 @@
 /* TEXT COLOR EXTRA */
 
 .text-black {
-    background-color: #000000!important;
+    color: #000000!important;
 }
 
 .text-oxfordBlue{
-    background-color: #14213D!important;
+    color: #14213D!important;
 }
 
 .text-orangeWeb{
-    background-color: #FCA311!important;
+    color: #FCA311!important;
 }
 
 .text-platinum{
-    background-color: #E5E5E5!important;
+    color: #E5E5E5!important;
 }
 
 /* BTN COLOR EXTRA */

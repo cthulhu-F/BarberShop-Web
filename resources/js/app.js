@@ -10,14 +10,21 @@ import ReactDOM from "react-dom";
 import Header from "./components/componentsBody/Header";
 import Footer from "./components/componentsBody/Footer";
 
-import Shop from "./components/componentsHome/Shop";
-import Item from "./components/componentsHome/Item";
-import Home from "./components/componentsHome/Home";
+
+import Shop from "./components/componentsShop/Shop";
 import Counter from "./counter";
+
+
+import Home from "./components/componentsHome/Home";
+import ModalShoppingCart from "./components/componentsShoppingCart/ModalShoppingCart";
+import Slider from "./components/componentsHome/Slider";
+import ModalTurn from "./components/componentsTurn/ModalTurn";
+import Item from "./components/componentsShop/Item";
 
 // import ImportBoostrap from "./importBoostrap"
 
 require('./bootstrap');
+
 
 
 ReactDOM.render(
@@ -37,9 +44,16 @@ ReactDOM.render(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Shop/>
+    <Home/>
   </React.StrictMode>,
-  document.getElementById("shop")
+  document.getElementById("home")
+);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Slider />
+  </React.StrictMode>,
+  document.getElementById("slider")
 );
 
 
