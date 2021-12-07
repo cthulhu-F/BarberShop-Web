@@ -17,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-Route::view('/', 'home')->name('home');
-Route::view('calendar', 'calendar')->name('calendar');
-Route::view('shop', 'shop')->name('shop');
+//Route::view('/', 'home')->name('home');
+//Route::view('calendar', 'calendar')->name('calendar');
+//Route::view('shop', 'shop')->name('shop');
+
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/shop', function () {
+    return view('shop');
+});
 
 
 Route::get('/product/{value}', function ($value) {
