@@ -31,5 +31,5 @@ Route::get('/shop', function () {
 
 
 Route::get('/product/{value}', function ($value) {
-    return view('product', ["value" => $value]);
+    return view('item', ["value" => $value]);
 });

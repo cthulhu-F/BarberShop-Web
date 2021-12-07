@@ -19,7 +19,7 @@ const ShopItem = ({data}) => {
                 </div>
     
                 <div className="card-body">
-                  <span className="fs-7 fw-bold">{name}</span>
+                  <span className="fs-7 fw-bold"><a className="text-decoration-none text-black" href={"/product/"+id}>{name}</a></span>
                   <div className="card-text text-muted fs-9">{description}</div>
                   <div className="d-flex justify-content-between mt-2">
                     <span className="fw-bold">${price}</span>

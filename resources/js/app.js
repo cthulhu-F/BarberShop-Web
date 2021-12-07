@@ -18,6 +18,7 @@ import Home from "./components/componentsHome/Home";
 import ModalShoppingCart from "./components/componentsShoppingCart/ModalShoppingCart";
 import Slider from "./components/componentsHome/Slider";
 import ModalTurn from "./components/componentsTurn/ModalTurn";
+import Item from "./components/componentsShop/Item";
 
 // import ImportBoostrap from "./importBoostrap"
 
@@ -29,6 +30,7 @@ require('./bootstrap');
 //   </React.StrictMode>,
 //   document.getElementById("home")
 // );
+
 
 
 ReactDOM.render(
