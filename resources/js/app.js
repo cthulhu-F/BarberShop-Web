@@ -7,19 +7,21 @@ import ReactDOM from "react-dom";
  * building robust, powerful web applications using React + Laravel.
  */
 
-import Header from "./components/componentsBody/Header";
+import Header  from "./components/componentsBody/Header";
 import Footer from "./components/componentsBody/Footer";
 
 
 import Shop from "./components/componentsShop/Shop";
 import Counter from "./counter";
+import Item from "./components/componentsShop/Item";
+import ModalShoppingCart from "./components/componentsShoppingCart/ModalShoppingCart";
+import ShoppingCart from "./components/componentsShoppingCart/ShoppingCart";
+import ModalTurn from "./components/componentsTurn/ModalTurn";
+
 
 
 import Home from "./components/componentsHome/Home";
-import ModalShoppingCart from "./components/componentsShoppingCart/ModalShoppingCart";
 import Slider from "./components/componentsHome/Slider";
-import ModalTurn from "./components/componentsTurn/ModalTurn";
-import Item from "./components/componentsShop/Item";
 
 // import ImportBoostrap from "./importBoostrap"
 
@@ -48,6 +50,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("home")
 );
+
 
 ReactDOM.render(
   <React.StrictMode>

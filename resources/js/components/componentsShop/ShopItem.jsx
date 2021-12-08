@@ -1,5 +1,5 @@
 
-const ShopItem = ({data}) => {
+const ShopItem = ({data, addToCart}) => {
 
   let {id, name, img, description, price, stock } = data;
 
@@ -7,6 +7,7 @@ const ShopItem = ({data}) => {
 
 
   return(
+
       <div className="col border-0">
               <div className="card border-0 shadow-sm rounded">
                 <div className="w-100 text-center bg-light rounded">
@@ -23,7 +24,7 @@ const ShopItem = ({data}) => {
                   <div className="card-text text-muted fs-9">{description}</div>
                   <div className="d-flex justify-content-between mt-2">
                     <span className="fw-bold">${price}</span>
-                    <button className="btn btn-black fs-7 py-1 px-2"><i className="bi bi-cart-plus"></i></button>
+                    <button className="btn btn-black fs-7 py-1 px-2 " onClick={()=>addToCart(id)}><i className="bi bi-cart-plus"></i></button>
                   </div>
                 </div>
               </div>

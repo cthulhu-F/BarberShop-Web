@@ -17,6 +17,7 @@ const Item = () => {
     const textDataCut = String(URLproduct).toUpperCase();
     return itemDataCut.indexOf(textDataCut) > -1
   });
+  
 
 
   return (
@@ -71,11 +72,7 @@ const Item = () => {
           </li>
           <li className="list-group-item border-0">
             <ul className="list-group list-group-horizontal border-0 border-top border-bottom py-4">
-              <li className="list-group-item border-0 p-0 pe-1 w-50 d-flex">
-                <button className="btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold " style={{zIndex: "2"}}><i className="bi bi-dash"></i></button>
-                <input className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3" placeholder="1" type="number" disabled />
-                <button className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
-              </li>
+              <Counter></Counter>
               <li className="list-group-item border-0  p-0 ps-1 w-50">
                 <button className="btn btn-dark h-100 w-100 fs-3"><i className="bi bi-cart-plus"></i></button>
               </li>

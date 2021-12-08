@@ -13,7 +13,6 @@
 
 <body>
 
-  
   <header>
     <div id="header"></div>
   </header>
@@ -21,17 +20,18 @@
   <section class="container-fluid bg-light p-4 min-vh-100 font-p">
 
     <article>
-      <div id="modalTurn"></div>
-    </article>
-
-    <article>
+      <div id="shoppingCart"></div>
       <div id="modalShoppingCart"></div>
     </article>
 
-    <article>
-      <!-- <div id="shop"></div> -->
-      <div id="shoppingCart"></div>
-    </article>
+
+    <!-- <article class="container-md">
+        <div class="d-flex justify-content-center border-0 border-bottom  my-4">
+          <span class="fw-bold fs-3 text-black font-h1">Nuestros productos</span>
+        </div>
+
+        <div id="slider"></div>
+    </article> -->
 
   </section>
 
@@ -39,7 +39,6 @@
   <footer class="text-center text-lg-start bg-dark text-muted font-h1">
     <div id="footer"></div>
   </footer>
-
 
 
     <script src="{{ asset('js/app.js') }}" defer></script>

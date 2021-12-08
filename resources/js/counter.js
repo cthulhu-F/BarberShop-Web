@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useReducer, useState } from "react"; 
 
 
-    const initialState = {contador:0};
+    const initialState = {contador:1};
 
     const TYPES = {
         INCREMENT:"INCREMENT",
@@ -14,11 +14,11 @@ import { useReducer, useState } from "react";
     function reducer (state, action){
         switch(action.type){
             case TYPES.INCREMENT:
-                if (state.contador <0) return {contador: 0};
+                if (state.contador <0) return {contador: 1};
                 return {contador: state.contador +1}
 
             case TYPES.DECREMENT:
-                if (state.contador <=0) return {contador: 0};
+                if (state.contador <=1) return {contador: 1};
                 return {contador: state.contador -1}
         }
     }

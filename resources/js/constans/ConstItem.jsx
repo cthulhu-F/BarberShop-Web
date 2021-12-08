@@ -18,19 +18,19 @@ export const ITEM_PRODUCTS = {
     },
     {
       id: 3,
-      name: "Producto 2",
+      name: "Producto 3",
       img: "./img_product.jpg",
       description: "Descripcion del producto",
       price: "10.99",
-      stock: "2"
+      stock: "3"
     },
     {
       id: 4,
-      name: "Producto 2",
+      name: "Producto 4",
       img: "./img_product.jpg",
       description: "Descripcion del producto",
       price: "10.99",
-      stock: "2"
+      stock: "4"
     }
   ],
 }
