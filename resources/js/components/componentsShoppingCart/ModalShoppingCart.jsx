@@ -1,75 +1,102 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
-import { useReducer } from "react";
-import { cartItemsData, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
-import ShopItem from "../componentsShop/ShopItem";
-import ShoppingCartItem from "./ShoppingCartItem";
-import { TYPES } from "../../../../src/actions/shoppingActions";
 
-const ModalShoppingCart = () => {
-    const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
-    const{products, cart} = state;
+const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart }) => {
 
-    const loadData = ()=>{
-      dispatch({type:TYPES.LOAD_DATA});
-    }
+  console.log(data);
 
-    const addOneToCart = (id) =>{
-      dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id})
-      };
-    
-    const deleteFromCart = (id, all=false) =>{
-        if(all){
-            dispatch({type:TYPES.REMOVE_ALL_FROM_CART, payload:id});
-            
-        }else {
-          dispatch({type:TYPES.REMOVE_ONE_FROM_CART, payload:id});
-      }
-    }
+  let shoppingCartItem = data;
 
-    const cleanCart = () =>{
-      dispatch({type:TYPES.CLEAN_CART})
+  if (data.length === 0) {
+    shoppingCartItem = [{
+      id: "Sin datos",
+      name: "Sin datos",
+      quantity: 0.00,
+      price: 0.00,
+    }]
   }
 
-    return (
-      <div className="modal fade" id="shoppingCartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-       aria-hidden="true">
-        <div className="modal-dialog modal-gl">
-          <div className="modal-content">
-            
-            <div className="modal-header">
-              <h5 className="modal-title fs-4" id="exampleModalLabel">Carrito <i
-                className="bi bi-cart"></i></h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            
-            {cart.map((item, index)=>
-                <ShoppingCartItem key ={index} data={item} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart}/>
-            )}
-        
-            <button onClick={()=> loadData()} >Load data</button>
-           
-            <div className="modal-footer">
-              <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Vaciar carrito </button>
-              <a href="/shoppingCart" className="btn btn-black">Completar compra</a>
-            </div>
+  
 
+
+  return (
+    <div className="modal fade" id="shoppingCartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div className="modal-dialog modal-gl">
+        <div className="modal-content">
+
+          <div className="modal-header">
+            <h5 className="modal-title fs-4" id="exampleModalLabel">Carrito <i
+              className="bi bi-cart"></i></h5>
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+
+          <div className="modal-body">
+            <div className="row">
+              <div className="col">
+                <div className="table-responsive font-p">
+                  <table className="table table-hover">
+                    <thead className="font-h1">
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">SubTotal</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody style={{verticalAlign: "middle"}}>
+
+                      {
+                        shoppingCartItem.map((item) => (
+                          <tr>
+                            <td>
+                              <div className="d-flex" style={{ height: "50px" }}>
+
+                              </div>
+                            </td>
+                            <td className="">
+                              <div className="fs-7"> {item.name}  </div>
+                              <div className="text-muted fs-7">  </div>
+                            </td>
+                            <td className="">
+                              <div className="fs-7"> {item.quantity}  </div>
+                              <div className="text-muted fs-7">  </div>
+                            </td>
+                            <td className="">{item.price}</td>
+                            <td className="">{item.price * item.quantity}</td>
+                            <td>
+                              <div className="d-flex">
+                              <button className="btn btn-danger p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id, true)}><i className="bi bi-trash"></i></button>
+                              <button className="btn btn-dark p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id)}><i class="bi bi-dash-lg"></i></button>
+                              <button className="btn btn-dark p-1 fs-7" onClick={()=> addOneToCart(item.id)}><i class="bi bi-plus-lg"></i></button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      }
+
+
+                    </tbody>
+                    <tfoot></tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="modal-footer">
+            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Vaciar carrito </button>
+            <a href="/shoppingCart" className="btn btn-black">Completar compra</a>
+          </div>
+
         </div>
       </div>
-    );
+    </div>
+  );
 
 }
 
 export default ModalShoppingCart
-
-if (document.getElementById("modalShoppingCart")) {
-  ReactDOM.render(
-      <React.StrictMode>
-          <ModalShoppingCart />
-      </React.StrictMode>,
-      document.getElementById("modalShoppingCart")
-  );
-}
