@@ -7,13 +7,19 @@ import { shoppingInitialState, shoppingReducer } from "../../../../src/reducers/
 import ShopItem from "../componentsShop/ShopItem";
 import ShoppingCartItem from "./ShoppingCartItem";
 import { TYPES } from "../../../../src/actions/shoppingActions";
+import ModalShoppingCart from "./ModalShoppingCart";
+import { CartPorvider, useCart } from "./ShoppingCartContext";
+
+
 
 const ShoppingCart = () => {
   const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
   const{products, cart} = state;
 
+
   const addToCart = (id) =>{
-      dispatch({type:TYPES.ADD_TO_CART,payload:id})
+      dispatch({type:TYPES.ADD_TO_CART,payload:id});
+
   };
 
   const addOneToCart = (id) =>{
@@ -23,6 +29,7 @@ const ShoppingCart = () => {
   const deleteFromCart = (id, all=false) =>{
       if(all){
           dispatch({type:TYPES.REMOVE_ALL_FROM_CART, payload:id});
+          
       }else {
         dispatch({type:TYPES.REMOVE_ONE_FROM_CART, payload:id});
     }
@@ -50,6 +57,9 @@ const ShoppingCart = () => {
                 )}
           </article>
 
+          {/* <ModalShoppingCart/> */}
+
+          
 
       </div>
     );

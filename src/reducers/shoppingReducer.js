@@ -7,6 +7,11 @@ export const shoppingInitialState = {
     cart:[],
 }
 
+export const cartItemsData = {
+    products :ITEM_PRODUCTS.products,
+    cart:[],
+}
+
 
 export function shoppingReducer(state, action){
     switch(action.type){
@@ -15,32 +20,36 @@ export function shoppingReducer(state, action){
 
             let itemInCart = state.cart.find((item)=> item.id === newItem.id); 
 
-            return itemInCart
-                ? {
+            cartItemsData.cart = itemInCart
+            ? {
+                ...state,
+                cart: state.cart.map((item) => 
+                    item.id === newItem.id
+                    ? {...item, quantity : item.quantity + 1}
+                    : item
+                ),
+            }:{
                     ...state,
-                    cart: state.cart.map((item) => 
-                        item.id === newItem.id
-                        ? {...item, quantity : item.quantity + 1}
-                        : item
-                    ),
-                }:{
-                        ...state,
-                        cart: [...state.cart, { ...newItem, quantity:1}],
-                    };
+                    cart: [...state.cart, { ...newItem, quantity:1}],
+                };
 
+
+            return cartItemsData.cart;
             
         }
 
         case TYPES.ADD_ONE_TO_CART:{
-            let itemToAdd = state.cart.find((item)=> item.id === newItem.id); 
-            return {...state,
+            let itemToAdd = state.cart.find((item)=> item.id === newItem.id);
+            
+            cartItemsData.cart = {...state,
                 cart: [...state.cart, { ...itemToAdd, quantity:1}],};
+            return cartItemsData.cart;
         }
 
         case TYPES.REMOVE_ONE_FROM_CART:{
             const intemToDelete= state.cart.find((item) => item.id === action.payload);
 
-            return intemToDelete.quantity >1
+            cartItemsData.cart =intemToDelete.quantity >1
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
@@ -52,16 +61,26 @@ export function shoppingReducer(state, action){
                 ...state,
                 cart: state.cart.filter(item => item.id !== action.payload),
             };
+
+            return cartItemsData.cart;
         }
         
         case TYPES.REMOVE_ALL_FROM_CART:{
-            return {...state,
-            cart: state.cart.filter(item => item.id !== action.payload),
-            };
+            cartItemsData.cart = {...state,
+                cart: state.cart.filter(item => item.id !== action.payload),
+                };
+            return cartItemsData.cart;
         }
 
         case TYPES.CLEAN_CART:{
-            return shoppingInitialState;
+            cartItemsData.cart= shoppingInitialState;
+            return cartItemsData.cart;
+        }
+
+        case TYPES.LOAD_DATA:{
+            console.log('data loaded');
+            console.log(cartItemsData.cart);
+            return cartItemsData.cart;
         }
 
         default :{

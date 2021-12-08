@@ -4,8 +4,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
 import { ITEM_IMG } from '../../constans/constImg';
 
+import { useReducer } from "react";
+import { shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
+import { TYPES } from "../../../../src/actions/shoppingActions";
+
 
 const Header = () => {
+
+  const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
+  const{products, cart} = state;
+
+  const loadData = ()=>{
+    dispatch({type:TYPES.LOAD_DATA});
+  }
 
   const urlImg = require.context('../../../asset/marca', true);
 
@@ -57,7 +68,7 @@ const Header = () => {
               <div className="d-flex">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                 <button className="btn btn-black" type="submit"><i className="bi bi-search"></i></button>
-                <button className="btn btn-black ms-2" data-bs-toggle="modal" data-bs-target="#shoppingCartModal"><i
+                <button className="btn btn-black ms-2" data-bs-toggle="modal" data-bs-target="#shoppingCartModal" onClick={()=> loadData()}><i
                     className="bi bi-cart"></i></button>
               </div>
             </div>
