@@ -29,10 +29,9 @@ Route::get('/shop', function () {
     return view('shop');
 });
 
-Route::get('/shopping-cart', function () {
+Route::get('/shoppingCart', function () {
     return view('shoppingCart');
 });
-
 
 Route::get('/product/{value}', function ($value) {
     return view('item', ["value" => $value]);
