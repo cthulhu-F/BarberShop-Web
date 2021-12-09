@@ -6441,32 +6441,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
 /* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../css/main.css */ "./resources/css/main.css");
-/* harmony import */ var _src_reducers_shoppingReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../src/reducers/shoppingReducer */ "./src/reducers/shoppingReducer.js");
-/* harmony import */ var _componentsShop_ShopItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../componentsShop/ShopItem */ "./resources/js/components/componentsShop/ShopItem.jsx");
-/* harmony import */ var _ShoppingCartItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ShoppingCartItem */ "./resources/js/components/componentsShoppingCart/ShoppingCartItem.jsx");
-/* harmony import */ var _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../src/actions/shoppingActions */ "./src/actions/shoppingActions.js");
-/* harmony import */ var _ModalShoppingCart__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModalShoppingCart */ "./resources/js/components/componentsShoppingCart/ModalShoppingCart.jsx");
-/* harmony import */ var _ShoppingCartContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ShoppingCartContext */ "./resources/js/components/componentsShoppingCart/ShoppingCartContext.jsx");
-/* harmony import */ var _ShoppingCartContext__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_ShoppingCartContext__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -6476,77 +6451,145 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var ShoppingCart = function ShoppingCart() {
-  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_src_reducers_shoppingReducer__WEBPACK_IMPORTED_MODULE_4__.shoppingReducer, _src_reducers_shoppingReducer__WEBPACK_IMPORTED_MODULE_4__.shoppingInitialState),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      state = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var products = state.products,
-      cart = state.cart;
-
-  var addToCart = function addToCart(id) {
-    dispatch({
-      type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_7__.TYPES.ADD_TO_CART,
-      payload: id
-    });
-  };
-
-  var addOneToCart = function addOneToCart(id) {
-    dispatch({
-      type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_7__.TYPES.ADD_ONE_TO_CART,
-      payload: id
-    });
-  };
-
-  var deleteFromCart = function deleteFromCart(id) {
-    var all = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-    if (all) {
-      dispatch({
-        type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_7__.TYPES.REMOVE_ALL_FROM_CART,
-        payload: id
-      });
-    } else {
-      dispatch({
-        type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_7__.TYPES.REMOVE_ONE_FROM_CART,
-        payload: id
-      });
-    }
-  };
-
-  var cleanCart = function cleanCart() {
-    dispatch({
-      type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_7__.TYPES.CLEAN_CART
-    });
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h2", {
-      children: " Carrito de Compras "
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
-      children: " Productos "
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("article", {
-      className: "box row",
-      children: products.map(function (product) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_componentsShop_ShopItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          data: product,
-          addToCart: addToCart
-        }, product.id);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "row g-3",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "col-12 mb-3",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+        className: "fs-3 font-h1",
+        children: "Mi carrito"
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h3", {
-      children: "Carrito"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("article", {
-      className: "box",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
-        onClick: cleanCart,
-        children: "Limpiar carrito"
-      }), cart.map(function (item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_ShoppingCartItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          data: item,
-          deleteFromCart: deleteFromCart,
-          addOneToCart: addOneToCart
-        }, index);
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "col-12 col-xl-8",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "row font-h1 fw-bold my-2 d-none d-xl-flex justify-content-left",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-1"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-3",
+          children: "PRODUCTO"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-3",
+          children: "CANTIDAD"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-2",
+          children: "PRECIO"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-2",
+          children: "SUBTOTAL"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-1"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "row g-2 g-xl-3 my-1 py-2 border-0 border-bottom",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-6 col-xl-1",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "d-flex",
+            style: {
+              height: "50px"
+            }
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "col-6 col-xl-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "d-block fs-7",
+            children: "Producto 1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "d-block fs-7 text-muted",
+            children: "Descripcion afas safasfasfasfsaa as afsf  fasfasfasf"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-12 col-xl-3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "d-flex",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              className: "btn btn-white border rounded-0 rounded-start fs-7 px-1 px-xl-3 fw-bold ",
+              style: {
+                zIndex: "2"
+              },
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+                className: "bi bi-dash"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+              className: "form-control border-0 border-top border-bottom rounded-0 bg-white text-center fs-7",
+              placeholder: "1",
+              type: "number",
+              disabled: true
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              className: "btn btn-white border rounded-0 rounded-end fs-7 px-1 px-xl-3 fw-bold",
+              style: {
+                zIndex: "2"
+              },
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+                className: "bi bi-plus"
+              })
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-6 col-xl-2",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+            className: "fs-7",
+            children: "$10.999999"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-5 col-xl-2",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+            className: "fs-7 fw-bold",
+            children: "$10.999999"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-1 col-xl-1 d-inline",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            className: "btn btn-danger p-1 fs-7",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+              className: "bi bi-trash"
+            })
+          })
+        })]
       })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "col-12 col-xl-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "row g-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-6 col-xl-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "",
+            children: "TOTAL"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-6 col-xl-8",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "text-end",
+            children: " $10.9999999"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-6 col-xl-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "fw-bold",
+            children: "SUBTOTAL"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-6 col-xl-8",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "text-end fw-bold",
+            children: " $10.9999999"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-12 col-xl-12",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "text-center border-0 border-bottom font-h1 fs-5",
+            children: "Seleccionar metodo de pago"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-12",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            className: "w-100 btn btn-orangeWeb",
+            children: "  Finalizar compra "
+          })
+        })]
+      })
     })]
   });
 };
@@ -6554,54 +6597,10 @@ var ShoppingCart = function ShoppingCart() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShoppingCart);
 
 if (document.getElementById("shoppingCart")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ShoppingCart, {})
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ShoppingCart, {})
   }), document.getElementById("shoppingCart"));
 }
-
-/***/ }),
-
-/***/ "./resources/js/components/componentsShoppingCart/ShoppingCartContext.jsx":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/componentsShoppingCart/ShoppingCartContext.jsx ***!
-  \********************************************************************************/
-/***/ (() => {
-
-// import react, {useState, useEffect, useMemo} from 'react';
-// import { useAccordionButton } from 'react-bootstrap';
-// import { shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
-// const CartContext = React.createContext();
-// export function CartPorvider (props){
-//     const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
-//     const{products, cart} = state;
-//     const addToCart = (id) =>{
-//         dispatch({type:TYPES.ADD_TO_CART,payload:id});
-//     };
-//     const addOneToCart = (id) =>{
-//       dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id})
-//       };
-//     const deleteFromCart = (id, all=false) =>{
-//         if(all){
-//             dispatch({type:TYPES.REMOVE_ALL_FROM_CART, payload:id});
-//         }else {
-//           dispatch({type:TYPES.REMOVE_ONE_FROM_CART, payload:id});
-//       }
-//     }
-//     const cleanCart = () =>{
-//         dispatch({type:TYPES.CLEAN_CART})
-//     }
-//     const value = React.useMemo(()=>{
-//         return ({cart});
-//     }, {cart});
-//     return <CartContext.Provider value={cart} {...cart}/>
-// }
-//     export function useCart(){
-//         const context = react.useContext(CartContext);
-//         if(!context){
-//             throw new Error('usecart debe estar dentro del proveedor cartContext')
-//         }
-//         return context;
-//     }
 
 /***/ }),
 
