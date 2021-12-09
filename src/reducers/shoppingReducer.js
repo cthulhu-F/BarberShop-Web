@@ -1,16 +1,25 @@
 import { TYPES } from '../actions/shoppingActions';
 import { ITEM_PRODUCTS } from '../../resources/js/constans/ConstItem';
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
+import { useEffect } from 'react';
 
 export const shoppingInitialState = {
     products :ITEM_PRODUCTS.products,
     cart:[],
 }
 
-export const cartItemsData = {
-    products :ITEM_PRODUCTS.products,
-    cart:[],
-}
+// export const cartItemsData = {
+//     products :ITEM_PRODUCTS.products,
+//     cart:[],
+// }
+
+const existentCart = JSON.parse(localStorage.getItem('cartData'));
+
+export const cartItemsData = existentCart
+    ? { ...existentCart}
+    : {products:ITEM_PRODUCTS.products,
+            cart:[]};
+
 
 
 export function shoppingReducer(state, action){
@@ -33,7 +42,7 @@ export function shoppingReducer(state, action){
                     cart: [...state.cart, { ...newItem, quantity:1}],
                 };
 
-
+            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
             
         }

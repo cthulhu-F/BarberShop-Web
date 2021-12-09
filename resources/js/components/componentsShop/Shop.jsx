@@ -14,7 +14,6 @@ const Shop = () => {
 
   const addToCart = (id) =>{
       dispatch({type:TYPES.ADD_TO_CART,payload:id});
-
   };
 
   const addOneToCart = (id) =>{
