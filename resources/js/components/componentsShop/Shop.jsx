@@ -52,7 +52,7 @@ const Shop = () => {
           </div>
           </div>
 
-          <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart}  />
+          <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} cleanCart={cleanCart}  />
         </div>
   );
 }

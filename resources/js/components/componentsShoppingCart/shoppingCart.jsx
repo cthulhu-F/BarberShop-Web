@@ -33,7 +33,7 @@ const ShoppingCart = () => {
 
           <div className="col-6 col-xl-3">
             <div className="d-block fs-7">
-              Producto 1
+              Producto 2
             </div>
             <div className="d-block fs-7 text-muted">
               Descripcion afas safasfasfasfsaa as afsf  fasfasfasf

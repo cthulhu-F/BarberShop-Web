@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
 
-const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart }) => {
+const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => {
 
   console.log(data);
 
   let shoppingCartItem = data;
+  const buttonsStyle = {
+    display: 'unset',
+  };
 
   if (data.length === 0) {
     shoppingCartItem = [{
@@ -15,6 +18,8 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart }) => {
       quantity: 0.00,
       price: 0.00,
     }]
+
+    buttonsStyle['display'] = "none";
   }
 
   
@@ -69,9 +74,9 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart }) => {
                             <td className="">{item.price * item.quantity}</td>
                             <td>
                               <div className="d-flex">
-                              <button className="btn btn-danger p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id, true)}><i className="bi bi-trash"></i></button>
-                              <button className="btn btn-dark p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id)}><i class="bi bi-dash-lg"></i></button>
-                              <button className="btn btn-dark p-1 fs-7" onClick={()=> addOneToCart(item.id)}><i class="bi bi-plus-lg"></i></button>
+                              <button className="btn btn-danger p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id, true)}style={buttonsStyle}><i className="bi bi-trash"></i></button>
+                              <button className="btn btn-dark p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id)} style={buttonsStyle}><i class="bi bi-dash-lg"></i></button>
+                              <button className="btn btn-dark p-1 fs-7" onClick={()=> addOneToCart(item.id)}style={buttonsStyle}><i class="bi bi-plus-lg"></i></button>
                               </div>
                             </td>
                           </tr>
@@ -88,7 +93,7 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart }) => {
           </div>
 
           <div className="modal-footer">
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Vaciar carrito </button>
+            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>cleanCart()}>Vaciar carrito </button>
             <a href="/shoppingCart" className="btn btn-black">Completar compra</a>
           </div>
 
