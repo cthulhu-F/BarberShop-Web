@@ -1,19 +1,22 @@
 import React from "react";
-import { useReducer } from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ITEM_PRODUCTS } from '../../constans/ConstItem';
-import { cartItemsData, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import { TYPES } from "../../../../src/actions/shoppingActions";
 import ShopItem from "./ShopItem";
-import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
-import mapDispatcht from "../../shoppingCartUses";
+
+  /*MODAL SHOP IMPORTS*/
+  import { useReducer } from 'react';
+  import { shoppingReducer, cartItemsData} from '../../../../src/reducers/shoppingReducer';
+  import mapDispatcht from '../../shoppingCartUses';
+  import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
+
+
 const Shop = () => {
+
+  /*MODAL SHOP ASSETS*/
   const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
   const{products, cart} = state;
-
-  
-
 
   const addToCart = mapDispatcht(dispatch).addToCart;
 
@@ -42,6 +45,7 @@ const Shop = () => {
           </div>
 
           <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}  />
+
         </div>
   );
 }

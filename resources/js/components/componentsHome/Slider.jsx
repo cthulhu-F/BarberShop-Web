@@ -3,11 +3,32 @@ import '../../../css/main.css';
 import { ITEM_PRODUCTS } from '../../constans/ConstItem';
 import SliderItem from './SliderItem';
 
+  /*MODAL SHOP IMPORTS*/
+import { useReducer } from 'react';
+import { shoppingReducer, cartItemsData} from '../../../../src/reducers/shoppingReducer';
+import mapDispatcht from '../../shoppingCartUses';
+import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
+
 const Slider = () => {
 
-  let SliderProducts_1 = ITEM_PRODUCTS.products.slice(0, 4);
+  
 
-  let SliderProducts_2 = ITEM_PRODUCTS.products.slice(4, 8);
+  /*MODAL SHOP ASSETS*/
+  const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
+  const{products, cart} = state;
+
+  const addToCart = mapDispatcht(dispatch).addToCart;
+
+  const addOneToCart = mapDispatcht(dispatch).addOneToCart;
+
+  const deleteFromCart = mapDispatcht(dispatch).deleteFromCart;
+
+  const cleanCart = mapDispatcht(dispatch).cleanCart;
+
+
+  let SliderProducts_1 = products.slice(0, 4);
+
+  let SliderProducts_2 = products.slice(4, 8);
 
   return(
 
@@ -25,15 +46,15 @@ const Slider = () => {
         <div className="carousel-item active">
         <div className="row row-cols-1 row-cols-xl-4 bg-light">
 
-        {SliderProducts_1.map((item) => <SliderItem key={item.id} data={item} />)}
-        
+        {SliderProducts_1.map((item) => <SliderItem key={item.id} data={item} addToCart={addToCart}/>)}
+
         </div>
         </div>
         <div className="carousel-item">
         <div className="row row-cols-1 row-cols-xl-4 bg-light">
 
-        {SliderProducts_2.map((item) => <SliderItem key={item.id} data={item} />)}
-        
+        {SliderProducts_2.map((item) => <SliderItem key={item.id} data={item} addToCart={addToCart}/>)}
+
         </div>
         </div>
         </div>
@@ -47,6 +68,9 @@ const Slider = () => {
           data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style={{width: "60px"}}>
 
         </button>
+
+        <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}  />
+
 
       </div>
 

@@ -10,7 +10,34 @@ import { TYPES } from "../../../../src/actions/shoppingActions";
 
 
 const Header = () => {
+  
+  let URL = window.location.pathname;
+  URL = URL.split('/');
+  let URLpage = URL[1];
+  if (URLpage ==''){
+    URLpage ='home';
+  }
 
+  let headerClasses ="nav-link link-black";
+  let shopClasses ="nav-link link-black";
+  
+  if (URLpage == 'home'){
+    headerClasses= "nav-link link-black border-0 border-dark border-bottom";
+  }
+
+  if (URLpage == 'shop'){
+    shopClasses= "nav-link link-black border-0 border-dark border-bottom";
+  }
+ 
+  // function activeSetter(componentsID){
+  //   let options = document.querySelectorAll("#" + componentsID);
+  //   console.log(options);
+  //   options.forEach((item)=>
+  //     console.log(item)
+  //   );
+  // }
+
+  // activeSetter(headerID);
 
   const urlImg = require.context('../../../asset/marca', true);
 
@@ -44,11 +71,11 @@ const Header = () => {
 
               <ul className="navbar-nav me-auto mb-2 mb-lg-0 p-1 mx-auto">
                 <li className="nav-item mx-1 my-1  my-xl-0">
-                  <a className="nav-link link-black border-0 border-dark border-bottom" aria-current="page"
-                    href="/">Home</a>
+                  <a className={headerClasses} aria-current="page"
+                    href="/" >Home</a>
                 </li>
                 <li className="nav-item mx-1 my-1  my-xl-0">
-                  <a className="nav-link link-black" href="/shop">Shop</a>
+                  <a className={shopClasses} href="/shop">Shop</a>
                 </li>
                 <li className="nav-item mx-1 my-1 my-xl-0">
                   <button type="button" className="btn btn-black rounded" href="turn.html" data-bs-toggle="modal"
