@@ -6015,20 +6015,21 @@ var Item = function Item() {
   var addToCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).addToCart;
   var addOneToCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).addOneToCart;
   var deleteFromCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).deleteFromCart;
-  var cleanCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).cleanCart;
+  var cleanCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).cleanCart; // const increment = mapDispatcht(dispatch).increment
+  // const decrement = mapDispatcht(dispatch).decrement;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([1]),
       _useState2 = _slicedToArray(_useState, 2),
       count = _useState2[0],
       setCount = _useState2[1];
 
   function increment() {
-    setCount(count + 1);
+    setCount(parseInt(count) + 1);
   }
 
   function decrement() {
     if (count <= 1) return count;
-    setCount(count - 1);
+    setCount(parseInt(count) - 1);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -7145,7 +7146,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -7157,8 +7157,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
 
 
 
@@ -7207,34 +7205,14 @@ var Counter = function Counter() {
     return dispatch({
       type: TYPES.DECREMENT
     });
-  };
+  }; // return (
+  //     <div className="list-group-item border-0 p-0 pe-1 w-50 d-flex">
+  //         <button onClick={restar} className="btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold " style={{ zIndex: "2"}}><i className="bi bi-dash"></i></button>
+  //         <h3 className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3" id="quantityCounter">{state.contador}</h3>
+  //         <button onClick={sumar} className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
+  //     </div>
+  // );
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "list-group-item border-0 p-0 pe-1 w-50 d-flex",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      onClick: restar,
-      className: "btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold ",
-      style: {
-        zIndex: "2"
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-        className: "bi bi-dash"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-      className: "form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3",
-      id: "quantityCounter",
-      children: state.contador
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      onClick: sumar,
-      className: "btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold",
-      style: {
-        zIndex: "2"
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-        className: "bi bi-plus"
-      })
-    })]
-  });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Counter);
@@ -7299,7 +7277,13 @@ var mapDispatcht = function mapDispatcht(dispatch) {
       dispatch({
         type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_5__.TYPES.CLEAN_CART
       });
-    }
+    } // increment : () =>{
+    //     dispatch({type:TYPES.INCREMENT})
+    // },
+    // decrement : () =>{
+    //     dispatch({type:TYPES.DECREMENT})
+    // },
+
   };
 };
 
@@ -7323,7 +7307,9 @@ var TYPES = {
   ADD_ONE_TO_CART: "ADD_TO_CART",
   REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
   REMOVE_ALL_FROM_CART: "REMOVE_ALL_FROM_CART",
-  CLEAN_CART: "CLEAN_CART"
+  CLEAN_CART: "CLEAN_CART" // INCREMENT:"INCREMENT",
+  // DECREMENT:"DECREMENT",
+
 };
 
 /***/ }),
@@ -7452,6 +7438,12 @@ function shoppingReducer(state, action) {
         localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
         return cartItemsData.cart;
       }
+    // case TYPES.INCREMENT:{
+    //     return {...state, count: state.count + 1}
+    // }
+    // case DECREMENT:{
+    //     return {...state, count: state.count - 1}
+    // }
 
     default:
       {

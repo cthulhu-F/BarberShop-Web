@@ -30,6 +30,14 @@ const mapDispatcht = (dispatch) => {
         dispatch({type:TYPES.CLEAN_CART})
     },
 
+    // increment : () =>{
+    //     dispatch({type:TYPES.INCREMENT})
+    // },
+
+    // decrement : () =>{
+    //     dispatch({type:TYPES.DECREMENT})
+    // },
+
     };
 };
 
