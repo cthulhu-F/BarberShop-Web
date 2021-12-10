@@ -32,12 +32,12 @@ export function shoppingReducer(state, action){
                 ...state,
                 cart: state.cart.map((item) => 
                     item.id === newItem.id
-                    ? {...item, quantity : item.quantity + 1}
+                    ? {...item, quantity : action.quantity}
                     : item
                 ),
             }:{
                     ...state,
-                    cart: [...state.cart, { ...newItem, quantity:1}],
+                    cart: [...state.cart, { ...newItem, quantity: action.quantity}],
                 };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
@@ -85,6 +85,12 @@ export function shoppingReducer(state, action){
 
         case TYPES.CLEAN_CART:{
             cartItemsData.cart= shoppingInitialState;
+            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            return cartItemsData.cart;
+        }
+
+        case TYPES.LOAD_DATA:{
+            cartItemsData.cart= {...state};
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
         }

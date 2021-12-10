@@ -11,8 +11,11 @@ import { TYPES } from "../../src/actions/shoppingActions";
 const mapDispatcht = (dispatch) => {
 
     return { 
-    addToCart : (id) =>{
-        dispatch({type:TYPES.ADD_TO_CART,payload:id})},
+    addToCart : (id, quantity) =>{
+        //for (let i =quantity; i>=1; i--){
+            dispatch({type:TYPES.ADD_TO_CART,payload:id, quantity: quantity});
+        //};
+        },
 
     addOneToCart : (id) =>{
         dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id})},
@@ -25,6 +28,10 @@ const mapDispatcht = (dispatch) => {
         }
     },
 
+    loadData : () =>{
+        dispatch({type:TYPES.LOAD_DATA});
+    },
+    
     cleanCart : () =>{
         dispatch({type:TYPES.CLEAN_CART})
     },

@@ -5,6 +5,7 @@ export const ITEM_PRODUCTS = {
       name: "Producto 1",
       img: "./img_product.jpg",
       description: "Descripcion del producto",
+      quantity: 1,
       price: "10.99",
       stock: "2"
     },
@@ -13,6 +14,7 @@ export const ITEM_PRODUCTS = {
       name: "Producto 2",
       img: "./img_product.jpg",
       description: "Descripcion del producto",
+      quantity: 1,
       price: "10.99",
       stock: "2"
     },
@@ -21,6 +23,7 @@ export const ITEM_PRODUCTS = {
       name: "Producto 3",
       img: "./img_product.jpg",
       description: "Descripcion del producto",
+      quantity: 1,
       price: "10.99",
       stock: "3"
     },
@@ -29,6 +32,7 @@ export const ITEM_PRODUCTS = {
       name: "Producto 4",
       img: "./img_product.jpg",
       description: "Descripcion del producto",
+      quantity: 1,
       price: "10.99",
       stock: "4"
     }
