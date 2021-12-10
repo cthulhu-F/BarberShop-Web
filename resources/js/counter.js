@@ -20,8 +20,8 @@ import { useReducer, useState } from "react";
         }
     }
 
-    const Counter= (value)=>{
-        const initialState = {contador:value};
+    const Counter= ()=>{
+        const initialState = {contador:1};
         const[state, dispatch] = useReducer(reducer, initialState);
 
         const sumar = () => dispatch({type:TYPES.INCREMENT});
@@ -31,7 +31,7 @@ import { useReducer, useState } from "react";
     return (
         <div className="list-group-item border-0 p-0 pe-1 w-50 d-flex">
             <button onClick={restar} className="btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold " style={{ zIndex: "2"}}><i className="bi bi-dash"></i></button>
-            <h3 className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3">{state.contador}</h3>
+            <h3 className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3" id="quantityCounter">{state.contador}</h3>
             <button onClick={sumar} className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
         </div>
     );

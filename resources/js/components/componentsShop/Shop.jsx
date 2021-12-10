@@ -3,39 +3,24 @@ import { useReducer } from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ITEM_PRODUCTS } from '../../constans/ConstItem';
-import { shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
+import { cartItemsData, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import { TYPES } from "../../../../src/actions/shoppingActions";
 import ShopItem from "./ShopItem";
 import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
-import addToCart from "../../shoppingCartUses";
-
 const Shop = () => {
-  const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
+  const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
   const{products, cart} = state;
 
-
   
 
-  const addToCart = (id) =>{
-    dispatch({type:TYPES.ADD_TO_CART,payload:id});
-  };
 
-  const addOneToCart = (id) =>{
-    dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id})
-    
-  };
-  
-  const deleteFromCart = (id, all=false) =>{
-      if(all){
-          dispatch({type:TYPES.REMOVE_ALL_FROM_CART, payload:id});
-      }else {
-        dispatch({type:TYPES.REMOVE_ONE_FROM_CART, payload:id});
-    }
-  }
+  const addToCart = mapDispatcht(dispatch).addToCart;
 
-  const cleanCart = () =>{
-      dispatch({type:TYPES.CLEAN_CART})
-  }
+  const addOneToCart = mapDispatcht(dispatch).addOneToCart;
+
+  const deleteFromCart = mapDispatcht(dispatch).deleteFromCart;
+
+  const cleanCart = mapDispatcht(dispatch).cleanCart;
 
 
   return (
@@ -55,7 +40,7 @@ const Shop = () => {
           </div>
           </div>
 
-          <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} cleanCart={cleanCart}  />
+          <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}  />
         </div>
   );
 }
