@@ -23,10 +23,6 @@
       <div id="modalTurn"></div>
     </article>
 
-    <article>
-      <div id="modalShoppingCart"></div>
-    </article>
-
     <article class="container-md">
         <div id="home"></div>
     </article>

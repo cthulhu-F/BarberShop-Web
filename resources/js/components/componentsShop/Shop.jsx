@@ -1,14 +1,42 @@
 import React from "react";
+import { useReducer } from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ITEM_PRODUCTS } from '../../constans/ConstItem';
+import { shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
+import { TYPES } from "../../../../src/actions/shoppingActions";
 import ShopItem from "./ShopItem";
+import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
+import addToCart from "../../shoppingCartUses";
 
 const Shop = () => {
+  const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
+  const{products, cart} = state;
 
-  const products = ITEM_PRODUCTS.products;
 
-  console.log(products);
+  
+
+  const addToCart = (id) =>{
+    dispatch({type:TYPES.ADD_TO_CART,payload:id});
+  };
+
+  const addOneToCart = (id) =>{
+    dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id})
+    
+  };
+  
+  const deleteFromCart = (id, all=false) =>{
+      if(all){
+          dispatch({type:TYPES.REMOVE_ALL_FROM_CART, payload:id});
+      }else {
+        dispatch({type:TYPES.REMOVE_ONE_FROM_CART, payload:id});
+    }
+  }
+
+  const cleanCart = () =>{
+      dispatch({type:TYPES.CLEAN_CART})
+  }
+
 
   return (
     <div className="container-fluid bg-light p-3 min-vh-100">
@@ -22,10 +50,12 @@ const Shop = () => {
               </div>
             </div>
     
-            {products.map((item) => <ShopItem  key={item.id} data={item} />)}
-    
+            {products.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart}/>)}
+
           </div>
           </div>
+
+          <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} cleanCart={cleanCart}  />
         </div>
   );
 }

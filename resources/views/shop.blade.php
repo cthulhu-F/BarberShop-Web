@@ -25,12 +25,8 @@
     </article>
 
     <article>
-      <div id="modalShoppingCart"></div>
-    </article>
-
-    <article>
-      <!-- <div id="shop"></div> -->
-      <div id="shoppingCart"></div>
+       <div id="shop"></div> 
+      <!-- <div id="shoppingCart"></div> -->
     </article>
 
   </section>

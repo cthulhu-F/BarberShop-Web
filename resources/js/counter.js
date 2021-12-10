@@ -3,9 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useReducer, useState } from "react"; 
 
-
-    const initialState = {contador:1};
-
     const TYPES = {
         INCREMENT:"INCREMENT",
         DECREMENT:"DECREMENT",
@@ -23,7 +20,8 @@ import { useReducer, useState } from "react";
         }
     }
 
-    const Counter= ()=>{
+    const Counter= (value)=>{
+        const initialState = {contador:value};
         const[state, dispatch] = useReducer(reducer, initialState);
 
         const sumar = () => dispatch({type:TYPES.INCREMENT});

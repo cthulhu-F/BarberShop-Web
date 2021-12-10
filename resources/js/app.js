@@ -13,8 +13,6 @@ import Footer from "./components/componentsBody/Footer";
 
 import Shop from "./components/componentsShop/Shop";
 import Counter from "./counter";
-import Item from "./components/componentsShop/Item";
-import ModalShoppingCart from "./components/componentsShoppingCart/ModalShoppingCart";
 import ShoppingCart from "./components/componentsShoppingCart/ShoppingCart";
 import ModalTurn from "./components/componentsTurn/ModalTurn";
 
@@ -58,6 +56,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("slider")
 );
+
+
 
 
 
