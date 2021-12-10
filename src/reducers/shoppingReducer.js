@@ -14,7 +14,9 @@ const existentCart = JSON.parse(localStorage.getItem('cartData'));
 export const cartItemsData = existentCart
     ? { ...existentCart}
     : {products:ITEM_PRODUCTS.products,
-            cart:[]};
+            cart:[],
+            };
+
 
 
 
@@ -23,7 +25,7 @@ export function shoppingReducer(state, action){
         case TYPES.ADD_TO_CART:{
             let newItem = state.products.find(product=> product.id === action.payload);
 
-            let itemInCart = state.cart.find((item)=> item.id === newItem.id); 
+            let itemInCart = state.cart.find(item=> item.id === newItem.id); 
 
             cartItemsData.cart = itemInCart
             ? {
@@ -86,6 +88,14 @@ export function shoppingReducer(state, action){
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
         }
+
+        // case TYPES.INCREMENT:{
+        //     return {...state, count: state.count + 1}
+        // }
+
+        // case DECREMENT:{
+        //     return {...state, count: state.count - 1}
+        // }
 
         default :{
             return state;

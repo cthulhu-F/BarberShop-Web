@@ -14,6 +14,7 @@ import Footer from "./components/componentsBody/Footer";
 import Shop from "./components/componentsShop/Shop";
 import Counter from "./counter";
 import ShoppingCart from "./components/componentsShoppingCart/ShoppingCart";
+import Item from "./components/componentsShop/Item";
 import ModalTurn from "./components/componentsTurn/ModalTurn";
 
 // import { useReducer } from "react";
@@ -36,6 +37,8 @@ function initShop(){
     );
   }
 }
+
+
 initShop();
 
 

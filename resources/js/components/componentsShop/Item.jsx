@@ -23,7 +23,7 @@ const Item = () => {
     return itemDataCut.indexOf(textDataCut) > -1
   });
 
-  let mainitem = existentProducts[0]
+  const mainitem = existentProducts[0]
 
   const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
   const{products, cart} = state;
@@ -36,16 +36,24 @@ const Item = () => {
 
   const cleanCart = mapDispatcht(dispatch).cleanCart;
 
+  // const increment = mapDispatcht(dispatch).increment
+
+  // const decrement = mapDispatcht(dispatch).decrement;
+
   
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState([1]);
   
   function increment(){
-    setCount(count + 1)
+    setCount(parseInt(count) + 1)
+
   }
+
   function decrement(){
     if (count <= 1) return count;
-    setCount(count - 1);
+    setCount(parseInt(count) - 1)
   }
+
+
 
   return (
     <div className="row bg-white justify-content-evenly font-p">
@@ -130,11 +138,5 @@ const Item = () => {
   );
 }
 
+
 export default Item;
-
-
-
-
-
-
-

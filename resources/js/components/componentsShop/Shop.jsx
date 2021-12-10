@@ -7,6 +7,7 @@ import { cartItemsData, shoppingReducer } from "../../../../src/reducers/shoppin
 import { TYPES } from "../../../../src/actions/shoppingActions";
 import ShopItem from "./ShopItem";
 import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
+import mapDispatcht from "../../shoppingCartUses";
 const Shop = () => {
   const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
   const{products, cart} = state;

@@ -7,6 +7,7 @@ import { TYPES } from "../../src/actions/shoppingActions";
 
 
 
+
 const mapDispatcht = (dispatch) => {
 
     return { 
@@ -27,6 +28,14 @@ const mapDispatcht = (dispatch) => {
     cleanCart : () =>{
         dispatch({type:TYPES.CLEAN_CART})
     },
+
+    // increment : () =>{
+    //     dispatch({type:TYPES.INCREMENT})
+    // },
+
+    // decrement : () =>{
+    //     dispatch({type:TYPES.DECREMENT})
+    // },
 
     };
 };
