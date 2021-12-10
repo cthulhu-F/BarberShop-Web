@@ -7,6 +7,7 @@ import { useReducer } from "react";
 import { cartItemsData, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import mapDispatcht from "../../shoppingCartUses";
 import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
+import { TYPES } from "../../../../src/actions/shoppingActions";
 
 
 
@@ -36,6 +37,8 @@ const Item = () => {
 
   const cleanCart = mapDispatcht(dispatch).cleanCart;
 
+  const loadData = mapDispatcht(dispatch).loadData;
+
   // const increment = mapDispatcht(dispatch).increment
 
   // const decrement = mapDispatcht(dispatch).decrement;
@@ -44,14 +47,17 @@ const Item = () => {
   const [count, setCount] = useState([1]);
   
   function increment(){
+    loadData();
     setCount(parseInt(count) + 1)
   }
 
   function decrement(){
+    loadData();
     if (count <= 1) return count;
     setCount(parseInt(count) - 1)
   }
 
+  console.log(cartItemsData);
 
   return (
     <div className="row bg-white justify-content-evenly font-p">
@@ -111,7 +117,7 @@ const Item = () => {
                 <button onClick={()=>{increment()}} className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
               </div>
               <li className="list-group-item border-0  p-0 ps-1 w-50">
-                <button className="btn btn-dark h-100 w-100 fs-3"onClick={()=>addToCart(mainitem.id)} ><i className="bi bi-cart-plus" ></i></button>
+                <button className="btn btn-dark h-100 w-100 fs-3"onClick={()=>addToCart(mainitem.id,count)} ><i className="bi bi-cart-plus" ></i></button>
               </li>
             </ul>
           </li>

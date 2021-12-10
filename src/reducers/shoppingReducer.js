@@ -89,6 +89,12 @@ export function shoppingReducer(state, action){
             return cartItemsData.cart;
         }
 
+        case TYPES.LOAD_DATA:{
+            cartItemsData.cart= {...state};
+            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            return cartItemsData.cart;
+        }
+
         // case TYPES.INCREMENT:{
         //     return {...state, count: state.count + 1}
         // }
