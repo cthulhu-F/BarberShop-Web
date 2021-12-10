@@ -8,10 +8,6 @@ export const shoppingInitialState = {
     cart:[],
 }
 
-// export const cartItemsData = {
-//     products :ITEM_PRODUCTS.products,
-//     cart:[],
-// }
 
 const existentCart = JSON.parse(localStorage.getItem('cartData'));
 
@@ -52,6 +48,7 @@ export function shoppingReducer(state, action){
             
             cartItemsData.cart = {...state,
                 cart: [...state.cart, { ...itemToAdd, quantity:1}],};
+            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
         }
 
@@ -71,6 +68,7 @@ export function shoppingReducer(state, action){
                 cart: state.cart.filter(item => item.id !== action.payload),
             };
 
+            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
         }
         
@@ -78,17 +76,14 @@ export function shoppingReducer(state, action){
             cartItemsData.cart = {...state,
                 cart: state.cart.filter(item => item.id !== action.payload),
                 };
+            
+            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
         }
 
         case TYPES.CLEAN_CART:{
             cartItemsData.cart= shoppingInitialState;
-            return cartItemsData.cart;
-        }
-
-        case TYPES.LOAD_DATA:{
-            console.log('data loaded');
-            console.log(cartItemsData.cart);
+            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
         }
 

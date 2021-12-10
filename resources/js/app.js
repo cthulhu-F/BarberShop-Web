@@ -17,7 +17,8 @@ import Item from "./components/componentsShop/Item";
 import ShoppingCart from "./components/componentsShoppingCart/ShoppingCart";
 import ModalTurn from "./components/componentsTurn/ModalTurn";
 
-
+// import { useReducer } from "react";
+// import { shoppingInitialState, shoppingReducer } from "../../src/reducers/shoppingReducer";
 
 import Home from "./components/componentsHome/Home";
 import Slider from "./components/componentsHome/Slider";
@@ -26,6 +27,17 @@ import Slider from "./components/componentsHome/Slider";
 
 require('./bootstrap');
 
+function initShop(){
+  if (document.getElementById("item")) {
+    ReactDOM.render(
+        <React.StrictMode>
+            <Item/>
+        </React.StrictMode>,
+        document.getElementById("item")
+    );
+  }
+}
+initShop();
 
 
 ReactDOM.render(
