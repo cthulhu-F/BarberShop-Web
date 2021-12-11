@@ -36,3 +36,30 @@ Route::get('/shoppingCart', function () {
 Route::get('/product/{value}', function ($value) {
     return view('item', ["value" => $value]);
 });
+
+// BACKOFFICE ROUTES 
+
+Route::get('/backOffice/home', function () {
+    return view('backOffice');
+});
+
+Route::get('/backOffice/turns', function () {
+    return view('turns');
+});
+
+Route::get('/backOffice/sales', function () {
+    return view('sales');
+});
+
+Route::get('/backOffice/inventory', function () {
+    return view('inventory');
+});
+
+Route::get('/backOffice/users', function () {
+    return view('users');
+});
+
+Route::get('/backOffice/settings', function () {
+    return view('settings');
+});
+

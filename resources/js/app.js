@@ -23,7 +23,16 @@ import ModalTurn from "./components/componentsTurn/ModalTurn";
 import Home from "./components/componentsHome/Home";
 import Slider from "./components/componentsHome/Slider";
 
-// import ImportBoostrap from "./importBoostrap"
+// BACKOFFICE IMPORTS
+
+import SidebarHeader from "./components/componentsBackOffice/SidebarHeader"
+import Turns from "./components/componentsBackOffice/Turns"
+import Sales from "./components/componentsBackOffice/Sales"
+import Inventory from "./components/componentsBackOffice/Inventory"
+import Users from "./components/componentsBackOffice/Users"
+import Settings from "./components/componentsBackOffice/Settings";
+import BackOfficeHome from "./components/componentsBackOffice/BackOfficeHome"
+
 
 require('./bootstrap');
 
