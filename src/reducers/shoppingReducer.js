@@ -45,14 +45,28 @@ export function shoppingReducer(state, action){
             
         }
 
+
         case TYPES.ADD_ONE_TO_CART:{
-            let itemToAdd = state.cart.find((item)=> item.id === newItem.id);
-            
-            cartItemsData.cart = {...state,
-                cart: [...state.cart, { ...itemToAdd, quantity:1}],};
+            const intemToDelete= state.cart.find((item) => item.id === action.payload);
+
+            cartItemsData.cart =intemToDelete.quantity >= 1
+            ?{
+                ...state,
+                cart: state.cart.map(item=> item.id === action.payload 
+                ? {...item, quantity : item.quantity +1}
+                : item
+                ),
+            }
+            :{
+                ...state,
+                cart: state.cart.filter(item => item.id !== action.payload),
+            };
+
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
-        }
+
+        } 
+
 
         case TYPES.REMOVE_ONE_FROM_CART:{
             const intemToDelete= state.cart.find((item) => item.id === action.payload);

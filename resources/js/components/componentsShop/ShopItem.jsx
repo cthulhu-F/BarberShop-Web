@@ -1,7 +1,7 @@
 
 const ShopItem = ({data, addToCart}) => {
 
-  let {id, name, img, description, price, stock } = data;
+  let {id, name, img, description, price, stock, quantity } = data;
 
   const urlImg = require.context('../../../asset/product', true);
 

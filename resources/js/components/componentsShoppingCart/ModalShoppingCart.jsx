@@ -4,7 +4,7 @@ import '../../../css/main.css';
 
 const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => {
 
-  console.log(data);
+  //console.log(data);
 
   let shoppingCartItem = data;
   const buttonsStyle = {

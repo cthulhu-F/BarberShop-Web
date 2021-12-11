@@ -6320,7 +6320,8 @@ var ShopItem = function ShopItem(_ref) {
       img = data.img,
       description = data.description,
       price = data.price,
-      stock = data.stock;
+      stock = data.stock,
+      quantity = data.quantity;
 
   var urlImg = __webpack_require__("./resources/asset/product sync recursive ^\\.\\/.*$");
 
@@ -6400,7 +6401,7 @@ var ModalShoppingCart = function ModalShoppingCart(_ref) {
       deleteFromCart = _ref.deleteFromCart,
       addOneToCart = _ref.addOneToCart,
       cleanCart = _ref.cleanCart;
-  console.log(data);
+  //console.log(data);
   var shoppingCartItem = data;
   var buttonsStyle = {
     display: 'unset'
@@ -7291,7 +7292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var TYPES = {
   ADD_TO_CART: "ADD_TO_CART",
-  ADD_ONE_TO_CART: "ADD_TO_CART",
+  ADD_ONE_TO_CART: "ADD_ONE_TO_CART",
   REMOVE_ONE_FROM_CART: "REMOVE_ONE_FROM_CART",
   REMOVE_ALL_FROM_CART: "REMOVE_ALL_FROM_CART",
   CLEAN_CART: "CLEAN_CART",
@@ -7353,21 +7354,20 @@ function shoppingReducer(state, action) {
   switch (action.type) {
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.ADD_TO_CART:
       {
-        var _newItem = state.products.find(function (product) {
+        var newItem = state.products.find(function (product) {
           return product.id === action.payload;
         });
-
         var itemInCart = state.cart.find(function (item) {
-          return item.id === _newItem.id;
+          return item.id === newItem.id;
         });
         cartItemsData.cart = itemInCart ? _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.map(function (item) {
-            return item.id === _newItem.id ? _objectSpread(_objectSpread({}, item), {}, {
+            return item.id === newItem.id ? _objectSpread(_objectSpread({}, item), {}, {
               quantity: action.quantity
             }) : item;
           })
         }) : _objectSpread(_objectSpread({}, state), {}, {
-          cart: [].concat(_toConsumableArray(state.cart), [_objectSpread(_objectSpread({}, _newItem), {}, {
+          cart: [].concat(_toConsumableArray(state.cart), [_objectSpread(_objectSpread({}, newItem), {}, {
             quantity: action.quantity
           })])
         });
@@ -7377,13 +7377,19 @@ function shoppingReducer(state, action) {
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.ADD_ONE_TO_CART:
       {
-        var itemToAdd = state.cart.find(function (item) {
-          return item.id === newItem.id;
+        var intemToDelete = state.cart.find(function (item) {
+          return item.id === action.payload;
         });
-        cartItemsData.cart = _objectSpread(_objectSpread({}, state), {}, {
-          cart: [].concat(_toConsumableArray(state.cart), [_objectSpread(_objectSpread({}, itemToAdd), {}, {
-            quantity: 1
-          })])
+        cartItemsData.cart = intemToDelete.quantity >= 1 ? _objectSpread(_objectSpread({}, state), {}, {
+          cart: state.cart.map(function (item) {
+            return item.id === action.payload ? _objectSpread(_objectSpread({}, item), {}, {
+              quantity: item.quantity + 1
+            }) : item;
+          })
+        }) : _objectSpread(_objectSpread({}, state), {}, {
+          cart: state.cart.filter(function (item) {
+            return item.id !== action.payload;
+          })
         });
         localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
         return cartItemsData.cart;
@@ -7391,10 +7397,11 @@ function shoppingReducer(state, action) {
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.REMOVE_ONE_FROM_CART:
       {
-        var intemToDelete = state.cart.find(function (item) {
+        var _intemToDelete = state.cart.find(function (item) {
           return item.id === action.payload;
         });
-        cartItemsData.cart = intemToDelete.quantity > 1 ? _objectSpread(_objectSpread({}, state), {}, {
+
+        cartItemsData.cart = _intemToDelete.quantity > 1 ? _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.map(function (item) {
             return item.id === action.payload ? _objectSpread(_objectSpread({}, item), {}, {
               quantity: item.quantity - 1

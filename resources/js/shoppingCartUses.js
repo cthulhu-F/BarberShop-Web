@@ -18,6 +18,7 @@ const mapDispatcht = (dispatch) => {
         },
 
     addOneToCart : (id) =>{
+
         dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id})},
     
     deleteFromCart : (id, all=false) =>{
