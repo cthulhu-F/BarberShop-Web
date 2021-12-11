@@ -2,10 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
 import { ITEM_IMG } from '../../constans/constImg';
 
+
+
 const Home = () => {
 
   const urlImg = require.context('../../../asset/clients', true);
 
+  
   return(
     <div className="row g-2">
 
@@ -68,6 +71,8 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/* <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}  /> */}
+
       </div>
   );
 }
