@@ -2,11 +2,14 @@ import { TYPES } from '../actions/shoppingActions';
 import { ITEM_PRODUCTS } from '../../resources/js/constans/ConstItem';
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 import { useEffect } from 'react';
+import "../../resources/css/sweetAlert.css"
 
 export const shoppingInitialState = {
     products :ITEM_PRODUCTS.products,
     cart:[],
 }
+
+import swal from "sweetAlert"
 
 
 const existentCart = JSON.parse(localStorage.getItem('cartData'));
@@ -41,6 +44,10 @@ export function shoppingReducer(state, action){
                 };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            swal({ title: "Enhorabuena!",
+            text: "Ahora tienes " + action.quantity +" "+ newItem.name +" en tu carrito",
+            icon:"success",
+            timer:"2000",});
             return cartItemsData.cart;
             
         }
@@ -65,6 +72,13 @@ export function shoppingReducer(state, action){
             };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            if(action.alert){
+                swal({
+                text: "Sumaste 1 "+ newItem.name +" en tu carrito",
+                timer:"1200", 
+                className:"add-to-cart-alert"
+            });
+            }
             return cartItemsData.cart;
 
         } 
@@ -102,6 +116,11 @@ export function shoppingReducer(state, action){
         case TYPES.CLEAN_CART:{
             cartItemsData.cart= shoppingInitialState;
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            swal({
+                text: "El carrito ha sido vaciado",
+                timer:"1200", 
+                className:"add-to-cart-alert"
+            });
             return cartItemsData.cart;
         }
 

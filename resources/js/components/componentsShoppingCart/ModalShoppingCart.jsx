@@ -22,8 +22,19 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
     buttonsStyle['display'] = "none";
   }
 
+  const cleanCartConfirmed = ()=>{
+    swal({ 
+      title: "Vaciar carrito",
+      text: "¿Desea vaciar su carrito?",
+      icon:"warning",
+      buttons: ['No', 'Sí']
+    }).then(answer =>{
+      if (answer){
+        cleanCart();
+      }
+    })
+  }
   
-
 
   return (
     <div className="modal fade" id="shoppingCartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -93,7 +104,7 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
           </div>
 
           <div className="modal-footer">
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>cleanCart()}>Vaciar carrito </button>
+            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>cleanCartConfirmed()}>Vaciar carrito </button>
             <a href="/shoppingCart" className="btn btn-black">Completar compra</a>
           </div>
 

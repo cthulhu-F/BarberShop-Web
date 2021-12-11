@@ -44,7 +44,7 @@ const Item = () => {
   // const decrement = mapDispatcht(dispatch).decrement;
 
   
-  const [count, setCount] = useState([1]);
+  const [count, setCount] = useState(1);
   
   function increment(){
     loadData();
