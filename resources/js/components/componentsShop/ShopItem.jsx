@@ -1,5 +1,5 @@
 
-const ShopItem = ({data, addToCart}) => {
+const ShopItem = ({data, addOneToCart}) => {
 
   let {id, name, img, description, price, stock, quantity } = data;
 
@@ -24,7 +24,7 @@ const ShopItem = ({data, addToCart}) => {
                   <div className="card-text text-muted fs-9">{description}</div>
                   <div className="d-flex justify-content-between mt-2">
                     <span className="fw-bold">${price}</span>
-                    <button className="btn btn-black fs-7 py-1 px-2 " onClick={()=>addToCart(id, 1)}><i className="bi bi-cart-plus"></i></button>
+                    <button className="btn btn-black fs-7 py-1 px-2 " onClick={()=>addOneToCart(id, 1)}><i className="bi bi-cart-plus"></i></button>
                   </div>
                 </div>
               </div>

@@ -8009,7 +8009,7 @@ var Slider = function Slider() {
           children: SliderProducts_1.map(function (item) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SliderItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
               data: item,
-              addToCart: addToCart
+              addOneToCart: addOneToCart
             }, item.id);
           })
         })
@@ -8020,7 +8020,7 @@ var Slider = function Slider() {
           children: SliderProducts_2.map(function (item) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SliderItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
               data: item,
-              addToCart: addToCart
+              addOneToCart: addOneToCart
             }, item.id);
           })
         })
@@ -8072,7 +8072,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var SliderItem = function SliderItem(_ref) {
   var data = _ref.data,
-      addToCart = _ref.addToCart;
+      addOneToCart = _ref.addOneToCart;
   var id = data.id,
       name = data.name,
       img = data.img,
@@ -8116,7 +8116,7 @@ var SliderItem = function SliderItem(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
             className: "btn btn-black fs-7 py-1 px-2",
             onClick: function onClick() {
-              return addToCart(id);
+              return addOneToCart(id);
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
               className: "bi bi-cart-plus"
@@ -8460,7 +8460,8 @@ var Shop = function Shop() {
         }), products.map(function (product) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
             data: product,
-            addToCart: addToCart
+            addToCart: addToCart,
+            addOneToCart: addOneToCart
           }, product.id);
         })]
       })
@@ -8501,7 +8502,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ShopItem = function ShopItem(_ref) {
   var data = _ref.data,
-      addToCart = _ref.addToCart;
+      addOneToCart = _ref.addOneToCart;
   var id = data.id,
       name = data.name,
       img = data.img,
@@ -8546,7 +8547,7 @@ var ShopItem = function ShopItem(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
             className: "btn btn-black fs-7 py-1 px-2 ",
             onClick: function onClick() {
-              return addToCart(id, 1);
+              return addOneToCart(id, 1);
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
               className: "bi bi-cart-plus"
@@ -9564,19 +9565,23 @@ function shoppingReducer(state, action) {
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.ADD_ONE_TO_CART:
       {
-        var intemToDelete = state.cart.find(function (item) {
+        var _newItem = state.products.find(function (product) {
+          return product.id === action.payload;
+        });
+
+        var intemToAdd = state.cart.find(function (item) {
           return item.id === action.payload;
         });
-        cartItemsData.cart = intemToDelete.quantity >= 1 ? _objectSpread(_objectSpread({}, state), {}, {
+        cartItemsData.cart = intemToAdd ? _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.map(function (item) {
             return item.id === action.payload ? _objectSpread(_objectSpread({}, item), {}, {
               quantity: item.quantity + 1
             }) : item;
           })
         }) : _objectSpread(_objectSpread({}, state), {}, {
-          cart: state.cart.filter(function (item) {
-            return item.id !== action.payload;
-          })
+          cart: [].concat(_toConsumableArray(state.cart), [_objectSpread(_objectSpread({}, _newItem), {}, {
+            quantity: 1
+          })])
         });
         localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
         return cartItemsData.cart;
@@ -9584,11 +9589,10 @@ function shoppingReducer(state, action) {
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.REMOVE_ONE_FROM_CART:
       {
-        var _intemToDelete = state.cart.find(function (item) {
+        var intemToDelete = state.cart.find(function (item) {
           return item.id === action.payload;
         });
-
-        cartItemsData.cart = _intemToDelete.quantity > 1 ? _objectSpread(_objectSpread({}, state), {}, {
+        cartItemsData.cart = intemToDelete.quantity > 1 ? _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.map(function (item) {
             return item.id === action.payload ? _objectSpread(_objectSpread({}, item), {}, {
               quantity: item.quantity - 1

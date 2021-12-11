@@ -47,9 +47,11 @@ export function shoppingReducer(state, action){
 
 
         case TYPES.ADD_ONE_TO_CART:{
-            const intemToDelete= state.cart.find((item) => item.id === action.payload);
+            let newItem = state.products.find(product=> product.id === action.payload);
 
-            cartItemsData.cart =intemToDelete.quantity >= 1
+            const intemToAdd= state.cart.find((item) => item.id === action.payload);
+
+            cartItemsData.cart =intemToAdd
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
@@ -59,7 +61,7 @@ export function shoppingReducer(state, action){
             }
             :{
                 ...state,
-                cart: state.cart.filter(item => item.id !== action.payload),
+                cart: [...state.cart, { ...newItem, quantity: 1}],
             };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));

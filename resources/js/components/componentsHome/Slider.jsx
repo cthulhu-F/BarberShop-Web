@@ -46,14 +46,14 @@ const Slider = () => {
         <div className="carousel-item active">
         <div className="row row-cols-1 row-cols-xl-4 bg-light">
 
-        {SliderProducts_1.map((item) => <SliderItem key={item.id} data={item} addToCart={addToCart}/>)}
+        {SliderProducts_1.map((item) => <SliderItem key={item.id} data={item} addOneToCart={addOneToCart}/>)}
 
         </div>
         </div>
         <div className="carousel-item">
         <div className="row row-cols-1 row-cols-xl-4 bg-light">
 
-        {SliderProducts_2.map((item) => <SliderItem key={item.id} data={item} addToCart={addToCart}/>)}
+        {SliderProducts_2.map((item) => <SliderItem key={item.id} data={item} addOneToCart={addOneToCart}/>)}
 
         </div>
         </div>
