@@ -7,7 +7,7 @@ import '../../../css/main.css';
 const BackOfficeHome = () =>{
     return(
         
-        <div >
+        <div > 
             <h1>HI FROM BackOfficeHome</h1>
         </div>
 
