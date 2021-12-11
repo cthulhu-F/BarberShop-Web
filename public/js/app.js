@@ -8981,13 +8981,14 @@ var ShoppingCart = function ShoppingCart() {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShoppingCart);
-
-if (document.getElementById("shoppingCart")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(ShoppingCart, {})
-  }), document.getElementById("shoppingCart"));
-}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShoppingCart); // if (document.getElementById("shoppingCart")) {
+//     ReactDOM.render(
+//         <React.StrictMode>
+//             <ShoppingCart />
+//         </React.StrictMode>,
+//         document.getElementById("shoppingCart")
+//     );
+//   }
 
 /***/ }),
 
