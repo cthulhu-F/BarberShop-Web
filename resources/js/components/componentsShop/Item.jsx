@@ -8,6 +8,7 @@ import { cartItemsData, shoppingReducer } from "../../../../src/reducers/shoppin
 import mapDispatcht from "../../shoppingCartUses";
 import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
 import { TYPES } from "../../../../src/actions/shoppingActions";
+import { main } from "@popperjs/core";
 
 
 
@@ -44,18 +45,47 @@ const Item = () => {
   // const decrement = mapDispatcht(dispatch).decrement;
 
   
-  const [count, setCount] = useState(1);
+  let itemInCart = cart.find((item) => item.id === mainitem.id);
+
+  let cartQuantity = itemInCart
+  ? itemInCart.quantity
+  : 1;
+
+  let aviableStock= mainitem.stock-cartQuantity;
+  
+  const [count, setCount] = useState(cartQuantity);
+
+
+  let addingButton = document.querySelector(".adding-button");
+  let removingButton = document.querySelector(".removing-button");
+    
+
+
+  // function buttonListener() {
+  //   if (aviableStock <= mainitem.stock) {
+  //     addingButton.disabled = true; 
+  //   } 
+  //   if(mainitem.stock == 1){
+  //     removingButton.disabled = true;
+  //   }
+  //   else {
+  //     addingButton.disabled = false;
+  //     removingButton.disabled = false;
+  //   }
+  // }
   
   function increment(){
     loadData();
-    setCount(parseInt(count) + 1)
+    setCount(parseInt(count) + 1);
   }
 
   function decrement(){
     loadData();
     if (count <= 1) return count;
-    setCount(parseInt(count) - 1)
+    setCount(parseInt(count) - 1);
   }
+
+
 
 
 
@@ -107,14 +137,17 @@ const Item = () => {
             <span className="text-muted fs-6">SKU: 123456789</span>
           </li>
           <li className="list-group-item border-0">
+            <span className="text-muted fs-6">Stock: {aviableStock}</span>
+          </li>
+          <li className="list-group-item border-0">
             <span className="text-dark fw-bold fs-3">${mainitem.price}</span>
           </li>
           <li className="list-group-item border-0">
             <ul className="list-group list-group-horizontal border-0 border-top border-bottom py-4">
               <div className="list-group-item border-0 p-0 pe-1 w-50 d-flex">
-                <button onClick={()=>{decrement()}} className="btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold " style={{ zIndex: "2"}}><i className="bi bi-dash"></i></button>
+                <button onClick={()=>{decrement()}} disabled={count <= 1} className="btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold removing-button" style={{ zIndex: "2"}}><i className="bi bi-dash"></i></button>
                 <h3 className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3">{count}</h3>
-                <button onClick={()=>{increment()}} className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
+                <button onClick={()=>{increment()}} disabled={count >= mainitem.stock} className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold adding-button" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
               </div>
               <li className="list-group-item border-0  p-0 ps-1 w-50">
                 <button className="btn btn-dark h-100 w-100 fs-3"onClick={()=>addToCart(mainitem.id,count)} ><i className="bi bi-cart-plus" ></i></button>
