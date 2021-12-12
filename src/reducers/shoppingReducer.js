@@ -2,11 +2,14 @@ import { TYPES } from '../actions/shoppingActions';
 import { ITEM_PRODUCTS } from '../../resources/js/constans/ConstItem';
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 import { useEffect } from 'react';
+import "../../resources/css/sweetAlert.css"
 
 export const shoppingInitialState = {
     products :ITEM_PRODUCTS.products,
     cart:[],
 }
+
+import swal from "sweetAlert"
 
 
 const existentCart = JSON.parse(localStorage.getItem('cartData'));
@@ -41,15 +44,21 @@ export function shoppingReducer(state, action){
                 };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            swal({ title: "Enhorabuena!",
+            text: "Ahora tienes " + action.quantity +" "+ newItem.name +" en tu carrito",
+            icon:"success",
+            timer:"2000",});
             return cartItemsData.cart;
             
         }
 
 
         case TYPES.ADD_ONE_TO_CART:{
-            const intemToDelete= state.cart.find((item) => item.id === action.payload);
+            let newItem = state.products.find(product=> product.id === action.payload);
 
-            cartItemsData.cart =intemToDelete.quantity >= 1
+            const intemToAdd= state.cart.find((item) => item.id === action.payload);
+
+            cartItemsData.cart =intemToAdd
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
@@ -59,10 +68,17 @@ export function shoppingReducer(state, action){
             }
             :{
                 ...state,
-                cart: state.cart.filter(item => item.id !== action.payload),
+                cart: [...state.cart, { ...newItem, quantity: 1}],
             };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            if(action.alert){
+                swal({
+                text: "Sumaste 1 "+ newItem.name +" en tu carrito",
+                timer:"1200", 
+                className:"add-to-cart-alert"
+            });
+            }
             return cartItemsData.cart;
 
         } 
@@ -100,6 +116,11 @@ export function shoppingReducer(state, action){
         case TYPES.CLEAN_CART:{
             cartItemsData.cart= shoppingInitialState;
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            swal({
+                text: "El carrito ha sido vaciado",
+                timer:"1200", 
+                className:"add-to-cart-alert"
+            });
             return cartItemsData.cart;
         }
 

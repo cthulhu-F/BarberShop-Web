@@ -17,9 +17,9 @@ const mapDispatcht = (dispatch) => {
         //};
         },
 
-    addOneToCart : (id) =>{
+    addOneToCart : (id, alert=false) =>{
 
-        dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id})},
+        dispatch({type:TYPES.ADD_ONE_TO_CART,payload:id, alert: alert})},
     
     deleteFromCart : (id, all=false) =>{
         if(all){
