@@ -9,7 +9,8 @@ export const shoppingInitialState = {
     cart:[],
 }
 
-import swal from "sweetAlert"
+import swal from'sweetalert2';
+import { Container } from 'postcss';
 
 
 const existentCart = JSON.parse(localStorage.getItem('cartData'));
@@ -35,17 +36,16 @@ export function shoppingReducer(state, action){
                 ...state,
                 cart: state.cart.map((item) => 
                     item.id === newItem.id
-                    ? {...item, quantity : action.quantity}
+                    ? {...item, quantity : action.quantity, stock: state.stock-action.quantity}
                     : item
                 ),
             }:{
                     ...state,
-                    cart: [...state.cart, { ...newItem, quantity: action.quantity}],
+                    cart: [...state.cart, { ...newItem, quantity: action.quantity, stock: state.stock-action.quantity}],
                 };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
-            
-            swal({ title: "Enhorabuena!",
+            swal.fire({ title: "Enhorabuena!",
             text: "Ahora tienes " + action.quantity +" "+ newItem.name +" en tu carrito",
             icon:"success",
             timer:"2000",});
@@ -65,23 +65,27 @@ export function shoppingReducer(state, action){
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
-                ? {...item, quantity : item.quantity +1}
+                ? {...item, quantity : item.quantity +1, stock: state.stock-1}
                 : item
                 ),
             }
             :{
                 ...state,
-                cart: [...state.cart, { ...newItem, quantity: 1}],
+                cart: [...state.cart, { ...newItem, quantity: 1,stock: state.stock-1}],
             };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
 
             
             if(action.alert){
-                swal({
+                swal.fire({
                 text: "Sumaste 1 "+ newItem.name +" en tu carrito",
                 timer:"1200", 
-                className:"add-to-cart-alert"
+                position: "bottom",
+                customClass : {
+                    container: "add-to-cart-alert-container",
+                    popup:"add-to-cart-alert",
+                },
             });
             }
             
@@ -93,11 +97,12 @@ export function shoppingReducer(state, action){
         case TYPES.REMOVE_ONE_FROM_CART:{
             const intemToDelete= state.cart.find((item) => item.id === action.payload);
 
+
             cartItemsData.cart =intemToDelete.quantity >1
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
-                ? {...item, quantity : item.quantity -1}
+                ? {...item, quantity : item.quantity -1, stock: state.stock+1}
                 : item
                 ),
             }
@@ -105,6 +110,7 @@ export function shoppingReducer(state, action){
                 ...state,
                 cart: state.cart.filter(item => item.id !== action.payload),
             };
+
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
             return cartItemsData.cart;
@@ -122,10 +128,10 @@ export function shoppingReducer(state, action){
         case TYPES.CLEAN_CART:{
             cartItemsData.cart= shoppingInitialState;
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
-            swal({
+            swal.fire({
                 text: "El carrito ha sido vaciado",
-                timer:"1200", 
-                className:"add-to-cart-alert"
+                timer:"1200",
+                icon: "success",
             });
             return cartItemsData.cart;
         }

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
 
+import swal from'sweetalert2';
+
+
 const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => {
 
   let shoppingCartItem = data;
@@ -21,14 +24,17 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
   }
 
   const cleanCartConfirmed = ()=>{
-    swal({ 
+    swal.fire({ 
       title: "Vaciar carrito",
       text: "¿Desea vaciar su carrito?",
       icon:"warning",
-      buttons: ['No', 'Sí']
-    }).then(answer =>{
-      if (answer){
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: "Sí, vaciar",
+    }).then((result) =>{
+      if (result.isConfirmed){
         cleanCart();
+        
       }
     })
   }
@@ -85,7 +91,7 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
                               <div className="d-flex">
                               <button className="btn btn-danger p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id, true)}style={buttonsStyle}><i className="bi bi-trash"></i></button>
                               <button className="btn btn-dark p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id)} style={buttonsStyle}><i class="bi bi-dash-lg"></i></button>
-                              <button className="btn btn-dark p-1 fs-7" onClick={()=> addOneToCart(item.id)}style={buttonsStyle}><i class="bi bi-plus-lg"></i></button>
+                              <button className="btn btn-dark p-1 fs-7" onClick={()=> addOneToCart(item.id)} style={buttonsStyle}><i class="bi bi-plus-lg"></i></button>
                               </div>
                             </td>
                           </tr>
