@@ -91,7 +91,7 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
                               <div className="d-flex">
                               <button className="btn btn-danger p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id, true)}style={buttonsStyle}><i className="bi bi-trash"></i></button>
                               <button className="btn btn-dark p-1 fs-7 me-1" onClick={()=> deleteFromCart(item.id)} style={buttonsStyle}><i class="bi bi-dash-lg"></i></button>
-                              <button className="btn btn-dark p-1 fs-7" onClick={()=> addOneToCart(item.id)} style={buttonsStyle}><i class="bi bi-plus-lg"></i></button>
+                              <button className="btn btn-dark p-1 fs-7" onClick={()=> addOneToCart(item.id)} disabled={item.quantity >= item.inmutableStock} style={buttonsStyle}><i class="bi bi-plus-lg"></i></button>
                               </div>
                             </td>
                           </tr>

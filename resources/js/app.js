@@ -9,6 +9,7 @@ import ReactDOM from "react-dom";
 
 import Header  from "./components/componentsBody/Header";
 import Footer from "./components/componentsBody/Footer";
+import Login  from "./components/componentsLogin/Login";
 
 
 import Shop from "./components/componentsShop/Shop";
@@ -17,8 +18,6 @@ import Item from "./components/componentsShop/Item";
 import ShoppingCart from "./components/componentsShoppingCart/ShoppingCart";
 import ModalTurn from "./components/componentsTurn/ModalTurn";
 
-// import { useReducer } from "react";
-// import { shoppingInitialState, shoppingReducer } from "../../src/reducers/shoppingReducer";
 
 import Home from "./components/componentsHome/Home";
 import Slider from "./components/componentsHome/Slider";

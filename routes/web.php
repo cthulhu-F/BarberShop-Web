@@ -59,3 +59,8 @@ Route::get('/backOffice/settings', function () {
     return view('viewBackOffice/settings');
 });
 
+
+Route::get('/login', function () {
+    return view('login');
+});
+
