@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
-import { ITEM_IMG } from '../../constans/constImg';
+import { ITEM_IMG } from '../../constants/constImg';
 
 import { useReducer } from "react";
 import { shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";

@@ -39,27 +39,23 @@ Route::get('/product/{value}', function ($value) {
 
 // BACKOFFICE ROUTES 
 
-Route::get('/backOffice/home', function () {
-    return view('backOffice');
-});
-
 Route::get('/backOffice/turns', function () {
-    return view('turns');
+    return view('viewBackOffice/turns');
 });
 
 Route::get('/backOffice/sales', function () {
-    return view('sales');
+    return view('viewBackOffice/sales');
 });
 
 Route::get('/backOffice/inventory', function () {
-    return view('inventory');
+    return view('viewBackOffice/inventory');
 });
 
 Route::get('/backOffice/users', function () {
-    return view('users');
+    return view('viewBackOffice/users');
 });
 
 Route::get('/backOffice/settings', function () {
-    return view('settings');
+    return view('viewBackOffice/settings');
 });
 

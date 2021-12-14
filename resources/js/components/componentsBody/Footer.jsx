@@ -8,7 +8,7 @@ const style= {
     height: "220px",
 }
 import '../../../css/main.css';
-import { ITEM_IMG } from '../../constans/constImg';
+import { ITEM_IMG } from '../../constants/constImg';
 
 const Footer = () => {
 

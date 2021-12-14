@@ -25,13 +25,13 @@ import Slider from "./components/componentsHome/Slider";
 
 // BACKOFFICE IMPORTS
 
-import SidebarHeader from "./components/componentsBackOffice/SidebarHeader"
-import Turns from "./components/componentsBackOffice/Turns"
-import Sales from "./components/componentsBackOffice/Sales"
-import Inventory from "./components/componentsBackOffice/Inventory"
-import Users from "./components/componentsBackOffice/Users"
-import Settings from "./components/componentsBackOffice/Settings";
-import BackOfficeHome from "./components/componentsBackOffice/BackOfficeHome"
+import SidebarHeader from "./components/componentsBackOffice/componentsHeader/SidebarHeader"
+import Turns from "./components/componentsBackOffice/componentsTurns/Turns"
+import Sales from "./components/componentsBackOffice/componentsInventory/Inventory"
+import Inventory from "./components/componentsBackOffice/componentsOrderSale/Sales"
+import Users from "./components/componentsBackOffice/componentsUser/Users"
+import Settings from "./components/componentsBackOffice/componentsSetting/Settings";
+
 
 
 require('./bootstrap');

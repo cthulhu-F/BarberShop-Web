@@ -1,5 +1,5 @@
 import { TYPES } from '../actions/shoppingActions';
-import { ITEM_PRODUCTS } from '../../resources/js/constans/ConstItem';
+import { ITEM_PRODUCTS } from '../../resources/js/constants/ConstItem';
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 import { useEffect } from 'react';
 import "../../resources/css/sweetAlert.css"
@@ -44,11 +44,14 @@ export function shoppingReducer(state, action){
                 };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            
             swal({ title: "Enhorabuena!",
             text: "Ahora tienes " + action.quantity +" "+ newItem.name +" en tu carrito",
             icon:"success",
             timer:"2000",});
+            
             return cartItemsData.cart;
+            
             
         }
 
@@ -72,6 +75,8 @@ export function shoppingReducer(state, action){
             };
 
             localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+
+            
             if(action.alert){
                 swal({
                 text: "Sumaste 1 "+ newItem.name +" en tu carrito",
@@ -79,6 +84,7 @@ export function shoppingReducer(state, action){
                 className:"add-to-cart-alert"
             });
             }
+            
             return cartItemsData.cart;
 
         } 

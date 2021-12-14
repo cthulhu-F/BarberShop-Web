@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ITEM_PRODUCTS } from '../../constans/ConstItem';
+import { ITEM_PRODUCTS } from '../../constants/ConstItem';
 import { TYPES } from "../../../../src/actions/shoppingActions";
 import ShopItem from "./ShopItem";
 
