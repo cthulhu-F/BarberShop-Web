@@ -9,7 +9,6 @@ export const ITEM_PRODUCTS = {
       price: "10.99",
       stock: 10,
       inmutableStock:10,
-
     },
     {
       id: 2,
