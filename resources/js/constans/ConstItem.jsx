@@ -8,6 +8,7 @@ export const ITEM_PRODUCTS = {
       quantity: 1,
       price: "10.99",
       stock: 10,
+      inmutableStock: 10,
     },
     {
       id: 2,
@@ -16,7 +17,9 @@ export const ITEM_PRODUCTS = {
       description: "Descripcion del producto",
       quantity: 1,
       price: "10.99",
-      stock: 100,
+      stock: 10,
+      inmutableStock: 10,
+
     },
     {
       id: 3,
@@ -25,7 +28,9 @@ export const ITEM_PRODUCTS = {
       description: "Descripcion del producto",
       quantity: 1,
       price: "10.99",
-      stock: 100,
+      stock: 10,
+      inmutableStock: 10,
+
     },
     {
       id: 4,
@@ -34,7 +39,9 @@ export const ITEM_PRODUCTS = {
       description: "Descripcion del producto",
       quantity: 1,
       price: "10.99",
-      stock: 100,
+      stock: 10,
+      inmutableStock: 10,
+
     }
   ],
 }
