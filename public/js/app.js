@@ -7793,14 +7793,14 @@ var Home = function Home() {
   /* 
   
   <div className="row g-2">
-         <div className="col-12 col-xl-12">
+          <div className="col-12 col-xl-12">
           <div className="d-flex justify-content-center border-0 border-bottom">
           <span className="fw-bold fs-3 text-black font-h1">Nuestros clientes</span>
           </div>
         </div>
-         <div className="col-12 col-xl-6 ">
-           <div className="row g-1 justify-content-end">
-             <div className="col-12 col-xl-12 p-0">
+          <div className="col-12 col-xl-6 ">
+            <div className="row g-1 justify-content-end">
+              <div className="col-12 col-xl-12 p-0">
               <div className="w-100 d-flex justify-content-end" style={{height: "600px"}}>
                 <img 
                 src={urlImg(ITEM_IMG.coverImg_1).default}
@@ -7809,7 +7809,7 @@ var Home = function Home() {
                 />
               </div>
             </div>
-             <div className="col-12 col-xl-12 p-0">
+              <div className="col-12 col-xl-12 p-0">
               <div className="w-100 d-flex justify-content-end" style={{height: "300px"}}>
                 <img 
                 src={urlImg(ITEM_IMG.coverImg_2).default}
@@ -7818,11 +7818,11 @@ var Home = function Home() {
                 />
               </div>
             </div>
-           </div>
-         </div>
-         <div className="col-12 col-xl-6">
-           <div className="row g-1 justify-content-start">
-             <div className="col-12 col-xl-12 p-0">
+            </div>
+          </div>
+          <div className="col-12 col-xl-6">
+            <div className="row g-1 justify-content-start">
+              <div className="col-12 col-xl-12 p-0">
               <div className="w-100 d-flex" style={{height: "300px"}}>
                 <img 
                 src={urlImg(ITEM_IMG.coverImg_3).default}
@@ -7831,7 +7831,7 @@ var Home = function Home() {
                 />
               </div>
             </div>
-             <div className="col-12 col-xl-12 p-0">
+              <div className="col-12 col-xl-12 p-0">
               <div className="w-100 d-flex" style={{height: "600px"}}>
                 <img 
                 src={urlImg(ITEM_IMG.coverImg_4).default}
@@ -7843,7 +7843,7 @@ var Home = function Home() {
           </div>
         </div>
       </div>
-   */
+    */
 
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -9231,11 +9231,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-<<<<<<< HEAD
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../../src/reducers/turnReducer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-=======
 /* harmony import */ var _src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../src/reducers/turnReducer */ "./src/reducers/turnReducer.js");
->>>>>>> d49c82fe9e1ce9bc9a38abc9fdd1650ed971161b
 /* harmony import */ var _turnUses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../turnUses */ "./resources/js/turnUses.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -9261,11 +9257,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var ModalTurn = function ModalTurn() {
-<<<<<<< HEAD
-  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../../src/reducers/turnReducer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../../src/reducers/turnReducer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())),
-=======
   var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__.turnReducer, _src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__.turnStateData),
->>>>>>> d49c82fe9e1ce9bc9a38abc9fdd1650ed971161b
       _useReducer2 = _slicedToArray(_useReducer, 2),
       turnState = _useReducer2[0],
       dispatch = _useReducer2[1];
@@ -9849,13 +9841,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-<<<<<<< HEAD
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../src/reducers/turnReducer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../src/actions/turnActions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-=======
 /* harmony import */ var _src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/reducers/turnReducer */ "./src/reducers/turnReducer.js");
 /* harmony import */ var _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/actions/turnActions */ "./src/actions/turnActions.js");
->>>>>>> d49c82fe9e1ce9bc9a38abc9fdd1650ed971161b
 
 
 
@@ -9866,11 +9853,7 @@ var turnMapDispatcht = function turnMapDispatcht(dispatch) {
   return {
     getChairs: function getChairs() {
       dispatch({
-<<<<<<< HEAD
-        type: Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../src/actions/turnActions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
-=======
         type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.GET_AVIABLES_CHAIRS
->>>>>>> d49c82fe9e1ce9bc9a38abc9fdd1650ed971161b
       });
     },
     // getDays: (id) => {
@@ -9879,22 +9862,14 @@ var turnMapDispatcht = function turnMapDispatcht(dispatch) {
     getSchedule: function getSchedule(id) {
       var date = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "22-12-202";
       dispatch({
-<<<<<<< HEAD
-        type: Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../src/actions/turnActions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-=======
         type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.GET_SCHEDULE,
->>>>>>> d49c82fe9e1ce9bc9a38abc9fdd1650ed971161b
         payload: id,
         date: date
       });
     },
     saveTurn: function saveTurn(id) {
       dispatch({
-<<<<<<< HEAD
-        type: Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../src/actions/turnActions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-=======
         type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.SAVE_TURN,
->>>>>>> d49c82fe9e1ce9bc9a38abc9fdd1650ed971161b
         payload: id
       });
     }
@@ -17309,7 +17284,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body,\nhtml {\n    margin: 0;\n    padding: 0;\n    height: 100%;\n}\n.user_card {\n    height: auto;\n    width: 350px;\n    margin-top: 20%;\n    background: #fff;\n    position: relative;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    padding: 10px;\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n    border-radius: 5px;\n\n}\n.brand_logo_container {\n    position: absolute;\n    height: 170px;\n    width: 170px;\n    top: -75px;\n    border-radius: 50%;\n    background: #fff;\n    padding: 10px;\n    text-align: center;\n}\n.brand_logo {\n    height: 150px;\n    width: 150px;\n    border-radius: 50%;\n    border: 2px solid white;\n}\n.form_container {\n    margin-top: 100px;\n}\n.login_btn {\n    width: 100%;\n    background: #000 !important;\n    color: white !important;\n}\n.login_btn:focus {\n    box-shadow: none !important;\n    outline: 0px !important;\n}\n.login_container {\n    padding: 0 2rem;\n}\n.input-group-text {\n    background: #000 !important;\n    color: white !important;\n    border: 0 !important;\n    border-radius: 0.25rem 0 0 0.25rem !important;\n}\n.input_user,\n.input_pass:focus {\n    box-shadow: none !important;\n    outline: 0px !important;\n}\n.custom-checkbox .custom-control-input:checked~.custom-control-label::before {\n    background-color: #000 !important;\n\n}\n\n.custom-checkbox{\n    display: flex !important;\n    justify-content: center !important;\n    align-items: center !important;\n}\n\n.custom-control-input{\n    margin: 10px;\n}\n.non-login-section{\n    margin-top:50px !important;\n}\n\n.sing-up-button{\n    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\n    margin:10px;\n}\n\n\n\n\n.mensajeError{\n    color:red !important;\n    font-weight: 800 !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body,\r\nhtml {\r\n    margin: 0;\r\n    padding: 0;\r\n    height: 100%;\r\n}\r\n.user_card {\r\n    height: auto;\r\n    width: 350px;\r\n    margin-top: 20%;\r\n    background: #fff;\r\n    position: relative;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n    padding: 10px;\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n    border-radius: 5px;\r\n\r\n}\r\n.brand_logo_container {\r\n    position: absolute;\r\n    height: 170px;\r\n    width: 170px;\r\n    top: -75px;\r\n    border-radius: 50%;\r\n    background: #fff;\r\n    padding: 10px;\r\n    text-align: center;\r\n}\r\n.brand_logo {\r\n    height: 150px;\r\n    width: 150px;\r\n    border-radius: 50%;\r\n    border: 2px solid white;\r\n}\r\n.form_container {\r\n    margin-top: 100px;\r\n}\r\n.login_btn {\r\n    width: 100%;\r\n    background: #000 !important;\r\n    color: white !important;\r\n}\r\n.login_btn:focus {\r\n    box-shadow: none !important;\r\n    outline: 0px !important;\r\n}\r\n.login_container {\r\n    padding: 0 2rem;\r\n}\r\n.input-group-text {\r\n    background: #000 !important;\r\n    color: white !important;\r\n    border: 0 !important;\r\n    border-radius: 0.25rem 0 0 0.25rem !important;\r\n}\r\n.input_user,\r\n.input_pass:focus {\r\n    box-shadow: none !important;\r\n    outline: 0px !important;\r\n}\r\n.custom-checkbox .custom-control-input:checked~.custom-control-label::before {\r\n    background-color: #000 !important;\r\n\r\n}\r\n\r\n.custom-checkbox{\r\n    display: flex !important;\r\n    justify-content: center !important;\r\n    align-items: center !important;\r\n}\r\n\r\n.custom-control-input{\r\n    margin: 10px;\r\n}\r\n.non-login-section{\r\n    margin-top:50px !important;\r\n}\r\n\r\n.sing-up-button{\r\n    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);\r\n    margin:10px;\r\n}\r\n\r\n\r\n\r\n\r\n.mensajeError{\r\n    color:red !important;\r\n    font-weight: 800 !important;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17363,7 +17338,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".add-to-cart-alert{\n   position: absolute;\n   bottom: 50px; \n   left: 0;\n   right: 0;\n   margin:auto;\n   display: flex !important;\n   align-items: center;\n   height: 60px;\n   overflow: hidden;\n   justify-content: center;\n   flex-direction: row;\n   width: 400px;\n   margin:0px !important;\n   padding: 0px !important;\n   box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 20%);\n}\n\n\n.add-to-cart-alert .swal2-actions {\n    width: 20%;\n    margin: 0px ;\n}\n\n.add-to-cart-alert .swal2-confirm{\n    padding: 5px 10px ;\n}\n.add-to-cart-alert .swal2-html-container{\n    text-align: center;\n    width: 80%;\n    margin:0;\n    padding:0;\n    font-weight: 700;\n}\n\n.add-to-cart-alert-container{\n    background-color: #00000000 !important;\n}\n\n/* .add-to-cart-alert .swal-icon{\n    margin:30px auto;\n}\n.add-to-cart-alert .swal-footer{\n    width: 20%;\n    margin-top: 0px ;\n}\n\n.add-to-cart-alert .swal-button{\n    padding: 5px 10px ;\n}\n.add-to-cart-alert .swal-text{\n    text-align: center;\n    width: 80%;\n    margin:0;\n    padding:0;\n    font-weight: 700;\n} */\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".add-to-cart-alert{\r\n   position: absolute;\r\n   bottom: 50px; \r\n   left: 0;\r\n   right: 0;\r\n   margin:auto;\r\n   display: flex !important;\r\n   align-items: center;\r\n   height: 60px;\r\n   overflow: hidden;\r\n   justify-content: center;\r\n   flex-direction: row;\r\n   width: 400px;\r\n   margin:0px !important;\r\n   padding: 0px !important;\r\n   box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 20%);\r\n}\r\n\r\n\r\n.add-to-cart-alert .swal2-actions {\r\n    width: 20%;\r\n    margin: 0px ;\r\n}\r\n\r\n.add-to-cart-alert .swal2-confirm{\r\n    padding: 5px 10px ;\r\n}\r\n.add-to-cart-alert .swal2-html-container{\r\n    text-align: center;\r\n    width: 80%;\r\n    margin:0;\r\n    padding:0;\r\n    font-weight: 700;\r\n}\r\n\r\n.add-to-cart-alert-container{\r\n    background-color: #00000000 !important;\r\n}\r\n\r\n/* .add-to-cart-alert .swal-icon{\r\n    margin:30px auto;\r\n}\r\n.add-to-cart-alert .swal-footer{\r\n    width: 20%;\r\n    margin-top: 0px ;\r\n}\r\n\r\n.add-to-cart-alert .swal-button{\r\n    padding: 5px 10px ;\r\n}\r\n.add-to-cart-alert .swal-text{\r\n    text-align: center;\r\n    width: 80%;\r\n    margin:0;\r\n    padding:0;\r\n    font-weight: 700;\r\n} */\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17387,7 +17362,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* BACKGROUND COLOR */\n\n/* BG COLOR EXTRA */\n\n.bg-black {\n    background-color: #000000!important;\n}\n\n.bg-oxfordBlue{\n    background-color: #14213D!important;\n}\n\n.bg-orangeWeb{\n    background-color: #FCA311!important;\n}\n\n.bg-platinum{\n    background-color: #E5E5E5!important;\n}\n\n/* TEXT COLOR EXTRA */\n\n.text-black {\n    color: #000000!important;\n}\n\n.text-oxfordBlue{\n    color: #14213D!important;\n}\n\n.text-orangeWeb{\n    color: #FCA311!important;\n}\n\n.text-platinum{\n    color: #E5E5E5!important;\n}\n\n/* BTN COLOR EXTRA */\n\n.btn-black{\n    background-color: #000000;\n    color: white;\n\n    transition: 0.5s;\n}\n\n.btn-black:hover{\n    color: #E5E5E5!important;\n    border: 1px solid white!important;\n}\n\n\n\n.btn-white{\n    background-color: white;\n    color: #000000;\n    border: 1px solid #000000;\n\n    transition: 0.5s;\n}\n\n.btn-white:hover{\n    color: #E5E5E5!important;\n    border: 1px solid white!important;\n\n    background-color: #000000;\n}\n\n\n.btn-orangeWeb{\n    background-color:  #FCA311!important;\n    color: #000000;\n    border: 1px solid #E5E5E5!important;\n\n    transition: 0.5s;\n}\n\n.btn-orangeWeb:hover{\n    color: #E5E5E5!important;\n}\n\n/* LINK COLOR EXTRA */\n\n\n.link-white{\n    color: white;\n\n    transition: 0.5s;\n}\n\n.link-white:hover{\n    color: #E5E5E5!important;\n}\n\n.link-black{\n    color: #000000;\n\n    transition: 0.5s;\n}\n\n.link-black:hover{\n    color: #E5E5E5!important;\n}\n\n/* NAVBAR COLOR EXTRA */\n\n.navbar-link-primary{\n    color:  #E5E5E5!important;\n    background-color: none;\n\n    transition: 0.5s;\n}\n\n.navbar-link-primary:hover{\n    color: #000000!important;\n    background-color: #E5E5E5!important;\n}\n\n.navbar-link-primary:hover > a{\n    color: #000000!important;\n}\n\n.navbar-link-active-primary{\n    color: #000000!important;\n    background-color: #E5E5E5!important;\n}\n\n.navbar-link-active-primary>a{\n    color: #000000!important;\n}\n\n/* BORDER COLOR EXTRA */\n\n.border-black{\n    border-color:  #000000!important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* BACKGROUND COLOR */\r\n\r\n/* BG COLOR EXTRA */\r\n\r\n.bg-black {\r\n    background-color: #000000!important;\r\n}\r\n\r\n.bg-oxfordBlue{\r\n    background-color: #14213D!important;\r\n}\r\n\r\n.bg-orangeWeb{\r\n    background-color: #FCA311!important;\r\n}\r\n\r\n.bg-platinum{\r\n    background-color: #E5E5E5!important;\r\n}\r\n\r\n/* TEXT COLOR EXTRA */\r\n\r\n.text-black {\r\n    color: #000000!important;\r\n}\r\n\r\n.text-oxfordBlue{\r\n    color: #14213D!important;\r\n}\r\n\r\n.text-orangeWeb{\r\n    color: #FCA311!important;\r\n}\r\n\r\n.text-platinum{\r\n    color: #E5E5E5!important;\r\n}\r\n\r\n/* BTN COLOR EXTRA */\r\n\r\n.btn-black{\r\n    background-color: #000000;\r\n    color: white;\r\n\r\n    transition: 0.5s;\r\n}\r\n\r\n.btn-black:hover{\r\n    color: #E5E5E5!important;\r\n    border: 1px solid white!important;\r\n}\r\n\r\n\r\n\r\n.btn-white{\r\n    background-color: white;\r\n    color: #000000;\r\n    border: 1px solid #000000;\r\n\r\n    transition: 0.5s;\r\n}\r\n\r\n.btn-white:hover{\r\n    color: #E5E5E5!important;\r\n    border: 1px solid white!important;\r\n\r\n    background-color: #000000;\r\n}\r\n\r\n\r\n.btn-orangeWeb{\r\n    background-color:  #FCA311!important;\r\n    color: #000000;\r\n    border: 1px solid #E5E5E5!important;\r\n\r\n    transition: 0.5s;\r\n}\r\n\r\n.btn-orangeWeb:hover{\r\n    color: #E5E5E5!important;\r\n}\r\n\r\n/* LINK COLOR EXTRA */\r\n\r\n\r\n.link-white{\r\n    color: white;\r\n\r\n    transition: 0.5s;\r\n}\r\n\r\n.link-white:hover{\r\n    color: #E5E5E5!important;\r\n}\r\n\r\n.link-black{\r\n    color: #000000;\r\n\r\n    transition: 0.5s;\r\n}\r\n\r\n.link-black:hover{\r\n    color: #E5E5E5!important;\r\n}\r\n\r\n/* NAVBAR COLOR EXTRA */\r\n\r\n.navbar-link-primary{\r\n    color:  #E5E5E5!important;\r\n    background-color: none;\r\n\r\n    transition: 0.5s;\r\n}\r\n\r\n.navbar-link-primary:hover{\r\n    color: #000000!important;\r\n    background-color: #E5E5E5!important;\r\n}\r\n\r\n.navbar-link-primary:hover > a{\r\n    color: #000000!important;\r\n}\r\n\r\n.navbar-link-active-primary{\r\n    color: #000000!important;\r\n    background-color: #E5E5E5!important;\r\n}\r\n\r\n.navbar-link-active-primary>a{\r\n    color: #000000!important;\r\n}\r\n\r\n/* BORDER COLOR EXTRA */\r\n\r\n.border-black{\r\n    border-color:  #000000!important;\r\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17416,7 +17391,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.c
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);"]);
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/*\n    font-family: 'Montserrat', sans-serif;\n    font-family: 'Poppins', sans-serif;\n    font-family: 'Ubuntu', sans-serif;\n    font-family: 'Rubik', sans-serif;\n    */\n\n\n    .font-h1{\n        font-family: 'Oswald', sans-serif;\n    }    \n\n.font-p{\n    font-family: 'Poppins', sans-serif;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/*\r\n    font-family: 'Montserrat', sans-serif;\r\n    font-family: 'Poppins', sans-serif;\r\n    font-family: 'Ubuntu', sans-serif;\r\n    font-family: 'Rubik', sans-serif;\r\n    */\r\n\r\n\r\n    .font-h1{\r\n        font-family: 'Oswald', sans-serif;\r\n    }    \r\n\r\n.font-p{\r\n    font-family: 'Poppins', sans-serif;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -76367,7 +76342,7 @@ function useForm(props = {}) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_args":[["axios@0.21.4","/Users/francolobos/Desktop/Personal/Fermins_developer/webapp-shoppingcart"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"/Users/francolobos/Desktop/Personal/Fermins_developer/webapp-shoppingcart","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 
