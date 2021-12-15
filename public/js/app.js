@@ -9231,14 +9231,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../src/reducers/turnReducer */ "./src/reducers/turnReducer.js");
+/* harmony import */ var _turnUses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../turnUses */ "./resources/js/turnUses.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+/*MODAL TURN IMPORTS*/
+
+
 
 
 
 
 
 var ModalTurn = function ModalTurn() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__.turnReducer, _src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__.turnStateData),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      turnState = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var chairs = turnState.chairs,
+      day = turnState.day,
+      schedule = turnState.schedule,
+      completeOrder = turnState.completeOrder;
+  var getChairs = (0,_turnUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).getChairs; // const getDays = turnMapDispatcht(dispatch).getDays;
+
+  var getSchedule = (0,_turnUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).getSchedule;
+  var saveTurn = (0,_turnUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).saveTurn; //Get Active Chairs,
+
+  var activeChairId;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "modal fade",
     id: "staticBackdrop",
     "data-bs-backdrop": "static",
@@ -9246,108 +9280,111 @@ var ModalTurn = function ModalTurn() {
     tabindex: "-1",
     "aria-labelledby": "staticBackdropLabel",
     "aria-hidden": "true",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "modal-dialog modal-gl",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "modal-content",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "modal-header",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
             className: "modal-title fs-3 font-h1",
             id: "staticBackdropLabel",
-            children: [" Nuevo turno ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+            children: [" Nuevo turno ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
               className: "bi bi-scissors"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             type: "button",
             className: "btn-close",
             "data-bs-dismiss": "modal",
             "aria-label": "Close"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "modal-body",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "row g-2",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "border-0 border-bottom",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "fw-bold fs-5 font-h1",
                   children: "Datos de contacto"
                 })
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "input-group mb-1",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                   type: "text",
                   className: "form-control",
                   placeholder: "Nombre",
                   "aria-label": "Username",
                   "aria-describedby": "basic-addon1"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "input-group-text bg-black text-white border border-black",
                   id: "basic-addon1",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                     className: "bi bi-person"
                   })
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "input-group mb-1",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                   type: "number",
                   className: "form-control",
                   placeholder: "Telefono",
                   "aria-label": "Username",
                   "aria-describedby": "basic-addon1"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "input-group-text bg-black text-white border border-black",
                   id: "basic-addon1",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                     className: "bi bi-telephone"
                   })
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "input-group mb-1",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                   type: "email",
                   className: "form-control",
                   placeholder: "Correo",
                   "aria-label": "Username",
                   "aria-describedby": "basic-addon1"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "input-group-text bg-black text-white border border-black",
                   id: "basic-addon1",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                     className: "bi bi-envelope"
                   })
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "border-0 border-bottom",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "fw-bold fs-5 font-h1",
                   children: "Motivo de turno"
                 })
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "accordion-item",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
                   className: "accordion-header",
                   id: "flush-headingOne",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                    onClick: function onClick() {
+                      return getChairs();
+                    },
                     className: "accordion-button collapsed bg-white text-black",
                     type: "button",
                     "data-bs-toggle": "collapse",
@@ -9356,92 +9393,91 @@ var ModalTurn = function ModalTurn() {
                     "aria-controls": "flush-collapseOne",
                     children: "Seleccione un motivo..."
                   })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   id: "flush-collapseOne",
                   className: "accordion-collapse collapse",
                   "aria-labelledby": "flush-headingOne",
                   "data-bs-parent": "#accordionFlushExample",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "accordion-body p-1",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
                       className: "list-group",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-                        className: "list-group-item border-0",
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                          className: "form-check-input me-1",
-                          name: "motivo",
-                          type: "radio",
-                          value: "",
-                          "aria-label": "..."
-                        }), "Motivo 1"]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-                        className: "list-group-item border-0",
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                          className: "form-check-input me-1",
-                          name: "motivo",
-                          type: "radio",
-                          value: "",
-                          "aria-label": "..."
-                        }), "Motivo 2"]
-                      })]
+                      children: chairs.map(function (chair) {
+                        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+                          className: "list-group-item border-0",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                            className: "form-check-input me-1",
+                            name: "motivo",
+                            type: "radio",
+                            value: "",
+                            onChange: function onChange() {
+                              return activeChairId = chair.id;
+                            },
+                            "aria-label": "..."
+                          }), chair.name]
+                        });
+                      })
                     })
                   })
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "border-0 border-bottom",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "fw-bold fs-5 font-h1",
                   children: "Seleccione una fecha disponible"
                 })
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "d-flex",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                   className: "form-control",
                   type: "date",
                   name: "trip-start",
-                  value: "2021-12-06",
+                  onChange: function onChange(event) {
+                    return getSchedule(activeChairId, event.target.value);
+                  },
                   min: "2021-12-06",
                   max: "2022-12-31"
                 })
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "col-12",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "input-group",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
                   className: "form-select border-0 border-start border-top border-bottom",
                   id: "inputGroupSelect02",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
                     selected: true,
                     children: "Horarios"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-                    value: "1",
-                    children: "00:00"
+                  }), schedule.map(function (hour) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+                      children: hour.turn
+                    });
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                   className: "input-group-text bg-white border-0 border-end border-top border-bottom",
                   "for": "inputGroupSelect02",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                     className: "bi bi-clock"
                   })
                 })]
               })
             })]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "modal-footer",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             type: "button",
             className: "btn btn-secondary",
             "data-bs-dismiss": "modal",
             children: "Cancelar"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             type: "button",
             className: "btn btn-black",
             children: "Generar turno"
@@ -9455,8 +9491,8 @@ var ModalTurn = function ModalTurn() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ModalTurn);
 
 if (document.getElementById("modalTurn")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ModalTurn, {})
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ModalTurn, {})
   }), document.getElementById("modalTurn"));
 }
 
@@ -9529,6 +9565,103 @@ __webpack_require__.r(__webpack_exports__);
 var ITEM_IMG = {
   logo: "./logo.jpg",
   coverImg_1: "./img-1940x460.jpg"
+};
+
+/***/ }),
+
+/***/ "./resources/js/constants/constTurn.jsx":
+/*!**********************************************!*\
+  !*** ./resources/js/constants/constTurn.jsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ITEM_TURNS": () => (/* binding */ ITEM_TURNS)
+/* harmony export */ });
+var ITEM_TURNS = {
+  configTurns: [{
+    id: 1,
+    name: "Silla 1",
+    update_at: "14/12/2021",
+    status: "ACTIVE",
+    configDay_id: 1
+  }, {
+    id: 2,
+    name: "Silla 2",
+    update_at: "14/12/2021",
+    status: "INACTIVE",
+    configDay_id: 2
+  }, {
+    id: 3,
+    name: "Silla 3",
+    update_at: "14/12/2021",
+    status: "ACTIVE",
+    configDay_id: 3
+  }, {
+    id: 4,
+    name: "Silla 4",
+    update_at: "14/12/2021",
+    status: "ACTIVE",
+    configDay_id: 4
+  }],
+  configDay: [{
+    id: 1,
+    mo: "10:00/12:00/5",
+    tu: "10:00/12:00/5",
+    we: "10:00/12:00/5",
+    th: "10:00/12:00/5",
+    fr: "10:00/12:00/5",
+    sa: "10:00/12:00/5",
+    su: "10:00/12:00/5",
+    update_at: "14/12/21",
+    status: "ACTIVE"
+  }, {
+    id: 2,
+    mo: "08:00/12:00/5",
+    tu: "08:00/12:00/5",
+    we: "08:00/12:00/5",
+    th: "08:00/12:00/5",
+    fr: "08:00/12:00/5",
+    sa: "08:00/12:00/5",
+    su: "08:00/12:00/5",
+    update_at: "14/12/21",
+    status: "INACTIVE"
+  }, {
+    id: 3,
+    mo: "08:00/12:00/5",
+    tu: "08:00/12:00/5",
+    we: "08:00/12:00/5",
+    th: "08:00/12:00/5",
+    fr: "08:00/12:00/5",
+    sa: "08:00/12:00/5",
+    su: "08:00/12:00/5",
+    update_at: "14/12/21",
+    status: "ACTIVE"
+  }, {
+    id: 4,
+    mo: "10:00/12:00/5",
+    tu: "10:00/12:00/5",
+    we: "10:00/12:00/5",
+    th: "10:00/12:00/5",
+    fr: "12:00/14:00/3",
+    sa: "12:00/14:00/3",
+    su: "12:00/13:00/3",
+    update_at: "14/12/21",
+    status: "ACTIVE"
+  }],
+  orderTurns: [{
+    id: 1,
+    name: "Silla 1",
+    name_client: "Jose",
+    email_client: "jose@gmail.com",
+    phone_client: "123456789",
+    date: "14/12/2021",
+    time: "08:00",
+    update_at: "14/12/2021",
+    status: "ACTIVE"
+  }]
 };
 
 /***/ }),
@@ -9695,6 +9828,58 @@ var mapDispatcht = function mapDispatcht(dispatch) {
 
 /***/ }),
 
+/***/ "./resources/js/turnUses.js":
+/*!**********************************!*\
+  !*** ./resources/js/turnUses.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/reducers/turnReducer */ "./src/reducers/turnReducer.js");
+/* harmony import */ var _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/actions/turnActions */ "./src/actions/turnActions.js");
+
+
+
+
+
+
+var turnMapDispatcht = function turnMapDispatcht(dispatch) {
+  return {
+    getChairs: function getChairs() {
+      dispatch({
+        type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.GET_AVIABLES_CHAIRS
+      });
+    },
+    // getDays: (id) => {
+    //     dispatch({ type: TURN_TYPES.GET_CHAIR_DAYS});
+    // },
+    getSchedule: function getSchedule(id) {
+      var date = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "22-12-202";
+      dispatch({
+        type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.GET_SCHEDULE,
+        payload: id,
+        date: date
+      });
+    },
+    saveTurn: function saveTurn(id) {
+      dispatch({
+        type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.SAVE_TURN,
+        payload: id
+      });
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (turnMapDispatcht);
+
+/***/ }),
+
 /***/ "./src/actions/shoppingActions.js":
 /*!****************************************!*\
   !*** ./src/actions/shoppingActions.js ***!
@@ -9715,6 +9900,26 @@ var TYPES = {
   LOAD_DATA: "LOAD_DATA" // INCREMENT:"INCREMENT",
   // DECREMENT:"DECREMENT",
 
+};
+
+/***/ }),
+
+/***/ "./src/actions/turnActions.js":
+/*!************************************!*\
+  !*** ./src/actions/turnActions.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TURN_TYPES": () => (/* binding */ TURN_TYPES)
+/* harmony export */ });
+var TURN_TYPES = {
+  GET_AVIABLES_CHAIRS: "GET_AVIABLES_CHAIRS",
+  // GET_CHAIR_DAYS          : "GET_CHAIR_DAYS",
+  GET_SCHEDULE: "GET_SCHEDULE",
+  SAVE_TURN: "SAVE_TURN"
 };
 
 /***/ }),
@@ -9901,6 +10106,145 @@ function shoppingReducer(state, action) {
     // case DECREMENT:{
     //     return {...state, count: state.count - 1}
     // }
+
+    default:
+      {
+        return state;
+      }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/reducers/turnReducer.js":
+/*!*************************************!*\
+  !*** ./src/reducers/turnReducer.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "turnStateData": () => (/* binding */ turnStateData),
+/* harmony export */   "turnReducer": () => (/* binding */ turnReducer)
+/* harmony export */ });
+/* harmony import */ var _actions_turnActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/turnActions */ "./src/actions/turnActions.js");
+/* harmony import */ var _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../resources/js/constants/constTurn */ "./resources/js/constants/constTurn.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _resources_css_sweetAlert_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../resources/css/sweetAlert.css */ "./resources/css/sweetAlert.css");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+var setHoursAndMinutes = function setHoursAndMinutes(seconds) {
+  var hours = Math.floor(seconds / 3600);
+  seconds -= hours * 3600;
+  var minutes = Math.floor(seconds / 60);
+  seconds -= minutes * 60;
+  var output = hours + ":" + minutes;
+  return output;
+};
+
+var addTime = function addTime(initial, aditional) {
+  var initialTime = initial.split(":");
+  var aditionalTime = aditional.split(":");
+  var hours = parseInt(initialTime[0]) + parseInt(aditionalTime[0]);
+  var minutes = parseInt(initialTime[1]) + parseInt(aditionalTime[1]);
+  var newHours = Math.floor(minutes / 60);
+  hours += newHours;
+  minutes -= newHours * 60;
+
+  if (minutes == 0) {
+    minutes = "00";
+  }
+
+  ;
+  return hours + ':' + minutes;
+};
+
+var turnStateData = {
+  chairs: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configTurns,
+  day: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay,
+  schedule: [{
+    turn: "07:00"
+  }, {
+    turn: "08:00"
+  }, {
+    turn: "09:00"
+  }, {
+    turn: "10:00"
+  }, {
+    turn: "11:00"
+  }, {
+    turn: "12:00"
+  }],
+  completeOrder: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns
+};
+function turnReducer(state, action) {
+  switch (action.type) {
+    case _actions_turnActions__WEBPACK_IMPORTED_MODULE_0__.TURN_TYPES.GET_AVIABLES_CHAIRS:
+      {
+        var activeChairs = [];
+        state.chairs.map(function (chair) {
+          if (chair.status === "ACTIVE") {
+            activeChairs.push(chair);
+          }
+        });
+        return _objectSpread(_objectSpread({}, state), {}, {
+          chairs: activeChairs
+        });
+      }
+    // case TURN_TYPES.GET_CHAIR_DAYS:{
+    // }
+
+    case _actions_turnActions__WEBPACK_IMPORTED_MODULE_0__.TURN_TYPES.GET_SCHEDULE:
+      {
+        var dateData = action.date.split("-");
+        var dt = new Date(dateData);
+        var weekDayIndex = dt.getDay();
+        var days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+        var weekDay = days[weekDayIndex];
+        var chairAviability = state.day.find(function (chair) {
+          return chair.id === action.payload;
+        });
+        var daySchedule = chairAviability[weekDay].split("/");
+        var turnsAmount = daySchedule[2];
+        var open = new Date("December 14, 2021 " + "".concat(daySchedule[0]) + ":00");
+        var colse = new Date("December 14, 2021 " + "".concat(daySchedule[1]) + ":00");
+        var difference = (colse - open) / 1000;
+        var turnDuration = difference / turnsAmount; // En segundos
+
+        turnDuration = setHoursAndMinutes(turnDuration);
+        var turn = daySchedule[0];
+        var aviableTurns = [{
+          turn: turn
+        }];
+
+        for (var ii = 0; ii < turnsAmount; ii++) {
+          turn = addTime(turn, turnDuration);
+          aviableTurns[ii] = {
+            turn: turn
+          };
+        }
+
+        return _objectSpread(_objectSpread({}, state), {}, {
+          schedule: aviableTurns
+        });
+      }
+
+    case _actions_turnActions__WEBPACK_IMPORTED_MODULE_0__.TURN_TYPES.SAVE_TURN:
+      {}
 
     default:
       {

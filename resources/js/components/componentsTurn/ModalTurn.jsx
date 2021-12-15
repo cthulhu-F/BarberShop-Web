@@ -1,7 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+  /*MODAL TURN IMPORTS*/
+  import { useReducer } from 'react';
+  import { turnReducer, turnStateData} from '../../../../src/reducers/turnReducer';
+  import turnMapDispatcht from "../../turnUses";
+
+
 const ModalTurn = () => {
+
+  const [turnState, dispatch] =useReducer(turnReducer,turnStateData);
+  const {chairs, day, schedule, completeOrder} = turnState;
+
+  const getChairs = turnMapDispatcht(dispatch).getChairs;
+
+  // const getDays = turnMapDispatcht(dispatch).getDays;
+
+  const getSchedule = turnMapDispatcht(dispatch).getSchedule;
+
+  const saveTurn = turnMapDispatcht(dispatch).saveTurn;
+
+  //Get Active Chairs,
+
+
+
+  let activeChairId;
 
   return(
 
@@ -63,7 +86,7 @@ const ModalTurn = () => {
                 <div className="col-12">
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="flush-headingOne">
-                      <button className="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse"
+                      <button onClick={()=>getChairs()} className="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                         Seleccione un motivo...
                       </button>
@@ -72,14 +95,12 @@ const ModalTurn = () => {
                       data-bs-parent="#accordionFlushExample">
                       <div className="accordion-body p-1">
                         <ul className="list-group">
-                          <li className="list-group-item border-0">
-                            <input className="form-check-input me-1" name="motivo" type="radio" value="" aria-label="..."/>
-                            Motivo 1
-                          </li>
-                          <li className="list-group-item border-0">
-                            <input className="form-check-input me-1" name="motivo" type="radio" value="" aria-label="..."/>
-                            Motivo 2
-                          </li>
+                          {chairs.map(chair=>
+                              <li className="list-group-item border-0">
+                              <input className="form-check-input me-1" name="motivo" type="radio" value="" onChange={()=>activeChairId = chair.id} aria-label="..."/>
+                              {chair.name}
+                              </li>
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -96,7 +117,7 @@ const ModalTurn = () => {
 
                 <div className="col-12">
                   <div className="d-flex">
-                    <input className="form-control" type="date" name="trip-start" value="2021-12-06" min="2021-12-06"
+                    <input className="form-control" type="date" name="trip-start" onChange={(event)=>getSchedule(activeChairId,event.target.value)} min="2021-12-06"
                       max="2022-12-31"/>
                   </div>
                 </div>
@@ -105,7 +126,10 @@ const ModalTurn = () => {
                   <div className="input-group">
                     <select className="form-select border-0 border-start border-top border-bottom" id="inputGroupSelect02">
                       <option selected>Horarios</option>
-                      <option value="1">00:00</option>
+                      {schedule.map((hour)=>
+                        <option>{hour.turn}</option>
+                      )}
+                      
                     </select>
                     <label className="input-group-text bg-white border-0 border-end border-top border-bottom"
                       for="inputGroupSelect02"><i className="bi bi-clock"></i></label>

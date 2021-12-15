@@ -22,8 +22,6 @@ export const cartItemsData = existentCart
             };
 
 
-
-
 export function shoppingReducer(state, action){
     switch(action.type){
         case TYPES.ADD_TO_CART:{
