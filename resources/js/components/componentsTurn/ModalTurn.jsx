@@ -7,6 +7,13 @@ import Chair from "./chair";
   import { turnReducer, turnStateData} from '../../../../src/reducers/turnReducer';
   import turnMapDispatcht from "../../turnUses";
 
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import Fade from "react-bootstrap";
+import "../../../css/ModalTurn.css"
+
+
+
 
 const ModalTurn = () => {
 
@@ -24,55 +31,56 @@ const ModalTurn = () => {
   const setActiveChair =  turnMapDispatcht(dispatch).setActiveChair;
 
 
+
   return(
-
     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div className="modal-dialog modal-gl">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title fs-3 font-h1" id="staticBackdropLabel"> Nuevo turno <i className="bi bi-scissors"></i>
-              </h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div className="modal-dialog modal-gl">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title fs-3 font-h1" id="staticBackdropLabel"> Nuevo turno <i className="bi bi-scissors"></i>
+          </h5>
+          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div className="modal-body">
+          <Tabs defaultActiveKey="first" transition={Fade} id="controlled-tabs"  selectedTabClassName="bg-dark text-white">
+            <Tab eventKey="first" title="Usuario" >
+            <div className="col-12" >
+              <div className="border-0 border-bottom">
+                <span className="fw-bold fs-5 font-h1">
+                  Datos de contacto
+                </span>
+              </div>
             </div>
-            <div className="modal-body">
-              <div className="row g-2">
 
-                <div className="col-12">
-                  <div className="border-0 border-bottom">
-                    <span className="fw-bold fs-5 font-h1">
-                      Datos de contacto
-                    </span>
-                  </div>
-                </div>
+            <div className="col-12" >
+              <div className="input-group mb-1">
+                <input type="text" className="form-control" placeholder="Nombre" aria-label="Username"
+                  aria-describedby="basic-addon1"/>
+                <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                    className="bi bi-person"></i></span>
+              </div>
+            </div>
 
-                <div className="col-12">
-                  <div className="input-group mb-1">
-                    <input type="text" className="form-control" placeholder="Nombre" aria-label="Username"
-                      aria-describedby="basic-addon1"/>
-                    <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
-                        className="bi bi-person"></i></span>
-                  </div>
-                </div>
+            <div className="col-12">
+              <div className="input-group mb-1">
+                <input type="number" className="form-control" placeholder="Telefono" aria-label="Username"
+                  aria-describedby="basic-addon1"/>
+                <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                    className="bi bi-telephone"></i></span>
+              </div>
+            </div>
 
-                <div className="col-12">
-                  <div className="input-group mb-1">
-                    <input type="number" className="form-control" placeholder="Telefono" aria-label="Username"
-                      aria-describedby="basic-addon1"/>
-                    <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
-                        className="bi bi-telephone"></i></span>
-                  </div>
-                </div>
-
-                <div className="col">
-                  <div className="input-group mb-1">
-                    <input type="email" className="form-control" placeholder="Correo" aria-label="Username"
-                      aria-describedby="basic-addon1"/>
-                    <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
-                        className="bi bi-envelope"></i></span>
-                  </div>
-                </div>
-
+            <div className="col">
+              <div className="input-group mb-1">
+                <input type="email" className="form-control" placeholder="Correo" aria-label="Username"
+                  aria-describedby="basic-addon1"/>
+                <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                    className="bi bi-envelope"></i></span>
+              </div>
+            </div>
+            </Tab>
+            <Tab eventKey="second" title="Turno" tabClassName="modal-turn-tab">
                 <div className="col-12">
                   <div className="border-0 border-bottom">
                     <span className="fw-bold fs-5 font-h1">
@@ -81,45 +89,15 @@ const ModalTurn = () => {
                   </div>
                 </div>
 
-                
-                  <div className="container mt-5">
-                    <div className="row">
-                        {chairs.map(chair=>
-                          <Chair key={chair.id} data={chair} setActiveChair={setActiveChair} getSchedule={getSchedule} selecetDay={selecetDay}></Chair>
-                        )}
-                    </div>
+            
+                <div className="container mt-5">
+                  <div className="row">
+                      {chairs.map(chair=>
+                        <Chair key={chair.id} data={chair} setActiveChair={setActiveChair} getSchedule={getSchedule} selecetDay={selecetDay}></Chair>
+                      )}
                   </div>
-                        
-                        
-                        
-                        {/* 
-                        <div className="col-12">
-                  <div className="accordion-item">
-
-                        <h2 className="accordion-header" id="flush-headingOne">
-                      <button onClick={()=>getChairs()} className="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Seleccione una silla...
-                      </button>
-                    </h2>
-                    <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                      data-bs-parent="#accordionFlushExample">
-                      <div className="accordion-body p-1">
-                      <ul className="list-group">
-                          {chairs.map(chair=>
-                              <li className="list-group-item border-0">
-                              <input className="form-check-input me-1" name="motivo" type="radio" value="" onChange={()=>{setActiveChair(chair.id); getSchedule(chair.id,selecetDay)}} aria-label="..."/>
-                              {chair.name}
-                              </li>
-
-                          )}
-                        </ul> 
-                         </div>
-                    </div>
-                      </div>
-                </div>*/}
-                     
-                
+                </div>
+              
 
                 <div className="col-12">
                   <div className="border-0 border-bottom">
@@ -150,16 +128,22 @@ const ModalTurn = () => {
                   </div>
                 </div>
 
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" className="btn btn-black">Generar turno</button>
-            </div>
-          </div>
+            </Tab>
+            <Tab eventKey="third" title="Confirmar" tabClassName="modal-turn-tab">
+
+            </Tab>
+          </Tabs>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" className="btn btn-black">Generar turno</button>
         </div>
       </div>
-    
+    </div>
+  </div>
+
+
+
   );
 }
 
