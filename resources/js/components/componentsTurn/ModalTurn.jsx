@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import Chair from "./chair";
   /*MODAL TURN IMPORTS*/
   import { useReducer } from 'react';
   import { turnReducer, turnStateData} from '../../../../src/reducers/turnReducer';
@@ -10,7 +11,7 @@ import ReactDOM from "react-dom";
 const ModalTurn = () => {
 
   const [turnState, dispatch] =useReducer(turnReducer,turnStateData);
-  const {chairs, day, schedule, completeOrder} = turnState;
+  const {chairs, day, schedule, completeOrder,activeChairId, selecetDay} = turnState;
 
   const getChairs = turnMapDispatcht(dispatch).getChairs;
 
@@ -19,12 +20,9 @@ const ModalTurn = () => {
   const getSchedule = turnMapDispatcht(dispatch).getSchedule;
 
   const saveTurn = turnMapDispatcht(dispatch).saveTurn;
+  
+  const setActiveChair =  turnMapDispatcht(dispatch).setActiveChair;
 
-  //Get Active Chairs,
-
-
-
-  let activeChairId;
 
   return(
 
@@ -78,34 +76,50 @@ const ModalTurn = () => {
                 <div className="col-12">
                   <div className="border-0 border-bottom">
                     <span className="fw-bold fs-5 font-h1">
-                      Motivo de turno
+                      Seleccione su silla 
                     </span>
                   </div>
                 </div>
 
-                <div className="col-12">
+                
+                  <div className="container mt-5">
+                    <div className="row">
+                        {chairs.map(chair=>
+                          <Chair key={chair.id} data={chair} setActiveChair={setActiveChair} getSchedule={getSchedule} selecetDay={selecetDay}></Chair>
+                        )}
+                    </div>
+                  </div>
+                        
+                        
+                        
+                        {/* 
+                        <div className="col-12">
                   <div className="accordion-item">
-                    <h2 className="accordion-header" id="flush-headingOne">
+
+                        <h2 className="accordion-header" id="flush-headingOne">
                       <button onClick={()=>getChairs()} className="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Seleccione un motivo...
+                        Seleccione una silla...
                       </button>
                     </h2>
                     <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                       data-bs-parent="#accordionFlushExample">
                       <div className="accordion-body p-1">
-                        <ul className="list-group">
+                      <ul className="list-group">
                           {chairs.map(chair=>
                               <li className="list-group-item border-0">
-                              <input className="form-check-input me-1" name="motivo" type="radio" value="" onChange={()=>activeChairId = chair.id} aria-label="..."/>
+                              <input className="form-check-input me-1" name="motivo" type="radio" value="" onChange={()=>{setActiveChair(chair.id); getSchedule(chair.id,selecetDay)}} aria-label="..."/>
                               {chair.name}
                               </li>
+
                           )}
-                        </ul>
-                      </div>
+                        </ul> 
+                         </div>
                     </div>
-                  </div>
-                </div>
+                      </div>
+                </div>*/}
+                     
+                
 
                 <div className="col-12">
                   <div className="border-0 border-bottom">

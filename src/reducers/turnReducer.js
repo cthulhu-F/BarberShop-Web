@@ -35,6 +35,7 @@ const addTime = (initial, aditional) =>{
 }
 
 
+const days=["su","mo","tu","we","th","fr","sa"];
 
 export const turnStateData = {
     chairs: ITEM_TURNS.configTurns,
@@ -48,6 +49,8 @@ export const turnStateData = {
         {turn: "12:00"}],
 
     completeOrder: ITEM_TURNS.orderTurns,
+    activeChairId: 1,
+    selecetDay: "01-01-2000",
 }
 
 export function turnReducer(state, action){
@@ -66,16 +69,23 @@ export function turnReducer(state, action){
         // case TURN_TYPES.GET_CHAIR_DAYS:{
 
         // }
+        case TURN_TYPES.SET_ACTIVE_CHAIR:{
+            console.log('active chair:'+action.payload);
+            return {...state, activeChairId: action.payload}
+        }
 
 
         case TURN_TYPES.GET_SCHEDULE:{
+            console.log(action.date)
             let dateData = action.date.split("-");
             let dt = new Date(dateData) 
             let weekDayIndex = dt.getDay();
-            let days=["su","mo","tu","we","th","fr","sa"];
             let weekDay =days[weekDayIndex];
-            let chairAviability = state.day.find(chair=>chair.id === action.payload);  
+            
+            let chairAviability = state.day.find(chair=>chair.id === action.payload);
+            console.log(action.payload)  
             let daySchedule = chairAviability[weekDay].split("/");
+            console.log(daySchedule)  
             let turnsAmount = daySchedule[2];
             let open = new Date("December 14, 2021 " + `${daySchedule[0]}` + ":00");
             let colse = new Date("December 14, 2021 "+ `${daySchedule[1]}`+ ":00");
@@ -83,13 +93,14 @@ export function turnReducer(state, action){
             let turnDuration = difference/turnsAmount // En segundos
 
             turnDuration = setHoursAndMinutes(turnDuration);
-            let turn = daySchedule[0]
+            let turn = daySchedule[0];
             let aviableTurns= [{turn:turn}];
             for (let ii = 0; ii<turnsAmount; ii++){
                 turn= addTime(turn,turnDuration);
                 aviableTurns[ii]={turn:turn};
             }
-            return {...state, schedule: aviableTurns};  
+            console.log(state.schedule)
+            return {...state, schedule: aviableTurns, selecetDay : action.date};  
         }
         
         case TURN_TYPES.SAVE_TURN:{

@@ -18,6 +18,10 @@ const turnMapDispatcht = (dispatch) => {
         //     dispatch({ type: TURN_TYPES.GET_CHAIR_DAYS});
         // },
 
+        setActiveChair: (id) =>{
+            dispatch({type: TURN_TYPES.SET_ACTIVE_CHAIR, payload:id});
+        },
+
         getSchedule: (id, date= "22-12-202") => {
             dispatch({ type: TURN_TYPES.GET_SCHEDULE , payload:id, date:date});            
         },
