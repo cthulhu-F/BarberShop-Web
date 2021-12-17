@@ -7,6 +7,12 @@ import "../../resources/css/sweetAlert.css"
 import swal from'sweetalert2';
 
 
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var todayString = yyyy + '-' + mm + '-' + dd;
+
 const setHoursAndMinutes= (seconds) =>{
     let hours = Math.floor(seconds/3600);
     seconds -= hours*3600;
@@ -51,14 +57,14 @@ export const turnStateData = {
     completeOrder: ITEM_TURNS.orderTurns,
     chairIsSelected: false,
     activeChairId: 1,
-    dayIsSelected: false,
-    selecetDay: "01-01-1970",
+    selecetDay: todayString,
     hourIsSelected: false,
     selectedHour:"",
     client_data: {
         name_client: "",
         phone_client: "",
-        email_client: ""
+        email_client: "",
+        client_is_registered: false,
         }
 }
 
@@ -75,15 +81,15 @@ export function turnReducer(state, action){
         }
 
 
-        // case TURN_TYPES.GET_CHAIR_DAYS:{
-
-        // }
         case TURN_TYPES.SET_ACTIVE_CHAIR:{
             return {...state, activeChairId: action.payload, chairIsSelected: true}
         }
 
 
         case TURN_TYPES.GET_SCHEDULE:{
+            if (action.date =="null"){
+                action.date = selecetDay;
+            };
             console.log(action.date)
             let dateData = action.date.split("-");
             let dt = new Date(dateData) 
@@ -107,32 +113,46 @@ export function turnReducer(state, action){
                 turn= addTime(turn,turnDuration);
                 aviableTurns[ii]={turn:turn};
             }
-            return {...state, schedule: aviableTurns, selecetDay : action.date};  
+            document.getElementById("inputGroupSelect02").value="Horarios";
+            return {...state, schedule: aviableTurns, selecetDay : action.date, selectedHour:"", hourIsSelected: false};  
         }
 
         case TURN_TYPES.SET_HOUR:{
-            console.log("selected hour" + action.payload)
+            if (action.payload =="Horarios"){
+                return state;
+            }
             return{...state, selectedHour: action.payload, hourIsSelected: true}
         }
         
         case TURN_TYPES.SAVE_TURN:{
-
+            let turnConfirmed = {
+                id: 1,
+                name: state.chairs.find((chair)=>chair.id === state.activeChairId).name,
+                name_client: state.client_data.name_client,
+                email_client: state.client_data.email_client, 
+                phone_client: state.client_data.phone_client, 
+                date: state.selecetDay,
+                time: state.selectedHour,
+                update_at: today, 
+                status: "ACTIVE"
+                }
+            console.log(turnConfirmed)
+            return state;
+            
         }
 
         case TURN_TYPES.SET_USER_DATA:{
             const {name, phone, email} = action.payload
+            console.log(action.payload.name)
             return {...state, client_data: {
                 name_client: name,
                 phone_client: phone,
-                email_client: email
+                email_client: email,
+                client_is_registered: true,
                 }
             }
         }
 
-        case TURN_TYPES.SET_TURN_DATA:{
-            console.log('turn data');
-            return state
-        }
 
         default :{
             return state;

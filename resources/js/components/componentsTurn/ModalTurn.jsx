@@ -9,6 +9,8 @@ import Chair from "./chair";
 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+// import { Tabs,TabList, Tab, TabPanel } from "react-tabs";
+import Button from "@restart/ui/esm/Button";
 import "../../../css/ModalTurn.css"
 
 import { useForm } from "react-hook-form";
@@ -18,15 +20,17 @@ import { useForm } from "react-hook-form";
 
 
 import { useState } from "react";
-import swal from "sweetalert";
+import swal from "sweetalert2";
+import { parse } from "postcss";
+import { min } from "lodash";
 
 
 const ModalTurn = () => {
 
   const [turnState, dispatch] =useReducer(turnReducer,turnStateData);
-  const {chairs, day, schedule, completeOrder,chairIsSelected, activeChairId, dayIsSelected, selecetDay, hourIsSelected, selectedHour ,userData, client_data} = turnState;
+  const {chairs, day, schedule, completeOrder,chairIsSelected, activeChairId, selecetDay, hourIsSelected, selectedHour ,userData, client_data} = turnState;
 
-  const {name_client, phone_client, email_client} = client_data;
+  const {name_client, phone_client, email_client, client_is_registered} = client_data;
 
   const getChairs = turnMapDispatcht(dispatch).getChairs;
 
@@ -42,32 +46,44 @@ const ModalTurn = () => {
 
   const setUserData = turnMapDispatcht(dispatch).setUserData;
 
-  const setTurnData =  turnMapDispatcht(dispatch).setTurnData;
-
-
-
   const {register, handleSubmit, formState:{errors}} = useForm(); 
-
-
 
   const [value, setValue] = useState()
 
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  var yyyymax = parseInt(yyyy)+1;
+  var minDate = yyyy + '-' + mm + '-' + dd;
+  var maxDte = yyyymax + '-' + mm + '-' + dd;
 
-  const setTodaY = ()=>{
-    // var today = new Date();
-    // var dd = String(today.getDate()).padStart(2, '0');
-    // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    // var yyyy = today.getFullYear();
 
-    // todaystring = mm + '/' + dd + '/' + yyyy;
-    // console.log(today)
+  const advancaTab = ()=>{
 
-    document.getElementById("calendar-input").valueAsDate = new Date()
+    //tab
+    document.getElementById("controlled-tabs-tab-second").classList.add("active")
+    document.getElementById("controlled-tabs-tab-second").removeAttribute("tabIndex");
+    document.getElementById("controlled-tabs-tab-second").ariaSelected = "true";
+
+    //tabpan
+    document.getElementById("controlled-tabs-tabpane-second").classList.add("active");
+
+    //tab
+    document.getElementById("controlled-tabs-tab-first").classList.remove("active")
+    document.getElementById("controlled-tabs-tab-first").tabIndex = "-1";
+    document.getElementById("controlled-tabs-tab-first").ariaSelected="false";
+    // document.getElementById("controlled-tabs-tab-first").removeAttribute("ariaSelected");
+
+    //tabpan
+    document.getElementById("controlled-tabs-tabpane-first").classList.remove("active");
+    
   }
 
   const onSubmit = data => {
     if (data){
       setUserData(data);
+      advancaTab();
     }else{
       console.log(data);
     }
@@ -75,30 +91,58 @@ const ModalTurn = () => {
 
   const setTurnDataValidated = ()=>{
 
-    if (!chairIsSelected || !dayIsSelected || !hourIsSelected){
-      let chairAlert="-Silla \n";
-      let dayAlert = "-Fecha \n";
-      let hourAlert = "-Horario \n";
+    if (!chairIsSelected || !hourIsSelected){
+      let chairAlert=" silla";
+      let hourAlert = " y horario";
 
       if (chairIsSelected){
         chairAlert= "";
-      }
-      if(dayIsSelected){
-        dayAlert= "";
+        hourAlert=" horario";
       }
       if(hourIsSelected){
         hourAlert= "";
       }
-      swal(`por favor, selecicone: \n ${chairAlert} ${dayAlert} ${hourAlert}`);
-    }
 
-    if (chairIsSelected, dayIsSelected,hourIsSelected){
-      setTurnData();
+      swal.fire({
+        text: `Por favor selecicone${chairAlert} ${hourAlert}.`,
+        timer:"1200", 
+        position: "bottom",
+        customClass : {
+            container: "add-to-cart-alert-container",
+            popup:"add-to-cart-alert",
+        }
+       });
     }
   }
 
 
+  const setTabMessage =()=>{
+    if (client_is_registered){
+      
+      return "Actualizar datos";
+    }
+    else {
+      return "Cargar datos";
+    }
+  }
 
+
+  const alertAndsaveTurn =(event)=>{
+    event.preventDefault();
+    saveTurn();
+    swal.fire({
+      title: "Turno guradado con éxito!",
+      html: `<span style="font-weight:700;" >Motivo:</span> ${chairs.find((chair)=>chair.id === activeChairId).name} <br><br>
+      <span style="font-weight:700;" >Cliente:</span> ${client_data.name_client}<br><br>
+      <span style="font-weight:700;" >Fecha:</span> ${selecetDay}<br><br>
+      <span style="font-weight:700;" >Hora:</span> ${selectedHour}`,
+      timer:5000})
+      .then(()=>{}).then(()=>{window.location = ""})
+  }
+
+
+  const [selectedTab, setSelectedTab] = useState(0);
+  const tabCount = 3;
 
   return(
     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -111,8 +155,16 @@ const ModalTurn = () => {
           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div className="modal-body">
-          <Tabs defaultActiveKey="first" id="controlled-tabs"  selectedTabClassName="bg-dark text-white">
-            <Tab eventKey="first" title="Usuario" >
+          <Tabs defaultActiveKey="first" id="controlled-tabs" 
+          selectedTabClassName="bg-dark text-white"
+          defaultTab={selectedTab.toString()}
+          >
+            {/* <TabList>
+              <Tab tabFor="0" id="tab0">Tab 1</Tab>
+              <Tab tabFor="1" id="tab1">Tab 2</Tab>
+              <Tab tabFor="2" id="tab2">Tab 3</Tab>
+            </TabList> */}
+            <Tab eventKey="first" title="Usuario"  tabId="0">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="col-12" >
                   <div className="border-0 border-bottom">
@@ -194,11 +246,11 @@ const ModalTurn = () => {
 
                 </div>
                 <div className="modal-footer">
-                  <button className="btn btn-black" type="submit" value="submit"  className="btn login_btn" onClick={()=>onSubmit()}>Siguiente</button>
+                  <button className="btn btn-black" type="submit" value="submit"  className="btn login_btn" onClick={()=>onSubmit()}>{setTabMessage()}</button>
                 </div>
               </form>
             </Tab>
-            <Tab eventKey="second" title="Turno" tabClassName="modal-turn-tab">
+            <Tab eventKey="second" title="Turno" tabClassName="modal-turn-tab" disabled={!client_is_registered}  tabId="1">
                 <div className="col-12">
                   <div className="border-0 border-bottom">
                     <span className="fw-bold fs-5 font-h1">
@@ -210,8 +262,8 @@ const ModalTurn = () => {
             
                 <div className="container mt-5">
                   <div className="row">
-                      {chairs.map(chair=>
-                        <Chair key={chair.id} data={chair} setActiveChair={setActiveChair} getSchedule={getSchedule} selecetDay={selecetDay} ></Chair>
+                      {chairs.filter(chair=>chair.status=="ACTIVE").map(chair=>
+                          <Chair key={chair.id} data={chair} setActiveChair={setActiveChair} getSchedule={getSchedule} selecetDay={selecetDay} ></Chair>
                       )}
                   </div>
                 </div>
@@ -228,8 +280,10 @@ const ModalTurn = () => {
                 <div className="col-12">
                   <div className="d-flex">
                     <input className="form-control" type="date" name="trip-start"
+                      min = {minDate} max={maxDte} value={minDate}
                       onChange={(event)=>getSchedule(activeChairId,event.target.value)}
-                       max="2022-12-31" id="calendar-input"/>
+                      id="calendar-input"
+                      style={{margin:"10px 0px"}}/>
                   </div>
                 </div>
 
@@ -253,32 +307,56 @@ const ModalTurn = () => {
                 </div>
 
             </Tab>
-            <Tab eventKey="third" title="Confirmar" tabClassName="modal-turn-tab">
-              <div className="input-group mb-1">
-                <input type="text" className="form-control" placeholder={client_data.name_client} aria-label="Username"
-                    aria-describedby="basic-addon1" disabled={true}/>
-                <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
-                    className="bi bi-person"></i></span>
-              </div>
+            <Tab eventKey="third" title="Confirmar" tabClassName="modal-turn-tab" disabled={!hourIsSelected || !chairIsSelected}  tabId="2" >
+              <form >
+                <div className="input-group mb-1">
+                  <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                      className="bi bi-person"></i></span>
+                  <input type="text" className="form-control" placeholder={client_data.name_client} aria-label="Username"
+                      aria-describedby="basic-addon1" disabled={true}/>
+                </div>
 
-              <div className="input-group mb-1">          
-                <input type="text" className="form-control" placeholder={client_data.phone_client} aria-label="Username"
-                    aria-describedby="basic-addon1" disabled={true}/>
-                <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
-                    className="bi bi-telephone"></i></span>
-              </div>
+                <div className="input-group mb-1">   
+                  <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                      className="bi bi-telephone"></i></span>       
+                  <input type="text" className="form-control" placeholder={client_data.phone_client} aria-label="Username"
+                      aria-describedby="basic-addon1" disabled={true}/>
+                </div>
 
-              <div className="input-group mb-1">
-                <input type="text" className="form-control" placeholder={client_data.email_client} aria-label="Username"
-                    aria-describedby="basic-addon1" disabled={true}/>
-                <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
-                        className="bi bi-envelope"></i></span>
-              </div>
+                <div className="input-group mb-1">
+                  <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                          className="bi bi-envelope"></i></span>
+                  <input type="text" className="form-control" placeholder={client_data.email_client} aria-label="Username"
+                      aria-describedby="basic-addon1" disabled={true}/>
+                </div>
 
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" className="btn btn-black">Generar turno</button>
-              </div>
+                <div className="input-group mb-1">
+                  <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                          className="bi bi-scissors"></i></span>
+                  <input type="text" className="form-control" placeholder={chairs.find((chair)=>chair.id === activeChairId).name } aria-label="Username"
+                      aria-describedby="basic-addon1" disabled={true}/>
+                </div>
+
+                <div className="input-group mb-1">
+                  <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                          className="bi bi-calendar-check"></i></span>
+                  <input type="text" className="form-control" placeholder={selecetDay} aria-label="Username"
+                      aria-describedby="basic-addon1" disabled={true}/>
+                </div>
+
+                <div className="input-group mb-1">
+                  <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
+                          className="bi bi-clock"></i></span>
+                  <input type="text" className="form-control" placeholder={selectedHour} aria-label="Username"
+                      aria-describedby="basic-addon1" disabled={true}/>
+                </div>
+
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" value="submit" className="btn btn-black" onClick={(event)=>{alertAndsaveTurn(event)}}>Generar turno</button>
+                     
+                </div>
+              </form>
             </Tab>
           </Tabs>
         </div>

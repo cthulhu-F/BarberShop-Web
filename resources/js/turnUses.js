@@ -22,7 +22,7 @@ const turnMapDispatcht = (dispatch) => {
             dispatch({type: TURN_TYPES.SET_ACTIVE_CHAIR, payload:id});
         },
 
-        getSchedule: (id, date= "22-12-202") => {
+        getSchedule: (id, date= "null") => {
             dispatch({ type: TURN_TYPES.GET_SCHEDULE , payload:id, date:date});            
         },
 
@@ -30,17 +30,15 @@ const turnMapDispatcht = (dispatch) => {
             dispatch({ type: TURN_TYPES.SET_HOUR , payload:hour});            
         },
 
-        saveTurn: (id) => {
-            dispatch({ type: TURN_TYPES.SAVE_TURN, payload:id});
+        saveTurn: () => {
+            dispatch({ type: TURN_TYPES.SAVE_TURN});
         },
 
         setUserData:(data)=>{
-            dispatch({ type: TURN_TYPES.SAVE_TURN, payload: data});
+            dispatch({ type: TURN_TYPES.SET_USER_DATA, payload: data});
         },
 
-        setTurnData:(data)=>{
-            dispatch({ type: TURN_TYPES.SET_TURN_DATA, payload: data});
-        }
+
     };
 };
 
