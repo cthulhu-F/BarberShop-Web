@@ -26,10 +26,21 @@ const turnMapDispatcht = (dispatch) => {
             dispatch({ type: TURN_TYPES.GET_SCHEDULE , payload:id, date:date});            
         },
 
+        setHour: (hour)=>{
+            dispatch({ type: TURN_TYPES.SET_HOUR , payload:hour});            
+        },
+
         saveTurn: (id) => {
             dispatch({ type: TURN_TYPES.SAVE_TURN, payload:id});
         },
 
+        setUserData:(data)=>{
+            dispatch({ type: TURN_TYPES.SAVE_TURN, payload: data});
+        },
+
+        setTurnData:(data)=>{
+            dispatch({ type: TURN_TYPES.SET_TURN_DATA, payload: data});
+        }
     };
 };
 

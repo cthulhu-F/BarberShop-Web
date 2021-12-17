@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-// bg-dark text-white
+
 
 const setActive = (id)=>{
     let allChairs = document.querySelectorAll('.chair-item');
@@ -19,7 +19,6 @@ const setActive = (id)=>{
         }
     })    
 };
-
 
 const Chair = ({data, setActiveChair, getSchedule, selecetDay}) =>{
     let {id, name, status} = data;

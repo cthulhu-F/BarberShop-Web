@@ -1,5 +1,15 @@
+
+.nav-link{
+    background-color: #fff !important ;
+    color: #000 !important;
+}
+
 .nav-link.active{
     background-color: #000 !important ;
     color: #fff !important;
 }
 
+
+.PhoneInputInput{
+    border: 1px !important;
+}

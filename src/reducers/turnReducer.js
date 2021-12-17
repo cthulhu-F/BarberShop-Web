@@ -49,8 +49,17 @@ export const turnStateData = {
         {turn: "12:00"}],
 
     completeOrder: ITEM_TURNS.orderTurns,
+    chairIsSelected: false,
     activeChairId: 1,
-    selecetDay: "01-01-2000",
+    dayIsSelected: false,
+    selecetDay: "01-01-1970",
+    hourIsSelected: false,
+    selectedHour:"",
+    client_data: {
+        name_client: "",
+        phone_client: "",
+        email_client: ""
+        }
 }
 
 export function turnReducer(state, action){
@@ -70,8 +79,7 @@ export function turnReducer(state, action){
 
         // }
         case TURN_TYPES.SET_ACTIVE_CHAIR:{
-            console.log('active chair:'+action.payload);
-            return {...state, activeChairId: action.payload}
+            return {...state, activeChairId: action.payload, chairIsSelected: true}
         }
 
 
@@ -99,12 +107,31 @@ export function turnReducer(state, action){
                 turn= addTime(turn,turnDuration);
                 aviableTurns[ii]={turn:turn};
             }
-            console.log(state.schedule)
             return {...state, schedule: aviableTurns, selecetDay : action.date};  
+        }
+
+        case TURN_TYPES.SET_HOUR:{
+            console.log("selected hour" + action.payload)
+            return{...state, selectedHour: action.payload, hourIsSelected: true}
         }
         
         case TURN_TYPES.SAVE_TURN:{
 
+        }
+
+        case TURN_TYPES.SET_USER_DATA:{
+            const {name, phone, email} = action.payload
+            return {...state, client_data: {
+                name_client: name,
+                phone_client: phone,
+                email_client: email
+                }
+            }
+        }
+
+        case TURN_TYPES.SET_TURN_DATA:{
+            console.log('turn data');
+            return state
         }
 
         default :{
