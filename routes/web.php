@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,9 +41,6 @@ Route::get('/product/{value}', function ($value) {
 
 // BACKOFFICE ROUTES 
 
-Route::get('/backOffice/turns', function () {
-    return view('viewBackOffice/turns');
-});
 
 Route::get('/backOffice/sales', function () {
     return view('viewBackOffice/sales');
@@ -63,6 +62,16 @@ Route::get('/backOffice/settings', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::get('/backOffice/turns', function () {
+    return view('viewBackOffice/turns');
+});
+
+
+
+
+
+
 
 
 

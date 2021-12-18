@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../css/main.css';
 
-
 const Turns = () =>{
+    const axios = require('axios');
+
+    let store = JSON.parse(localStorage.getItem('login'))
+
+      
+   
+  axios.interceptors.request.use(function(config){
+    const token = store.token;
+
+    if(token){
+      config.headers.Authorization = 'Bearer ${token}';
+    }
+
+    return config;
+  })
+    
+
+
+    /*
+
+    let store = JSON.parse(localStorage.getItem('login'))
+
+    console.log(store);
+  
+    if(store.login !== true){
+        window.location.replace('/login')
+    }
+
+    */
+    
+
+
+
+
+
     return(
         
         <div >
