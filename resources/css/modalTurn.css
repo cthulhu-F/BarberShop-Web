@@ -13,3 +13,8 @@
 .PhoneInputInput{
     border: 1px !important;
 }
+
+
+.nav-link {
+    border-bottom:1px solid #000;
+}

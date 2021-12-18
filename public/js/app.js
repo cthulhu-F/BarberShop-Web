@@ -10956,8 +10956,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chair__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chair */ "./resources/js/components/componentsTurn/chair.jsx");
 /* harmony import */ var _src_reducers_turnReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../src/reducers/turnReducer */ "./src/reducers/turnReducer.js");
 /* harmony import */ var _turnUses__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../turnUses */ "./resources/js/turnUses.js");
-/* harmony import */ var react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/Tabs */ "./node_modules/react-bootstrap/esm/Tabs.js");
-/* harmony import */ var react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/Tab */ "./node_modules/react-bootstrap/esm/Tab.js");
+/* harmony import */ var react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/Tabs */ "./node_modules/react-bootstrap/esm/Tabs.js");
+/* harmony import */ var react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-bootstrap/Tab */ "./node_modules/react-bootstrap/esm/Tab.js");
 /* harmony import */ var _css_ModalTurn_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../css/ModalTurn.css */ "./resources/css/ModalTurn.css");
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
@@ -10965,7 +10965,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var postcss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/postcss.mjs");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_tabs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-tabs */ "./node_modules/react-tabs/esm/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -10999,6 +11000,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
  // import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 // import 'react-phone-number-input/style.css'
+
 
 
 
@@ -11058,19 +11060,15 @@ var ModalTurn = function ModalTurn() {
   var maxDte = yyyymax + '-' + mm + '-' + dd;
 
   var advancaTab = function advancaTab() {
-    //tab
-    document.getElementById("controlled-tabs-tab-second").classList.add("active");
-    document.getElementById("controlled-tabs-tab-second").removeAttribute("tabIndex");
-    document.getElementById("controlled-tabs-tab-second").ariaSelected = "true"; //tabpan
-
-    document.getElementById("controlled-tabs-tabpane-second").classList.add("active"); //tab
-
-    document.getElementById("controlled-tabs-tab-first").classList.remove("active");
-    document.getElementById("controlled-tabs-tab-first").tabIndex = "-1";
-    document.getElementById("controlled-tabs-tab-first").ariaSelected = "false"; // document.getElementById("controlled-tabs-tab-first").removeAttribute("ariaSelected");
-    //tabpan
-
-    document.getElementById("controlled-tabs-tabpane-first").classList.remove("active");
+    var key;
+    var allTabs = document.querySelectorAll(".nav-link");
+    allTabs.forEach(function (tab) {
+      if (tab.classList.contains("active")) {
+        key = tab.id.split('-')[3];
+      }
+    });
+    key = parseInt(key) + 1;
+    document.getElementById("controlled-tabs-tab-".concat(key)).click();
   };
 
   var onSubmit = function onSubmit(data) {
@@ -11106,6 +11104,10 @@ var ModalTurn = function ModalTurn() {
         }
       });
     }
+
+    if (chairIsSelected && hourIsSelected) {
+      advancaTab();
+    }
   };
 
   var setTabMessage = function setTabMessage() {
@@ -11136,7 +11138,7 @@ var ModalTurn = function ModalTurn() {
       setSelectedTab = _useState4[1];
 
   var tabCount = 3;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
     className: "modal fade",
     id: "staticBackdrop",
     "data-bs-backdrop": "static",
@@ -11144,51 +11146,54 @@ var ModalTurn = function ModalTurn() {
     tabindex: "-1",
     "aria-labelledby": "staticBackdropLabel",
     "aria-hidden": "true",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
       className: "modal-dialog modal-gl",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
         className: "modal-content",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
           className: "modal-header",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("h5", {
             className: "modal-title fs-3 font-h1",
             id: "staticBackdropLabel",
-            children: [" Nuevo turno ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+            children: [" Nuevo turno ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
               className: "bi bi-scissors"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
             type: "button",
             className: "btn-close",
             "data-bs-dismiss": "modal",
             "aria-label": "Close"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
           className: "modal-body",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_11__["default"], {
-            defaultActiveKey: "first",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_12__["default"], {
+            defaultActiveKey: "1",
             id: "controlled-tabs",
             selectedTabClassName: "bg-dark text-white",
             defaultTab: selectedTab.toString(),
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_12__["default"], {
-              eventKey: "first",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              eventKey: "1",
               title: "Usuario",
               tabId: "0",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("form", {
                 onSubmit: handleSubmit(onSubmit),
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                   className: "col-12",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                  style: {
+                    margin: "20px 0px"
+                  },
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                     className: "border-0 border-bottom",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                       className: "fw-bold fs-5 font-h1",
                       children: "Datos de contacto"
                     })
                   })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "col-12",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                     className: "input-group mb-1",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", _objectSpread({
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", _objectSpread({
                       type: "text",
                       className: "form-control",
                       placeholder: "Nombre",
@@ -11203,22 +11208,22 @@ var ModalTurn = function ModalTurn() {
                         value: /[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}/i,
                         message: "El formato no es correcto"
                       }
-                    }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                    }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                       className: "input-group-text bg-black text-white border border-black",
                       id: "basic-addon1",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                         className: "bi bi-person"
                       })
                     })]
-                  }), errors.name && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  }), errors.name && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: errors.name,
                     children: errors.name.message
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "col-12",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                     className: "input-group mb-1",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", _objectSpread({
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", _objectSpread({
                       type: "tel",
                       className: "form-control",
                       placeholder: "Telefono",
@@ -11233,22 +11238,22 @@ var ModalTurn = function ModalTurn() {
                         value: /[0-9]{9,12}/,
                         message: "El formato no es correcto"
                       }
-                    }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                    }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                       className: "input-group-text bg-black text-white border border-black",
                       id: "basic-addon1",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                         className: "bi bi-telephone"
                       })
                     })]
-                  }), errors.phone && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  }), errors.phone && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: errors.phone,
                     children: errors.phone.message
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "col",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                     className: "input-group mb-1",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", _objectSpread({
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", _objectSpread({
                       type: "email",
                       className: "form-control",
                       placeholder: "Correo",
@@ -11263,20 +11268,23 @@ var ModalTurn = function ModalTurn() {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                         message: "El formato no es correcto"
                       }
-                    }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                    }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                       className: "input-group-text bg-black text-white border border-black",
                       id: "basic-addon1",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                         className: "bi bi-envelope"
                       })
                     })]
-                  }), errors.email && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  }), errors.email && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: errors.email,
                     children: errors.email.message
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                   className: "modal-footer",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", (_jsx2 = {
+                  style: {
+                    margin: "20px 0px 0px 0px"
+                  },
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", (_jsx2 = {
                     className: "btn btn-black",
                     type: "submit",
                     value: "submit"
@@ -11285,29 +11293,32 @@ var ModalTurn = function ModalTurn() {
                   }), _defineProperty(_jsx2, "children", setTabMessage()), _jsx2))
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_12__["default"], {
-              eventKey: "second",
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              eventKey: "2",
               title: "Turno",
               tabClassName: "modal-turn-tab",
               disabled: !client_is_registered,
               tabId: "1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                 className: "col-12",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                style: {
+                  margin: "20px 0px 0px 0px"
+                },
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                   className: "border-0 border-bottom",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "fw-bold fs-5 font-h1",
                     children: "Seleccione su silla"
                   })
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                 className: "container mt-5",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                   className: "row",
                   children: chairs.filter(function (chair) {
                     return chair.status == "ACTIVE";
                   }).map(function (chair) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_chair__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_chair__WEBPACK_IMPORTED_MODULE_2__["default"], {
                       data: chair,
                       setActiveChair: setActiveChair,
                       getSchedule: getSchedule,
@@ -11315,20 +11326,23 @@ var ModalTurn = function ModalTurn() {
                     }, chair.id);
                   })
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                 className: "col-12",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                style: {
+                  margin: "20px 0px 0px 0px"
+                },
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                   className: "border-0 border-bottom",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "fw-bold fs-5 font-h1",
                     children: "Seleccione una fecha disponible"
                   })
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                 className: "col-12",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                   className: "d-flex",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
                     className: "form-control",
                     type: "date",
                     name: "trip-start",
@@ -11344,59 +11358,74 @@ var ModalTurn = function ModalTurn() {
                     }
                   })
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                 className: "col-12",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "input-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("select", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("select", {
                     className: "form-select border-0 border-start border-top border-bottom",
                     id: "inputGroupSelect02",
                     onChange: function onChange(event) {
                       return setHour(event.target.value);
                     },
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
                       selected: true,
                       children: "Horarios"
                     }), schedule.map(function (hour) {
-                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
                         children: hour.turn
                       });
                     })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
                     className: "input-group-text bg-white border-0 border-end border-top border-bottom",
                     "for": "inputGroupSelect02",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                       className: "bi bi-clock"
                     })
                   })]
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                 className: "modal-footer",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
+                style: {
+                  margin: "20px 0px 0px 0px"
+                },
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
                   type: "button",
-                  className: "btn btn-black",
+                  className: "btn login_btn btn-black",
                   onClick: function onClick() {
                     return setTurnDataValidated();
                   },
                   children: "Siguiente"
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_12__["default"], {
-              eventKey: "third",
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              eventKey: "3",
               title: "Confirmar",
               tabClassName: "modal-turn-tab",
               disabled: !hourIsSelected || !chairIsSelected,
               tabId: "2",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("form", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+                  className: "col-12",
+                  style: {
+                    margin: "20px 0px"
+                  },
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+                    className: "border-0 border-bottom",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+                      className: "fw-bold fs-5 font-h1",
+                      children: "Datos del Turno"
+                    })
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "input-group mb-1",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "input-group-text bg-black text-white border border-black",
                     id: "basic-addon1",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                       className: "bi bi-person"
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: client_data.name_client,
@@ -11404,15 +11433,15 @@ var ModalTurn = function ModalTurn() {
                     "aria-describedby": "basic-addon1",
                     disabled: true
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "input-group mb-1",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "input-group-text bg-black text-white border border-black",
                     id: "basic-addon1",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                       className: "bi bi-telephone"
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: client_data.phone_client,
@@ -11420,15 +11449,15 @@ var ModalTurn = function ModalTurn() {
                     "aria-describedby": "basic-addon1",
                     disabled: true
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "input-group mb-1",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "input-group-text bg-black text-white border border-black",
                     id: "basic-addon1",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                       className: "bi bi-envelope"
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: client_data.email_client,
@@ -11436,15 +11465,15 @@ var ModalTurn = function ModalTurn() {
                     "aria-describedby": "basic-addon1",
                     disabled: true
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "input-group mb-1",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "input-group-text bg-black text-white border border-black",
                     id: "basic-addon1",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                       className: "bi bi-scissors"
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: chairs.find(function (chair) {
@@ -11454,15 +11483,15 @@ var ModalTurn = function ModalTurn() {
                     "aria-describedby": "basic-addon1",
                     disabled: true
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "input-group mb-1",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "input-group-text bg-black text-white border border-black",
                     id: "basic-addon1",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                       className: "bi bi-calendar-check"
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: selecetDay,
@@ -11470,15 +11499,15 @@ var ModalTurn = function ModalTurn() {
                     "aria-describedby": "basic-addon1",
                     disabled: true
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "input-group mb-1",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "input-group-text bg-black text-white border border-black",
                     id: "basic-addon1",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("i", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("i", {
                       className: "bi bi-clock"
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     placeholder: selectedHour,
@@ -11486,14 +11515,17 @@ var ModalTurn = function ModalTurn() {
                     "aria-describedby": "basic-addon1",
                     disabled: true
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "modal-footer",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
+                  style: {
+                    margin: "20px 0px 0px 0px"
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
                     type: "button",
                     className: "btn btn-secondary",
                     "data-bs-dismiss": "modal",
                     children: "Cancelar"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
                     type: "submit",
                     value: "submit",
                     className: "btn btn-black",
@@ -11515,8 +11547,8 @@ var ModalTurn = function ModalTurn() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ModalTurn);
 
 if (document.getElementById("modalTurn")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ModalTurn, {})
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(ModalTurn, {})
   }), document.getElementById("modalTurn"));
 }
 
@@ -19505,6 +19537,61 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else {}
 }());
+
+
+/***/ }),
+
+/***/ "./node_modules/clsx/dist/clsx.m.js":
+/*!******************************************!*\
+  !*** ./node_modules/clsx/dist/clsx.m.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function toVal(mix) {
+	var k, y, str='';
+
+	if (typeof mix === 'string' || typeof mix === 'number') {
+		str += mix;
+	} else if (typeof mix === 'object') {
+		if (Array.isArray(mix)) {
+			for (k=0; k < mix.length; k++) {
+				if (mix[k]) {
+					if (y = toVal(mix[k])) {
+						str && (str += ' ');
+						str += y;
+					}
+				}
+			}
+		} else {
+			for (k in mix) {
+				if (mix[k]) {
+					str && (str += ' ');
+					str += k;
+				}
+			}
+		}
+	}
+
+	return str;
+}
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+	var i=0, tmp, x, str='';
+	while (i < arguments.length) {
+		if (tmp = arguments[i++]) {
+			if (x = toVal(tmp)) {
+				str && (str += ' ');
+				str += x
+			}
+		}
+	}
+	return str;
+}
 
 
 /***/ }),
@@ -70938,6 +71025,1113 @@ function polyfill(Component) {
 
   return Component;
 }
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/components/Tab.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/react-tabs/esm/components/Tab.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Tab)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+var _excluded = ["children", "className", "disabled", "disabledClassName", "focus", "id", "panelId", "selected", "selectedClassName", "tabIndex", "tabRef"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var DEFAULT_CLASS = 'react-tabs__tab';
+
+var Tab = /*#__PURE__*/function (_Component) {
+  _inheritsLoose(Tab, _Component);
+
+  function Tab() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Tab.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.checkFocus();
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate() {
+    this.checkFocus();
+  };
+
+  _proto.checkFocus = function checkFocus() {
+    var _this$props = this.props,
+        selected = _this$props.selected,
+        focus = _this$props.focus;
+
+    if (selected && focus) {
+      this.node.focus();
+    }
+  };
+
+  _proto.render = function render() {
+    var _cx,
+        _this = this;
+
+    var _this$props2 = this.props,
+        children = _this$props2.children,
+        className = _this$props2.className,
+        disabled = _this$props2.disabled,
+        disabledClassName = _this$props2.disabledClassName,
+        focus = _this$props2.focus,
+        id = _this$props2.id,
+        panelId = _this$props2.panelId,
+        selected = _this$props2.selected,
+        selectedClassName = _this$props2.selectedClassName,
+        tabIndex = _this$props2.tabIndex,
+        tabRef = _this$props2.tabRef,
+        attributes = _objectWithoutPropertiesLoose(_this$props2, _excluded);
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", _extends({}, attributes, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_2__["default"])(className, (_cx = {}, _cx[selectedClassName] = selected, _cx[disabledClassName] = disabled, _cx)),
+      ref: function ref(node) {
+        _this.node = node;
+        if (tabRef) tabRef(node);
+      },
+      role: "tab",
+      id: id,
+      "aria-selected": selected ? 'true' : 'false',
+      "aria-disabled": disabled ? 'true' : 'false',
+      "aria-controls": panelId,
+      tabIndex: tabIndex || (selected ? '0' : null),
+      "data-rttab": true
+    }), children);
+  };
+
+  return Tab;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+Tab.defaultProps = {
+  className: DEFAULT_CLASS,
+  disabledClassName: DEFAULT_CLASS + "--disabled",
+  focus: false,
+  id: null,
+  panelId: null,
+  selected: false,
+  selectedClassName: DEFAULT_CLASS + "--selected"
+};
+
+Tab.propTypes =  true ? {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_0___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)]),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_0___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object)]),
+  disabled: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  tabIndex: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  disabledClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  focus: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  // private
+  id: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  // private
+  panelId: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  // private
+  selected: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  // private
+  selectedClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  tabRef: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func) // private
+
+} : 0;
+Tab.tabsRole = 'Tab';
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/components/TabList.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-tabs/esm/components/TabList.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TabList)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+var _excluded = ["children", "className"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var TabList = /*#__PURE__*/function (_Component) {
+  _inheritsLoose(TabList, _Component);
+
+  function TabList() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = TabList.prototype;
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        children = _this$props.children,
+        className = _this$props.className,
+        attributes = _objectWithoutPropertiesLoose(_this$props, _excluded);
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", _extends({}, attributes, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_2__["default"])(className),
+      role: "tablist"
+    }), children);
+  };
+
+  return TabList;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+TabList.defaultProps = {
+  className: 'react-tabs__tab-list'
+};
+
+TabList.propTypes =  true ? {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_0___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().array)]),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_0___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object)])
+} : 0;
+TabList.tabsRole = 'TabList';
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/components/TabPanel.js":
+/*!************************************************************!*\
+  !*** ./node_modules/react-tabs/esm/components/TabPanel.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TabPanel)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+var _excluded = ["children", "className", "forceRender", "id", "selected", "selectedClassName", "tabId"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var DEFAULT_CLASS = 'react-tabs__tab-panel';
+
+var TabPanel = /*#__PURE__*/function (_Component) {
+  _inheritsLoose(TabPanel, _Component);
+
+  function TabPanel() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = TabPanel.prototype;
+
+  _proto.render = function render() {
+    var _cx;
+
+    var _this$props = this.props,
+        children = _this$props.children,
+        className = _this$props.className,
+        forceRender = _this$props.forceRender,
+        id = _this$props.id,
+        selected = _this$props.selected,
+        selectedClassName = _this$props.selectedClassName,
+        tabId = _this$props.tabId,
+        attributes = _objectWithoutPropertiesLoose(_this$props, _excluded);
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", _extends({}, attributes, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_2__["default"])(className, (_cx = {}, _cx[selectedClassName] = selected, _cx)),
+      role: "tabpanel",
+      id: id,
+      "aria-labelledby": tabId
+    }), forceRender || selected ? children : null);
+  };
+
+  return TabPanel;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+TabPanel.defaultProps = {
+  className: DEFAULT_CLASS,
+  forceRender: false,
+  selectedClassName: DEFAULT_CLASS + "--selected"
+};
+
+TabPanel.propTypes =  true ? {
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().node),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_0___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object)]),
+  forceRender: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  id: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  // private
+  selected: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  // private
+  selectedClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  tabId: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string) // private
+
+} : 0;
+TabPanel.tabsRole = 'TabPanel';
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/components/Tabs.js":
+/*!********************************************************!*\
+  !*** ./node_modules/react-tabs/esm/components/Tabs.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Tabs)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _helpers_propTypes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/propTypes */ "./node_modules/react-tabs/esm/helpers/propTypes.js");
+/* harmony import */ var _UncontrolledTabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UncontrolledTabs */ "./node_modules/react-tabs/esm/components/UncontrolledTabs.js");
+/* harmony import */ var _helpers_count__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers/count */ "./node_modules/react-tabs/esm/helpers/count.js");
+var _excluded = ["children", "defaultIndex", "defaultFocus"];
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var MODE_CONTROLLED = 0;
+var MODE_UNCONTROLLED = 1;
+
+var Tabs = /*#__PURE__*/function (_Component) {
+  _inheritsLoose(Tabs, _Component);
+
+  function Tabs(props) {
+    var _this;
+
+    _this = _Component.call(this, props) || this;
+
+    _this.handleSelected = function (index, last, event) {
+      var onSelect = _this.props.onSelect;
+      var mode = _this.state.mode; // Call change event handler
+
+      if (typeof onSelect === 'function') {
+        // Check if the change event handler cancels the tab change
+        if (onSelect(index, last, event) === false) return;
+      }
+
+      var state = {
+        // Set focus if the change was triggered from the keyboard
+        focus: event.type === 'keydown'
+      };
+
+      if (mode === MODE_UNCONTROLLED) {
+        // Update selected index
+        state.selectedIndex = index;
+      }
+
+      _this.setState(state);
+    };
+
+    _this.state = Tabs.copyPropsToState(_this.props, {}, props.defaultFocus);
+    return _this;
+  }
+
+  Tabs.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
+    return Tabs.copyPropsToState(props, state);
+  };
+
+  Tabs.getModeFromProps = function getModeFromProps(props) {
+    return props.selectedIndex === null ? MODE_UNCONTROLLED : MODE_CONTROLLED;
+  };
+
+  // preserve the existing selectedIndex from state.
+  // If the state has not selectedIndex, default to the defaultIndex or 0
+  Tabs.copyPropsToState = function copyPropsToState(props, state, focus) {
+    if (focus === void 0) {
+      focus = false;
+    }
+
+    if ( true && state.mode !== undefined && state.mode !== Tabs.getModeFromProps(props)) {
+      throw new Error("Switching between controlled mode (by using `selectedIndex`) and uncontrolled mode is not supported in `Tabs`.\nFor more information about controlled and uncontrolled mode of react-tabs see https://github.com/reactjs/react-tabs#controlled-vs-uncontrolled-mode.");
+    }
+
+    var newState = {
+      focus: focus,
+      mode: Tabs.getModeFromProps(props)
+    };
+
+    if (newState.mode === MODE_UNCONTROLLED) {
+      var maxTabIndex = Math.max(0, (0,_helpers_count__WEBPACK_IMPORTED_MODULE_4__.getTabsCount)(props.children) - 1);
+      var selectedIndex = null;
+
+      if (state.selectedIndex != null) {
+        selectedIndex = Math.min(state.selectedIndex, maxTabIndex);
+      } else {
+        selectedIndex = props.defaultIndex || 0;
+      }
+
+      newState.selectedIndex = selectedIndex;
+    }
+
+    return newState;
+  };
+
+  var _proto = Tabs.prototype;
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        children = _this$props.children,
+        defaultIndex = _this$props.defaultIndex,
+        defaultFocus = _this$props.defaultFocus,
+        props = _objectWithoutPropertiesLoose(_this$props, _excluded);
+
+    var _this$state = this.state,
+        focus = _this$state.focus,
+        selectedIndex = _this$state.selectedIndex;
+    props.focus = focus;
+    props.onSelect = this.handleSelected;
+
+    if (selectedIndex != null) {
+      props.selectedIndex = selectedIndex;
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_UncontrolledTabs__WEBPACK_IMPORTED_MODULE_3__["default"], props, children);
+  };
+
+  return Tabs;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+Tabs.defaultProps = {
+  defaultFocus: false,
+  forceRenderTabPanel: false,
+  selectedIndex: null,
+  defaultIndex: null,
+  environment: null,
+  disableUpDownKeys: false
+};
+
+Tabs.propTypes =  true ? {
+  children: _helpers_propTypes__WEBPACK_IMPORTED_MODULE_2__.childrenPropType,
+  direction: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOf(['rtl', 'ltr']),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_0___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object)]),
+  defaultFocus: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  defaultIndex: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
+  disabledTabClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  disableUpDownKeys: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  domRef: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func),
+  forceRenderTabPanel: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  onSelect: _helpers_propTypes__WEBPACK_IMPORTED_MODULE_2__.onSelectPropType,
+  selectedIndex: _helpers_propTypes__WEBPACK_IMPORTED_MODULE_2__.selectedIndexPropType,
+  selectedTabClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  selectedTabPanelClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  environment: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object)
+} : 0;
+Tabs.tabsRole = 'Tabs';
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/components/UncontrolledTabs.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-tabs/esm/components/UncontrolledTabs.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ UncontrolledTabs)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _helpers_uuid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/uuid */ "./node_modules/react-tabs/esm/helpers/uuid.js");
+/* harmony import */ var _helpers_propTypes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers/propTypes */ "./node_modules/react-tabs/esm/helpers/propTypes.js");
+/* harmony import */ var _helpers_count__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helpers/count */ "./node_modules/react-tabs/esm/helpers/count.js");
+/* harmony import */ var _helpers_childrenDeepMap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helpers/childrenDeepMap */ "./node_modules/react-tabs/esm/helpers/childrenDeepMap.js");
+/* harmony import */ var _helpers_elementTypes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../helpers/elementTypes */ "./node_modules/react-tabs/esm/helpers/elementTypes.js");
+var _excluded = ["children", "className", "disabledTabClassName", "domRef", "focus", "forceRenderTabPanel", "onSelect", "selectedIndex", "selectedTabClassName", "selectedTabPanelClassName", "environment", "disableUpDownKeys"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+
+function isNode(node) {
+  return node && 'getAttribute' in node;
+} // Determine if a node from event.target is a Tab element
+
+
+function isTabNode(node) {
+  return isNode(node) && node.getAttribute('data-rttab');
+} // Determine if a tab node is disabled
+
+
+function isTabDisabled(node) {
+  return isNode(node) && node.getAttribute('aria-disabled') === 'true';
+}
+
+var canUseActiveElement;
+
+function determineCanUseActiveElement(environment) {
+  var env = environment || (typeof window !== 'undefined' ? window : undefined);
+
+  try {
+    canUseActiveElement = !!(typeof env !== 'undefined' && env.document && env.document.activeElement);
+  } catch (e) {
+    // Work around for IE bug when accessing document.activeElement in an iframe
+    // Refer to the following resources:
+    // http://stackoverflow.com/a/10982960/369687
+    // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12733599
+    canUseActiveElement = false;
+  }
+}
+
+var UncontrolledTabs = /*#__PURE__*/function (_Component) {
+  _inheritsLoose(UncontrolledTabs, _Component);
+
+  function UncontrolledTabs() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.tabNodes = [];
+
+    _this.handleKeyDown = function (e) {
+      var _this$props = _this.props,
+          direction = _this$props.direction,
+          disableUpDownKeys = _this$props.disableUpDownKeys;
+
+      if (_this.isTabFromContainer(e.target)) {
+        var index = _this.props.selectedIndex;
+        var preventDefault = false;
+        var useSelectedIndex = false;
+
+        if (e.keyCode === 32 || e.keyCode === 13) {
+          preventDefault = true;
+          useSelectedIndex = false;
+
+          _this.handleClick(e);
+        }
+
+        if (e.keyCode === 37 || !disableUpDownKeys && e.keyCode === 38) {
+          // Select next tab to the left, validate if up arrow is not disabled
+          if (direction === 'rtl') {
+            index = _this.getNextTab(index);
+          } else {
+            index = _this.getPrevTab(index);
+          }
+
+          preventDefault = true;
+          useSelectedIndex = true;
+        } else if (e.keyCode === 39 || !disableUpDownKeys && e.keyCode === 40) {
+          // Select next tab to the right, validate if down arrow is not disabled
+          if (direction === 'rtl') {
+            index = _this.getPrevTab(index);
+          } else {
+            index = _this.getNextTab(index);
+          }
+
+          preventDefault = true;
+          useSelectedIndex = true;
+        } else if (e.keyCode === 35) {
+          // Select last tab (End key)
+          index = _this.getLastTab();
+          preventDefault = true;
+          useSelectedIndex = true;
+        } else if (e.keyCode === 36) {
+          // Select first tab (Home key)
+          index = _this.getFirstTab();
+          preventDefault = true;
+          useSelectedIndex = true;
+        } // This prevents scrollbars from moving around
+
+
+        if (preventDefault) {
+          e.preventDefault();
+        } // Only use the selected index in the state if we're not using the tabbed index
+
+
+        if (useSelectedIndex) {
+          _this.setSelected(index, e);
+        }
+      }
+    };
+
+    _this.handleClick = function (e) {
+      var node = e.target;
+
+      do {
+        if (_this.isTabFromContainer(node)) {
+          if (isTabDisabled(node)) {
+            return;
+          }
+
+          var index = [].slice.call(node.parentNode.children).filter(isTabNode).indexOf(node);
+
+          _this.setSelected(index, e);
+
+          return;
+        }
+      } while ((node = node.parentNode) != null);
+    };
+
+    return _this;
+  }
+
+  var _proto = UncontrolledTabs.prototype;
+
+  _proto.setSelected = function setSelected(index, event) {
+    // Check index boundary
+    if (index < 0 || index >= this.getTabsCount()) return;
+    var _this$props2 = this.props,
+        onSelect = _this$props2.onSelect,
+        selectedIndex = _this$props2.selectedIndex; // Call change event handler
+
+    onSelect(index, selectedIndex, event);
+  };
+
+  _proto.getNextTab = function getNextTab(index) {
+    var count = this.getTabsCount(); // Look for non-disabled tab from index to the last tab on the right
+
+    for (var i = index + 1; i < count; i++) {
+      if (!isTabDisabled(this.getTab(i))) {
+        return i;
+      }
+    } // If no tab found, continue searching from first on left to index
+
+
+    for (var _i = 0; _i < index; _i++) {
+      if (!isTabDisabled(this.getTab(_i))) {
+        return _i;
+      }
+    } // No tabs are disabled, return index
+
+
+    return index;
+  };
+
+  _proto.getPrevTab = function getPrevTab(index) {
+    var i = index; // Look for non-disabled tab from index to first tab on the left
+
+    while (i--) {
+      if (!isTabDisabled(this.getTab(i))) {
+        return i;
+      }
+    } // If no tab found, continue searching from last tab on right to index
+
+
+    i = this.getTabsCount();
+
+    while (i-- > index) {
+      if (!isTabDisabled(this.getTab(i))) {
+        return i;
+      }
+    } // No tabs are disabled, return index
+
+
+    return index;
+  };
+
+  _proto.getFirstTab = function getFirstTab() {
+    var count = this.getTabsCount(); // Look for non disabled tab from the first tab
+
+    for (var i = 0; i < count; i++) {
+      if (!isTabDisabled(this.getTab(i))) {
+        return i;
+      }
+    }
+
+    return null;
+  };
+
+  _proto.getLastTab = function getLastTab() {
+    var i = this.getTabsCount(); // Look for non disabled tab from the last tab
+
+    while (i--) {
+      if (!isTabDisabled(this.getTab(i))) {
+        return i;
+      }
+    }
+
+    return null;
+  };
+
+  _proto.getTabsCount = function getTabsCount() {
+    var children = this.props.children;
+    return (0,_helpers_count__WEBPACK_IMPORTED_MODULE_5__.getTabsCount)(children);
+  };
+
+  _proto.getPanelsCount = function getPanelsCount() {
+    var children = this.props.children;
+    return (0,_helpers_count__WEBPACK_IMPORTED_MODULE_5__.getPanelsCount)(children);
+  };
+
+  _proto.getTab = function getTab(index) {
+    return this.tabNodes["tabs-" + index];
+  };
+
+  _proto.getChildren = function getChildren() {
+    var _this2 = this;
+
+    var index = 0;
+    var _this$props3 = this.props,
+        children = _this$props3.children,
+        disabledTabClassName = _this$props3.disabledTabClassName,
+        focus = _this$props3.focus,
+        forceRenderTabPanel = _this$props3.forceRenderTabPanel,
+        selectedIndex = _this$props3.selectedIndex,
+        selectedTabClassName = _this$props3.selectedTabClassName,
+        selectedTabPanelClassName = _this$props3.selectedTabPanelClassName,
+        environment = _this$props3.environment;
+    this.tabIds = this.tabIds || [];
+    this.panelIds = this.panelIds || [];
+    var diff = this.tabIds.length - this.getTabsCount(); // Add ids if new tabs have been added
+    // Don't bother removing ids, just keep them in case they are added again
+    // This is more efficient, and keeps the uuid counter under control
+
+    while (diff++ < 0) {
+      this.tabIds.push((0,_helpers_uuid__WEBPACK_IMPORTED_MODULE_3__["default"])());
+      this.panelIds.push((0,_helpers_uuid__WEBPACK_IMPORTED_MODULE_3__["default"])());
+    } // Map children to dynamically setup refs
+
+
+    return (0,_helpers_childrenDeepMap__WEBPACK_IMPORTED_MODULE_6__.deepMap)(children, function (child) {
+      var result = child; // Clone TabList and Tab components to have refs
+
+      if ((0,_helpers_elementTypes__WEBPACK_IMPORTED_MODULE_7__.isTabList)(child)) {
+        var listIndex = 0; // Figure out if the current focus in the DOM is set on a Tab
+        // If it is we should keep the focus on the next selected tab
+
+        var wasTabFocused = false;
+
+        if (canUseActiveElement == null) {
+          determineCanUseActiveElement(environment);
+        }
+
+        if (canUseActiveElement) {
+          wasTabFocused = react__WEBPACK_IMPORTED_MODULE_1__.Children.toArray(child.props.children).filter(_helpers_elementTypes__WEBPACK_IMPORTED_MODULE_7__.isTab).some(function (tab, i) {
+            var env = environment || (typeof window !== 'undefined' ? window : undefined);
+            return env && env.document.activeElement === _this2.getTab(i);
+          });
+        }
+
+        result = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_1__.cloneElement)(child, {
+          children: (0,_helpers_childrenDeepMap__WEBPACK_IMPORTED_MODULE_6__.deepMap)(child.props.children, function (tab) {
+            var key = "tabs-" + listIndex;
+            var selected = selectedIndex === listIndex;
+            var props = {
+              tabRef: function tabRef(node) {
+                _this2.tabNodes[key] = node;
+              },
+              id: _this2.tabIds[listIndex],
+              panelId: _this2.panelIds[listIndex],
+              selected: selected,
+              focus: selected && (focus || wasTabFocused)
+            };
+            if (selectedTabClassName) props.selectedClassName = selectedTabClassName;
+            if (disabledTabClassName) props.disabledClassName = disabledTabClassName;
+            listIndex++;
+            return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_1__.cloneElement)(tab, props);
+          })
+        });
+      } else if ((0,_helpers_elementTypes__WEBPACK_IMPORTED_MODULE_7__.isTabPanel)(child)) {
+        var props = {
+          id: _this2.panelIds[index],
+          tabId: _this2.tabIds[index],
+          selected: selectedIndex === index
+        };
+        if (forceRenderTabPanel) props.forceRender = forceRenderTabPanel;
+        if (selectedTabPanelClassName) props.selectedClassName = selectedTabPanelClassName;
+        index++;
+        result = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_1__.cloneElement)(child, props);
+      }
+
+      return result;
+    });
+  };
+
+  /**
+   * Determine if a node from event.target is a Tab element for the current Tabs container.
+   * If the clicked element is not a Tab, it returns false.
+   * If it finds another Tabs container between the Tab and `this`, it returns false.
+   */
+  _proto.isTabFromContainer = function isTabFromContainer(node) {
+    // return immediately if the clicked element is not a Tab.
+    if (!isTabNode(node)) {
+      return false;
+    } // Check if the first occurrence of a Tabs container is `this` one.
+
+
+    var nodeAncestor = node.parentElement;
+
+    do {
+      if (nodeAncestor === this.node) return true;
+      if (nodeAncestor.getAttribute('data-rttabs')) break;
+      nodeAncestor = nodeAncestor.parentElement;
+    } while (nodeAncestor);
+
+    return false;
+  };
+
+  _proto.render = function render() {
+    var _this3 = this;
+
+    // Delete all known props, so they don't get added to DOM
+    var _this$props4 = this.props,
+        children = _this$props4.children,
+        className = _this$props4.className,
+        disabledTabClassName = _this$props4.disabledTabClassName,
+        domRef = _this$props4.domRef,
+        focus = _this$props4.focus,
+        forceRenderTabPanel = _this$props4.forceRenderTabPanel,
+        onSelect = _this$props4.onSelect,
+        selectedIndex = _this$props4.selectedIndex,
+        selectedTabClassName = _this$props4.selectedTabClassName,
+        selectedTabPanelClassName = _this$props4.selectedTabPanelClassName,
+        environment = _this$props4.environment,
+        disableUpDownKeys = _this$props4.disableUpDownKeys,
+        attributes = _objectWithoutPropertiesLoose(_this$props4, _excluded);
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", _extends({}, attributes, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_2__["default"])(className),
+      onClick: this.handleClick,
+      onKeyDown: this.handleKeyDown,
+      ref: function ref(node) {
+        _this3.node = node;
+        if (domRef) domRef(node);
+      },
+      "data-rttabs": true
+    }), this.getChildren());
+  };
+
+  return UncontrolledTabs;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+UncontrolledTabs.defaultProps = {
+  className: 'react-tabs',
+  focus: false
+};
+
+UncontrolledTabs.propTypes =  true ? {
+  children: _helpers_propTypes__WEBPACK_IMPORTED_MODULE_4__.childrenPropType,
+  direction: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOf(['rtl', 'ltr']),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_0___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object)]),
+  disabledTabClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  disableUpDownKeys: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  domRef: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func),
+  focus: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  forceRenderTabPanel: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  onSelect: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func.isRequired),
+  selectedIndex: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number.isRequired),
+  selectedTabClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  selectedTabPanelClassName: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  environment: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().object)
+} : 0;
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/helpers/childrenDeepMap.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/react-tabs/esm/helpers/childrenDeepMap.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "deepMap": () => (/* binding */ deepMap),
+/* harmony export */   "deepForEach": () => (/* binding */ deepForEach)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _elementTypes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elementTypes */ "./node_modules/react-tabs/esm/helpers/elementTypes.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+function isTabChild(child) {
+  return (0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTab)(child) || (0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTabList)(child) || (0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTabPanel)(child);
+}
+
+function deepMap(children, callback) {
+  return react__WEBPACK_IMPORTED_MODULE_0__.Children.map(children, function (child) {
+    // null happens when conditionally rendering TabPanel/Tab
+    // see https://github.com/reactjs/react-tabs/issues/37
+    if (child === null) return null;
+
+    if (isTabChild(child)) {
+      return callback(child);
+    }
+
+    if (child.props && child.props.children && typeof child.props.children === 'object') {
+      // Clone the child that has children and map them too
+      return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(child, _extends({}, child.props, {
+        children: deepMap(child.props.children, callback)
+      }));
+    }
+
+    return child;
+  });
+}
+function deepForEach(children, callback) {
+  return react__WEBPACK_IMPORTED_MODULE_0__.Children.forEach(children, function (child) {
+    // null happens when conditionally rendering TabPanel/Tab
+    // see https://github.com/reactjs/react-tabs/issues/37
+    if (child === null) return;
+
+    if ((0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTab)(child) || (0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTabPanel)(child)) {
+      callback(child);
+    } else if (child.props && child.props.children && typeof child.props.children === 'object') {
+      if ((0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTabList)(child)) callback(child);
+      deepForEach(child.props.children, callback);
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/helpers/count.js":
+/*!******************************************************!*\
+  !*** ./node_modules/react-tabs/esm/helpers/count.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getTabsCount": () => (/* binding */ getTabsCount),
+/* harmony export */   "getPanelsCount": () => (/* binding */ getPanelsCount)
+/* harmony export */ });
+/* harmony import */ var _childrenDeepMap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./childrenDeepMap */ "./node_modules/react-tabs/esm/helpers/childrenDeepMap.js");
+/* harmony import */ var _elementTypes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elementTypes */ "./node_modules/react-tabs/esm/helpers/elementTypes.js");
+
+
+function getTabsCount(children) {
+  var tabCount = 0;
+  (0,_childrenDeepMap__WEBPACK_IMPORTED_MODULE_0__.deepForEach)(children, function (child) {
+    if ((0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTab)(child)) tabCount++;
+  });
+  return tabCount;
+}
+function getPanelsCount(children) {
+  var panelCount = 0;
+  (0,_childrenDeepMap__WEBPACK_IMPORTED_MODULE_0__.deepForEach)(children, function (child) {
+    if ((0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTabPanel)(child)) panelCount++;
+  });
+  return panelCount;
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/helpers/elementTypes.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/react-tabs/esm/helpers/elementTypes.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "isTab": () => (/* binding */ isTab),
+/* harmony export */   "isTabList": () => (/* binding */ isTabList),
+/* harmony export */   "isTabPanel": () => (/* binding */ isTabPanel)
+/* harmony export */ });
+function makeTypeChecker(tabsRole) {
+  return function (element) {
+    return !!element.type && element.type.tabsRole === tabsRole;
+  };
+}
+
+var isTab = makeTypeChecker('Tab');
+var isTabList = makeTypeChecker('TabList');
+var isTabPanel = makeTypeChecker('TabPanel');
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/helpers/propTypes.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/react-tabs/esm/helpers/propTypes.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "childrenPropType": () => (/* binding */ childrenPropType),
+/* harmony export */   "onSelectPropType": () => (/* binding */ onSelectPropType),
+/* harmony export */   "selectedIndexPropType": () => (/* binding */ selectedIndexPropType)
+/* harmony export */ });
+/* harmony import */ var _childrenDeepMap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./childrenDeepMap */ "./node_modules/react-tabs/esm/helpers/childrenDeepMap.js");
+/* harmony import */ var _elementTypes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elementTypes */ "./node_modules/react-tabs/esm/helpers/elementTypes.js");
+
+
+function childrenPropType(props, propName, componentName) {
+  var error;
+  var tabsCount = 0;
+  var panelsCount = 0;
+  var tabListFound = false;
+  var listTabs = [];
+  var children = props[propName];
+  (0,_childrenDeepMap__WEBPACK_IMPORTED_MODULE_0__.deepForEach)(children, function (child) {
+    if ((0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTabList)(child)) {
+      if (child.props && child.props.children && typeof child.props.children === 'object') {
+        (0,_childrenDeepMap__WEBPACK_IMPORTED_MODULE_0__.deepForEach)(child.props.children, function (listChild) {
+          return listTabs.push(listChild);
+        });
+      }
+
+      if (tabListFound) {
+        error = new Error("Found multiple 'TabList' components inside 'Tabs'. Only one is allowed.");
+      }
+
+      tabListFound = true;
+    }
+
+    if ((0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTab)(child)) {
+      if (!tabListFound || listTabs.indexOf(child) === -1) {
+        error = new Error("Found a 'Tab' component outside of the 'TabList' component. 'Tab' components " + "have to be inside the 'TabList' component.");
+      }
+
+      tabsCount++;
+    } else if ((0,_elementTypes__WEBPACK_IMPORTED_MODULE_1__.isTabPanel)(child)) {
+      panelsCount++;
+    }
+  });
+
+  if (!error && tabsCount !== panelsCount) {
+    error = new Error("There should be an equal number of 'Tab' and 'TabPanel' in `" + componentName + "`. " + ("Received " + tabsCount + " 'Tab' and " + panelsCount + " 'TabPanel'."));
+  }
+
+  return error;
+}
+function onSelectPropType(props, propName, componentName, location, propFullName) {
+  var prop = props[propName];
+  var name = propFullName || propName;
+  var error = null;
+
+  if (prop && typeof prop !== 'function') {
+    error = new Error("Invalid " + location + " `" + name + "` of type `" + typeof prop + "` supplied " + ("to `" + componentName + "`, expected `function`."));
+  } else if (props.selectedIndex != null && prop == null) {
+    error = new Error("The " + location + " `" + name + "` is marked as required in `" + componentName + "`, but " + "its value is `undefined` or `null`.\n" + "`onSelect` is required when `selectedIndex` is also set. Not doing so will " + "make the tabs not do anything, as `selectedIndex` indicates that you want to " + "handle the selected tab yourself.\n" + "If you only want to set the inital tab replace `selectedIndex` with `defaultIndex`.");
+  }
+
+  return error;
+}
+function selectedIndexPropType(props, propName, componentName, location, propFullName) {
+  var prop = props[propName];
+  var name = propFullName || propName;
+  var error = null;
+
+  if (prop != null && typeof prop !== 'number') {
+    error = new Error("Invalid " + location + " `" + name + "` of type `" + typeof prop + "` supplied to " + ("`" + componentName + "`, expected `number`."));
+  } else if (props.defaultIndex != null && prop != null) {
+    return new Error("The " + location + " `" + name + "` cannot be used together with `defaultIndex` " + ("in `" + componentName + "`.\n") + ("Either remove `" + name + "` to let `" + componentName + "` handle the selected ") + "tab internally or remove `defaultIndex` to handle it yourself.");
+  }
+
+  return error;
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/helpers/uuid.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/react-tabs/esm/helpers/uuid.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ uuid),
+/* harmony export */   "reset": () => (/* binding */ reset)
+/* harmony export */ });
+// Get a universally unique identifier
+var count = 0;
+function uuid() {
+  return "react-tabs-" + count++;
+}
+function reset() {
+  count = 0;
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-tabs/esm/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/react-tabs/esm/index.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tabs": () => (/* reexport safe */ _components_Tabs__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "TabList": () => (/* reexport safe */ _components_TabList__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "Tab": () => (/* reexport safe */ _components_Tab__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "TabPanel": () => (/* reexport safe */ _components_TabPanel__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   "resetIdCounter": () => (/* reexport safe */ _helpers_uuid__WEBPACK_IMPORTED_MODULE_4__.reset)
+/* harmony export */ });
+/* harmony import */ var _components_Tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Tabs */ "./node_modules/react-tabs/esm/components/Tabs.js");
+/* harmony import */ var _components_TabList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/TabList */ "./node_modules/react-tabs/esm/components/TabList.js");
+/* harmony import */ var _components_Tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Tab */ "./node_modules/react-tabs/esm/components/Tab.js");
+/* harmony import */ var _components_TabPanel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/TabPanel */ "./node_modules/react-tabs/esm/components/TabPanel.js");
+/* harmony import */ var _helpers_uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/uuid */ "./node_modules/react-tabs/esm/helpers/uuid.js");
+
+
 
 
 

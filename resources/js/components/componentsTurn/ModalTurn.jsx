@@ -23,6 +23,7 @@ import { useState } from "react";
 import swal from "sweetalert2";
 import { parse } from "postcss";
 import { min } from "lodash";
+import { TabList } from "react-tabs";
 
 
 const ModalTurn = () => {
@@ -59,28 +60,20 @@ const ModalTurn = () => {
   var maxDte = yyyymax + '-' + mm + '-' + dd;
 
 
-  const advancaTab = ()=>{
-
-    //tab
-    document.getElementById("controlled-tabs-tab-second").classList.add("active")
-    document.getElementById("controlled-tabs-tab-second").removeAttribute("tabIndex");
-    document.getElementById("controlled-tabs-tab-second").ariaSelected = "true";
-
-    //tabpan
-    document.getElementById("controlled-tabs-tabpane-second").classList.add("active");
-
-    //tab
-    document.getElementById("controlled-tabs-tab-first").classList.remove("active")
-    document.getElementById("controlled-tabs-tab-first").tabIndex = "-1";
-    document.getElementById("controlled-tabs-tab-first").ariaSelected="false";
-    // document.getElementById("controlled-tabs-tab-first").removeAttribute("ariaSelected");
-
-    //tabpan
-    document.getElementById("controlled-tabs-tabpane-first").classList.remove("active");
-    
+  const advancaTab = () =>{
+    let key 
+    const allTabs = document.querySelectorAll(".nav-link");
+    allTabs.forEach(tab => 
+      {if(tab.classList.contains("active")){
+        key = tab.id.split('-')[3]
+        }
+      }
+    );
+    key = parseInt(key) + 1;
+    document.getElementById(`controlled-tabs-tab-${key}`).click();
   }
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     if (data){
       setUserData(data);
       advancaTab();
@@ -113,8 +106,11 @@ const ModalTurn = () => {
         }
        });
     }
-  }
 
+    if(chairIsSelected && hourIsSelected){
+      advancaTab()
+    }
+  }
 
   const setTabMessage =()=>{
     if (client_is_registered){
@@ -155,7 +151,7 @@ const ModalTurn = () => {
           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div className="modal-body">
-          <Tabs defaultActiveKey="first" id="controlled-tabs" 
+          <Tabs defaultActiveKey="1" id="controlled-tabs" 
           selectedTabClassName="bg-dark text-white"
           defaultTab={selectedTab.toString()}
           >
@@ -164,9 +160,9 @@ const ModalTurn = () => {
               <Tab tabFor="1" id="tab1">Tab 2</Tab>
               <Tab tabFor="2" id="tab2">Tab 3</Tab>
             </TabList> */}
-            <Tab eventKey="first" title="Usuario"  tabId="0">
+            <Tab eventKey="1" title="Usuario"  tabId="0">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="col-12" >
+                <div className="col-12" style={{margin:"20px 0px"}}>
                   <div className="border-0 border-bottom">
                     <span className="fw-bold fs-5 font-h1">
                       Datos de contacto
@@ -245,13 +241,13 @@ const ModalTurn = () => {
                   {errors.email && <span className={errors.email}>{errors.email.message}</span>}
 
                 </div>
-                <div className="modal-footer">
+                <div className="modal-footer" style={{margin:"20px 0px 0px 0px"}}>
                   <button className="btn btn-black" type="submit" value="submit"  className="btn login_btn" onClick={()=>onSubmit()}>{setTabMessage()}</button>
                 </div>
               </form>
             </Tab>
-            <Tab eventKey="second" title="Turno" tabClassName="modal-turn-tab" disabled={!client_is_registered}  tabId="1">
-                <div className="col-12">
+            <Tab eventKey="2" title="Turno" tabClassName="modal-turn-tab" disabled={!client_is_registered}  tabId="1">
+                <div className="col-12" style={{margin:"20px 0px 0px 0px"}}>
                   <div className="border-0 border-bottom">
                     <span className="fw-bold fs-5 font-h1">
                       Seleccione su silla 
@@ -269,7 +265,7 @@ const ModalTurn = () => {
                 </div>
               
 
-                <div className="col-12">
+                <div className="col-12" style={{margin:"20px 0px 0px 0px"}}> 
                   <div className="border-0 border-bottom">
                     <span className="fw-bold fs-5 font-h1">
                       Seleccione una fecha disponible
@@ -302,13 +298,20 @@ const ModalTurn = () => {
                   </div>
                 </div>
 
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-black" onClick={()=>setTurnDataValidated()}>Siguiente</button>
+                <div className="modal-footer" style={{margin:"20px 0px 0px 0px"}}>
+                  <button type="button" className="btn login_btn btn-black"  onClick={()=>setTurnDataValidated()}>Siguiente</button>
                 </div>
 
             </Tab>
-            <Tab eventKey="third" title="Confirmar" tabClassName="modal-turn-tab" disabled={!hourIsSelected || !chairIsSelected}  tabId="2" >
+            <Tab eventKey="3" title="Confirmar" tabClassName="modal-turn-tab" disabled={!hourIsSelected || !chairIsSelected}  tabId="2" >
               <form >
+                <div className="col-12" style={{margin:"20px 0px"}}>
+                  <div className="border-0 border-bottom">
+                    <span className="fw-bold fs-5 font-h1">
+                      Datos del Turno
+                    </span>
+                  </div>
+                </div>
                 <div className="input-group mb-1">
                   <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i
                       className="bi bi-person"></i></span>
@@ -351,7 +354,7 @@ const ModalTurn = () => {
                       aria-describedby="basic-addon1" disabled={true}/>
                 </div>
 
-                <div className="modal-footer">
+                <div className="modal-footer" style={{margin:"20px 0px 0px 0px"}}>
                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   <button type="submit" value="submit" className="btn btn-black" onClick={(event)=>{alertAndsaveTurn(event)}}>Generar turno</button>
                      
