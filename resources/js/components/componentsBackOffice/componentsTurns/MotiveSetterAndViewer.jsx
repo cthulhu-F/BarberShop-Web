@@ -1,8 +1,29 @@
 import React from "react";
 import MotiveSetter from "./MotiveSetter";
 
-const MotiveSetterAndViewer= ({allChairsSchedule, allChairs, setEditableChair, editableChair })=>{
+/*MODAL TURN IMPORTS*/
+import { useReducer } from 'react';
+import { backofficeTurnReducer, BackofficeTurnData} from '../../../../../src/reducers/backOfficeTurnReducer';
+import backofficeTurnMapDispatch from "../../../backOfficeTurnUses";
 
+const MotiveSetterAndViewer= ()=>{
+
+    const [backOfficeTurnState, dispatch] =useReducer(backofficeTurnReducer,BackofficeTurnData);
+    const {allChairsSchedule, allChairs, editableChair, turnsPerday, editableDay} = backOfficeTurnState;
+  
+  
+    const setEditableChair = backofficeTurnMapDispatch(dispatch).setEditableChair;
+  
+    const setActiveDay =backofficeTurnMapDispatch(dispatch).setActiveDay;
+    const saveChairSchedule = backofficeTurnMapDispatch(dispatch).saveChairSchedule; 
+  
+    const addCount = backofficeTurnMapDispatch(dispatch).addCount;
+    const restCount = backofficeTurnMapDispatch(dispatch).restCount; 
+  
+    const setStartHour =backofficeTurnMapDispatch(dispatch).setStartHour;
+    const setEndHour =setChairName
+  
+    const setChairName = backofficeTurnMapDispatch(dispatch).setChairName;
     return(
         <div>
           <div className="col-12">
@@ -49,7 +70,7 @@ const MotiveSetterAndViewer= ({allChairsSchedule, allChairs, setEditableChair, e
                           <td>
                             <div className="d-flex justify-content-center">
                               <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                                data-bs-target="#modalAddProduct" onClick={()=>setEditableChair(chair.id)}><i className="bi bi-pencil fs-7"></i></button>
+                                data-bs-target="#modalAddProduct" onClick={()=>{setEditableChair(chair.id); setActiveDay(0)}}><i className="bi bi-pencil fs-7"></i></button>
                               <button className="btn btn-outline-danger  p-1 me-1"><i className="bi bi-gear"></i></button>
                             </div>
                           </td>
@@ -97,7 +118,10 @@ const MotiveSetterAndViewer= ({allChairsSchedule, allChairs, setEditableChair, e
 
               <div className="col-12 col-xl-4 ps-3 mb-3">
 
-               <MotiveSetter editableChair={editableChair} />
+               <MotiveSetter editableChair={editableChair} turnsPerday={turnsPerday}
+               setActiveDay={setActiveDay} editableDay={editableDay}
+               saveChairSchedule={saveChairSchedule} addCount={addCount}
+               restCount= {restCount} setStartHour={setStartHour} setEndHour={setEndHour} setChairName={setChairName}/>
               </div>
 
             </div>

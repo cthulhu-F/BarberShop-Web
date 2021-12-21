@@ -1,56 +1,26 @@
 import React from "react";
 
 
-import { useState } from "react";
+const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
+  saveChairSchedule, addCount, restCount, setStartHour, setEndHour, setChairName}) =>{
 
-/*MODAL TURN IMPORTS*/
+    
+    function handleClickEvent(evt) {
+      document.querySelectorAll(".switch").forEach(function(theSwitch) {
+        theSwitch.addEventListener("click", handleClickEvent, false);
+      });
 
-import { useReducer } from 'react';
-import { backofficeTurnReducer, BackofficeTurnData} from '../../../../../src/reducers/backOfficeTurnReducer';
-import backofficeTurnMapDispatch from "../../../backOfficeTurnUses";
+      let el = evt.target;
 
+      if (el.getAttribute("aria-checked") == "true") {
+          el.setAttribute("aria-checked", "false");
+      } else {
+          el.setAttribute("aria-checked", "true");
+      }
 
-const MotiveSetter =({editableChair}) =>{
-
-    const [backOfficeTurnState, dispatch] =useReducer(backofficeTurnReducer,BackofficeTurnData);
-    const {allChairsSchedule, allChairs, editableDay, turnsPerday} = backOfficeTurnState;
-
-    const setEditableChair = backofficeTurnMapDispatch(dispatch).setEditableChair;
-    const setEditableDay =  backofficeTurnMapDispatch(dispatch).setEditableDay;
-    const loadData  = backofficeTurnMapDispatch(dispatch).loadData;
-    const addCount = backofficeTurnMapDispatch(dispatch).addCount;
-    const restCount = backofficeTurnMapDispatch(dispatch).restCount;
-    const getDayInitialCount = backofficeTurnMapDispatch(dispatch).getDayInitialCount;
-
-
-    const resetHourDefault = ()=>{
-        const timers =document.querySelectorAll('#timeFin');
-        const timersContainer =document.getElementById('timeFin-container');
-        timers.forEach(timer=>{
-            timer.value = "";
-        })
-
+      console.log(el.getAttribute("aria-checked"))
     }
-    
-    const setActiveDay = (id)=>{
-        let allDays = document.querySelectorAll('.day-item');
-    
-        allDays.forEach(day =>{
-            if (day.id ==id ){
-                day.classList.add("bg-dark","text-white");
-            }
-            else {
-                try{
-                    day.classList.remove("bg-dark","text-white");
-                }
-                catch(error){
-                }
-            }
-        })
-        resetHourDefault();
-        setEditableDay(id)
-        getDayInitialCount();
-    };
+
     return(
         <div>
              <div className="row shadow-sm p-2">
@@ -69,7 +39,7 @@ const MotiveSetter =({editableChair}) =>{
 
                   <div className="col-xl-9 mb-3">
                     <div className="input-group">
-                      <input type="text" className="form-control fs-8" placeholder={editableChair.name}
+                      <input type="text" className="form-control fs-8" placeholder={editableChair.name} onChange ={(event)=>setChairName(event.target.value)}
                         aria-label="Recipient's username" aria-describedby="basic-addon2" disabled={true} id="editable-chair-name"/>
                       <button className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"
                         onClick={()=> {
@@ -112,6 +82,7 @@ const MotiveSetter =({editableChair}) =>{
                           <input type="text" className="form-control w-50" id="timeFin"
                             onFocus={(e) => e.currentTarget.type = "time"}
                             onBlur={(e) => e.currentTarget.type = "text"}
+                            onChange={(e) =>setStartHour(e.target.value)}
                             placeholder={editableDay[1].split('/')[0]}/>
                         </div>
                         
@@ -120,6 +91,7 @@ const MotiveSetter =({editableChair}) =>{
                           <input type="text" className="form-control w-50" id="timeFin"
                             onFocus={(e) => e.currentTarget.type = "time"}
                             onBlur={(e) => e.currentTarget.type = "text"}
+                            onChange={(e) =>setEndHour(e.target.value)}
                             placeholder={editableDay[1].split('/')[1]}/></div>
                         </div>
 
@@ -136,20 +108,20 @@ const MotiveSetter =({editableChair}) =>{
                       <div className="col-12 d-flex">
                         <div className="form-check form-switch">
                           <label className="form-check-label" for="flexSwitchCheckDefault">¿Quieres aplicar estos cambios para todos los dias?</label>
-                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" aria-checked={false} onClick={(e)=>{handleClickEvent(e)}}/>
                         </div>
                       </div>
 
                       <div className="col-12 d-flex justify-content-between">
                         <div className="input-group w-50">
-                          <input type="text" className="form-control" placeholder="00:00/00:00/10" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                          <input type="text" className="form-control" placeholder={editableDay[1]} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
                         <span className="input-group-text p-0" id="basic-addon2">
                           <button className="input-group-text btn btn-black">
                             <i className="bi bi-files"></i>
                           </button>
                         </span>
                         </div>
-                        <button className="btn btn-orangeWeb">
+                        <button className="btn btn-orangeWeb" onClick={()=>saveChairSchedule(document.getElementById('flexSwitchCheckDefault').getAttribute("aria-checked"))}>
                           Guardar
                         </button>
                       </div>

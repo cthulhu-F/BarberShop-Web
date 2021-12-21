@@ -1,7 +1,7 @@
 import { BACKOFFICE_TURN_TYPES } from '../actions/backofficeTurnActions';
 import { ITEM_TURNS } from '../../resources/js/constants/constTurn';
 import "../../resources/css/sweetAlert.css"
-import { CssSyntaxError } from 'postcss';
+import { setA } from 'postcss';
 
 
 export const BackofficeTurnData = {
@@ -26,11 +26,6 @@ export function backofficeTurnReducer (state, action){
         case BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY:{
             let editableChairSchedule = state.allChairsSchedule.find(chair=>chair.id == state.editableChair.configDay_id);
             let editableDayArray = Object.entries(editableChairSchedule.days)[action.payload];
-            // let editabledayMap = new Map([
-            //     [editableDayArray[0],
-            //     editableDayArray[1]]
-            //   ]);
-            // let editableDayObj = Object.fromEntries(editabledayMap);
             console.log(editableDayArray)
             return {...state, editableDay: editableDayArray};
         }
@@ -39,12 +34,24 @@ export function backofficeTurnReducer (state, action){
         }
 
         case BACKOFFICE_TURN_TYPES.ADD_COUNT :{
-            return {...state, turnsPerday: parseInt(state.turnsPerday) +1}
+           
+            let newEditableDay = state.editableDay[1].split("/");
+            let editableDayTurnsPerday = newEditableDay.pop();
+            newEditableDay.push(parseInt(editableDayTurnsPerday)+1)
+            newEditableDay = newEditableDay.join('/');
+            newEditableDay = [state.editableDay[0],newEditableDay]
+            return {...state, turnsPerday: parseInt(state.turnsPerday) +1, editableDay: newEditableDay};
         }
 
         case BACKOFFICE_TURN_TYPES.REST_COUNT :{
             if (state.turnsPerday <=1) return state;
-            return {...state, turnsPerday: parseInt(state.turnsPerday) -1};
+
+            let newEditableDay = state.editableDay[1].split("/");
+            let editableDayTurnsPerday = newEditableDay.pop();
+            newEditableDay.push(parseInt(editableDayTurnsPerday)-1)
+            newEditableDay = newEditableDay.join('/');
+            newEditableDay = [state.editableDay[0],newEditableDay]
+            return {...state, turnsPerday: parseInt(state.turnsPerday) -1, editableDay: newEditableDay};
         }
         
         case BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT:{
@@ -53,6 +60,45 @@ export function backofficeTurnReducer (state, action){
             let dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];
             return {...state, turnsPerday: dfaultTurnsPerDay}
 
+        }
+
+        case BACKOFFICE_TURN_TYPES.SET_START_HOUR:{
+            let newEditableDay = state.editableDay[1].split("/");
+            let startHour = newEditableDay.shift();
+            newEditableDay.unshift(action.payload)
+            newEditableDay = newEditableDay.join('/');
+            newEditableDay = [state.editableDay[0],newEditableDay]
+            return {...state, editableDay: newEditableDay};
+        }
+
+        case BACKOFFICE_TURN_TYPES.SET_END_HOUR:{
+            let newEditableDay = state.editableDay[1].split("/");
+            let startHour = newEditableDay.shift();
+            newEditableDay.shift();
+            newEditableDay.unshift(action.payload)
+            newEditableDay.unshift(startHour)
+            newEditableDay = newEditableDay.join('/');
+            newEditableDay = [state.editableDay[0],newEditableDay]
+            return {...state, editableDay: newEditableDay};
+        }
+         
+        case BACKOFFICE_TURN_TYPES.SAVE_CHAIR_SCHEDULE :{
+            let editableChairSchedule = state.allChairsSchedule.find(chair=>chair.id ==state.editableChair.id);
+            if (action.payload == "false"){
+                editableChairSchedule.days[state.editableDay[0]] = state.editableDay[1]
+            }
+            else {
+                const days=["su","mo","tu","we","th","fr","sa"];
+                days.forEach(day=>{
+                    editableChairSchedule.days[day] = state.editableDay[1]
+                })
+            }
+            console.log(editableChairSchedule)
+            return state
+        }
+
+        case BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME:{
+            return {...state,  ...state.editableChair, name :action.payload}
         }
 
         default :{

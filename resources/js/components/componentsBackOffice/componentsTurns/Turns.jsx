@@ -5,20 +5,11 @@ import '../../../../css/main.css';
 
 import MotiveSetterAndViewer from "./MotiveSetterAndViewer";
 
-/*MODAL TURN IMPORTS*/
-import { useReducer } from 'react';
-import { backofficeTurnReducer, BackofficeTurnData} from '../../../../../src/reducers/backOfficeTurnReducer';
-import backofficeTurnMapDispatch from "../../../backOfficeTurnUses";
+
 
 
 const Turns = () =>{
 
-  const [backOfficeTurnState, dispatch] =useReducer(backofficeTurnReducer,BackofficeTurnData);
-  const {allChairsSchedule, allChairs, editableChair} = backOfficeTurnState;
-
-
-  const setEditableChair = backofficeTurnMapDispatch(dispatch).setEditableChair;
-  const setEditableDay =  backofficeTurnMapDispatch(dispatch).setEditableDay;
 
     return(
         
@@ -50,7 +41,7 @@ const Turns = () =>{
                 </div>
                 <div className="col-12 col-xl-3">
                   <button className="btn btn-outline-danger w-100"><span
-                      className=" font-h1 fw-bold fs-3 " onClick={()=>setEditableChair(2)} >PROXIMAMENTE</span></button>
+                      className=" font-h1 fw-bold fs-3 "  >PROXIMAMENTE</span></button>
                 </div>
               </div>
             </div>
@@ -184,9 +175,7 @@ const Turns = () =>{
             </div>
 
           <MotiveSetterAndViewer
-          allChairsSchedule={allChairsSchedule}
-          allChairs={allChairs} setEditableChair={setEditableChair}
-          editableChair={editableChair}/>
+          />
             
           </div>
         </div>
