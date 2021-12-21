@@ -1,16 +1,10 @@
 import axios from "axios";
-import { result } from "lodash";
-
-
-
 
 export const Authorization = async (post) => {
 
-  let status = status
-
   let access = await axios({
     method: 'post',
-    url: 'http://127.0.0.1:8000/api/auth/Login',
+    url: 'http://192.168.0.4:8000/api/auth/Login',
     data: post
   }).then(
     result => {
@@ -21,47 +15,38 @@ export const Authorization = async (post) => {
       }
     );
 
-  localStorage.setItem('login', JSON.stringify(access))
+  sessionStorage.setItem("TOKEN", access)
 
   return await access;
-
 }
 
 export const getToken = async () => {
-  let tokenStatus = await JSON.parse(localStorage.getItem('login'))
-  return await tokenStatus;
+  let token = sessionStorage.getItem("TOKEN");
+  return token; 
 }
 
+export const clearToken = async () => {
+  sessionStorage.clear()
+}
 
+export const VerifyAuth = async () => {
 
-export function InitInterceptors() {
-  axios.interceptors.request.use(config => {
-    const token = getToken();
+  let token = await getToken();
+  let config = { headers: { Authorization: 'Bearer ' + token } }
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return config;
+  let key = await axios.get('http://192.168.0.4:8000/api/auth/Profile', config
+  ).then((res) => {
+    return res
+  }).catch((res) => {
+    return res;
   });
 
-  axios.interceptors.response.use(
-    response => response,
-    error => {
-      if (error.response.status === 401) {
-        //deleteToken();
-        window.location = "/";
-      } else {
-        return Promise.reject(error);
-      }
-    }
-  );
+  return key
+  
 }
 
 
-
-
-export default (Authorization, getToken, InitInterceptors);
+export default (Authorization, getToken, VerifyAuth);
 
 
 

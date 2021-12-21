@@ -388,13 +388,6 @@ const Turns = () =>{
 
 export default Turns
 
-if( document.getElementById("turns")){
-    ReactDOM.render(
-      <React.StrictMode>
-        <Turns />
-      </React.StrictMode>,
-      document.getElementById("turns")
-    );
-  }
+
   
   

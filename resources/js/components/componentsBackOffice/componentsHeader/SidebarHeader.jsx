@@ -101,13 +101,6 @@ const SidebarHeader = () =>{
 
 export default SidebarHeader
 
-if( document.getElementById("sidebar-header")){
-    ReactDOM.render(
-      <React.StrictMode>
-        <SidebarHeader />
-      </React.StrictMode>,
-      document.getElementById("sidebar-header")
-    );
-  }
+
   
   

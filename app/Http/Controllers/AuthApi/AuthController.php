@@ -120,11 +120,11 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
 
-      $nueva_cookie = cookie('User', $token, 60);
-	    $response = response("Voy a enviarte una cookie");
-	    $response->withCookie($nueva_cookie);
-
-      return $response;
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 
     /*

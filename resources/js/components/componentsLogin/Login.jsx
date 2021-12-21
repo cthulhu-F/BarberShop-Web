@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import LoginCss from "../../../css/login.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { ITEM_IMG } from '../../constants/constImg';
 import { useForm } from "react-hook-form";
-import  { Authorization, getToken, InitInterceptors } from "../../helpers/AuthHelpers";
+import  { Authorization, getToken } from "../../helpers/AuthHelpers";
 
-//InitInterceptors();
 
 const passwordVisible = (iconId, inputId) => {
 
@@ -27,10 +27,7 @@ const passwordVisible = (iconId, inputId) => {
     }
 }
 
-const Login = () => {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
-    const [chargerUser, setChargerUser] = useState(true);
+const Login = ({auth}) => {
 
     const onSubmit =  async evento => {
 
@@ -39,42 +36,11 @@ const Login = () => {
             password: evento.password
         }    
 
-        console.log(cookies.get('User'));
+        Authorization(post);
 
-        setToken(await Authorization(post));
-
-        //console.log(access);
-
-        /*
-        if(access != 'ERROR'){ 
-        window.location.replace('/backOffice/turns') }
-        */
-        //let profile = await ProfileTypeAuthorization(access);
-        //console.log(profile.data);
+        window.location.replace('/backOffice/turns')
     }
 
-    /*
-    useEffect(() => {
-        const cargarUsuario = async () => {
-            if(!getToken()){
-                setChargerUser(false);
-                return;
-            }
-         try {
-             const profile = await InitInterceptors(getToken());
-         } catch (error) {
-             console.log("ERROR");
-         }   
-    
-
-        }
-    })
-    */
-
-
-
-
-    
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -141,6 +107,8 @@ const Login = () => {
                             <div className="d-flex justify-content-center mt-3 login_container">
                                 <button type="submit" value="submit" className="btn login_btn" onClick={() => onSubmit()}>Login</button>
                             </div>
+
+                            
                         </form>
                     </div>
 
@@ -167,12 +135,13 @@ const Login = () => {
 
 export default Login
 
-
+/*
 if (document.getElementById("login")) {
     ReactDOM.render(
         <React.StrictMode>
-            <Login />
+            <Login/>
         </React.StrictMode>,
         document.getElementById("login")
     );
-}
+  }
+  */
