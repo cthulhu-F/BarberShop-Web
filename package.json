@@ -32,6 +32,7 @@
         "react-phone-number-input": "^3.1.44",
         "react-router-dom": "^6.0.2",
         "react-tabs": "^3.2.3",
+        "react-time-picker": "^4.4.4",
         "sweetalert": "^2.1.2",
         "sweetalert2": "^11.3.0"
     }

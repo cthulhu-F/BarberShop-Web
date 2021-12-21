@@ -45,7 +45,8 @@ const days=["su","mo","tu","we","th","fr","sa"];
 
 export const turnStateData = {
     chairs: ITEM_TURNS.configTurns,
-    day: ITEM_TURNS.configDay,
+    chairConfigDay: ITEM_TURNS.configDay,
+    day: ITEM_TURNS.configDay.days,
     schedule:[
         {turn: "07:00"},
         {turn: "08:00"},
@@ -96,9 +97,9 @@ export function turnReducer(state, action){
             let weekDayIndex = dt.getDay();
             let weekDay =days[weekDayIndex];
             
-            let chairAviability = state.day.find(chair=>chair.id === action.payload);
-            console.log(action.payload)  
-            let daySchedule = chairAviability[weekDay].split("/");
+            let chairAviability = state.chairConfigDay.find(chair=>chair.id === action.payload);
+            console.log(chairAviability)  
+            let daySchedule = chairAviability.days[weekDay].split("/");
             console.log(daySchedule)  
             let turnsAmount = daySchedule[2];
             let open = new Date("December 14, 2021 " + `${daySchedule[0]}` + ":00");
