@@ -4,7 +4,7 @@ export const Authorization = async (post) => {
 
   let access = await axios({
     method: 'post',
-    url: 'http://192.168.0.4:8000/api/auth/Login',
+    url: 'http://127.0.0.1:8000/api/auth/Login',
     data: post
   }).then(
     result => {
@@ -34,7 +34,7 @@ export const VerifyAuth = async () => {
   let token = await getToken();
   let config = { headers: { Authorization: 'Bearer ' + token } }
 
-  let key = await axios.get('http://192.168.0.4:8000/api/auth/Profile', config
+  let key = await axios.get('http://127.0.0.1:8000/api/Profile', config
   ).then((res) => {
     return res
   }).catch((res) => {

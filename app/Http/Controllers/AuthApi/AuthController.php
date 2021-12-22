@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\AuthApi;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+    use App\Http\Controllers\Controller;
+    use App\Models\Role;
+    use App\Models\User;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Hash;
     use Illuminate\Http\JsonResponse;
@@ -36,6 +37,8 @@ class AuthController extends Controller
             'name' => 'required|string|min:2|max:100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
+            //'role_id' => 'required',
+            'phone' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -45,8 +48,12 @@ class AuthController extends Controller
         $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                //'role_id' => $request->role_id,
+                'phone' => $request->phone
             ]);
+
+        $user->roles()->attach(Role::where('name', 'user')->first());    
 
         return response()->json([
             'message' => 'User successfully registered',

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,17 @@ Route::get('/login', function () {
 |--------------------------------------------------------------------------
 */
 
+
+Route::get('/', [HomeController::class, 'index']);
+
+
+
+/*
+Route::get('/', function () {
+  return view('index');
+});
+*/
+
 Route::get('/backOffice/turns', function () {
   return view('viewBackOffice/turns');
 });
@@ -28,10 +40,5 @@ Route::get('/backOffice/turns', function () {
 | Web Routes
 |--------------------------------------------------------------------------
 */
-
-Route::get('/', function () {
-  return view('auth/prueba');
-});
-
 
 
