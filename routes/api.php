@@ -28,6 +28,19 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 |--------------------------------------------------------------------------
 */
 
+Route::post('Login', function(){
+  $credentials = request()->only('email','password');
+
+  if (Auth::attempt($credentials)){
+    request()->session()->regenerate();
+
+    return 'Login in';
+  }
+  return 'Fails';
+} );
+
+
+/*
 Route::group([
   'middleware' => 'api',
   'prefix' => 'auth'
@@ -36,7 +49,7 @@ Route::group([
   Route::post('Login', [AuthController::class, 'login']);
 
 });
-
+*/
 
 
 

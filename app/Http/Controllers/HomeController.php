@@ -11,11 +11,17 @@ use App\Models\User;
 class HomeController extends Controller
 {
 
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 
     public function index(Request $request)
     {   
-        //$user = JWTAuth::parseToken()->authenticate();
+
+        $request->user()->authorizeRoles(['user','admin']);
+
         $user = User::find(2);
         return $user->name;
     }

@@ -21,7 +21,7 @@ Route::get('/login', function () {
 */
 
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 
 
 

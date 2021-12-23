@@ -18,9 +18,6 @@
   </header>
 
   <section>
-  
-  <pre> 
-</pre>
 
   <div id="login">
   </div>
