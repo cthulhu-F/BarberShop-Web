@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../css/main.css';
@@ -182,13 +182,6 @@ const Turns = () =>{
 
 export default Turns
 
-if( document.getElementById("turns")){
-    ReactDOM.render(
-      <React.StrictMode>
-        <Turns />
-      </React.StrictMode>,
-      document.getElementById("turns")
-    );
-  }
+
   
   

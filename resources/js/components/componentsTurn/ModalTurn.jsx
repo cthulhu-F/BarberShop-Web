@@ -375,11 +375,3 @@ const ModalTurn = () => {
 
 export default ModalTurn
 
-if (document.getElementById("modalTurn")) {
-  ReactDOM.render(
-      <React.StrictMode>
-          <ModalTurn />
-      </React.StrictMode>,
-      document.getElementById("modalTurn")
-  );
-}

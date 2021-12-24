@@ -13,6 +13,12 @@ return [
     |
     */
 
+    /* OLDDEFAULTS
+    'guard' => 'api',
+        'passwords' => 'users',
+    
+    */
+
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
@@ -35,11 +41,29 @@ return [
     |
     */
 
+    /* OLD GUARDS 
+     'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+      ],
+      'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+        'hash' => false,
+      ],
+          
+    */
+
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+      ],
+      'api' => [
+        'driver' => 'session',
+        'provider' => 'users',
+        'hash' => false,
+      ],
     ],
 
     /*
