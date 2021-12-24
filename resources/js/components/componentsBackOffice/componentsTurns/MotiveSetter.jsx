@@ -18,15 +18,21 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
     }
 
     
-    function handleClickEvent(evt) {
-      let el = evt.target;
-
-      if (el.getAttribute("aria-checked") == "true") {
-          el.setAttribute("aria-checked", "false");
+    function handleClickEvent(element) {
+      if (element.getAttribute("aria-checked") == "true") {
+        element.setAttribute("aria-checked", "false");
       } else {
-          el.setAttribute("aria-checked", "true");
+        element.setAttribute("aria-checked", "true");
       }
       switchDayStatus(editableDay[1]);
+    }
+
+    function handleClickEventGlobalSetting(element) {
+      if (element.getAttribute("aria-checked") == "true") {
+        element.setAttribute("aria-checked", "false");
+      } else {
+        element.setAttribute("aria-checked", "true");
+      }
     }
 
   function checkDayStatus(){
@@ -190,7 +196,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       <div className="col-12 d-flex">
                         <div className="form-check form-switch">
                           <label className="form-check-label" for="flexSwitchCheckDefault">¿Quieres aplicar estos cambios para todos los dias?</label>
-                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" aria-checked={false} onClick={(e)=>{handleClickEvent(e)}}/>
+                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" aria-checked={false} onClick={(e)=>{handleClickEventGlobalSetting(e.target)}}/>
                         </div>
                         
                       </div>
@@ -198,7 +204,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       <div className="col-12 d-flex">
                         <div className="form-check form-switch">
                             <label className="form-check-label" for="desactivate-day" id="labelMessage"></label>
-                            <input className="form-check-input" type="checkbox" role="switch" id="desactivate-day" onClick={(e)=>{handleClickEvent(e)}}/>
+                            <input className="form-check-input" type="checkbox" role="switch" id="desactivate-day" onClick={(e)=>{handleClickEvent(e.target)}}/>
                           </div>
                       </div>
 

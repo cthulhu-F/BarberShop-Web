@@ -7211,6 +7211,44 @@ var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
 
 /***/ }),
 
+/***/ "./resources/js/backofficeTurnDashboardUses.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/backofficeTurnDashboardUses.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _src_reducers_backofficeTurnDashboardReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/reducers/backofficeTurnDashboardReducer */ "./src/reducers/backofficeTurnDashboardReducer.js");
+/* harmony import */ var _src_actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/actions/backofficeTurnDashboardActions */ "./src/actions/backofficeTurnDashboardActions.js");
+
+
+
+
+
+
+var backofficeTurnDashboardMapDispatch = function backofficeTurnDashboardMapDispatch(dispatch) {
+  return {
+    resetInitialState: function resetInitialState() {
+      dispatch({
+        type: _src_actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_DASHBOARD_TYPES.RESET_INITIAL_STATE
+      });
+    } // getTodaySchedule : () =>{
+    //     dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE});
+    // }
+
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (backofficeTurnDashboardMapDispatch);
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -8631,16 +8669,22 @@ var MotiveSetter = function MotiveSetter(_ref) {
     }
   }
 
-  function handleClickEvent(evt) {
-    var el = evt.target;
-
-    if (el.getAttribute("aria-checked") == "true") {
-      el.setAttribute("aria-checked", "false");
+  function handleClickEvent(element) {
+    if (element.getAttribute("aria-checked") == "true") {
+      element.setAttribute("aria-checked", "false");
     } else {
-      el.setAttribute("aria-checked", "true");
+      element.setAttribute("aria-checked", "true");
     }
 
     switchDayStatus(editableDay[1]);
+  }
+
+  function handleClickEventGlobalSetting(element) {
+    if (element.getAttribute("aria-checked") == "true") {
+      element.setAttribute("aria-checked", "false");
+    } else {
+      element.setAttribute("aria-checked", "true");
+    }
   }
 
   function checkDayStatus() {
@@ -8946,7 +8990,7 @@ var MotiveSetter = function MotiveSetter(_ref) {
                 id: "flexSwitchCheckDefault",
                 "aria-checked": false,
                 onClick: function onClick(e) {
-                  handleClickEvent(e);
+                  handleClickEventGlobalSetting(e.target);
                 }
               })]
             })
@@ -8964,7 +9008,7 @@ var MotiveSetter = function MotiveSetter(_ref) {
                 role: "switch",
                 id: "desactivate-day",
                 onClick: function onClick(e) {
-                  handleClickEvent(e);
+                  handleClickEvent(e.target);
                 }
               })]
             })
@@ -9466,10 +9510,10 @@ function Pagination(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/componentsBackOffice/componentsTurns/Turns.jsx":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/componentsBackOffice/componentsTurns/Turns.jsx ***!
-  \********************************************************************************/
+/***/ "./resources/js/components/componentsBackOffice/componentsTurns/TurnDashboard.jsx":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/componentsBackOffice/componentsTurns/TurnDashboard.jsx ***!
+  \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -9477,21 +9521,107 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
-/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../css/main.css */ "./resources/css/main.css");
-/* harmony import */ var _MotiveSetterAndViewer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MotiveSetterAndViewer */ "./resources/js/components/componentsBackOffice/componentsTurns/MotiveSetterAndViewer.jsx");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _src_reducers_backofficeTurnDashboardReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../src/reducers/backofficeTurnDashboardReducer */ "./src/reducers/backofficeTurnDashboardReducer.js");
+/* harmony import */ var _backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../backofficeTurnDashboardUses */ "./resources/js/backofficeTurnDashboardUses.js");
+/* harmony import */ var _TurnDashboardItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TurnDashboardItem */ "./resources/js/components/componentsBackOffice/componentsTurns/TurnDashboardItem.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+
+/*REDUCER IMPORTS*/
 
 
 
 
 
 
-var Turns = function Turns() {
+
+
+var TurnDashboard = function TurnDashboard(_ref) {
+  _objectDestructuringEmpty(_ref);
+
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useReducer)(_src_reducers_backofficeTurnDashboardReducer__WEBPACK_IMPORTED_MODULE_2__.backofficeTurnDashboardReducer, _src_reducers_backofficeTurnDashboardReducer__WEBPACK_IMPORTED_MODULE_2__.FilteredTurns),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      backofficeTurnDashboardState = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var allShcheduled = backofficeTurnDashboardState.allShcheduled,
+      todayScheduled = backofficeTurnDashboardState.todayScheduled,
+      tomorrowScheduled = backofficeTurnDashboardState.tomorrowScheduled; // const getTodaySchedule = backofficeTurnDashboardMapDispatch(dispatch).getTodaySchedule;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(todayScheduled),
+      _useState2 = _slicedToArray(_useState, 2),
+      todayTurns = _useState2[0],
+      setTurns = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var fetchPosts = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return todayScheduled;
+
+              case 2:
+                res = _context.sent;
+                setTurns(res);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function fetchPosts() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
+    fetchPosts();
+  }, [todayScheduled]);
+
+  var setActiveHeader = function setActiveHeader(id) {
+    console.log(id);
+    var allButtons = document.querySelectorAll(".schedule-header-item");
+    allButtons.forEach(function (button) {
+      try {
+        button.classList.remove("btn-danger");
+        button.classList.add("btn-outline-danger");
+      } catch (error) {}
+
+      if (button.id == id) {
+        button.classList.remove("btn-outline-danger");
+        button.classList.add("btn-danger");
+      }
+    });
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "row px-3",
@@ -9528,7 +9658,11 @@ var Turns = function Turns() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "col-12 col-xl-3",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-              className: "btn btn-danger w-100",
+              className: "btn btn-danger w-100 schedule-header-item",
+              id: "get-today-shcedule",
+              onClick: function onClick(e) {
+                return setActiveHeader("get-today-shcedule");
+              },
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: " font-h1 fw-bold fs-3",
                 children: "HOY"
@@ -9537,7 +9671,11 @@ var Turns = function Turns() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "col-12 col-xl-3",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-              className: "btn btn-outline-danger w-100",
+              className: "btn btn-outline-danger w-100 schedule-header-item",
+              id: "get-tomorrow-shcedule",
+              onClick: function onClick(e) {
+                return setActiveHeader("get-tomorrow-shcedule");
+              },
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: " font-h1 fw-bold fs-3 ",
                 children: "PROXIMAMENTE"
@@ -9549,63 +9687,10 @@ var Turns = function Turns() {
         className: "col-12",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "row g-1 my-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "col-12 col-xl-3 shadow-sm border mx-xl-2 my-2",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "d-block",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                className: "d-flex justify-content-between bg-light p-2",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                  className: "font-h1 fw-bold fs-5 pt-2 pb-2",
-                  children: "Motivo 1"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-                  className: "btn border-0 fs-5",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-                    className: "bi bi-x"
-                  })
-                })]
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-              className: "d-block bg-white px-2 py-3 border-0 rounded",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                className: "d-flex",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: "fw-bold me-1",
-                  children: "Fecha:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  children: "10/12/2021"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                className: "d-flex",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: "fw-bold me-1",
-                  children: "Hora:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  children: "19:12"
-                })]
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-              className: "d-flex bg-light px-2 py-3",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-                className: "btn btn-black",
-                "data-bs-toggle": "modal",
-                "data-bs-target": "#modalDataClient",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: "d-none d-xl-inline",
-                  children: "Cliente"
-                }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-                  className: "bi bi-person"
-                }), " "]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-                className: "btn btn-orangeWeb mx-2",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: "d-none d-xl-inline",
-                  children: "Completar"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-                  className: "bi bi-check"
-                })]
-              })]
-            })]
+          children: todayTurns.map(function (scheduledTurn) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TurnDashboardItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              scheduledTurn: scheduledTurn
+            }, scheduledTurn.id);
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -9818,16 +9903,238 @@ var Turns = function Turns() {
             })]
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_MotiveSetterAndViewer__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
+      })]
     })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TurnDashboard);
+
+/***/ }),
+
+/***/ "./resources/js/components/componentsBackOffice/componentsTurns/TurnDashboardItem.jsx":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/componentsBackOffice/componentsTurns/TurnDashboardItem.jsx ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var TurnDashboardItem = function TurnDashboardItem(_ref) {
+  var scheduledTurn = _ref.scheduledTurn;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "col-12 col-xl-3 shadow-sm border mx-xl-2 my-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "d-block",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "d-flex justify-content-between bg-light p-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "font-h1 fw-bold fs-5 pt-2 pb-2",
+          children: [scheduledTurn.name, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+            className: "bi bi-scissors"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          className: "btn border-0 fs-5",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+            className: "bi bi-x"
+          })
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "d-block bg-white px-2 py-3 border-0 rounded",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "d-flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "fw-bold me-1",
+          children: "Fecha:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          children: scheduledTurn.date
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "d-flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "fw-bold me-1",
+          children: "Hora:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          children: scheduledTurn.time
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "d-flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "fw-bold me-1",
+          children: "Cliente:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          children: scheduledTurn.name_client
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "d-flex bg-light px-2 py-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+        className: "btn btn-black",
+        "data-bs-toggle": "modal",
+        "data-bs-target": "#modalDataClient".concat(scheduledTurn.id),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "d-none d-xl-inline",
+          children: "Cliente"
+        }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+          className: "bi bi-person"
+        }), " "]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+        className: "btn btn-orangeWeb mx-2",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "d-none d-xl-inline",
+          children: "Completar"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+          className: "bi bi-check"
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "modal fade",
+      id: "modalDataClient".concat(scheduledTurn.id),
+      "data-bs-backdrop": "static",
+      "data-bs-keyboard": "false",
+      tabindex: "-1",
+      "aria-labelledby": "modalChairConfigLabel",
+      "aria-hidden": "true",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "modal-dialog modal-gl",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "modal-content",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "modal-header",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h5", {
+              className: "modal-title font-h1 fw-bold fs-5 pt-2 pb-2",
+              children: ["Datos de ", scheduledTurn.name_client]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+              type: "button",
+              className: "btn-close",
+              "data-bs-dismiss": "modal",
+              "aria-label": "Close"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "modal-body",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "d-block bg-white px-2 py-3 border-0 rounded container",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                className: "input-group mb-1 row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "input-group-text bg-black text-white border border-black col-1",
+                  id: "basic-addon1",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                    className: "bi bi-person"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                  type: "button",
+                  "class": "btn btn-light col-11",
+                  children: scheduledTurn.name_client
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                className: "input-group mb-1 row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "input-group-text bg-black text-white border border-black col-1",
+                  id: "basic-addon1",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                    className: "bi bi-telephone"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                  type: "button",
+                  "class": "btn btn-light col-11",
+                  children: scheduledTurn.phone_client
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                className: "input-group mb-1 row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "input-group-text bg-black text-white border border-black col-1",
+                  id: "basic-addon1",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                    className: "bi bi-envelope"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                  type: "button",
+                  "class": "btn btn-light col-11",
+                  children: scheduledTurn.email_client
+                })]
+              })]
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "modal-footer justify-content-between",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+              className: "col-3",
+              href: "tel:".concat(scheduledTurn.phone_client),
+              style: {
+                color: "#fff",
+                fontWeight: "600",
+                textDecoration: "inherit"
+              },
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "input-group-text bg-black text-white border border-black",
+                id: "basic-addon1",
+                children: "Llamar"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+              type: "button col-3",
+              className: "btn btn-dark",
+              "data-bs-dismiss": "modal",
+              children: "Ok"
+            })]
+          })]
+        })
+      })
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TurnDashboardItem);
+
+/***/ }),
+
+/***/ "./resources/js/components/componentsBackOffice/componentsTurns/Turns.jsx":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/componentsBackOffice/componentsTurns/Turns.jsx ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../css/main.css */ "./resources/css/main.css");
+/* harmony import */ var _MotiveSetterAndViewer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MotiveSetterAndViewer */ "./resources/js/components/componentsBackOffice/componentsTurns/MotiveSetterAndViewer.jsx");
+/* harmony import */ var _TurnDashboard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TurnDashboard */ "./resources/js/components/componentsBackOffice/componentsTurns/TurnDashboard.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+var Turns = function Turns() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TurnDashboard__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MotiveSetterAndViewer__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
   });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Turns);
 
 if (document.getElementById("turns")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Turns, {})
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Turns, {})
   }), document.getElementById("turns"));
 }
 
@@ -12707,6 +13014,46 @@ var ITEM_TURNS = {
     time: "08:00",
     update_at: "14/12/2021",
     status: "ACTIVE"
+  }, {
+    id: 2,
+    name: "Silla 1",
+    name_client: "Maria",
+    email_client: "maria@gmail.com",
+    phone_client: "111222333",
+    date: "15/12/2021",
+    time: "09:00",
+    update_at: "14/12/2021",
+    status: "ACTIVE"
+  }, {
+    id: 3,
+    name: "Silla 4",
+    name_client: "Florencia",
+    email_client: "florencia@gmail.com",
+    phone_client: "0909097867",
+    date: "14/12/2021",
+    time: "10:00",
+    update_at: "14/12/2021",
+    status: "ACTIVE"
+  }, {
+    id: 4,
+    name: "Silla 3",
+    name_client: "martiin",
+    email_client: "martiin@gmail.com",
+    phone_client: "45237658",
+    date: "24/12/2021",
+    time: "11:00",
+    update_at: "14/12/2021",
+    status: "ACTIVE"
+  }, {
+    id: 5,
+    name: "Silla 3",
+    name_client: "santiago",
+    email_client: "santiago@gmail.com",
+    phone_client: "123543092486'",
+    date: "24/12/2021",
+    time: "12:00",
+    update_at: "24/12/2021",
+    status: "ACTIVE"
   }]
 };
 
@@ -12967,6 +13314,24 @@ var BACKOFFICE_TURN_TYPES = {
   SET_CHAIR_NAME: "SET_CHAIR_NAME",
   SWITCH_CHAIR_STATUS: "SWITCH_CHAIR_STATUS",
   SWITCH_DAY_STATUS: "SWITCH_DAY_STATUS"
+};
+
+/***/ }),
+
+/***/ "./src/actions/backofficeTurnDashboardActions.js":
+/*!*******************************************************!*\
+  !*** ./src/actions/backofficeTurnDashboardActions.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BACKOFFICE_TURN_DASHBOARD_TYPES": () => (/* binding */ BACKOFFICE_TURN_DASHBOARD_TYPES)
+/* harmony export */ });
+var BACKOFFICE_TURN_DASHBOARD_TYPES = {
+  RESET_INITIAL_STATE: "RESET_INITIAL_STATE" // GET_TODAYS_SCHEDULE :"GET_TODAYS_SCHEDULE",
+
 };
 
 /***/ }),
@@ -13247,6 +13612,74 @@ function backofficeTurnReducer(state, action) {
           editableDay: _newEditableDay4
         });
       }
+
+    default:
+      {
+        return state;
+      }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/reducers/backofficeTurnDashboardReducer.js":
+/*!********************************************************!*\
+  !*** ./src/reducers/backofficeTurnDashboardReducer.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "InitialTurns": () => (/* binding */ InitialTurns),
+/* harmony export */   "FilteredTurns": () => (/* binding */ FilteredTurns),
+/* harmony export */   "backofficeTurnDashboardReducer": () => (/* binding */ backofficeTurnDashboardReducer)
+/* harmony export */ });
+/* harmony import */ var _actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/backofficeTurnDashboardActions */ "./src/actions/backofficeTurnDashboardActions.js");
+/* harmony import */ var _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../resources/js/constants/constTurn */ "./resources/js/constants/constTurn.jsx");
+/* harmony import */ var _resources_css_sweetAlert_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../resources/css/sweetAlert.css */ "./resources/css/sweetAlert.css");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+
+var yyyy = today.getFullYear();
+var todayString = dd + '/' + mm + '/' + yyyy;
+var InitialTurns = {
+  allShcheduled: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns,
+  todayScheduled: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns.filter(function (turn) {
+    return turn.date == todayString;
+  }),
+  tomorrowScheduled: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns.filter(function (turn) {
+    return turn.date != todayString;
+  })
+};
+var FilteredTurns = {
+  allShcheduled: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns,
+  todayScheduled: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns.filter(function (turn) {
+    return turn.date == todayString;
+  }),
+  tomorrowScheduled: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns.filter(function (turn) {
+    return turn.date != todayString;
+  })
+};
+function backofficeTurnDashboardReducer(state, action) {
+  switch (action.type) {
+    case _actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_DASHBOARD_TYPES.RESET_INITIAL_STATE:
+      {
+        return InitialTurns;
+      }
+    // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE :{
+    //     console.log("GET TODAY SHCEDULES");
+    //     let todaySchedule = state.shcheduled.filter((turn)=>turn.date == todayString)
+    //     console.log(todaySchedule)
+    //     return {...state, shcheduled : todaySchedule};
+    // }
 
     default:
       {
