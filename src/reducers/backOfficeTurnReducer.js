@@ -2,6 +2,13 @@ import { BACKOFFICE_TURN_TYPES } from '../actions/backofficeTurnActions';
 import { ITEM_TURNS } from '../../resources/js/constants/constTurn';
 import "../../resources/css/sweetAlert.css"
 import { setA } from 'postcss';
+import swal from 'sweetalert2';
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var todayString =  mm + '/' + dd + '/'+yyyy;
 
 
 export const BackofficeTurnData = {
@@ -83,23 +90,67 @@ export function backofficeTurnReducer (state, action){
         }
          
         case BACKOFFICE_TURN_TYPES.SAVE_CHAIR_SCHEDULE :{
+            let turnDataString = document.getElementById("turn-data-string");
+            if (turnDataString.value == ""){
+                turnDataString = turnDataString.placeholder;
+            }else{
+                turnDataString = turnDataString.value;
+            }
+
+            function validData(str) {
+                var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/); 
+                return !!pattern.test(str);
+              }
+
+            if(!validData(turnDataString)){
+                swal.fire({
+                    text: 'Por respete el formato "09:00/12:00/5"', 
+                    position: "bottom",
+                    customClass : {
+                        container: "add-to-cart-alert-container",
+                        popup:"add-to-cart-alert",
+                    }
+                   });
+                return state
+            }
+            
             let editableChairSchedule = state.allChairsSchedule.find(chair=>chair.id ==state.editableChair.id);
             if (action.payload == "false"){
-                editableChairSchedule.days[state.editableDay[0]] = state.editableDay[1]
+                // editableChairSchedule.days[state.editableDay[0]] = state.editableDay[1]
+                editableChairSchedule.days[state.editableDay[0]] = turnDataString
             }
             else {
                 const days=["su","mo","tu","we","th","fr","sa"];
                 days.forEach(day=>{
-                    editableChairSchedule.days[day] = state.editableDay[1]
+                    // editableChairSchedule.days[day] = state.editableDay[1]
+                    editableChairSchedule.days[day] = turnDataString
                 })
             }
+
+            editableChairSchedule.update_at = todayString;
+
             console.log(editableChairSchedule)
             return state
         }
 
-        case BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME:{
-            return {...state,  ...state.editableChair, name :action.payload}
+        case BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME : {
+            let newEditableChair = state.editableChair;
+            if (action.newName != ""){
+                newEditableChair.name = action.newName;
+            }
+            console.log(newEditableChair)
+            return state
         }
+
+        case BACKOFFICE_TURN_TYPES.SWITCH_CHAIR_STATUS :{
+            let newEditableChair = state.editableChair;
+            console.log(newEditableChair.status)
+            newEditableChair.status = action.payload
+            console.log(newEditableChair.status)
+            return {...state, editableChair : newEditableChair}
+        }
+
+ 
 
         default :{
             return state;

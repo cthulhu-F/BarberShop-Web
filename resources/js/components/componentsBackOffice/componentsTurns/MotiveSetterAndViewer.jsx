@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState,  useEffect } from "react";
 import MotiveSetter from "./MotiveSetter";
 
 /*MODAL TURN IMPORTS*/
 import { useReducer } from 'react';
 import { backofficeTurnReducer, BackofficeTurnData} from '../../../../../src/reducers/backOfficeTurnReducer';
 import backofficeTurnMapDispatch from "../../../backOfficeTurnUses";
+
+import Pagination from "./Pagination";
+import ModalChairsConfig from "./ModalChairsConfig";
+
 
 const MotiveSetterAndViewer= ()=>{
 
@@ -21,9 +25,39 @@ const MotiveSetterAndViewer= ()=>{
     const restCount = backofficeTurnMapDispatch(dispatch).restCount; 
   
     const setStartHour =backofficeTurnMapDispatch(dispatch).setStartHour;
-    const setEndHour =setChairName
+    const setEndHour =backofficeTurnMapDispatch(dispatch).setEndHour;
+
+    const saveChairConfig = backofficeTurnMapDispatch(dispatch).saveChairConfig;
   
-    const setChairName = backofficeTurnMapDispatch(dispatch).setChairName;
+
+    /* PAGINATION*/
+    const [posts, setPosts] = useState(allChairsSchedule)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(2)
+  
+    useEffect(() => {
+      const fetchPosts = async () => {
+        const res = await allChairsSchedule;
+        setPosts(res)
+      }
+      fetchPosts();      
+    }, [allChairsSchedule])
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+    const howManyPages = Math.ceil(posts.length/postsPerPage)
+
+     /* PAGINATION END*/
+
+
+  // function checkChairStatus(){
+  // const switcher = document.getElementById("chair-inhabilitator");
+  //   if(editableChair.status == "NONACTIVE"){
+  //       switcher.checked = true;
+  //   }
+  // }
+
     return(
         <div>
           <div className="col-12">
@@ -54,7 +88,7 @@ const MotiveSetterAndViewer= ()=>{
                         </tr>
                       </thead>
                       <tbody>
-                      {allChairsSchedule.map((chair)=>
+                      {currentPosts.map((chair)=>
                         <tr>
                           <th scope="row">
                             {chair.id}
@@ -64,47 +98,40 @@ const MotiveSetterAndViewer= ()=>{
                           </td>
                           <td>
                             <div style={{ overflowWrap: "break-word", width: "200px"}}>
-                              {Object.entries(chair.days).filter(day => day[1] != "INACTIVE").map(activeDay=>(activeDay[0] + ' ').toUpperCase())}
+                              {Object.entries(chair.days).filter(day => day[1] != "NONACTIVE").map(activeDay=>(activeDay[0] + ' ').toUpperCase())}
                             </div>
                           </td>
                           <td>
                             <div className="d-flex justify-content-center">
                               <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
                                 data-bs-target="#modalAddProduct" onClick={()=>{setEditableChair(chair.id); setActiveDay(0)}}><i className="bi bi-pencil fs-7"></i></button>
-                              <button className="btn btn-outline-danger  p-1 me-1"><i className="bi bi-gear"></i></button>
+                              <button type="button" className="btn btn-outline-danger p-1 me-1"
+                              data-bs-toggle="modal" data-bs-target="#modalChairConfig"><i className="bi bi-gear"
+                              onClick={()=>{setEditableChair(chair.id); setActiveDay(0)}}></i></button>
                             </div>
                           </td>
                           <td>
-                            <div className="d-flex justify-content-center">
-                              <input className="form-check-input p-2 m-auto" type="checkbox" id="inlineCheckbox1" value="option1"/>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="text-success fs-3 d-flex justify-content-center" title="ACTIVO">
-                              <i className="bi bi-check-circle-fill"></i>
-                            </div>
+                            {chair.status == "ACTIVE" ?
+                               <div className="text-success fs-3 d-flex justify-content-center" title="ACTIVO">
+                                <i className="bi bi-check-circle-fill"></i>
+                              </div>
+                            :
+                              <div className="text-danger fs-3 d-flex justify-content-center" title="INACTIVO">
+                                <i class="bi bi-x-circle-fill"></i>
+                              </div>
+                            }
                           </td>
                         </tr>
+                        
                       )}
+                      
                       </tbody>
                       <tfoot>
                         <tr>
                           <td className="" colspan="10">
                             <div className="d-flex justify-content-end">
                               <nav aria-label="Page navigation example m-0">
-                                <ul className="pagination m-0">
-                                  <li className="page-item">
-                                    <a className="page-link text-black" href="#" aria-label="Previous">
-                                      <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                  </li>
-                                  <li className="page-item"><a className="page-link text-black" href="#">1</a></li>
-                                  <li className="page-item">
-                                    <a className="page-link text-black" href="#" aria-label="Next">
-                                      <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                  </li>
-                                </ul>
+                                <Pagination setCurrentPage={setCurrentPage} pages ={howManyPages}/>
                               </nav>
                             </div>
                           </td>
@@ -121,12 +148,13 @@ const MotiveSetterAndViewer= ()=>{
                <MotiveSetter editableChair={editableChair} turnsPerday={turnsPerday}
                setActiveDay={setActiveDay} editableDay={editableDay}
                saveChairSchedule={saveChairSchedule} addCount={addCount}
-               restCount= {restCount} setStartHour={setStartHour} setEndHour={setEndHour} setChairName={setChairName}/>
+               restCount= {restCount} setStartHour={setStartHour} setEndHour={setEndHour} />
               </div>
 
             </div>
           </div>
-        </div>        
+        </div>
+          <ModalChairsConfig editableChair={editableChair} saveChairConfig={saveChairConfig} />
       </div>
     );
 }

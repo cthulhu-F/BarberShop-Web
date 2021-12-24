@@ -23,6 +23,18 @@ const resetnameDefault = ()=>{
     })
 }
 
+const resetTurnDataString = () =>{
+    document.getElementById("turn-data-string").value = "";
+}
+
+const resetGlobalSaving = () => {
+    let globalSwitch = document.getElementById("flexSwitchCheckDefault");
+    if (globalSwitch.getAttribute("aria-checked") == "true"){
+        globalSwitch.click();
+    }
+}
+
+
 const backofficeTurnMapDispatch = (dispatch)=>{
     return {
         setEditableChair: (id) => {
@@ -64,6 +76,8 @@ const backofficeTurnMapDispatch = (dispatch)=>{
             })
             resetHourDefault();
             resetnameDefault();
+            resetTurnDataString();
+            resetGlobalSaving();
             dispatch({ type: BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY, payload:id});
             dispatch({ type: BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT});
         },
@@ -77,12 +91,22 @@ const backofficeTurnMapDispatch = (dispatch)=>{
             dispatch({ type: BACKOFFICE_TURN_TYPES.SET_END_HOUR, payload:endHour});
         },
 
-        saveChairSchedule: (globalSaving) => {
+        saveChairSchedule: (globalSaving, newChairName) => {
             dispatch({ type: BACKOFFICE_TURN_TYPES.SAVE_CHAIR_SCHEDULE, payload: globalSaving});
+            dispatch({ type: BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME, newName: newChairName});
+
         },
 
-        setChairName: (newName) => {
-            dispatch({ type: BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME, payload: newName});
+        saveChairConfig : (actualStatus, newChairName) =>{
+            let payloadValue;
+            if (actualStatus == "ACTIVE"){
+                payloadValue ="NONACTIVE";
+            }
+            if (actualStatus == "NONACTIVE"){
+                payloadValue ="ACTIVE";
+            }
+            dispatch ({type: BACKOFFICE_TURN_TYPES.SWITCH_CHAIR_STATUS, payload: payloadValue})
+            dispatch({ type: BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME, newName: newChairName});
         },
     }
 }

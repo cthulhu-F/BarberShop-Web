@@ -12,7 +12,7 @@ export const ITEM_TURNS = {
       id: 2,
       name: "Silla 2",
       update_at: "14/12/2021",
-      status: "INACTIVE",
+      status: "NONACTIVE",
       configDay_id: 2,
     },
     {

@@ -1,8 +1,21 @@
 import React from "react";
+import Chair from "../../componentsTurn/chair";
 
 
 const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
-  saveChairSchedule, addCount, restCount, setStartHour, setEndHour, setChairName}) =>{
+  saveChairSchedule, addCount, restCount, setStartHour, setEndHour}) =>{
+
+    function myCopyFunction() {
+      var copyText = document.getElementById("turn-data-string");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); 
+      if (copyText.value ==""){
+        navigator.clipboard.writeText(copyText.placeholder);
+      }else{
+        navigator.clipboard.writeText(copyText.value);
+
+      }
+    }
 
     
     function handleClickEvent(evt) {
@@ -17,8 +30,6 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
       } else {
           el.setAttribute("aria-checked", "true");
       }
-
-      console.log(el.getAttribute("aria-checked"))
     }
 
     return(
@@ -29,21 +40,18 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                   </div>
 
                   <div className="col-xl-3 mb-3">
-                    <div className="input-group">
-                      <span className="input-group-text bg-black text-white border border-black fs-9"
-                        id="basic-addon1">ID</span>
-                      <span className="input-group-text bg-black text-white border border-black fs-9"
-                        id="basic-addon1">{editableChair.id}</span>
+                    <div className="input-group ">
+                      <span className="input-group-text bg-black text-white border border-black fs-9 rounded"
+                        id="basic-addon1">{`ID: ${editableChair.id}`}</span>
                     </div>
                   </div>
 
                   <div className="col-xl-9 mb-3">
                     <div className="input-group">
-                      <input type="text" className="form-control fs-8" placeholder={editableChair.name} onChange ={(event)=>setChairName(event.target.value)}
+                      <input type="text" className="form-control fs-8" placeholder={editableChair.name} 
                         aria-label="Recipient's username" aria-describedby="basic-addon2" disabled={true} id="editable-chair-name"/>
                       <button className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"
                         onClick={()=> {
-                            console.log(document.getElementById('editable-chair-name').disabled)
                             if(document.getElementById('editable-chair-name').disabled){
                                 document.getElementById('editable-chair-name').disabled = false;
                             }else{
@@ -58,7 +66,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                     <div className="row g-3">
 
                       <div className="col-12 mb-2">
-                        <span className="form-text">Dias disponibles</span>
+                        <span className="form-text">Dias disponibles </span>
                       </div>
 
                       <div className="col-12">
@@ -114,17 +122,25 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
                       <div className="col-12 d-flex justify-content-between">
                         <div className="input-group w-50">
-                          <input type="text" className="form-control" placeholder={editableDay[1]} aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                          <input type="text" className="form-control" placeholder={editableDay[1]} aria-label="Recipient's username" aria-describedby="basic-addon2" id="turn-data-string"/>
                         <span className="input-group-text p-0" id="basic-addon2">
-                          <button className="input-group-text btn btn-black">
+                          <button className="input-group-text btn btn-black" onClick={()=>myCopyFunction()}>
                             <i className="bi bi-files"></i>
                           </button>
                         </span>
                         </div>
-                        <button className="btn btn-orangeWeb" onClick={()=>saveChairSchedule(document.getElementById('flexSwitchCheckDefault').getAttribute("aria-checked"))}>
+                        <button className={editableChair.status =="NONACTIVE" ? "btn btn-danger": "btn btn-orangeWeb"} onClick={()=>saveChairSchedule(document.getElementById('flexSwitchCheckDefault').getAttribute("aria-checked"), document.getElementById('editable-chair-name').value)}
+                        >
                           Guardar
                         </button>
                       </div>
+                      {editableChair.status =="NONACTIVE" ? 
+                      <div style ={{backgroundColor:"red", color:"#fff", fontWeight:"600", width:"100%"}}>
+                        SILLA INHABILITADA, AÚN PUEDES GUARDAR TUS CAMBIOS PERO TUS CLIENTES NO PODRÁN SELECCIONAR ESTA SILLA.
+                      </div> 
+                      :
+                      ""
+                      }
 
                     </div>
                   </div>

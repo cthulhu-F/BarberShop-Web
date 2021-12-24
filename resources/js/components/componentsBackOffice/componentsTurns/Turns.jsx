@@ -6,8 +6,6 @@ import '../../../../css/main.css';
 import MotiveSetterAndViewer from "./MotiveSetterAndViewer";
 
 
-
-
 const Turns = () =>{
 
 
