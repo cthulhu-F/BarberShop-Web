@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Chair from "../../componentsTurn/chair";
 
 
 const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
-  saveChairSchedule, addCount, restCount, setStartHour, setEndHour, allChairsSchedule}) =>{
+  saveChairSchedule, addCount, restCount, setStartHour, setEndHour, switchDayStatus}) =>{
 
     function myCopyFunction() {
       var copyText = document.getElementById("turn-data-string");
@@ -26,16 +26,8 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
       } else {
           el.setAttribute("aria-checked", "true");
       }
+      switchDayStatus(editableDay[1]);
     }
-
-    function setLabelMessage(daySchedule)  {
-      if(daySchedule == "NONACTIVE"){
-          return " Día inhabilitado ¿Desea habilitar este día?"
-      } else{
-          return  "¿Desea inhabilitar este día?" 
-      } 
-  }
-
 
   function checkDayStatus(){
       const switcher = document.getElementById("desactivate-day");
@@ -61,8 +53,56 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
   async function asyncCheckDayStatus() {
     await resolveAfterRender();
   }
+
   asyncCheckDayStatus();
-  // checkDayStatus();
+
+
+  useEffect(() => {
+    let day = editableDay.map((day) => {
+      switch (day){
+        case "mo":
+          return "0"
+        case "tu":
+          return "1" 
+        case "we":
+          return "2" 
+        case "th":
+          return "3"
+        case "fr":
+          return "4"
+        case "sa":
+          return "5" 
+        case "su":
+          return "6"
+        }
+      }
+    )
+
+
+    let dayActive = document.getElementById(day[0]);
+    let labelMessage = document.getElementById("labelMessage");
+    let allDays = document.querySelectorAll('.day-item');
+
+    allDays.forEach(day =>{
+      try{
+          day.classList.remove("bg-danger");
+          day.classList.remove("text-white");
+          day.classList.remove("bg-dark");
+      }catch(error){}
+    })
+
+    if(editableDay[1] == "NONACTIVE"){
+      labelMessage.innerHTML = "Día inhabilitado ¿Desea habilitar este dia?"
+      dayActive.classList.add("bg-danger","text-white");
+    }
+    
+    else{
+      dayActive.classList.add("bg-dark", "text-white");
+      labelMessage.innerHTML = "¿Desea inhabilitar este día?";
+    }
+
+    }, [editableDay[1], editableDay])
+
 
     return(
         <div>
@@ -143,7 +183,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
                       <div className="col-12 d-flex">
                         <button className="btn btn-white border rounded-0 rounded-start fs-6 px-1 px-xl-3 fw-bold " style={{zIndex: 2}} disabled={editableDay[1]=="NONACTIVE"} onClick={()=>restCount()}><i className="bi bi-dash"></i></button>
-                      <input className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-6" placeholder={editableDay[1]=="NONACTIVE" ? "-":turnsPerday} type="number" disabled />
+                      <input className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-6" placeholder={editableDay[1]=="NONACTIVE" ? "-":editableDay[1].split("/")[2]} type="number" disabled />
                       <button className="btn btn-white border rounded-0 rounded-end fs-6 px-1 px-xl-3 fw-bold" style={{zIndex: 2}} disabled={editableDay[1]=="NONACTIVE"} onClick={()=>addCount()}><i className="bi bi-plus"></i></button>
                       </div>
 
@@ -157,7 +197,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
                       <div className="col-12 d-flex">
                         <div className="form-check form-switch">
-                            <label className="form-check-label" for="desactivate-day">{setLabelMessage(editableDay[1])}</label>
+                            <label className="form-check-label" for="desactivate-day" id="labelMessage"></label>
                             <input className="form-check-input" type="checkbox" role="switch" id="desactivate-day" onClick={(e)=>{handleClickEvent(e)}}/>
                           </div>
                       </div>

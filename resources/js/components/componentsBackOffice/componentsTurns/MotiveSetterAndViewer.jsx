@@ -28,6 +28,8 @@ const MotiveSetterAndViewer= ()=>{
     const setEndHour =backofficeTurnMapDispatch(dispatch).setEndHour;
 
     const saveChairConfig = backofficeTurnMapDispatch(dispatch).saveChairConfig;
+
+    const switchDayStatus = backofficeTurnMapDispatch(dispatch).switchDayStatus;
   
 
     /* PAGINATION*/
@@ -50,13 +52,15 @@ const MotiveSetterAndViewer= ()=>{
 
      /* PAGINATION END*/
 
-
-  // function checkChairStatus(){
-  // const switcher = document.getElementById("chair-inhabilitator");
-  //   if(editableChair.status == "NONACTIVE"){
-  //       switcher.checked = true;
-  //   }
-  // }
+     const days = {
+       "mo": "lu",
+       "tu": "ma",
+       "we": "mi",
+       "th": "ju",
+       "fr": "vi",
+       "sa": "sa",
+       "su": "do",
+     }
 
     return(
         <div>
@@ -97,8 +101,13 @@ const MotiveSetterAndViewer= ()=>{
                             <div style={{ overflowWrap: "break-word", width: "150px"}}> {allChairs.find(chair2=>chair2.configDay_id == chair.id).name} </div>
                           </td>
                           <td>
-                            <div style={{ overflowWrap: "break-word", width: "200px"}}>
-                              {Object.entries(chair.days).filter(day => day[1] != "NONACTIVE").map(activeDay=>(activeDay[0] + ' ').toUpperCase())}
+                            <div style={{ overflowWrap: "break-word", width: "300px"}}>
+                              {/* {Object.entries(chair.days).filter(day => day[1] != "NONACTIVE").map(activeDay=> */}
+                              {Object.entries(chair.days).map(activeDay=>
+                              <span className={activeDay[1]=="NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white" } style={{
+                                padding:"5px", borderRadius:"5px", marginRight:"5px"
+                              }}>{(days[activeDay[0]] + ' ').toUpperCase()}</span>
+                              )}
                             </div>
                           </td>
                           <td>
@@ -149,7 +158,8 @@ const MotiveSetterAndViewer= ()=>{
                setActiveDay={setActiveDay} editableDay={editableDay}
                saveChairSchedule={saveChairSchedule} addCount={addCount}
                restCount= {restCount} setStartHour={setStartHour} setEndHour={setEndHour}
-               allChairsSchedule={allChairsSchedule} />
+               switchDayStatus={switchDayStatus}
+               />
               </div>
 
             </div>

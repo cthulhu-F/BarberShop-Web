@@ -33,45 +33,14 @@ export function backofficeTurnReducer (state, action){
         case BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY:{
             let editableChairSchedule = state.allChairsSchedule.find(chair=>chair.id == state.editableChair.configDay_id);
             let editableDayArray = Object.entries(editableChairSchedule.days)[action.payload];
-            console.log(editableDayArray)
+            console.log(editableDayArray);
             return {...state, editableDay: editableDayArray};
         }
         case BACKOFFICE_TURN_TYPES.LOAD_DATA :{
             return state;
         }
 
-        case BACKOFFICE_TURN_TYPES.SET_DAYS_STYLES:{
-            let allDays = document.querySelectorAll('.day-item');
-            let dayStatus;
-
-            const daysString=["mo","tu","we","th","fr","sa","su"];
-            const currentSchedule = state.allChairsSchedule.find(schedule=>schedule.id == state.editableChair.configDay_id)
-            
-            if (currentSchedule.days[daysString[action.payload]]=="NONACTIVE"){
-                dayStatus = "NONACTIVE";
-            }
-            else{
-                dayStatus =  "";
-            }
-            
-            allDays.forEach(day =>{
-                console.log(parseInt(day.id))
-                console.log(parseInt(action.payload))
-                if (parseInt(day.id) == parseInt(action.payload) ){
-                    if(dayStatus =="NONACTIVE"){
-                        day.classList.add("bg-danger","text-white");
-                    }else
-                    day.classList.add("bg-dark","text-white");
-                } else {
-                    try{
-                        day.classList.remove("bg-dark","text-white", "bg-danger");
-                    }catch(error){}
-                }
-            })
-
-            return state
-
-        }
+ 
 
         case BACKOFFICE_TURN_TYPES.ADD_COUNT :{
            
@@ -79,7 +48,7 @@ export function backofficeTurnReducer (state, action){
             let editableDayTurnsPerday = newEditableDay.pop();
             newEditableDay.push(parseInt(editableDayTurnsPerday)+1)
             newEditableDay = newEditableDay.join('/');
-            newEditableDay = [state.editableDay[0],newEditableDay]
+            newEditableDay = [state.editableDay[0],newEditableDay];
             return {...state, turnsPerday: parseInt(state.turnsPerday) +1, editableDay: newEditableDay};
         }
 
@@ -88,26 +57,26 @@ export function backofficeTurnReducer (state, action){
 
             let newEditableDay = state.editableDay[1].split("/");
             let editableDayTurnsPerday = newEditableDay.pop();
-            newEditableDay.push(parseInt(editableDayTurnsPerday)-1)
+            newEditableDay.push(parseInt(editableDayTurnsPerday)-1);
             newEditableDay = newEditableDay.join('/');
-            newEditableDay = [state.editableDay[0],newEditableDay]
+            newEditableDay = [state.editableDay[0],newEditableDay];
             return {...state, turnsPerday: parseInt(state.turnsPerday) -1, editableDay: newEditableDay};
         }
         
         case BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT:{
             // console.log(state.allChairsSchedule.days["state.editableDay[0]"]);
-            let currentChair = state.allChairsSchedule.find((chair)=>chair.id == state.editableChair.configDay_id)
+            let currentChair = state.allChairsSchedule.find((chair)=>chair.id == state.editableChair.configDay_id);
             let dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];
-            return {...state, turnsPerday: dfaultTurnsPerDay}
+            return {...state, turnsPerday: dfaultTurnsPerDay};
 
         }
 
         case BACKOFFICE_TURN_TYPES.SET_START_HOUR:{
             let newEditableDay = state.editableDay[1].split("/");
             let startHour = newEditableDay.shift();
-            newEditableDay.unshift(action.payload)
+            newEditableDay.unshift(action.payload);
             newEditableDay = newEditableDay.join('/');
-            newEditableDay = [state.editableDay[0],newEditableDay]
+            newEditableDay = [state.editableDay[0],newEditableDay];
             return {...state, editableDay: newEditableDay};
         }
 
@@ -115,10 +84,10 @@ export function backofficeTurnReducer (state, action){
             let newEditableDay = state.editableDay[1].split("/");
             let startHour = newEditableDay.shift();
             newEditableDay.shift();
-            newEditableDay.unshift(action.payload)
-            newEditableDay.unshift(startHour)
+            newEditableDay.unshift(action.payload);
+            newEditableDay.unshift(startHour);
             newEditableDay = newEditableDay.join('/');
-            newEditableDay = [state.editableDay[0],newEditableDay]
+            newEditableDay = [state.editableDay[0],newEditableDay];
             return {...state, editableDay: newEditableDay};
         }
          
@@ -130,8 +99,9 @@ export function backofficeTurnReducer (state, action){
                 turnDataString = turnDataString.value;
             }
 
+            console.log(turnDataString);
             function validData(str) {
-                var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);                var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/); 
+                var pattern = new RegExp(/^(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);  
                 var pattern2 = new RegExp(/NONACTIVE/); 
                 return !!(pattern.test(str) || pattern2.test(str));
               }
@@ -145,26 +115,26 @@ export function backofficeTurnReducer (state, action){
                         popup:"add-to-cart-alert",
                     }
                    });
-                return state
+                return state;
             }
             
             let editableChairSchedule = state.allChairsSchedule.find(chair=>chair.id ==state.editableChair.id);
             if (action.payload == "false"){
                 // editableChairSchedule.days[state.editableDay[0]] = state.editableDay[1]
-                editableChairSchedule.days[state.editableDay[0]] = turnDataString
+                editableChairSchedule.days[state.editableDay[0]] = turnDataString;
             }
             else {
                 const days=["su","mo","tu","we","th","fr","sa"];
                 days.forEach(day=>{
                     // editableChairSchedule.days[day] = state.editableDay[1]
-                    editableChairSchedule.days[day] = turnDataString
+                    editableChairSchedule.days[day] = turnDataString;
                 })
             }
 
             editableChairSchedule.update_at = todayString;
 
-            console.log(editableChairSchedule)
-            return state
+            console.log(editableChairSchedule);
+            return state;
         }
 
         case BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME : {
@@ -184,6 +154,11 @@ export function backofficeTurnReducer (state, action){
             return {...state, editableChair : newEditableChair}
         }
  
+        case BACKOFFICE_TURN_TYPES.SWITCH_DAY_STATUS :{
+            let newEditableDay = state.editableDay;
+            newEditableDay[1] = `${action.payload}`;
+            return {...state, editableDay :newEditableDay };
+        }
 
         default :{
             return state;

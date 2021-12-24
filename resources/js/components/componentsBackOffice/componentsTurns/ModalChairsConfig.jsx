@@ -49,6 +49,8 @@ const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
         saveChairConfig(previousValue, document.getElementById('editable-chair-name-2').value);
     }
 
+    
+
     return (
         <div className="modal fade" id="modalChairConfig" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="modalChairConfigLabel" aria-hidden="true">
@@ -93,7 +95,7 @@ const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={()=>saveConfigChanges()}>Save changes</button>
+                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=>saveConfigChanges()}>Save changes</button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>

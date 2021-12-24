@@ -7101,8 +7101,6 @@ var resetGlobalSaving = function resetGlobalSaving() {
   }
 };
 
-var findDayStatus = function findDayStatus(position, allChairsSchedule, editableChair) {};
-
 var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
   return {
     setEditableChair: function setEditableChair(id) {
@@ -7149,10 +7147,6 @@ var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
       dispatch({
         type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT
       });
-      dispatch({
-        type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.SET_DAYS_STYLES,
-        payload: id
-      });
     },
     setStartHour: function setStartHour(startHour) {
       dispatch({
@@ -7194,6 +7188,20 @@ var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
       dispatch({
         type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME,
         newName: newChairName
+      });
+    },
+    switchDayStatus: function switchDayStatus(actualStatus) {
+      var payloadValue;
+
+      if (actualStatus == "NONACTIVE") {
+        payloadValue = "09:00/12:00/4";
+      } else {
+        payloadValue = "NONACTIVE";
+      }
+
+      dispatch({
+        type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.SWITCH_DAY_STATUS,
+        payload: payloadValue
       });
     }
   };
@@ -8551,6 +8559,7 @@ var ModalChairsConfig = function ModalChairsConfig(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
             type: "button",
             className: "btn btn-primary",
+            "data-bs-dismiss": "modal",
             onClick: function onClick() {
               return saveConfigChanges();
             },
@@ -8608,7 +8617,7 @@ var MotiveSetter = function MotiveSetter(_ref) {
       restCount = _ref.restCount,
       setStartHour = _ref.setStartHour,
       setEndHour = _ref.setEndHour,
-      allChairsSchedule = _ref.allChairsSchedule;
+      switchDayStatus = _ref.switchDayStatus;
 
   function myCopyFunction() {
     var copyText = document.getElementById("turn-data-string");
@@ -8630,14 +8639,8 @@ var MotiveSetter = function MotiveSetter(_ref) {
     } else {
       el.setAttribute("aria-checked", "true");
     }
-  }
 
-  function setLabelMessage(daySchedule) {
-    if (daySchedule == "NONACTIVE") {
-      return " Día inhabilitado ¿Desea habilitar este día?";
-    } else {
-      return "¿Desea inhabilitar este día?";
-    }
+    switchDayStatus(editableDay[1]);
   }
 
   function checkDayStatus() {
@@ -8685,8 +8688,51 @@ var MotiveSetter = function MotiveSetter(_ref) {
     return _asyncCheckDayStatus.apply(this, arguments);
   }
 
-  asyncCheckDayStatus(); // checkDayStatus();
+  asyncCheckDayStatus();
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var day = editableDay.map(function (day) {
+      switch (day) {
+        case "mo":
+          return "0";
 
+        case "tu":
+          return "1";
+
+        case "we":
+          return "2";
+
+        case "th":
+          return "3";
+
+        case "fr":
+          return "4";
+
+        case "sa":
+          return "5";
+
+        case "su":
+          return "6";
+      }
+    });
+    var dayActive = document.getElementById(day[0]);
+    var labelMessage = document.getElementById("labelMessage");
+    var allDays = document.querySelectorAll('.day-item');
+    allDays.forEach(function (day) {
+      try {
+        day.classList.remove("bg-danger");
+        day.classList.remove("text-white");
+        day.classList.remove("bg-dark");
+      } catch (error) {}
+    });
+
+    if (editableDay[1] == "NONACTIVE") {
+      labelMessage.innerHTML = "Día inhabilitado ¿Desea habilitar este dia?";
+      dayActive.classList.add("bg-danger", "text-white");
+    } else {
+      dayActive.classList.add("bg-dark", "text-white");
+      labelMessage.innerHTML = "¿Desea inhabilitar este día?";
+    }
+  }, [editableDay[1], editableDay]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "row shadow-sm p-2",
@@ -8869,7 +8915,7 @@ var MotiveSetter = function MotiveSetter(_ref) {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               className: "form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-6",
-              placeholder: editableDay[1] == "NONACTIVE" ? "-" : turnsPerday,
+              placeholder: editableDay[1] == "NONACTIVE" ? "-" : editableDay[1].split("/")[2],
               type: "number",
               disabled: true
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
@@ -8911,7 +8957,7 @@ var MotiveSetter = function MotiveSetter(_ref) {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
                 className: "form-check-label",
                 "for": "desactivate-day",
-                children: setLabelMessage(editableDay[1])
+                id: "labelMessage"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 className: "form-check-input",
                 type: "checkbox",
@@ -9042,6 +9088,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
   var setStartHour = (0,_backOfficeTurnUses__WEBPACK_IMPORTED_MODULE_4__["default"])(dispatch).setStartHour;
   var setEndHour = (0,_backOfficeTurnUses__WEBPACK_IMPORTED_MODULE_4__["default"])(dispatch).setEndHour;
   var saveChairConfig = (0,_backOfficeTurnUses__WEBPACK_IMPORTED_MODULE_4__["default"])(dispatch).saveChairConfig;
+  var switchDayStatus = (0,_backOfficeTurnUses__WEBPACK_IMPORTED_MODULE_4__["default"])(dispatch).switchDayStatus;
   /* PAGINATION*/
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(allChairsSchedule),
@@ -9093,13 +9140,16 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
   var currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   var howManyPages = Math.ceil(posts.length / postsPerPage);
   /* PAGINATION END*/
-  // function checkChairStatus(){
-  // const switcher = document.getElementById("chair-inhabilitator");
-  //   if(editableChair.status == "NONACTIVE"){
-  //       switcher.checked = true;
-  //   }
-  // }
 
+  var days = {
+    "mo": "lu",
+    "tu": "ma",
+    "we": "mi",
+    "th": "ju",
+    "fr": "vi",
+    "sa": "sa",
+    "su": "do"
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "col-12",
@@ -9166,12 +9216,18 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
                             style: {
                               overflowWrap: "break-word",
-                              width: "200px"
+                              width: "300px"
                             },
-                            children: Object.entries(chair.days).filter(function (day) {
-                              return day[1] != "NONACTIVE";
-                            }).map(function (activeDay) {
-                              return (activeDay[0] + ' ').toUpperCase();
+                            children: Object.entries(chair.days).map(function (activeDay) {
+                              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                                className: activeDay[1] == "NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white",
+                                style: {
+                                  padding: "5px",
+                                  borderRadius: "5px",
+                                  marginRight: "5px"
+                                },
+                                children: (days[activeDay[0]] + ' ').toUpperCase()
+                              });
                             })
                           })
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
@@ -9252,7 +9308,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
               restCount: restCount,
               setStartHour: setStartHour,
               setEndHour: setEndHour,
-              allChairsSchedule: allChairsSchedule
+              switchDayStatus: switchDayStatus
             })
           })]
         })
@@ -12901,7 +12957,6 @@ __webpack_require__.r(__webpack_exports__);
 var BACKOFFICE_TURN_TYPES = {
   SET_EDITABLE_CHAIR: "SET_EDITABLE_CHAIR",
   SET_EDITABLE_DAY: "SET_EDITABLE_DAY",
-  SET_DAYS_STYLES: "SET_DAYS_STYLES",
   LOAD_DATA: "LOAD_DATA",
   ADD_COUNT: "ADD_COUNT",
   REST_COUNT: "REST_COUNT",
@@ -12910,7 +12965,8 @@ var BACKOFFICE_TURN_TYPES = {
   SET_START_HOUR: "SET_START_HOUR",
   SET_END_HOUR: "SET_END_HOUR",
   SET_CHAIR_NAME: "SET_CHAIR_NAME",
-  SWITCH_CHAIR_STATUS: "SWITCH_CHAIR_STATUS"
+  SWITCH_CHAIR_STATUS: "SWITCH_CHAIR_STATUS",
+  SWITCH_DAY_STATUS: "SWITCH_DAY_STATUS"
 };
 
 /***/ }),
@@ -13033,38 +13089,6 @@ function backofficeTurnReducer(state, action) {
         return state;
       }
 
-    case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SET_DAYS_STYLES:
-      {
-        var allDays = document.querySelectorAll('.day-item');
-        var dayStatus;
-        var daysString = ["mo", "tu", "we", "th", "fr", "sa", "su"];
-        var currentSchedule = state.allChairsSchedule.find(function (schedule) {
-          return schedule.id == state.editableChair.configDay_id;
-        });
-
-        if (currentSchedule.days[daysString[action.payload]] == "NONACTIVE") {
-          dayStatus = "NONACTIVE";
-        } else {
-          dayStatus = "";
-        }
-
-        allDays.forEach(function (day) {
-          console.log(parseInt(day.id));
-          console.log(parseInt(action.payload));
-
-          if (parseInt(day.id) == parseInt(action.payload)) {
-            if (dayStatus == "NONACTIVE") {
-              day.classList.add("bg-danger", "text-white");
-            } else day.classList.add("bg-dark", "text-white");
-          } else {
-            try {
-              day.classList.remove("bg-dark", "text-white", "bg-danger");
-            } catch (error) {}
-          }
-        });
-        return state;
-      }
-
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.ADD_COUNT:
       {
         var newEditableDay = state.editableDay[1].split("/");
@@ -13145,8 +13169,7 @@ function backofficeTurnReducer(state, action) {
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SAVE_CHAIR_SCHEDULE:
       {
         var validData = function validData(str) {
-          var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);
-          var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);
+          var pattern = new RegExp(/^(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);
           var pattern2 = new RegExp(/NONACTIVE/);
           return !!(pattern.test(str) || pattern2.test(str));
         };
@@ -13158,6 +13181,8 @@ function backofficeTurnReducer(state, action) {
         } else {
           turnDataString = turnDataString.value;
         }
+
+        console.log(turnDataString);
 
         if (!validData(turnDataString)) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -13211,6 +13236,15 @@ function backofficeTurnReducer(state, action) {
         console.log(_newEditableChair.status);
         return _objectSpread(_objectSpread({}, state), {}, {
           editableChair: _newEditableChair
+        });
+      }
+
+    case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SWITCH_DAY_STATUS:
+      {
+        var _newEditableDay4 = state.editableDay;
+        _newEditableDay4[1] = "".concat(action.payload);
+        return _objectSpread(_objectSpread({}, state), {}, {
+          editableDay: _newEditableDay4
         });
       }
 
