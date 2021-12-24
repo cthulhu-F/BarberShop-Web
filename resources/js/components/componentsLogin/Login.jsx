@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import LoginCss from "../../../css/login.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../../css/main.css';
 import { ITEM_IMG } from '../../constants/constImg';
 import { useForm } from "react-hook-form";
-import  { Authorization, getToken } from "../../helpers/AuthHelpers";
+import  { Authorization} from "../../helpers/AuthHelpers";
+import swal from'sweetalert2';
 
 
 const passwordVisible = (iconId, inputId) => {
@@ -27,7 +29,7 @@ const passwordVisible = (iconId, inputId) => {
     }
 }
 
-const Login = ({auth}) => {
+const Login = () => {
 
     const onSubmit =  async evento => {
 
@@ -36,9 +38,20 @@ const Login = ({auth}) => {
             password: evento.password
         }    
 
-        Authorization(post);
+        let validate = await Authorization(post);
 
-        window.location.replace('/backOffice/turns')
+        console.log(validate.data);
+
+        if(validate.data != 'Unauthenticated'){      
+            window.location.replace(validate.data)
+        } else {
+            swal.fire({
+                icon: 'error',
+                title: 'Error de autenticacion',
+                text: 'El usuario o contraseña ingresados no existe',
+                showConfirmButton: false,
+              })
+        }
     }
 
 

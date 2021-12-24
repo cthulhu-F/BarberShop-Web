@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\View\HomeController;
+use App\Http\Controllers\ViewOffice\BackOfficeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -9,10 +10,8 @@ use App\Http\Controllers\HomeController;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/login', [HomeController::class, 'login']);
 
-Route::get('/login', function () {
-  return view('login');
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -21,19 +20,21 @@ Route::get('/login', function () {
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->middleware('auth');
+Route::group([
+  'middleware' => 'auth',
+], function ($router) {
 
+  Route::get('/backOffice', [BackOfficeController::class, 'turn']);
+  Route::get('/backOffice/turn', [BackOfficeController::class, 'turn']);
+  Route::get('/backOffice/sale', [BackOfficeController::class, 'sale']);
+  Route::get('/backOffice/inventory', [BackOfficeController::class, 'inventory']);
+  Route::get('/backOffice/user', [BackOfficeController::class, 'user']);
+  Route::get('/backOffice/setting', [BackOfficeController::class, 'setting']);
 
-
-/*
-Route::get('/', function () {
-  return view('index');
 });
-*/
 
-Route::get('/backOffice/turns', function () {
-  return view('viewBackOffice/turns');
-});
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,4 @@ Route::get('/backOffice/turns', function () {
 |--------------------------------------------------------------------------
 */
 
-
+Route::get('/', [HomeController::class, 'index']);

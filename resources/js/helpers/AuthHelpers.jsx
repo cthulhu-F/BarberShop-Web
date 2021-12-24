@@ -4,21 +4,21 @@ export const Authorization = async (post) => {
 
   let access = await axios({
     method: 'post',
-    url: 'http://127.0.0.1:8000/api/auth/Login',
+    url: 'http://127.0.0.1:8000/api/Login',
     data: post
   }).then(
     result => {
-      return result.data.access_token;
+      return result;
     }).catch(
       result => {
-        return "ERROR";
+        return result;
       }
     );
 
-  sessionStorage.setItem("TOKEN", access)
-
   return await access;
 }
+
+/*
 
 export const getToken = async () => {
   let token = sessionStorage.getItem("TOKEN");
@@ -44,9 +44,9 @@ export const VerifyAuth = async () => {
   return key
   
 }
+*/
 
-
-export default (Authorization, getToken, VerifyAuth);
+export default (Authorization);
 
 
 

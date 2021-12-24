@@ -15,17 +15,16 @@ const SidebarHeader = () =>{
 
     let menuItems = [
         {slug: "home", classes: defaultClases,},
-        {slug: "turns", classes: defaultClases,},
-        {slug: "sales", classes: defaultClases,},
+        {slug: "turn", classes: defaultClases,},
+        {slug: "sale", classes: defaultClases,},
         {slug: "inventory", classes: defaultClases,},
-        {slug: "users", classes: defaultClases,},
-        {slug: "settings",classes: defaultClases,},
+        {slug: "user", classes: defaultClases,},
+        {slug: "setting",classes: defaultClases,},
     ]
 
     menuItems.forEach(item=>{
       if (URLpage == item.slug){
         item.classes += " navbar-link-active-primary ";
-
       } else {
         item.classes += " navbar-link-primary ";
       } 
@@ -51,8 +50,8 @@ const SidebarHeader = () =>{
                 <ul className="nav nav-pills flex-column m-0 ps-1 ps-xl-0">
         
                     <li
-                    className={findCalsses("turns")}>
-                    <a href="turns" className="text-decoration-none text-white" aria-current="page">
+                    className={findCalsses("turn")}>
+                    <a href="turn" className="text-decoration-none text-white" aria-current="page">
                         <i className="bi bi-journal-arrow-up fs-4 mx-0 mx-xl-1"></i>
                         <span className="d-none d-xl-inline">Turnos</span>
                     </a>
@@ -60,8 +59,8 @@ const SidebarHeader = () =>{
         
         
                     <li
-                    className={findCalsses("sales")}>
-                    <a href="sales" className="text-decoration-none text-white" aria-current="page">
+                    className={findCalsses("sale")}>
+                    <a href="sale" className="text-decoration-none text-white" aria-current="page">
                         <i className="bi bi-journal-check fs-4 mx-0 mx-xl-1"></i>
                         <span className="d-none d-xl-inline">Orden de ventas</span>
                     </a>
@@ -77,16 +76,16 @@ const SidebarHeader = () =>{
                     </li>
         
                     <li
-                    className={findCalsses("users")}>
-                    <a href="users" className="text-decoration-none text-white" aria-current="page">
+                    className={findCalsses("user")}>
+                    <a href="user" className="text-decoration-none text-white" aria-current="page">
                         <i className="bi bi-person-lines-fill fs-4 mx-0 mx-xl-1"></i>
                         <span className="d-none d-xl-inline">Usuarios</span>
                     </a>
                     </li>
         
                     <li
-                    className={findCalsses("settings")}>
-                    <a href="settings" className="text-decoration-none text-white" aria-current="page">
+                    className={findCalsses("setting")}>
+                    <a href="setting" className="text-decoration-none text-white" aria-current="page">
                         <i className="bi bi-gear fs-4 mx-0 mx-xl-1"></i>
                         <span className="d-none d-xl-inline">Configuracion</span>
                     </a>
