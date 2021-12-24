@@ -20,7 +20,7 @@ class Role extends Model
         'name',  
         'description',
         'created_at',
-        'uodated_at',
+        'updated_at',
     ];
 
 

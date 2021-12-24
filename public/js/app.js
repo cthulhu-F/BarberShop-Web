@@ -73038,7 +73038,9 @@ function useWatch(props) {
                     (isObject(fieldValues) && !objectHasFunction(fieldValues))
                     ? Object.assign({}, fieldValues) : Array.isArray(fieldValues)
                     ? [...fieldValues]
-                    : fieldValues);
+                    : isUndefined(fieldValues)
+                        ? defaultValue
+                        : fieldValues);
             }
         },
     });
@@ -73078,14 +73080,11 @@ function useController(props) {
         updateMounted(name, true);
         return () => {
             const _shouldUnregisterField = control._options.shouldUnregister || shouldUnregister;
-            if (isArrayField
+            isArrayField
                 ? _shouldUnregisterField && !control._stateFlags.action
-                : _shouldUnregisterField) {
-                control.unregister(name, { keepDefaultValue: true });
-            }
-            else {
-                updateMounted(name, false);
-            }
+                : _shouldUnregisterField
+                    ? control.unregister(name)
+                    : updateMounted(name, false);
         };
     }, [name, control, isArrayField, shouldUnregister]);
     return {
@@ -73379,13 +73378,13 @@ const useFieldArray = (props) => {
         control._updateFieldArray(name, updateAt, {
             argA: index,
             argB: value,
-        }, fieldArrayValues, true, false);
+        }, fieldArrayValues, true, false, false);
     };
     const replace = (value) => {
         const updatedFieldArrayValuesWithKey = mapIds(convertToArrayPayload(value), keyName);
         const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
         setFields(updatedFieldArrayValuesWithKey);
-        control._updateFieldArray(name, () => updatedFieldArrayValuesWithKey, {}, fieldArrayValues, true, false);
+        control._updateFieldArray(name, () => updatedFieldArrayValuesWithKey, {}, fieldArrayValues, true, false, false);
     };
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
         control._stateFlags.action = false;
@@ -73982,13 +73981,13 @@ function createFormControl(props = {}) {
         }
         return isValid;
     };
-    const _updateFieldArray = (name, method, args, values = [], shouldSetValues = true, shouldSetFields = true) => {
+    const _updateFieldArray = (name, method, args, values = [], shouldSetValues = true, shouldSetFields = true, shouldSetError = true) => {
         _stateFlags.action = true;
         if (shouldSetFields && get(_fields, name)) {
             const fieldValues = method(get(_fields, name), args.argA, args.argB);
             shouldSetValues && set(_fields, name, fieldValues);
         }
-        if (Array.isArray(get(_formState.errors, name))) {
+        if (shouldSetError && Array.isArray(get(_formState.errors, name))) {
             const errors = method(get(_formState.errors, name), args.argA, args.argB);
             shouldSetValues && set(_formState.errors, name, errors);
             unsetEmptyArray(_formState.errors, name);
@@ -74164,7 +74163,8 @@ function createFormControl(props = {}) {
         if (field) {
             const fieldReference = field._f;
             if (fieldReference) {
-                set(_formValues, name, getFieldValueAs(value, fieldReference));
+                !fieldReference.disabled &&
+                    set(_formValues, name, getFieldValueAs(value, fieldReference));
                 fieldValue =
                     isWeb && isHTMLElement(fieldReference.ref) && isNullOrUndefined(value)
                         ? ''
@@ -74427,7 +74427,7 @@ function createFormControl(props = {}) {
                         _f: radioOrCheckbox
                             ? Object.assign(Object.assign({}, field._f), { refs: [...compact(field._f.refs).filter(live), fieldRef], ref: { type: fieldRef.type, name } }) : Object.assign(Object.assign({}, field._f), { ref: fieldRef }),
                     });
-                    !options.disabled && updateValidAndValue(name, false, fieldRef);
+                    updateValidAndValue(name, false, fieldRef);
                 }
                 else {
                     field = get(_fields, name, {});
@@ -74545,10 +74545,10 @@ function createFormControl(props = {}) {
                     : {}
                 : cloneUpdatedValues;
             _fields = {};
-            _subjects.watch.next({
+            _subjects.array.next({
                 values,
             });
-            _subjects.array.next({
+            _subjects.watch.next({
                 values,
             });
         }
@@ -74560,6 +74560,9 @@ function createFormControl(props = {}) {
             watchAll: false,
             focus: '',
         };
+        _stateFlags.mount =
+            !_proxyFormState.isValid || !!keepStateOptions.keepIsValid;
+        _stateFlags.watch = !!props.shouldUnregister;
         _subjects.state.next({
             submitCount: keepStateOptions.keepSubmitCount
                 ? _formState.submitCount
@@ -74586,9 +74589,6 @@ function createFormControl(props = {}) {
             isSubmitting: false,
             isSubmitSuccessful: false,
         });
-        _stateFlags.mount =
-            !_proxyFormState.isValid || !!keepStateOptions.keepIsValid;
-        _stateFlags.watch = !!props.shouldUnregister;
     };
     const setFocus = (name) => {
         const field = get(_fields, name)._f;
