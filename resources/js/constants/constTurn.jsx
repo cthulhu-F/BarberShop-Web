@@ -34,7 +34,7 @@ export const ITEM_TURNS = {
    {
      id: 1,
      days:{
-      mo: "10:00/12:00/5",
+      mo: "NONACTIVE",
       tu: "12:00/13:00/4",
       we: "10:40/11:40/1",
       th: "10:05/12:00/3",

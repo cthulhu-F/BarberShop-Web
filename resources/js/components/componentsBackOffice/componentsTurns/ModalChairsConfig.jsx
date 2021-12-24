@@ -16,7 +16,7 @@ const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
    
     function setLabelMessage()  {
         if(editableChair.status == "NONACTIVE"){
-            return "¿Desea habilitar esta silla?"
+            return "Silla inhabilitada ¿Desea habilitar esta silla?"
         } else{
             return  "¿Desea inhabilitar esta silla?" 
         } 

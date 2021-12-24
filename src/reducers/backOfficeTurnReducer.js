@@ -40,6 +40,39 @@ export function backofficeTurnReducer (state, action){
             return state;
         }
 
+        case BACKOFFICE_TURN_TYPES.SET_DAYS_STYLES:{
+            let allDays = document.querySelectorAll('.day-item');
+            let dayStatus;
+
+            const daysString=["mo","tu","we","th","fr","sa","su"];
+            const currentSchedule = state.allChairsSchedule.find(schedule=>schedule.id == state.editableChair.configDay_id)
+            
+            if (currentSchedule.days[daysString[action.payload]]=="NONACTIVE"){
+                dayStatus = "NONACTIVE";
+            }
+            else{
+                dayStatus =  "";
+            }
+            
+            allDays.forEach(day =>{
+                console.log(parseInt(day.id))
+                console.log(parseInt(action.payload))
+                if (parseInt(day.id) == parseInt(action.payload) ){
+                    if(dayStatus =="NONACTIVE"){
+                        day.classList.add("bg-danger","text-white");
+                    }else
+                    day.classList.add("bg-dark","text-white");
+                } else {
+                    try{
+                        day.classList.remove("bg-dark","text-white", "bg-danger");
+                    }catch(error){}
+                }
+            })
+
+            return state
+
+        }
+
         case BACKOFFICE_TURN_TYPES.ADD_COUNT :{
            
             let newEditableDay = state.editableDay[1].split("/");
@@ -98,8 +131,9 @@ export function backofficeTurnReducer (state, action){
             }
 
             function validData(str) {
-                var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/); 
-                return !!pattern.test(str);
+                var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);                var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/); 
+                var pattern2 = new RegExp(/NONACTIVE/); 
+                return !!(pattern.test(str) || pattern2.test(str));
               }
 
             if(!validData(turnDataString)){
@@ -149,7 +183,6 @@ export function backofficeTurnReducer (state, action){
             console.log(newEditableChair.status)
             return {...state, editableChair : newEditableChair}
         }
-
  
 
         default :{

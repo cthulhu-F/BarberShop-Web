@@ -7101,6 +7101,8 @@ var resetGlobalSaving = function resetGlobalSaving() {
   }
 };
 
+var findDayStatus = function findDayStatus(position, allChairsSchedule, editableChair) {};
+
 var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
   return {
     setEditableChair: function setEditableChair(id) {
@@ -7136,16 +7138,6 @@ var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
       });
     },
     setActiveDay: function setActiveDay(id) {
-      var allDays = document.querySelectorAll('.day-item');
-      allDays.forEach(function (day) {
-        if (day.id == id) {
-          day.classList.add("bg-dark", "text-white");
-        } else {
-          try {
-            day.classList.remove("bg-dark", "text-white");
-          } catch (error) {}
-        }
-      });
       resetHourDefault();
       resetnameDefault();
       resetTurnDataString();
@@ -7156,6 +7148,10 @@ var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
       });
       dispatch({
         type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT
+      });
+      dispatch({
+        type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.SET_DAYS_STYLES,
+        payload: id
       });
     },
     setStartHour: function setStartHour(startHour) {
@@ -8432,7 +8428,7 @@ var ModalChairsConfig = function ModalChairsConfig(_ref) {
 
   function setLabelMessage() {
     if (editableChair.status == "NONACTIVE") {
-      return "¿Desea habilitar esta silla?";
+      return "Silla inhabilitada ¿Desea habilitar esta silla?";
     } else {
       return "¿Desea inhabilitar esta silla?";
     }
@@ -8586,9 +8582,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _componentsTurn_chair__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../componentsTurn/chair */ "./resources/js/components/componentsTurn/chair.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _componentsTurn_chair__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../componentsTurn/chair */ "./resources/js/components/componentsTurn/chair.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -8603,7 +8607,8 @@ var MotiveSetter = function MotiveSetter(_ref) {
       addCount = _ref.addCount,
       restCount = _ref.restCount,
       setStartHour = _ref.setStartHour,
-      setEndHour = _ref.setEndHour;
+      setEndHour = _ref.setEndHour,
+      allChairsSchedule = _ref.allChairsSchedule;
 
   function myCopyFunction() {
     var copyText = document.getElementById("turn-data-string");
@@ -8618,9 +8623,6 @@ var MotiveSetter = function MotiveSetter(_ref) {
   }
 
   function handleClickEvent(evt) {
-    document.querySelectorAll(".switch").forEach(function (theSwitch) {
-      theSwitch.addEventListener("click", handleClickEvent, false);
-    });
     var el = evt.target;
 
     if (el.getAttribute("aria-checked") == "true") {
@@ -8630,30 +8632,85 @@ var MotiveSetter = function MotiveSetter(_ref) {
     }
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+  function setLabelMessage(daySchedule) {
+    if (daySchedule == "NONACTIVE") {
+      return " Día inhabilitado ¿Desea habilitar este día?";
+    } else {
+      return "¿Desea inhabilitar este día?";
+    }
+  }
+
+  function checkDayStatus() {
+    var switcher = document.getElementById("desactivate-day");
+
+    if (editableDay[1] == "NONACTIVE") {
+      switcher.checked = true;
+      switcher.setAttribute("aria-checked", "true");
+    } else {
+      try {
+        switcher.checked = false;
+        switcher.setAttribute("aria-checked", "false");
+      } catch (error) {}
+    }
+  }
+
+  function resolveAfterRender() {
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        checkDayStatus();
+      }, 0);
+    });
+  }
+
+  function asyncCheckDayStatus() {
+    return _asyncCheckDayStatus.apply(this, arguments);
+  }
+
+  function _asyncCheckDayStatus() {
+    _asyncCheckDayStatus = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return resolveAfterRender();
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _asyncCheckDayStatus.apply(this, arguments);
+  }
+
+  asyncCheckDayStatus(); // checkDayStatus();
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "row shadow-sm p-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "col-xl-12 mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
           className: "fw-bold fs-5 font-h1",
           children: "Agrega los motivos de tus turnos"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "col-xl-3 mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "input-group ",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
             className: "input-group-text bg-black text-white border border-black fs-9 rounded",
             id: "basic-addon1",
             children: "ID: ".concat(editableChair.id)
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "col-xl-9 mb-3",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "input-group",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
             type: "text",
             className: "form-control fs-8",
             placeholder: editableChair.name,
@@ -8661,7 +8718,7 @@ var MotiveSetter = function MotiveSetter(_ref) {
             "aria-describedby": "basic-addon2",
             disabled: true,
             id: "editable-chair-name"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             className: "input-group-text fs-8 bg-black text-white border-black",
             id: "basic-addon2",
             onClick: function onClick() {
@@ -8671,66 +8728,66 @@ var MotiveSetter = function MotiveSetter(_ref) {
                 document.getElementById('editable-chair-name').disabled = true;
               }
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
               "class": "bi bi-pencil"
             })
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "col-xl-12",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "row g-3",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-12 mb-2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
               className: "form-text",
               children: "Dias disponibles "
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-12",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold bg-dark text-white day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
               id: "0",
               children: "LU"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
               id: "1",
               children: "MA"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
               id: "2",
               children: "MI"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
               id: "3",
               children: "JU"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
               id: "4",
               children: "VI"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
               id: "5",
               children: "SA"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
@@ -8738,21 +8795,21 @@ var MotiveSetter = function MotiveSetter(_ref) {
               id: "6",
               children: "DO"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-12 mb-2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
               className: "form-text",
               children: "Horarios disponible"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-12",
             id: "timeFin-container",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                 className: "me-2 p-2",
                 children: "Hora de inicio"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 type: "text",
                 className: "form-control w-50",
                 id: "timeFin",
@@ -8765,14 +8822,15 @@ var MotiveSetter = function MotiveSetter(_ref) {
                 onChange: function onChange(e) {
                   return setStartHour(e.target.value);
                 },
-                placeholder: editableDay[1].split('/')[0]
+                placeholder: editableDay[1].split('/')[0] == "NONACTIVE" ? "--:--" : editableDay[1].split('/')[0],
+                disabled: editableDay[1] == "NONACTIVE"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                 className: "me-2 p-2",
                 children: "Hora de Fin"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 type: "text",
                 className: "form-control w-50",
                 id: "timeFin",
@@ -8785,54 +8843,57 @@ var MotiveSetter = function MotiveSetter(_ref) {
                 onChange: function onChange(e) {
                   return setEndHour(e.target.value);
                 },
-                placeholder: editableDay[1].split('/')[1]
+                placeholder: editableDay[1].split('/')[1] == null ? "--:--" : editableDay[1].split('/')[1],
+                disabled: editableDay[1] == "NONACTIVE"
               })]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-12 mb-2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
               className: "form-text",
               children: "\xBFCuantos turnos por dia deseas dar?"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-12 d-flex",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-white border rounded-0 rounded-start fs-6 px-1 px-xl-3 fw-bold ",
               style: {
                 zIndex: 2
               },
+              disabled: editableDay[1] == "NONACTIVE",
               onClick: function onClick() {
                 return restCount();
               },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                 className: "bi bi-dash"
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               className: "form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-6",
-              placeholder: turnsPerday,
+              placeholder: editableDay[1] == "NONACTIVE" ? "-" : turnsPerday,
               type: "number",
               disabled: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-white border rounded-0 rounded-end fs-6 px-1 px-xl-3 fw-bold",
               style: {
                 zIndex: 2
               },
+              disabled: editableDay[1] == "NONACTIVE",
               onClick: function onClick() {
                 return addCount();
               },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                 className: "bi bi-plus"
               })
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-12 d-flex",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "form-check form-switch",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
                 className: "form-check-label",
                 "for": "flexSwitchCheckDefault",
                 children: "\xBFQuieres aplicar estos cambios para todos los dias?"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 className: "form-check-input",
                 type: "checkbox",
                 role: "switch",
@@ -8843,38 +8904,57 @@ var MotiveSetter = function MotiveSetter(_ref) {
                 }
               })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "col-12 d-flex",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "form-check form-switch",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+                className: "form-check-label",
+                "for": "desactivate-day",
+                children: setLabelMessage(editableDay[1])
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                className: "form-check-input",
+                type: "checkbox",
+                role: "switch",
+                id: "desactivate-day",
+                onClick: function onClick(e) {
+                  handleClickEvent(e);
+                }
+              })]
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-12 d-flex justify-content-between",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "input-group w-50",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 type: "text",
                 className: "form-control",
                 placeholder: editableDay[1],
+                disabled: editableDay[1] == "NONACTIVE",
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2",
                 id: "turn-data-string"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                 className: "input-group-text p-0",
                 id: "basic-addon2",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                   className: "input-group-text btn btn-black",
                   onClick: function onClick() {
                     return myCopyFunction();
                   },
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                     className: "bi bi-files"
                   })
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: editableChair.status == "NONACTIVE" ? "btn btn-danger" : "btn btn-orangeWeb",
               onClick: function onClick() {
                 return saveChairSchedule(document.getElementById('flexSwitchCheckDefault').getAttribute("aria-checked"), document.getElementById('editable-chair-name').value);
               },
               children: "Guardar"
             })]
-          }), editableChair.status == "NONACTIVE" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          }), editableChair.status == "NONACTIVE" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             style: {
               backgroundColor: "red",
               color: "#fff",
@@ -9171,7 +9251,8 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
               addCount: addCount,
               restCount: restCount,
               setStartHour: setStartHour,
-              setEndHour: setEndHour
+              setEndHour: setEndHour,
+              allChairsSchedule: allChairsSchedule
             })
           })]
         })
@@ -12510,7 +12591,7 @@ var ITEM_TURNS = {
   configDay: [{
     id: 1,
     days: {
-      mo: "10:00/12:00/5",
+      mo: "NONACTIVE",
       tu: "12:00/13:00/4",
       we: "10:40/11:40/1",
       th: "10:05/12:00/3",
@@ -12820,6 +12901,7 @@ __webpack_require__.r(__webpack_exports__);
 var BACKOFFICE_TURN_TYPES = {
   SET_EDITABLE_CHAIR: "SET_EDITABLE_CHAIR",
   SET_EDITABLE_DAY: "SET_EDITABLE_DAY",
+  SET_DAYS_STYLES: "SET_DAYS_STYLES",
   LOAD_DATA: "LOAD_DATA",
   ADD_COUNT: "ADD_COUNT",
   REST_COUNT: "REST_COUNT",
@@ -12951,6 +13033,38 @@ function backofficeTurnReducer(state, action) {
         return state;
       }
 
+    case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SET_DAYS_STYLES:
+      {
+        var allDays = document.querySelectorAll('.day-item');
+        var dayStatus;
+        var daysString = ["mo", "tu", "we", "th", "fr", "sa", "su"];
+        var currentSchedule = state.allChairsSchedule.find(function (schedule) {
+          return schedule.id == state.editableChair.configDay_id;
+        });
+
+        if (currentSchedule.days[daysString[action.payload]] == "NONACTIVE") {
+          dayStatus = "NONACTIVE";
+        } else {
+          dayStatus = "";
+        }
+
+        allDays.forEach(function (day) {
+          console.log(parseInt(day.id));
+          console.log(parseInt(action.payload));
+
+          if (parseInt(day.id) == parseInt(action.payload)) {
+            if (dayStatus == "NONACTIVE") {
+              day.classList.add("bg-danger", "text-white");
+            } else day.classList.add("bg-dark", "text-white");
+          } else {
+            try {
+              day.classList.remove("bg-dark", "text-white", "bg-danger");
+            } catch (error) {}
+          }
+        });
+        return state;
+      }
+
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.ADD_COUNT:
       {
         var newEditableDay = state.editableDay[1].split("/");
@@ -13032,7 +13146,9 @@ function backofficeTurnReducer(state, action) {
       {
         var validData = function validData(str) {
           var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);
-          return !!pattern.test(str);
+          var pattern = new RegExp(/^[0-2][0-3]:[0-5][0-9][/][0-2][0-3]:[0-5][0-9][/][0-9]{1,2}$/);
+          var pattern2 = new RegExp(/NONACTIVE/);
+          return !!(pattern.test(str) || pattern2.test(str));
         };
 
         var turnDataString = document.getElementById("turn-data-string");

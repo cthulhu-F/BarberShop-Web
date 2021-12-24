@@ -3,7 +3,7 @@ import Chair from "../../componentsTurn/chair";
 
 
 const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
-  saveChairSchedule, addCount, restCount, setStartHour, setEndHour}) =>{
+  saveChairSchedule, addCount, restCount, setStartHour, setEndHour, allChairsSchedule}) =>{
 
     function myCopyFunction() {
       var copyText = document.getElementById("turn-data-string");
@@ -19,10 +19,6 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
     
     function handleClickEvent(evt) {
-      document.querySelectorAll(".switch").forEach(function(theSwitch) {
-        theSwitch.addEventListener("click", handleClickEvent, false);
-      });
-
       let el = evt.target;
 
       if (el.getAttribute("aria-checked") == "true") {
@@ -31,6 +27,42 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
           el.setAttribute("aria-checked", "true");
       }
     }
+
+    function setLabelMessage(daySchedule)  {
+      if(daySchedule == "NONACTIVE"){
+          return " Día inhabilitado ¿Desea habilitar este día?"
+      } else{
+          return  "¿Desea inhabilitar este día?" 
+      } 
+  }
+
+
+  function checkDayStatus(){
+      const switcher = document.getElementById("desactivate-day");
+      if(editableDay[1] == "NONACTIVE"){
+          switcher.checked = true;
+          switcher.setAttribute("aria-checked", "true")
+      }
+      else{ try {
+          switcher.checked = false;
+          switcher.setAttribute("aria-checked", "false")
+      }catch(error){}
+      }
+  }
+
+  function resolveAfterRender() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        checkDayStatus();
+      }, 0);
+    });
+  }
+
+  async function asyncCheckDayStatus() {
+    await resolveAfterRender();
+  }
+  asyncCheckDayStatus();
+  // checkDayStatus();
 
     return(
         <div>
@@ -91,7 +123,8 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                             onFocus={(e) => e.currentTarget.type = "time"}
                             onBlur={(e) => e.currentTarget.type = "text"}
                             onChange={(e) =>setStartHour(e.target.value)}
-                            placeholder={editableDay[1].split('/')[0]}/>
+                            placeholder={editableDay[1].split('/')[0] == "NONACTIVE" ? "--:--" : editableDay[1].split('/')[0]}
+                            disabled ={editableDay[1]=="NONACTIVE"}/>
                         </div>
                         
                         <div className="d-flex justify-content-between mb-1">
@@ -100,7 +133,8 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                             onFocus={(e) => e.currentTarget.type = "time"}
                             onBlur={(e) => e.currentTarget.type = "text"}
                             onChange={(e) =>setEndHour(e.target.value)}
-                            placeholder={editableDay[1].split('/')[1]}/></div>
+                            placeholder={editableDay[1].split('/')[1] == null ? "--:--" : editableDay[1].split('/')[1]}
+                            disabled ={editableDay[1]=="NONACTIVE"}/></div>
                         </div>
 
                       <div className="col-12 mb-2">
@@ -108,9 +142,9 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       </div>
 
                       <div className="col-12 d-flex">
-                        <button className="btn btn-white border rounded-0 rounded-start fs-6 px-1 px-xl-3 fw-bold " style={{zIndex: 2}} onClick={()=>restCount()}><i className="bi bi-dash"></i></button>
-                      <input className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-6" placeholder={turnsPerday} type="number" disabled />
-                      <button className="btn btn-white border rounded-0 rounded-end fs-6 px-1 px-xl-3 fw-bold" style={{zIndex: 2}} onClick={()=>addCount()}><i className="bi bi-plus"></i></button>
+                        <button className="btn btn-white border rounded-0 rounded-start fs-6 px-1 px-xl-3 fw-bold " style={{zIndex: 2}} disabled={editableDay[1]=="NONACTIVE"} onClick={()=>restCount()}><i className="bi bi-dash"></i></button>
+                      <input className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-6" placeholder={editableDay[1]=="NONACTIVE" ? "-":turnsPerday} type="number" disabled />
+                      <button className="btn btn-white border rounded-0 rounded-end fs-6 px-1 px-xl-3 fw-bold" style={{zIndex: 2}} disabled={editableDay[1]=="NONACTIVE"} onClick={()=>addCount()}><i className="bi bi-plus"></i></button>
                       </div>
 
                       <div className="col-12 d-flex">
@@ -118,11 +152,19 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                           <label className="form-check-label" for="flexSwitchCheckDefault">¿Quieres aplicar estos cambios para todos los dias?</label>
                           <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" aria-checked={false} onClick={(e)=>{handleClickEvent(e)}}/>
                         </div>
+                        
+                      </div>
+
+                      <div className="col-12 d-flex">
+                        <div className="form-check form-switch">
+                            <label className="form-check-label" for="desactivate-day">{setLabelMessage(editableDay[1])}</label>
+                            <input className="form-check-input" type="checkbox" role="switch" id="desactivate-day" onClick={(e)=>{handleClickEvent(e)}}/>
+                          </div>
                       </div>
 
                       <div className="col-12 d-flex justify-content-between">
                         <div className="input-group w-50">
-                          <input type="text" className="form-control" placeholder={editableDay[1]} aria-label="Recipient's username" aria-describedby="basic-addon2" id="turn-data-string"/>
+                          <input type="text" className="form-control" placeholder={editableDay[1]} disabled={editableDay[1] =="NONACTIVE"} aria-label="Recipient's username" aria-describedby="basic-addon2" id="turn-data-string"/>
                         <span className="input-group-text p-0" id="basic-addon2">
                           <button className="input-group-text btn btn-black" onClick={()=>myCopyFunction()}>
                             <i className="bi bi-files"></i>

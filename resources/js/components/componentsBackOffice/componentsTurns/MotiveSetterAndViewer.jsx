@@ -148,7 +148,8 @@ const MotiveSetterAndViewer= ()=>{
                <MotiveSetter editableChair={editableChair} turnsPerday={turnsPerday}
                setActiveDay={setActiveDay} editableDay={editableDay}
                saveChairSchedule={saveChairSchedule} addCount={addCount}
-               restCount= {restCount} setStartHour={setStartHour} setEndHour={setEndHour} />
+               restCount= {restCount} setStartHour={setStartHour} setEndHour={setEndHour}
+               allChairsSchedule={allChairsSchedule} />
               </div>
 
             </div>

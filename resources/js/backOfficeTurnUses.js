@@ -34,6 +34,9 @@ const resetGlobalSaving = () => {
     }
 }
 
+const findDayStatus = (position,allChairsSchedule, editableChair) => {
+
+  }
 
 const backofficeTurnMapDispatch = (dispatch)=>{
     return {
@@ -63,24 +66,17 @@ const backofficeTurnMapDispatch = (dispatch)=>{
         },
 
         setActiveDay : (id)=>{
-            let allDays = document.querySelectorAll('.day-item');
-        
-            allDays.forEach(day =>{
-                if (day.id ==id ){
-                    day.classList.add("bg-dark","text-white");
-                } else {
-                    try{
-                        day.classList.remove("bg-dark","text-white");
-                    }catch(error){}
-                }
-            })
+         
             resetHourDefault();
             resetnameDefault();
             resetTurnDataString();
             resetGlobalSaving();
             dispatch({ type: BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY, payload:id});
             dispatch({ type: BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT});
+            dispatch({ type: BACKOFFICE_TURN_TYPES.SET_DAYS_STYLES,  payload:id});
+
         },
+
 
 
         setStartHour :(startHour) =>{
@@ -108,6 +104,7 @@ const backofficeTurnMapDispatch = (dispatch)=>{
             dispatch ({type: BACKOFFICE_TURN_TYPES.SWITCH_CHAIR_STATUS, payload: payloadValue})
             dispatch({ type: BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME, newName: newChairName});
         },
+
     }
 }
 
