@@ -58,7 +58,7 @@ export const ITEM_TURNS = {
       su: "10:00/12:00/5",
      },
     update_at: "14/12/21",
-    status: "INACTIVE",
+    status: "NONACTIVE",
   },
   {
     id: 3,
@@ -97,7 +97,7 @@ export const ITEM_TURNS = {
       name_client: "Jose",
       email_client: "jose@gmail.com", 
       phone_client: "123456789", 
-      date: "14/12/2021",
+      date: "14/01/2022",
       time: "08:00",
       update_at: "14/12/2021", 
       status: "ACTIVE"
@@ -108,7 +108,7 @@ export const ITEM_TURNS = {
       name_client: "Maria",
       email_client: "maria@gmail.com", 
       phone_client: "111222333", 
-      date: "15/12/2021",
+      date: "18/01/2022",
       time: "09:00",
       update_at: "14/12/2021", 
       status: "ACTIVE"
@@ -119,7 +119,7 @@ export const ITEM_TURNS = {
       name_client: "Florencia",
       email_client: "florencia@gmail.com", 
       phone_client: "0909097867", 
-      date: "14/12/2021",
+      date: "14/01/2022",
       time: "10:00",
       update_at: "14/12/2021", 
       status: "ACTIVE"
@@ -130,7 +130,7 @@ export const ITEM_TURNS = {
       name_client: "martiin",
       email_client: "martiin@gmail.com", 
       phone_client: "45237658", 
-      date: "24/12/2021",
+      date: "26/12/2021",
       time: "11:00",
       update_at: "14/12/2021", 
       status: "ACTIVE"
@@ -141,7 +141,18 @@ export const ITEM_TURNS = {
       name_client: "santiago",
       email_client: "santiago@gmail.com", 
       phone_client: "123543092486'", 
-      date: "24/12/2021",
+      date: "26/12/2021",
+      time: "12:00",
+      update_at: "24/12/2021", 
+      status: "ACTIVE"
+    },
+    {
+      id: 6,
+      name: "Silla 2",
+      name_client: "ruperto",
+      email_client: "ruperto@gmail.com", 
+      phone_client: "123578999'", 
+      date: "26/12/2021",
       time: "12:00",
       update_at: "24/12/2021", 
       status: "ACTIVE"

@@ -9,11 +9,22 @@ import TurnDashboardItem from "./TurnDashboardItem";
 
 const TurnDashboard = ({}) =>{
 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var yyyymax = parseInt(yyyy)+1;
+    var minDate = yyyy + '-' + mm + '-' + dd;
+    var maxDte = yyyymax + '-' + mm + '-' + dd;
+    var pHolder = dd +'/' + mm + '/' + yyyy
+
+
     const [ backofficeTurnDashboardState, dispatch] = useReducer(backofficeTurnDashboardReducer,FilteredTurns);
-    const {allShcheduled, todayScheduled,tomorrowScheduled} = backofficeTurnDashboardState;
+    const {allShcheduled, todayScheduled,tomorrowScheduled, dashboardTurns} = backofficeTurnDashboardState;
 
-    // const getTodaySchedule = backofficeTurnDashboardMapDispatch(dispatch).getTodaySchedule;
-
+    const getTodaySchedule = backofficeTurnDashboardMapDispatch(dispatch).getTodaySchedule;
+    const getTomorrowSchedule = backofficeTurnDashboardMapDispatch(dispatch).getTomorrowSchedule;
+    const filterDashboard = backofficeTurnDashboardMapDispatch(dispatch).filterDashboard;
 
     const [todayTurns, setTurns] = useState(todayScheduled)
 
@@ -26,11 +37,19 @@ const TurnDashboard = ({}) =>{
     }, [todayScheduled])
 
 
+    const [visibility, setDisplayed] = useState('hidden');
+    const DateStyle = {
+        visibility: visibility
+    }
+
+    let [todayFlag, setSwitch] = useState(true)
+
     const setActiveHeader =(id)=>{
         console.log(id)
         const allButtons =document.querySelectorAll(".schedule-header-item");
         allButtons.forEach(button =>{
             try{
+                button.classList.remove("active");
                 button.classList.remove("btn-danger");
                 button.classList.add("btn-outline-danger");
             }catch(error){}
@@ -38,11 +57,24 @@ const TurnDashboard = ({}) =>{
             if (button.id == id){
                 button.classList.remove("btn-outline-danger");
                 button.classList.add("btn-danger");
+                button.classList.add("active");
             }
-
+        
         })
+
+        if (document.getElementById('get-tomorrow-shcedule').classList.contains('active')){
+            today
+            setDisplayed('inherit');
+            setSwitch(false);
+        }else{
+            setDisplayed('hidden');
+            setSwitch(true);
+        }
+
     }
 
+
+    let existentChairs =[];
     
     return(
         <div>
@@ -70,12 +102,12 @@ const TurnDashboard = ({}) =>{
                     <div className="row g-3">
                         <div className="col-12 col-xl-3">
                             <button className="btn btn-danger w-100 schedule-header-item" id="get-today-shcedule"
-                            onClick={(e)=>setActiveHeader("get-today-shcedule")}>
+                            onClick={(e)=>{setActiveHeader("get-today-shcedule"); getTodaySchedule()}}>
                                 <span className=" font-h1 fw-bold fs-3" >HOY</span></button>
                         </div>
                         <div className="col-12 col-xl-3">
                             <button className="btn btn-outline-danger w-100 schedule-header-item" id="get-tomorrow-shcedule"
-                            onClick={(e)=>setActiveHeader("get-tomorrow-shcedule")}><span
+                            onClick={(e)=>{setActiveHeader("get-tomorrow-shcedule"); getTomorrowSchedule()}}><span
                                 className=" font-h1 fw-bold fs-3 "  >PROXIMAMENTE</span></button>
                         </div>
                     </div>
@@ -84,10 +116,11 @@ const TurnDashboard = ({}) =>{
                 <div className="col-12">
                     <div className="row g-1 my-4">
 
-                        {todayTurns.map((scheduledTurn)=>
+                        { 
+                            dashboardTurns.map((scheduledTurn)=>
                             <TurnDashboardItem key={scheduledTurn.id} scheduledTurn={scheduledTurn}/>
-                        )}
-                        
+                            )
+                        }
 
                     </div>
                     
@@ -96,30 +129,57 @@ const TurnDashboard = ({}) =>{
                 <div className="col-12">
                     <div className="row rounded p-2 mb-3">
 
-                        <div className="col-12 col-xl-2 p-0 mx-xl-2">
-                            <input className="form-control p-2" id="inputDateIni" type="date" name="trip-start" value="2021-11-26"
-                                min="2018-01-01" max="2022-12-01"/>
-                            <label for="inputDateIni" className="form-label text-muted fs-9">Fecha de inicio</label>
-                        </div>
-
-                        <div className="col-12 col-xl-2 p-0 mx-xl-2">
-                            <input className="form-control p-2" id="inputDateIni" type="date" name="trip-start" value="2021-11-26"
-                                min="2018-01-01" max="2022-12-01"/>
-                            <label for="inputDateIni" className="form-label text-muted fs-9">Fecha de Fin</label>
-                        </div>
-
                         <div className="col-12 col-xl-3 p-0 mx-xl-2">
                             <div className="input-group m-0">
-                                <select className="form-select p-2" id="inputGroupSelect02">
-                                    <option selected>Seleccione el motivo de su turno...</option>
-                                    <option value="1">Motivo 1</option>
-                                    <option value="2">Motivo 2</option>
-                                    <option value="3">Motivo 3</option>
+                                <select className="form-select p-2" id="inputChairSelect" onChange={(e)=>filterDashboard(document.getElementById("inputDateIni").value,document.getElementById("inputDateEnd").value, e.target.value, todayFlag)}>
+                                    <option selected>Ver silla</option>
+
+                                    { todayFlag ? 
+                                        todayScheduled.map((scheduledTurn)=>{
+                                        if (!existentChairs.includes(scheduledTurn.name)){
+                                            existentChairs.push(scheduledTurn.name)
+                                        }})
+                                        :
+                                        tomorrowScheduled.map((scheduledTurn)=>{
+                                            if (!existentChairs.includes(scheduledTurn.name)){
+                                                existentChairs.push(scheduledTurn.name)
+                                            }})
+
+                                    }                           
+                                    {
+                                        existentChairs.map((chairName)=>
+                                        <option value={chairName}>{chairName} </option>
+                                        )
+                                    }
+                                    
+
                                 </select>
-                                <label className="input-group-text btn btn-black border-black" for="inputGroupSelect02"><i
+                                <label className="input-group-text btn btn-black border-black" for="inputChairSelect"><i
                                     className="bi bi-arrow-down"></i></label>
                             </div>
                         </div>
+
+                        <div className="col-12 col-xl-2 p-0 mx-xl-2" style={DateStyle}>
+                            <input className="form-control p-2" id="inputDateIni" type="date" name="trip-start"
+                                onChange={(e)=>filterDashboard(e.target.value, document.getElementById("inputDateEnd").value, document.getElementById("inputChairSelect").value)}
+                                // onFocus={(e) => e.currentTarget.type = "date"}
+                                // onBlur={(e) => e.currentTarget.type = "text"}
+                                // placeholder={pHolder}
+                                min={minDate} max={maxDte} />
+                            <label for="inputDateIni" className="form-label text-muted fs-9">Fecha de inicio</label>
+                        </div>
+
+                        <div className="col-12 col-xl-2 p-0 mx-xl-2" style={DateStyle}>
+                            <input className="form-control p-2" id="inputDateEnd" type="date" name="trip-start" 
+                                onChange={(e)=>filterDashboard(document.getElementById("inputDateIni").value, e.target.value, document.getElementById("inputChairSelect").value)}
+                                // onFocus={(e) => e.currentTarget.type = "date"}
+                                // onBlur={(e) => e.currentTarget.type = "text"}
+                                // placeholder={pHolder}
+                                min={minDate} max={maxDte} />
+                            <label for="inputDateEnd" className="form-label text-muted fs-9">Fecha de Fin</label>
+                        </div>
+
+                        
                     </div>
                 </div>
 

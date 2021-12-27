@@ -58,6 +58,7 @@ const ModalTurn = () => {
   var yyyymax = parseInt(yyyy)+1;
   var minDate = yyyy + '-' + mm + '-' + dd;
   var maxDte = yyyymax + '-' + mm + '-' + dd;
+  var pHolder = dd +'/' + mm + '/' + yyyy
 
 
   const advancaTab = () =>{
@@ -276,7 +277,10 @@ const ModalTurn = () => {
                 <div className="col-12">
                   <div className="d-flex">
                     <input className="form-control" type="date" name="trip-start"
-                      min = {minDate} max={maxDte} value={minDate}
+                      // onFocus={(e) => e.currentTarget.type = "date"}
+                      // onBlur={(e) => e.currentTarget.type = "text"}
+                      // placeholder={pHolder}
+                      min = {minDate} max={maxDte} 
                       onChange={(event)=>getSchedule(activeChairId,event.target.value)}
                       id="calendar-input"
                       style={{margin:"10px 0px"}}/>
