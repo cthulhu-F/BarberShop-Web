@@ -96,20 +96,22 @@ export const ITEM_TURNS = {
       name: "Silla 1",
       name_client: "Jose",
       email_client: "jose@gmail.com", 
-      phone_client: "123456789", 
+      phone_client: "+54 3547 506790", 
       date: "14/01/2022",
       time: "08:00",
+      turn_duration: "00:15",
       update_at: "14/12/2021", 
       status: "ACTIVE"
     },
     {
       id: 2,
       name: "Silla 1",
-      name_client: "Maria",
+      name_client: "Axel",
       email_client: "maria@gmail.com", 
-      phone_client: "111222333", 
+      phone_client: "+54 9 362 459-4434", 
       date: "18/01/2022",
       time: "09:00",
+      turn_duration: "00:30",
       update_at: "14/12/2021", 
       status: "ACTIVE"
     },
@@ -121,8 +123,9 @@ export const ITEM_TURNS = {
       phone_client: "0909097867", 
       date: "14/01/2022",
       time: "10:00",
+      turn_duration: "01:15",
       update_at: "14/12/2021", 
-      status: "ACTIVE"
+      status: "NONACTIVE"
     },
     {
       id: 4,
@@ -130,10 +133,11 @@ export const ITEM_TURNS = {
       name_client: "martiin",
       email_client: "martiin@gmail.com", 
       phone_client: "45237658", 
-      date: "26/12/2021",
+      date: "27/12/2021",
       time: "11:00",
+      turn_duration: "01:00",
       update_at: "14/12/2021", 
-      status: "ACTIVE"
+      status: "NONACTIVE"
     },
     {
       id: 5,
@@ -141,10 +145,11 @@ export const ITEM_TURNS = {
       name_client: "santiago",
       email_client: "santiago@gmail.com", 
       phone_client: "123543092486'", 
-      date: "26/12/2021",
+      date: "27/12/2021",
       time: "12:00",
+      turn_duration: "00:45",
       update_at: "24/12/2021", 
-      status: "ACTIVE"
+      status: "CONFIRMED"
     },
     {
       id: 6,
@@ -152,8 +157,9 @@ export const ITEM_TURNS = {
       name_client: "ruperto",
       email_client: "ruperto@gmail.com", 
       phone_client: "123578999'", 
-      date: "26/12/2021",
+      date: "27/12/2021",
       time: "12:00",
+      turn_duration: "00:15",
       update_at: "24/12/2021", 
       status: "ACTIVE"
     }

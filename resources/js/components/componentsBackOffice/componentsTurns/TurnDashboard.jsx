@@ -6,6 +6,9 @@ import { backofficeTurnDashboardReducer, FilteredTurns } from "../../../../../sr
 import backofficeTurnDashboardMapDispatch from "../../../backofficeTurnDashboardUses";
 
 import TurnDashboardItem from "./TurnDashboardItem";
+import Pagination from "./Pagination";
+import TurnDashboardListItem from "./TurnDashboardListItem";
+import ModalTurn from "../../componentsTurn/ModalTurn";
 
 const TurnDashboard = ({}) =>{
 
@@ -25,6 +28,13 @@ const TurnDashboard = ({}) =>{
     const getTodaySchedule = backofficeTurnDashboardMapDispatch(dispatch).getTodaySchedule;
     const getTomorrowSchedule = backofficeTurnDashboardMapDispatch(dispatch).getTomorrowSchedule;
     const filterDashboard = backofficeTurnDashboardMapDispatch(dispatch).filterDashboard;
+
+    const editTurnSchedule = backofficeTurnDashboardMapDispatch(dispatch).editTurnSchedule;
+
+    const orderByDate = backofficeTurnDashboardMapDispatch(dispatch).orderByDate;
+
+    const setTurnStatus = backofficeTurnDashboardMapDispatch(dispatch).setTurnStatus;
+
 
     const [todayTurns, setTurns] = useState(todayScheduled)
 
@@ -75,6 +85,33 @@ const TurnDashboard = ({}) =>{
 
 
     let existentChairs =[];
+
+    /* PAGINATION*/
+    
+    const [pagintaionTurns, setTurnsPagination] = useState(allShcheduled)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [turnsPerPage] = useState(5)
+    
+    useEffect(() => {
+        const fetchTurns = async () => {
+        const res = await allShcheduled;
+        setTurnsPagination(res)
+        }
+        fetchTurns();      
+    }, [allShcheduled])
+
+    const indexOfLastTurn = currentPage * turnsPerPage;
+    const indexOfFirstTurn = indexOfLastTurn - turnsPerPage;
+    const currentTurns = pagintaionTurns.slice(indexOfFirstTurn, indexOfLastTurn)
+    const howManyPages = Math.ceil(pagintaionTurns.length/turnsPerPage)
+
+        /* PAGINATION END*/
+
+
+    /*ORDER TURNS BY DATE */
+    
+    /*ORDER TURNS BY DATE */
+
     
     return(
         <div>
@@ -99,7 +136,7 @@ const TurnDashboard = ({}) =>{
                 </div>
 
                 <div className="col-12">
-                    <div className="row g-3">
+                    <div className="row g-3 rounded p-2 mb-3" style={{display:"flex", alignItems: "flex-end"}}>
                         <div className="col-12 col-xl-3">
                             <button className="btn btn-danger w-100 schedule-header-item" id="get-today-shcedule"
                             onClick={(e)=>{setActiveHeader("get-today-shcedule"); getTodaySchedule()}}>
@@ -110,6 +147,16 @@ const TurnDashboard = ({}) =>{
                             onClick={(e)=>{setActiveHeader("get-tomorrow-shcedule"); getTomorrowSchedule()}}><span
                                 className=" font-h1 fw-bold fs-3 "  >PROXIMAMENTE</span></button>
                         </div>
+
+                        <div className="col-12 col-xl-4"></div>
+                        <div className="col-12 col-xl-2 my-2 p-0">
+                            <div className="text-center">
+                                <button className="btn btn-black w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Agregar Turno
+                                </button>
+                            </div>
+                        </div>
+                        <ModalTurn/>
                     </div>
                 </div>
 
@@ -118,7 +165,7 @@ const TurnDashboard = ({}) =>{
 
                         { 
                             dashboardTurns.map((scheduledTurn)=>
-                            <TurnDashboardItem key={scheduledTurn.id} scheduledTurn={scheduledTurn}/>
+                            <TurnDashboardItem key={scheduledTurn.id} scheduledTurn={scheduledTurn} setTurnStatus={setTurnStatus}/>
                             )
                         }
 
@@ -193,61 +240,42 @@ const TurnDashboard = ({}) =>{
                                 <th scope="col">Datos del cliente</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Hora</th>
-                                <th scope="col">Fecha de salida</th>
+                                <th scope="col">Hora de salida</th>
                                 <th scope="col"></th>
+                                <th scope="col" className="row">
+                                    {/* <td className="col-3">
+                                        <input className="form-check-input" type="checkbox" role="switch" key="ACTIVE" id="filter-by-active"/>
+                                        <label className="form-check-label text-secondary" for="filter-by-active"><i class="bi bi-dash-circle-fill"></i></label>
+                                    </td>
+                                    <td className="col-3">
+                                        <input className="form-check-input" type="checkbox" role="switch" key="NONACTIVE" id="filter-by-nonactive"/>
+                                        <label className="form-check-label text-danger" for="filter-by-nonactive"><i class="bi bi-x-circle-fill"></i></label>
+                                    </td>
+                                    <td className="col-3"> 
+                                        <input className="form-check-input" type="checkbox" role="switch" key="CONFIRMED" id="completed"/>
+                                        <label className="form-check-label text-success" for="filter-by-completed"><i className="bi bi-check-circle-fill"></i></label>
+                                    </td> */}
+                                </th>
+                                
                                 <th scope="col"></th>
-                                <th scope="col"></th>
+                                
                                 </tr>
                             </thead>
+
+                            
                             <tbody>
-                                <tr>
-                                <th scope="row">1</th>
-                                <td>
-                                    <div style={{ overflowWrap: "break-word", width: "150px" }}> Motivo 1 </div>
-                                </td>
-                                <td>
-                                    <button className="btn btn-black" data-bs-toggle="modal" data-bs-target="#modalDataClient">Desplegar</button>
-                                </td>
-                                <td>00/00/0000</td>
-                                <td>00:00</td>
-                                <td>00/00/0000</td>
-                                <td>
-                                    <div className="d-flex justify-content-center">
-                                    <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                                        data-bs-target="#modalAddProduct"><i className="bi bi-pencil fs-7"></i></button>
-                                    <button className="btn btn-outline-danger  p-1 me-1"><i className="bi bi-gear"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="d-flex justify-content-center">
-                                        <input className="form-check-input p-2 m-auto" type="checkbox" id="inlineCheckbox1" value="option1"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className="text-success fs-3 d-flex justify-content-center" title="ACTIVO">
-                                    <i className="bi bi-check-circle-fill"></i>
-                                    </div>
-                                </td>
-                                </tr>
+                                {currentTurns.map((turn)=>
+                                    <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus}/>
+                                )}
+                                
                             </tbody>
                             <tfoot>
                                 <tr>
                                 <td className="" colspan="10">
                                     <div className="d-flex justify-content-end">
                                     <nav aria-label="Page navigation example m-0">
-                                        <ul className="pagination m-0">
-                                        <li className="page-item">
-                                            <a className="page-link text-black" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li className="page-item"><a className="page-link text-black" href="#">1</a></li>
-                                        <li className="page-item">
-                                            <a className="page-link text-black" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                        </ul>
+                                        <Pagination setCurrentPage={setCurrentPage} pages={howManyPages}/>
+
                                     </nav>
                                     </div>
                                 </td>

@@ -20,6 +20,14 @@ const setHoursAndMinutes= (seconds) =>{
     let minutes = Math.floor(seconds/60);
     seconds -= minutes*60;
 
+    if (minutes <10){
+        minutes = "0"+minutes;
+    }
+
+    if (hours <10){
+        hours = "0"+hours;
+    }
+
     let output = hours + ":" + minutes;
     return output;
 }
@@ -36,7 +44,14 @@ const addTime = (initial, aditional) =>{
     hours+= newHours;
     minutes-= newHours*60;
 
-    if(minutes==0){minutes="00"};
+    if (minutes <10){
+        minutes = "0"+minutes;
+    }
+
+    if (hours <10){
+        hours = "0"+hours;
+    }
+
     return(hours +':'+minutes);
 }
 
@@ -61,6 +76,7 @@ export const turnStateData = {
     selecetDay: todayString,
     hourIsSelected: false,
     selectedHour:"",
+    tunrnDuration:"",
     client_data: {
         name_client: "",
         phone_client: "",
@@ -115,7 +131,7 @@ export function turnReducer(state, action){
                 aviableTurns[ii]={turn:turn};
             }
             document.getElementById("inputGroupSelect02").value="Horarios";
-            return {...state, schedule: aviableTurns, selecetDay : action.date, selectedHour:"", hourIsSelected: false};  
+            return {...state, schedule: aviableTurns, selecetDay : action.date, selectedHour:"", hourIsSelected: false, turnDuration : turnDuration};  
         }
 
         case TURN_TYPES.SET_HOUR:{
@@ -134,6 +150,7 @@ export function turnReducer(state, action){
                 phone_client: state.client_data.phone_client, 
                 date: state.selecetDay,
                 time: state.selectedHour,
+                turn_duration: state.turnDuration,
                 update_at: today, 
                 status: "ACTIVE"
                 }

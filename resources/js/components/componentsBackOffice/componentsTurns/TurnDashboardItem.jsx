@@ -1,7 +1,20 @@
 import React from "react";
 
-const TurnDashboardItem = ({scheduledTurn}) =>{
+const TurnDashboardItem = ({scheduledTurn,setTurnStatus}) =>{
 
+    const setConfirmed = (scheduledTurnId) =>{
+
+        setTurnStatus(scheduledTurnId, "CONFIRMED")
+            swal.fire({
+                text: 'Turno confirmado con éxito',
+                timer:"1500", 
+                position: "bottom",
+                customClass : {
+                container: "add-to-cart-alert-container",
+                popup:"add-to-cart-alert",
+                }
+            })
+    }
 
 
     return (
@@ -21,7 +34,7 @@ const TurnDashboardItem = ({scheduledTurn}) =>{
             <div className="d-flex bg-light px-2 py-3">
                 <button className="btn btn-black" data-bs-toggle="modal" data-bs-target={`#modalDataClient${scheduledTurn.id}`}><span className="d-none d-xl-inline">Cliente</span> <i
                     className="bi bi-person"></i> </button>
-                <button className="btn btn-orangeWeb mx-2"><span className="d-none d-xl-inline">Completar</span><i
+                <button className="btn btn-orangeWeb mx-2"><span className="d-none d-xl-inline" onClick={()=>setConfirmed(scheduledTurn.id)}>Completar</span><i
                     className="bi bi-check"></i></button>
             </div>
 

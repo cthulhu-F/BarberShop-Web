@@ -67,19 +67,19 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
     let day = editableDay.map((day) => {
       switch (day){
         case "mo":
-          return "0"
+          return "day0"
         case "tu":
-          return "1" 
+          return "day1" 
         case "we":
-          return "2" 
+          return "day2" 
         case "th":
-          return "3"
+          return "day3"
         case "fr":
-          return "4"
+          return "day4"
         case "sa":
-          return "5" 
+          return "day5" 
         case "su":
-          return "6"
+          return "day6"
         }
       }
     )
@@ -108,6 +108,8 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
     }
 
     }, [editableDay[1], editableDay])
+
+
 
 
     return(
@@ -148,13 +150,13 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       </div>
 
                       <div className="col-12">
-                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item" onClick={(event)=>setActiveDay(event.target.id)} id="0">LU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="1">MA</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="2">MI</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="3">JU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="4">VI</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="5">SA</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="6">DO</button>
+                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day0">LU</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day1">MA</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day2">MI</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day3">JU</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day4">VI</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day5">SA</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day6">DO</button>
                       </div>
 
                       <div className="col-12 mb-2">
