@@ -80,7 +80,7 @@ const ModalTurnListSettings = ({turn, editTurnSchedule, setTurnStatus}) =>{
                                 <span className="me-2 p-2">Modificar</span>
 
                                 <select className="form-select p-2" id="set-turn-status-by-input">
-                                    <option key="ACTIVE" id="ACTIVE">Activo</option>
+                                    <option key="ACTIVE" id="ACTIVE">Programado</option>
                                     <option key="NONACTIVE" id="NONACTIVE">Cancelado</option>
                                     <option key="CONFIRMED" id="CONFIRMED">Confirmado</option>
                                 </select>
@@ -91,7 +91,7 @@ const ModalTurnListSettings = ({turn, editTurnSchedule, setTurnStatus}) =>{
 
                                 <div className="p-2">
                                     <span className="form-check-label text-secondary">
-                                        Activo <i class="bi bi-dash-circle-fill"></i></span>
+                                    Programado <i class="bi bi-dash-circle-fill"></i></span>
                                 </div>
                                 <div className="p-2">
 

@@ -130,7 +130,7 @@ const TurnDashboard = ({}) =>{
                 <div className="col-12">
                     <div className="row p-2 mb-3">
                         <div className="col-12 p-0">
-                            <div className="font-h1 fs-1 fw-bold">Turnos</div>
+                            <div className="font-h1 fs-1 fw-bold">Turnos Programados</div>
                         </div>
                     </div>
                 </div>
@@ -227,6 +227,15 @@ const TurnDashboard = ({}) =>{
                         </div>
 
                         
+                    </div>
+                </div>
+
+
+                <div className="col-12">
+                    <div className="row p-2 mb-3">
+                        <div className="col-12 p-0">
+                            <div className="font-h1 fs-1 fw-bold">Todos los turnos</div>
+                        </div>
                     </div>
                 </div>
 
