@@ -109,7 +109,7 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
             <div className="modal-dialog modal-gl">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 class="modal-title">Programación del turno {turn.id}</h5>
+                        <h5 class="modal-title fw-bold font-h1">Programación del turno {turn.id}</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
@@ -119,7 +119,7 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
                         <div className="col-12" id="timeFin-container">
 
                             <div className="d-flex justify-content-between mb-1" >
-                                <span className="me-2 p-2">Fecha</span>
+                                <span className="me-2 p-2 fw-bold">Fecha</span>
 
                                 <input className="form-control  w-50" type="text" name="trip-start"
                                 onFocus={(e) => e.currentTarget.type = "date"}
@@ -132,7 +132,7 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
                         
 
                             <div className="d-flex justify-content-between mb-1" >
-                                <span className="me-2 p-2">Hora de inicio</span>
+                                <span className="me-2 p-2 fw-bold">Hora de inicio</span>
 
                                 <input type="text" className="form-control w-50" id="backofice-turn-time-editor"
                                 onFocus={(e) => e.currentTarget.type = "time"}
@@ -143,7 +143,7 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
                             </div>
                         
                             <div className="d-flex justify-content-between mb-1">
-                                <span className="me-2 p-2">Duración</span>
+                                <span className="me-2 p-2 fw-bold">Duración</span>
                                 <input type="text" className="form-control w-50" id="backofice-turn-duration-editor"
                                 onFocus={(e) => e.currentTarget.type = "time"}
                                 onBlur={(e) => e.currentTarget.type = "text"}

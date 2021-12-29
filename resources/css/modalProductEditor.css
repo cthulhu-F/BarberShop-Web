@@ -1,0 +1,15 @@
+#backofice-product-imagen-editor-viewer{
+    height: 200px;
+    width:200px;
+    background-size: cover;
+    border: solid 2px #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+    
+}
+
+
+#backofice-product-imagen-editor-viewer:hover #backofice-product-imagen-editor-viewer-overlay {
+    opacity: 0.7;
+}
