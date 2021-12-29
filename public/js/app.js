@@ -7301,10 +7301,6 @@ var backofficeTurnDashboardMapDispatch = function backofficeTurnDashboardMapDisp
         type: _src_actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_DASHBOARD_TYPES.RESET_INITIAL_STATE
       });
     },
-    getTodaySchedule: function getTodaySchedule() {// dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE});
-    },
-    getTomorrowSchedule: function getTomorrowSchedule() {// dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE});
-    },
     filterDashboard: function filterDashboard(mindate, maxdate, chairName, todayFlag) {
       if (!todayFlag) {
         console.log(maxdate);
@@ -10491,8 +10487,6 @@ var TurnDashboard = function TurnDashboard(_ref) {
       todayScheduled = backofficeTurnDashboardState.todayScheduled,
       tomorrowScheduled = backofficeTurnDashboardState.tomorrowScheduled,
       dashboardTurns = backofficeTurnDashboardState.dashboardTurns;
-  var getTodaySchedule = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).getTodaySchedule;
-  var getTomorrowSchedule = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).getTomorrowSchedule;
   var filterDashboard = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).filterDashboard;
   var editTurnSchedule = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).editTurnSchedule;
   var orderByDate = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).orderByDate;
@@ -10636,7 +10630,6 @@ var TurnDashboard = function TurnDashboard(_ref) {
               id: "get-today-shcedule",
               onClick: function onClick(e) {
                 setActiveHeader("get-today-shcedule");
-                getTodaySchedule();
               },
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
                 className: " font-h1 fw-bold fs-3",
@@ -10650,7 +10643,6 @@ var TurnDashboard = function TurnDashboard(_ref) {
               id: "get-tomorrow-shcedule",
               onClick: function onClick(e) {
                 setActiveHeader("get-tomorrow-shcedule");
-                getTomorrowSchedule();
               },
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
                 className: " font-h1 fw-bold fs-3 ",
@@ -15729,12 +15721,6 @@ function backofficeTurnDashboardReducer(state, action) {
       {
         return allShcheduled;
       }
-    // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE :{           
-    //     return {...state, dashboardTurns : state.todayScheduled};
-    // }
-    // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE :{
-    //     return {...state, dashboardTurns : state.tomorrowScheduled};
-    // }
 
     case _actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_DASHBOARD_TYPES.FILTER_DASHBOARD:
       {
@@ -15848,8 +15834,12 @@ function backofficeTurnDashboardReducer(state, action) {
         console.log(_allScheduleSorted);
         return _objectSpread(_objectSpread({}, state), {}, {
           allShcheduled: _allScheduleSorted,
-          todayScheduled: filteredByActive(state.todayScheduled),
-          tomorrowScheduled: filteredByActive(state.tomorrowScheduled),
+          todayScheduled: filteredByActive(_allScheduleSorted.filter(function (turn) {
+            return turn.date == todayString;
+          })),
+          tomorrowScheduled: filteredByActive(_allScheduleSorted.filter(function (turn) {
+            return turn.date != todayString;
+          })),
           dashboardTurns: state.dashboardTurns
         });
       }

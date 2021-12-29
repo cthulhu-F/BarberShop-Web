@@ -20,13 +20,7 @@ const backofficeTurnDashboardMapDispatch = (dispatch)=>{
             dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.RESET_INITIAL_STATE});
         },
 
-        getTodaySchedule : () =>{
-            // dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE});
-        },
 
-        getTomorrowSchedule : () =>{
-            // dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE});
-        },
 
         filterDashboard : (mindate, maxdate,chairName, todayFlag) =>{
             if (!todayFlag){

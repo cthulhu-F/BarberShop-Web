@@ -25,8 +25,6 @@ const TurnDashboard = ({}) =>{
     const [ backofficeTurnDashboardState, dispatch] = useReducer(backofficeTurnDashboardReducer,FilteredTurns);
     const {allShcheduled, todayScheduled,tomorrowScheduled, dashboardTurns} = backofficeTurnDashboardState;
 
-    const getTodaySchedule = backofficeTurnDashboardMapDispatch(dispatch).getTodaySchedule;
-    const getTomorrowSchedule = backofficeTurnDashboardMapDispatch(dispatch).getTomorrowSchedule;
     const filterDashboard = backofficeTurnDashboardMapDispatch(dispatch).filterDashboard;
 
     const editTurnSchedule = backofficeTurnDashboardMapDispatch(dispatch).editTurnSchedule;
@@ -132,12 +130,12 @@ const TurnDashboard = ({}) =>{
                     <div className="row g-3 rounded p-2 mb-3" style={{display:"flex", alignItems: "flex-end"}}>
                         <div className="col-12 col-xl-3">
                             <button className="btn btn-danger w-100 schedule-header-item" id="get-today-shcedule"
-                            onClick={(e)=>{setActiveHeader("get-today-shcedule"); getTodaySchedule()}}>
+                            onClick={(e)=>{setActiveHeader("get-today-shcedule")}}>
                                 <span className=" font-h1 fw-bold fs-3" >HOY</span></button>
                         </div>
                         <div className="col-12 col-xl-3">
                             <button className="btn btn-outline-danger w-100 schedule-header-item" id="get-tomorrow-shcedule"
-                            onClick={(e)=>{setActiveHeader("get-tomorrow-shcedule"); getTomorrowSchedule()}}><span
+                            onClick={(e)=>{setActiveHeader("get-tomorrow-shcedule")}}><span
                                 className=" font-h1 fw-bold fs-3 "  >PROXIMAMENTE</span></button>
                         </div>
 
