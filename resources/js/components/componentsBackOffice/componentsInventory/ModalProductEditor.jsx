@@ -34,14 +34,14 @@ const ModalProductEditor = ({editableProduct, saveProductConfig,allCategories, n
 
         if (nameField.value != "" || descriptionField.value != "" || selectedCategroyId != currentCategoryId   || stockField.value != ""  || priceField.value !="" ) {
 
-            let nameAlert     =   nameField.value == "" ? "" : ` <span style="font-weight:700;" >Nombre </span><br> ${nameField.placeholder} ---> ${nameField.value} <br> <br>  `;
-            let descriptionAlert     =   descriptionField.value == "" ? "" : `<span style="font-weight:700;" >Descripción </span><br>  ${descriptionField.placeholder} ---> ${descriptionField.value} <br><br>`;
+            let nameAlert           =   nameField.value == "" ? "" : ` <span style="font-weight:700;" >Nombre </span><br> ${nameField.placeholder} ---> ${nameField.value} <br> <br>  `;
+            let descriptionAlert    =   descriptionField.value == "" ? "" : `<span style="font-weight:700;" >Descripción </span><br>  ${descriptionField.placeholder} ---> ${descriptionField.value} <br><br>`;
             let categoryAlert =
             selectedCategroyId == currentCategoryId
                 ? ""
                 : `<span style="font-weight:700;" >Categoría </span><br> ${currentCategoryName} ---> ${selectedCategoryName}<br><br>`;
-            let stockAlert     =   stockField.value == "" ? "" : `<span style="font-weight:700;" >Stock </span><br>  ${stockField.placeholder} ---> ${stockField.value} <br><br>`;
-            let priceAlert     =   priceField.value == "" ? "" : `<span style="font-weight:700;" >Precio </span><br>  ${priceField.placeholder} ---> ${priceField.value} <br><br>`;
+            let stockAlert          =   stockField.value == "" ? "" : `<span style="font-weight:700;" >Stock </span><br>  ${stockField.placeholder} ---> ${stockField.value} <br><br>`;
+            let priceAlert          =   priceField.value == "" ? "" : `<span style="font-weight:700;" >Precio </span><br>  ${priceField.placeholder} ---> ${priceField.value} <br><br>`;
 
         
             swal.fire({
@@ -152,6 +152,53 @@ const ModalProductEditor = ({editableProduct, saveProductConfig,allCategories, n
     }
 
  
+    const creeateNewProduct = () =>{
+        const parent = document.getElementById(`modalProductEditor${editableProduct.id}`)
+        const nameField = parent.querySelector("#backofice-product-name-editor");
+        const descriptionField = parent.querySelector("#backofice-product-description-editor");
+        const stockField = parent.querySelector("#backofice-product-stock-editor");
+        const priceField = parent.querySelector("#backofice-product-price-editor");
+        const categoryField = parent.querySelector("#backofice-product-category-editor");
+
+        const selectedCategroyId = categoryField.options[categoryField.selectedIndex].id
+
+        if (nameField.value == "" || descriptionField.value == "" || stockField.value == ""  || priceField.value =="" ) {
+
+            let nameAlert     =   nameField.value != "" ? "" : ` <span style="font-weight:700;" >Nombre </span><br><br>  `;
+            let descriptionAlert     =   descriptionField.value != "" ? "" : `<span style="font-weight:700;" >Descripción </span><br><br>`;
+            let stockAlert     =   stockField.value != "" ? "" : `<span style="font-weight:700;" >Stock </span><br><br>`;
+            let priceAlert     =   priceField.value != "" ? "" : `<span style="font-weight:700;" >Precio </span><br><br>`;
+
+        
+            swal.fire({
+            title: "Atención",
+            html: `Para crear un nuevo producto debe completar los siguientes campos<br><br> 
+            ${nameAlert} ${descriptionAlert} ${stockAlert}${priceAlert}`, 
+            icon: 'warning'});
+        }else{
+
+            saveProductConfig(nameField.value, "name", editableProduct.id);
+            nameField.value ="";
+            saveProductConfig(descriptionField.value, "description", editableProduct.id);
+            descriptionField.value ="";
+            saveProductConfig(selectedCategroyId, "categories_id", editableProduct.id);
+            saveProductConfig(stockField.value, "stock", editableProduct.id);
+            stockField.value ="";
+            saveProductConfig(priceField.value, "price", editableProduct.id);
+            priceField.value ="";
+            saveProductConfig(todayString, "updated_at", editableProduct.id);
+
+            swal.fire({
+                text: `${editableProduct.name} creado con éxito.`,
+                timer:"2000", 
+                position: "bottom",
+                customClass : {
+                    container: "add-to-cart-alert-container",
+                    popup:"add-to-cart-alert",
+                }
+            });
+        }
+    }
 
 
 
@@ -161,7 +208,7 @@ const ModalProductEditor = ({editableProduct, saveProductConfig,allCategories, n
             <div className="modal-dialog modal-gl">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 class="modal-title fw-bold font-h1"> Editar {editableProduct.name}</h5>
+                        <h5 class="modal-title fw-bold font-h1">{newProduct ? `Crear nuevo producto` :`Editar ${editableProduct.name}`}</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
@@ -260,7 +307,7 @@ const ModalProductEditor = ({editableProduct, saveProductConfig,allCategories, n
                             newProduct 
                             
                             ? 
-                            <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={()=>console.log('newproduct')}>Crear Producto</button>
+                            <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={()=>creeateNewProduct()}>Crear Producto</button>
 
                             :
                             <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={()=>saveConfigChanges()}>Guardar cambios</button>
