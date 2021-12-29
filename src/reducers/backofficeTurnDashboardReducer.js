@@ -47,7 +47,7 @@ export const FilteredTurns ={
     allShcheduled : sortByDate(ITEM_TURNS.orderTurns),
     todayScheduled : filteredByActive(sortByDate(ITEM_TURNS.orderTurns.filter((turn)=>turn.date == todayString))),
     tomorrowScheduled : filteredByActive(sortByDate(ITEM_TURNS.orderTurns.filter((turn)=>turn.date != todayString))),
-    dashboardTurns : filteredByActive(sortByDate(ITEM_TURNS.orderTurns.filter((turn)=>turn.date == todayString))),
+    dashboardTurns : sortByDate(ITEM_TURNS.orderTurns),
 }
 
 export function backofficeTurnDashboardReducer(state, action){
@@ -56,14 +56,14 @@ export function backofficeTurnDashboardReducer(state, action){
             return allShcheduled
         }
 
-        case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE :{           
-            return {...state, dashboardTurns : state.todayScheduled};
-        }
+        // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE :{           
+        //     return {...state, dashboardTurns : state.todayScheduled};
+        // }
 
 
-        case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE :{
-            return {...state, dashboardTurns : state.tomorrowScheduled};
-        }
+        // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE :{
+        //     return {...state, dashboardTurns : state.tomorrowScheduled};
+        // }
 
         case BACKOFFICE_TURN_DASHBOARD_TYPES.FILTER_DASHBOARD:{
             let dateMin = action.min.split('-')
@@ -83,7 +83,7 @@ export function backofficeTurnDashboardReducer(state, action){
 
             let filteredByName;
 
-            let FilteredBydate =  state.tomorrowScheduled.filter(turn =>
+            let FilteredBydate =  state.allShcheduled.filter(turn =>
                     parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) >= compartaiveMin && 
                     parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) <= compartaiveMax 
             );
@@ -104,9 +104,9 @@ export function backofficeTurnDashboardReducer(state, action){
         case BACKOFFICE_TURN_DASHBOARD_TYPES.FILTER_BY_CHAIR :{
             let filteredByChair
             if(action.payload != "Ver silla"){
-                filteredByChair = state.todayScheduled.filter((turn)=>turn.name == action.payload);
+                filteredByChair = state.allShcheduled.filter((turn)=>turn.name == action.payload);
             }else {
-                filteredByChair = state.todayScheduled
+                filteredByChair = state.allShcheduled
             }
 
             return {...state, dashboardTurns : filteredByChair};
@@ -168,7 +168,7 @@ export function backofficeTurnDashboardReducer(state, action){
             return {...state, allShcheduled: allScheduleSorted,
                 todayScheduled: filteredByActive(state.todayScheduled),
                 tomorrowScheduled: filteredByActive(state.tomorrowScheduled),
-                dashboardTurns: filteredByActive(state.dashboardTurns),
+                dashboardTurns: state.dashboardTurns,
             }
 
         }   

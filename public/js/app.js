@@ -7298,15 +7298,9 @@ var backofficeTurnDashboardMapDispatch = function backofficeTurnDashboardMapDisp
         type: _src_actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_DASHBOARD_TYPES.RESET_INITIAL_STATE
       });
     },
-    getTodaySchedule: function getTodaySchedule() {
-      dispatch({
-        type: _src_actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE
-      });
+    getTodaySchedule: function getTodaySchedule() {// dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE});
     },
-    getTomorrowSchedule: function getTomorrowSchedule() {
-      dispatch({
-        type: _src_actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE
-      });
+    getTomorrowSchedule: function getTomorrowSchedule() {// dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE});
     },
     filterDashboard: function filterDashboard(mindate, maxdate, chairName, todayFlag) {
       if (!todayFlag) {
@@ -10902,57 +10896,19 @@ var TurnDashboard = function TurnDashboard(_ref) {
   var filterDashboard = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).filterDashboard;
   var editTurnSchedule = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).editTurnSchedule;
   var orderByDate = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).orderByDate;
-  var setTurnStatus = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).setTurnStatus;
+  var setTurnStatus = (0,_backofficeTurnDashboardUses__WEBPACK_IMPORTED_MODULE_3__["default"])(dispatch).setTurnStatus; // const [todayTurns, setTurns] = useState(todayScheduled)
+  // useEffect(() => {
+  //     const fetchPosts = async () => {
+  //       const res = await todayScheduled;
+  //       setTurns(res)
+  //     }
+  //     fetchPosts();      
+  // }, [todayScheduled])
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(todayScheduled),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
       _useState2 = _slicedToArray(_useState, 2),
-      todayTurns = _useState2[0],
-      setTurns = _useState2[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var fetchPosts = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return todayScheduled;
-
-              case 2:
-                res = _context.sent;
-                setTurns(res);
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function fetchPosts() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
-    fetchPosts();
-  }, [todayScheduled]);
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('hidden'),
-      _useState4 = _slicedToArray(_useState3, 2),
-      visibility = _useState4[0],
-      setDisplayed = _useState4[1];
-
-  var DateStyle = {
-    visibility: visibility
-  };
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
-      _useState6 = _slicedToArray(_useState5, 2),
-      todayFlag = _useState6[0],
-      setSwitch = _useState6[1];
+      todayFlag = _useState2[0],
+      setTodayFlagSwitch = _useState2[1];
 
   var setActiveHeader = function setActiveHeader(id) {
     console.log(id);
@@ -10972,62 +10928,60 @@ var TurnDashboard = function TurnDashboard(_ref) {
     });
 
     if (document.getElementById('get-tomorrow-shcedule').classList.contains('active')) {
-      today;
-      setDisplayed('inherit');
-      setSwitch(false);
+      // today
+      setTodayFlagSwitch(false);
     } else {
-      setDisplayed('hidden');
-      setSwitch(true);
+      setTodayFlagSwitch(true);
     }
   };
 
   var existentChairs = [];
   /* PAGINATION*/
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(allShcheduled),
-      _useState8 = _slicedToArray(_useState7, 2),
-      pagintaionTurns = _useState8[0],
-      setTurnsPagination = _useState8[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(dashboardTurns),
+      _useState4 = _slicedToArray(_useState3, 2),
+      pagintaionTurns = _useState4[0],
+      setTurnsPagination = _useState4[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
-      _useState10 = _slicedToArray(_useState9, 2),
-      currentPage = _useState10[0],
-      setCurrentPage = _useState10[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentPage = _useState6[0],
+      setCurrentPage = _useState6[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(5),
-      _useState12 = _slicedToArray(_useState11, 1),
-      turnsPerPage = _useState12[0];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(5),
+      _useState8 = _slicedToArray(_useState7, 1),
+      turnsPerPage = _useState8[0];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var fetchTurns = /*#__PURE__*/function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context2.next = 2;
-                return allShcheduled;
+                _context.next = 2;
+                return dashboardTurns;
 
               case 2:
-                res = _context2.sent;
+                res = _context.sent;
                 setTurnsPagination(res);
 
               case 4:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }));
 
       return function fetchTurns() {
-        return _ref3.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }();
 
     fetchTurns();
-  }, [allShcheduled]);
+  }, [dashboardTurns]);
   var indexOfLastTurn = currentPage * turnsPerPage;
   var indexOfFirstTurn = indexOfLastTurn - turnsPerPage;
   var currentTurns = pagintaionTurns.slice(indexOfFirstTurn, indexOfLastTurn);
@@ -11122,7 +11076,12 @@ var TurnDashboard = function TurnDashboard(_ref) {
         className: "col-12",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           className: "row g-1 my-4",
-          children: dashboardTurns.map(function (scheduledTurn) {
+          children: todayFlag ? todayScheduled.map(function (scheduledTurn) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_TurnDashboardItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              scheduledTurn: scheduledTurn,
+              setTurnStatus: setTurnStatus
+            }, scheduledTurn.id);
+          }) : tomorrowScheduled.map(function (scheduledTurn) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_TurnDashboardItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
               scheduledTurn: scheduledTurn,
               setTurnStatus: setTurnStatus
@@ -11131,9 +11090,20 @@ var TurnDashboard = function TurnDashboard(_ref) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "col-12",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+          className: "row rounded p-2 mb-3"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+        className: "col-12",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-          className: "row rounded p-2 mb-3",
+          className: "row p-2 mb-3 d-flex align-items-end",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+            className: "col-12 p-0 col-xl-4 p-0 mx-xl-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+              className: "font-h1 fs-1 fw-bold",
+              children: "Todos los turnos"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
             className: "col-12 col-xl-3 p-0 mx-xl-2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
               className: "input-group m-0",
@@ -11146,11 +11116,7 @@ var TurnDashboard = function TurnDashboard(_ref) {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
                   selected: true,
                   children: "Ver silla"
-                }), todayFlag ? todayScheduled.map(function (scheduledTurn) {
-                  if (!existentChairs.includes(scheduledTurn.name)) {
-                    existentChairs.push(scheduledTurn.name);
-                  }
-                }) : tomorrowScheduled.map(function (scheduledTurn) {
+                }), allShcheduled.map(function (scheduledTurn) {
                   if (!existentChairs.includes(scheduledTurn.name)) {
                     existentChairs.push(scheduledTurn.name);
                   }
@@ -11170,8 +11136,11 @@ var TurnDashboard = function TurnDashboard(_ref) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
             className: "col-12 col-xl-2 p-0 mx-xl-2",
-            style: DateStyle,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("label", {
+              "for": "inputDateIni",
+              className: "form-label text-muted fs-9",
+              children: "Fecha de inicio"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
               className: "form-control p-2",
               id: "inputDateIni",
               type: "date",
@@ -11184,15 +11153,14 @@ var TurnDashboard = function TurnDashboard(_ref) {
               ,
               min: minDate,
               max: maxDte
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("label", {
-              "for": "inputDateIni",
-              className: "form-label text-muted fs-9",
-              children: "Fecha de inicio"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
             className: "col-12 col-xl-2 p-0 mx-xl-2",
-            style: DateStyle,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("label", {
+              "for": "inputDateEnd",
+              className: "form-label text-muted fs-9",
+              children: "Fecha de Fin"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
               className: "form-control p-2",
               id: "inputDateEnd",
               type: "date",
@@ -11205,24 +11173,8 @@ var TurnDashboard = function TurnDashboard(_ref) {
               ,
               min: minDate,
               max: maxDte
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("label", {
-              "for": "inputDateEnd",
-              className: "form-label text-muted fs-9",
-              children: "Fecha de Fin"
             })]
           })]
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-        className: "col-12",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-          className: "row p-2 mb-3",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-            className: "col-12 p-0",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-              className: "font-h1 fs-1 fw-bold",
-              children: "Todos los turnos"
-            })
-          })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "col-12 p-0",
@@ -14722,7 +14674,7 @@ var ITEM_TURNS = {
     name_client: "martiin",
     email_client: "martiin@gmail.com",
     phone_client: "45237658",
-    date: "27/12/2021",
+    date: "29/12/2021",
     time: "11:00",
     turn_duration: "01:00",
     update_at: "14/12/2021",
@@ -14733,7 +14685,7 @@ var ITEM_TURNS = {
     name_client: "santiago",
     email_client: "santiago@gmail.com",
     phone_client: "123543092486'",
-    date: "27/12/2021",
+    date: "29/12/2021",
     time: "12:00",
     turn_duration: "00:45",
     update_at: "24/12/2021",
@@ -14744,7 +14696,7 @@ var ITEM_TURNS = {
     name_client: "ruperto",
     email_client: "ruperto@gmail.com",
     phone_client: "123578999'",
-    date: "27/12/2021",
+    date: "29/12/2021",
     time: "12:00",
     turn_duration: "00:15",
     update_at: "24/12/2021",
@@ -15045,8 +14997,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var BACKOFFICE_TURN_DASHBOARD_TYPES = {
   RESET_INITIAL_STATE: "RESET_INITIAL_STATE",
-  GET_TODAYS_SCHEDULE: "GET_TODAYS_SCHEDULE",
-  GET_TOMOORROW_SCHEDULE: "GET_TOMOORROW_SCHEDULE",
+  // GET_TODAYS_SCHEDULE :"GET_TODAYS_SCHEDULE",
+  // GET_TOMOORROW_SCHEDULE : "GET_TOMOORROW_SCHEDULE",
   SET_DATE: "SET_DATE",
   FILTER_DASHBOARD: "FILTER_DASHBOARD",
   EDITE_TURN_SCHEDULE: "EDITE_TURN_SCHEDULE",
@@ -15631,9 +15583,7 @@ var FilteredTurns = {
   tomorrowScheduled: filteredByActive(sortByDate(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns.filter(function (turn) {
     return turn.date != todayString;
   }))),
-  dashboardTurns: filteredByActive(sortByDate(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns.filter(function (turn) {
-    return turn.date == todayString;
-  })))
+  dashboardTurns: sortByDate(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.orderTurns)
 };
 function backofficeTurnDashboardReducer(state, action) {
   switch (action.type) {
@@ -15641,20 +15591,12 @@ function backofficeTurnDashboardReducer(state, action) {
       {
         return allShcheduled;
       }
-
-    case _actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE:
-      {
-        return _objectSpread(_objectSpread({}, state), {}, {
-          dashboardTurns: state.todayScheduled
-        });
-      }
-
-    case _actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE:
-      {
-        return _objectSpread(_objectSpread({}, state), {}, {
-          dashboardTurns: state.tomorrowScheduled
-        });
-      }
+    // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE :{           
+    //     return {...state, dashboardTurns : state.todayScheduled};
+    // }
+    // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE :{
+    //     return {...state, dashboardTurns : state.tomorrowScheduled};
+    // }
 
     case _actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_DASHBOARD_TYPES.FILTER_DASHBOARD:
       {
@@ -15672,7 +15614,7 @@ function backofficeTurnDashboardReducer(state, action) {
         console.log(compartaiveMax);
         console.log(action.chairName);
         var filteredByName;
-        var FilteredBydate = state.tomorrowScheduled.filter(function (turn) {
+        var FilteredBydate = state.allShcheduled.filter(function (turn) {
           return parseInt(turn.date.split('/')[2] + turn.date.split('/')[1] + turn.date.split('/')[0]) >= compartaiveMin && parseInt(turn.date.split('/')[2] + turn.date.split('/')[1] + turn.date.split('/')[0]) <= compartaiveMax;
         });
 
@@ -15694,11 +15636,11 @@ function backofficeTurnDashboardReducer(state, action) {
         var filteredByChair;
 
         if (action.payload != "Ver silla") {
-          filteredByChair = state.todayScheduled.filter(function (turn) {
+          filteredByChair = state.allShcheduled.filter(function (turn) {
             return turn.name == action.payload;
           });
         } else {
-          filteredByChair = state.todayScheduled;
+          filteredByChair = state.allShcheduled;
         }
 
         return _objectSpread(_objectSpread({}, state), {}, {
@@ -15770,7 +15712,7 @@ function backofficeTurnDashboardReducer(state, action) {
           allShcheduled: _allScheduleSorted,
           todayScheduled: filteredByActive(state.todayScheduled),
           tomorrowScheduled: filteredByActive(state.tomorrowScheduled),
-          dashboardTurns: filteredByActive(state.dashboardTurns)
+          dashboardTurns: state.dashboardTurns
         });
       }
 
