@@ -8182,7 +8182,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
     }();
 
     fetchPosts();
-  }, [allChairsSchedule]);
+  }, [allChairs, allChairsSchedule]);
   var indexOfLastPost = currentPage * postsPerPage;
   var indexOfFirstPost = indexOfLastPost - postsPerPage;
   var currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -8200,170 +8200,187 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-      className: "col-12",
+      className: "row px-3",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "row p-2 mb-3",
+        className: "col-12 p-1",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "col-12 p-0",
+          className: "row bg-dark shadow rounded p-0 mb-3",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "font-h1 fs-1 fw-bold",
-            children: "Configura los turnos"
+            className: "col-12",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "font-h1 fs-1"
+            })
           })
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-      className: "col-12",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "row",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-          className: "row mb-3",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "col-12 col-xl-8  pe-xl-3 p-0 mb-3",
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      className: "row px-4 g-1",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "col-12",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "row p-2 mb-3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "col-12 p-0",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-              className: "h-100 p-xl-2 px-3",
+              className: "font-h1 fs-1 fw-bold",
+              children: "Configurar las Sillas"
+            })
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "col-12",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "row",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "row mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "col-12 col-xl-8  pe-xl-3 p-0 mb-3",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                className: "table-responsive",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
-                  className: "table table-hover table-striped bg-white aling-middle",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                        scope: "col",
-                        children: "ID"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                        scope: "col",
-                        children: "Nombre"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                        scope: "col",
-                        children: "Dias disponibles"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                        scope: "col"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                        scope: "col"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                        scope: "col"
-                      })]
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
-                    children: currentPosts.map(function (chair) {
-                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                className: "h-100 p-xl-2 px-3",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                  className: "table-responsive",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
+                    className: "table table-hover table-striped bg-white aling-middle",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                          scope: "row",
-                          children: chair.id
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                            style: {
-                              overflowWrap: "break-word",
-                              width: "150px"
-                            },
-                            children: [" ", allChairs.find(function (chair2) {
-                              return chair2.configDay_id == chair.id;
-                            }).name, " "]
-                          })
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                            style: {
-                              overflowWrap: "break-word",
-                              width: "300px"
-                            },
-                            children: Object.entries(chair.days).map(function (activeDay) {
-                              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-                                className: activeDay[1] == "NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white",
-                                style: {
-                                  padding: "5px",
-                                  borderRadius: "5px",
-                                  marginRight: "5px"
-                                },
-                                children: (days[activeDay[0]] + ' ').toUpperCase()
-                              });
-                            })
-                          })
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-                            className: "d-flex justify-content-center",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                              className: "btn btn-outline-success p-1 me-1",
-                              "data-bs-toggle": "modal",
-                              "data-bs-target": "#modalAddProduct",
-                              onClick: function onClick() {
-                                setEditableChair(chair.id);
-                                setActiveDay(0);
+                          scope: "col",
+                          children: "ID"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          scope: "col",
+                          children: "Nombre"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          scope: "col",
+                          children: "Dias disponibles"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          scope: "col"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          scope: "col"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                          scope: "col"
+                        })]
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                      children: currentPosts.map(function (chair) {
+                        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                            scope: "row",
+                            children: chair.id
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                              style: {
+                                overflowWrap: "break-word",
+                                width: "150px"
                               },
-                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                                className: "bi bi-pencil fs-7"
+                              children: [" ", allChairs.find(function (chair2) {
+                                return chair2.configDay_id == chair.id;
+                              }).name, " "]
+                            })
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                              style: {
+                                overflowWrap: "break-word",
+                                width: "300px"
+                              },
+                              children: Object.entries(chair.days).map(function (activeDay) {
+                                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                                  className: activeDay[1] == "NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white",
+                                  style: {
+                                    padding: "5px",
+                                    borderRadius: "5px",
+                                    marginRight: "5px"
+                                  },
+                                  children: (days[activeDay[0]] + ' ').toUpperCase()
+                                });
                               })
-                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-                              type: "button",
-                              className: "btn btn-outline-danger p-1 me-1",
-                              "data-bs-toggle": "modal",
-                              "data-bs-target": "#modalChairConfig",
-                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                                className: "bi bi-gear",
+                            })
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                              className: "d-flex justify-content-center",
+                              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                                className: "btn btn-outline-success p-1 me-1",
+                                "data-bs-toggle": "modal",
+                                "data-bs-target": "#modalAddProduct",
                                 onClick: function onClick() {
                                   setEditableChair(chair.id);
                                   setActiveDay(0);
-                                }
+                                },
+                                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                                  className: "bi bi-pencil fs-7"
+                                })
+                              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+                                type: "button",
+                                className: "btn btn-outline-danger p-1 me-1",
+                                "data-bs-toggle": "modal",
+                                "data-bs-target": "#modalChairConfig",
+                                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                                  className: "bi bi-gear",
+                                  onClick: function onClick() {
+                                    setEditableChair(chair.id);
+                                    setActiveDay(0);
+                                  }
+                                })
+                              })]
+                            })
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                            children: chair.status == "ACTIVE" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                              className: "text-success fs-3 d-flex justify-content-center",
+                              title: "ACTIVO",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                                className: "bi bi-check-circle-fill"
                               })
-                            })]
-                          })
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                          children: chair.status == "ACTIVE" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                            className: "text-success fs-3 d-flex justify-content-center",
-                            title: "ACTIVO",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                              className: "bi bi-check-circle-fill"
+                            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                              className: "text-danger fs-3 d-flex justify-content-center",
+                              title: "INACTIVO",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+                                "class": "bi bi-x-circle-fill"
+                              })
                             })
-                          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                            className: "text-danger fs-3 d-flex justify-content-center",
-                            title: "INACTIVO",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-                              "class": "bi bi-x-circle-fill"
-                            })
-                          })
-                        })]
-                      });
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tfoot", {
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                        className: "",
-                        colspan: "10",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-                          className: "d-flex justify-content-end",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("nav", {
-                            "aria-label": "Page navigation example m-0",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Pagination__WEBPACK_IMPORTED_MODULE_5__["default"], {
-                              setCurrentPage: setCurrentPage,
-                              pages: howManyPages
+                          })]
+                        });
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tfoot", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                          className: "",
+                          colspan: "10",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                            className: "d-flex justify-content-end",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("nav", {
+                              "aria-label": "Page navigation example m-0",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Pagination__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                                setCurrentPage: setCurrentPage,
+                                pages: howManyPages
+                              })
                             })
                           })
                         })
                       })
-                    })
-                  })]
+                    })]
+                  })
                 })
               })
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "col-12 col-xl-4 ps-3 mb-3",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_MotiveSetter__WEBPACK_IMPORTED_MODULE_2__["default"], {
-              editableChair: editableChair,
-              turnsPerday: turnsPerday,
-              setActiveDay: setActiveDay,
-              editableDay: editableDay,
-              saveChairSchedule: saveChairSchedule,
-              addCount: addCount,
-              restCount: restCount,
-              setStartHour: setStartHour,
-              setEndHour: setEndHour,
-              switchDayStatus: switchDayStatus
-            })
-          })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "col-12 col-xl-4 ps-3 mb-3",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_MotiveSetter__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                editableChair: editableChair,
+                turnsPerday: turnsPerday,
+                setActiveDay: setActiveDay,
+                editableDay: editableDay,
+                saveChairSchedule: saveChairSchedule,
+                addCount: addCount,
+                restCount: restCount,
+                setStartHour: setStartHour,
+                setEndHour: setEndHour,
+                switchDayStatus: switchDayStatus
+              })
+            })]
+          })
         })
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_ModalChairsConfig__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      editableChair: editableChair,
-      saveChairConfig: saveChairConfig
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_ModalChairsConfig__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        editableChair: editableChair,
+        saveChairConfig: saveChairConfig
+      })]
     })]
   });
 };
@@ -11582,8 +11599,8 @@ var Chair = function Chair(_ref) {
       id: id,
       onClick: function onClick() {
         setActive(id);
-        setActiveChair(configDay_id);
-        getSchedule(configDay_id, selecetDay);
+        setActiveChair(id);
+        getSchedule(id, selecetDay);
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "d-flex",
@@ -12301,6 +12318,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 
@@ -12312,9 +12341,29 @@ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 
 var yyyy = today.getFullYear();
 var todayString = mm + '/' + dd + '/' + yyyy;
+
+var sortById = function sortById(nonSorted) {
+  var sortedElements = [];
+  var sortedOrder = [];
+  nonSorted.map(function (chair) {
+    return sortedOrder.push({
+      order: chair.id
+    });
+  });
+  sortedOrder.sort(function (a, b) {
+    return a.order - b.order;
+  });
+  sortedOrder.map(function (sortedId) {
+    return sortedElements.push.apply(sortedElements, _toConsumableArray(nonSorted.filter(function (turn) {
+      return turn.id == sortedId.order;
+    })));
+  });
+  return sortedElements;
+};
+
 var BackofficeTurnData = {
-  allChairs: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configTurns,
-  allChairsSchedule: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay,
+  allChairs: sortById(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configTurns),
+  allChairsSchedule: sortById(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay),
   editableChair: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configTurns[0],
   editableDay: Object.entries(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay[0].days)[0],
   turnsPerday: Object.entries(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay[0].days)[0][1].split('/')[2]
@@ -12490,11 +12539,24 @@ function backofficeTurnReducer(state, action) {
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SWITCH_CHAIR_STATUS:
       {
         var _newEditableChair = state.editableChair;
-        console.log(_newEditableChair.status);
         _newEditableChair.status = action.payload;
-        console.log(_newEditableChair.status);
+        console.log(_newEditableChair);
+        var modifiedScheduled = state.allChairs.filter(function (chair) {
+          return chair.id != state.editableChair.id;
+        });
+        modifiedScheduled.push(_newEditableChair);
+        var neweditablechairSchedule = state.allChairsSchedule.find(function (chair) {
+          return chair.id == state.editableChair.id;
+        });
+        var newAllChairsSchedule = state.allChairsSchedule.filter(function (chair) {
+          return chair.id != state.editableChair.id;
+        });
+        neweditablechairSchedule.status = action.payload;
+        newAllChairsSchedule.push(neweditablechairSchedule);
         return _objectSpread(_objectSpread({}, state), {}, {
-          editableChair: _newEditableChair
+          editableChair: _newEditableChair,
+          allChairs: sortById(modifiedScheduled),
+          allChairsSchedule: sortById(newAllChairsSchedule)
         });
       }
 

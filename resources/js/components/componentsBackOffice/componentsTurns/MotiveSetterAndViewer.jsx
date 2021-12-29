@@ -43,7 +43,7 @@ const MotiveSetterAndViewer= ()=>{
         setPosts(res)
       }
       fetchPosts();      
-    }, [allChairsSchedule])
+    }, [allChairs, allChairsSchedule])
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -64,10 +64,21 @@ const MotiveSetterAndViewer= ()=>{
 
     return(
         <div>
+          <div className="row px-3">
+                <div className="col-12 p-1">
+                    <div className="row bg-dark shadow rounded p-0 mb-3">
+                        <div className="col-12">
+                            <div className="font-h1 fs-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div className="row px-4 g-1">
           <div className="col-12">
             <div className="row p-2 mb-3">
               <div className="col-12 p-0">
-                <div className="font-h1 fs-1 fw-bold">Configura los turnos</div>
+                <div className="font-h1 fs-1 fw-bold">Configurar las Sillas</div>
               </div>
             </div>
           </div>
@@ -140,7 +151,7 @@ const MotiveSetterAndViewer= ()=>{
                           <td className="" colspan="10">
                             <div className="d-flex justify-content-end">
                               <nav aria-label="Page navigation example m-0">
-                                <Pagination setCurrentPage={setCurrentPage} pages ={howManyPages}/>
+                                <Pagination setCurrentPage={setCurrentPage} pages={howManyPages}/>
                               </nav>
                             </div>
                           </td>
@@ -164,9 +175,11 @@ const MotiveSetterAndViewer= ()=>{
 
             </div>
           </div>
-        </div>
+          </div>
           <ModalChairsConfig editableChair={editableChair} saveChairConfig={saveChairConfig} />
+        </div>
       </div>
+
     );
 }
 
