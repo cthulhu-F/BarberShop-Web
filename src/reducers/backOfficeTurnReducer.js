@@ -10,10 +10,31 @@ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 var todayString =  mm + '/' + dd + '/'+yyyy;
 
+const sortById = (nonSorted) =>{
+    const sortedElements =[];
+    let sortedOrder = [];
+    nonSorted.map((chair)=>
+        sortedOrder.push(
+            {order : chair.id}
+        )
+    )
+    sortedOrder.sort(function(a, b) {
+        return a.order - b.order;
+    });
+
+    sortedOrder.map(sortedId=>
+        sortedElements.push(
+            ...nonSorted.filter(turn => turn.id == sortedId.order)
+        )
+    )
+
+    return sortedElements
+}
+
 
 export const BackofficeTurnData = {
-    allChairs : ITEM_TURNS.configTurns,
-    allChairsSchedule : ITEM_TURNS.configDay,
+    allChairs : sortById(ITEM_TURNS.configTurns),
+    allChairsSchedule : sortById(ITEM_TURNS.configDay),
     editableChair: ITEM_TURNS.configTurns[0],
     editableDay: Object.entries(ITEM_TURNS.configDay[0].days)[0],
     turnsPerday: Object.entries(ITEM_TURNS.configDay[0].days)[0][1].split('/')[2]
@@ -148,10 +169,18 @@ export function backofficeTurnReducer (state, action){
 
         case BACKOFFICE_TURN_TYPES.SWITCH_CHAIR_STATUS :{
             let newEditableChair = state.editableChair;
-            console.log(newEditableChair.status)
             newEditableChair.status = action.payload
-            console.log(newEditableChair.status)
-            return {...state, editableChair : newEditableChair}
+            console.log(newEditableChair)
+
+            let modifiedScheduled = state.allChairs.filter(chair => chair.id != state.editableChair.id)
+            modifiedScheduled.push(newEditableChair)
+           
+            let neweditablechairSchedule = state.allChairsSchedule.find(chair => chair.id == state.editableChair.id)
+            let newAllChairsSchedule = state.allChairsSchedule.filter(chair => chair.id != state.editableChair.id)
+            neweditablechairSchedule.status =action.payload
+            newAllChairsSchedule.push(neweditablechairSchedule)
+
+            return {...state, editableChair : newEditableChair, allChairs: sortById(modifiedScheduled), allChairsSchedule : sortById(newAllChairsSchedule)}
         }
  
         case BACKOFFICE_TURN_TYPES.SWITCH_DAY_STATUS :{
