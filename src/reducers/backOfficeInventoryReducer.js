@@ -68,11 +68,12 @@ export function backofficeInventoryReducer(state, action){
     switch(action.type){
 
         case BACKOFFICE_INVENTORY_TYPES.CHANGE_PRODUCT_VALUE :{
-            let editableProduct = state.allProducts.find(product => product.id == action.productId);
+            let editableProduct = state.allProducts.find(product => product.id == action.productId) ? state.allProducts.find(product => product.id == action.productId) : state.newProductSqueleton
             let returnAllProducts = state.allProducts.filter(product => product.id != action.productId);
             editableProduct[action.editableField] =action.payload 
             returnAllProducts.push(editableProduct);
-            return {...state,allProducts: sortById(returnAllProducts)}
+            let updateEsqueleton = state.allProducts.find(product => product.id == action.productId) ? state.newProductSqueleton : createNewVirtual(returnAllProducts);
+            return {...state, allProducts: sortById(returnAllProducts), newProductSqueleton: updateEsqueleton, filteredBysearch:sortById(returnAllProducts)}
         }
 
 

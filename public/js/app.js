@@ -8018,6 +8018,48 @@ var ModalProductEditor = function ModalProductEditor(_ref) {
     }
   };
 
+  var creeateNewProduct = function creeateNewProduct() {
+    var parent = document.getElementById("modalProductEditor".concat(editableProduct.id));
+    var nameField = parent.querySelector("#backofice-product-name-editor");
+    var descriptionField = parent.querySelector("#backofice-product-description-editor");
+    var stockField = parent.querySelector("#backofice-product-stock-editor");
+    var priceField = parent.querySelector("#backofice-product-price-editor");
+    var categoryField = parent.querySelector("#backofice-product-category-editor");
+    var selectedCategroyId = categoryField.options[categoryField.selectedIndex].id;
+
+    if (nameField.value == "" || descriptionField.value == "" || stockField.value == "" || priceField.value == "") {
+      var nameAlert = nameField.value != "" ? "" : " <span style=\"font-weight:700;\" >Nombre </span><br><br>  ";
+      var descriptionAlert = descriptionField.value != "" ? "" : "<span style=\"font-weight:700;\" >Descripci\xF3n </span><br><br>";
+      var stockAlert = stockField.value != "" ? "" : "<span style=\"font-weight:700;\" >Stock </span><br><br>";
+      var priceAlert = priceField.value != "" ? "" : "<span style=\"font-weight:700;\" >Precio </span><br><br>";
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+        title: "Atención",
+        html: "Para crear un nuevo producto debe completar los siguientes campos<br><br> \n            ".concat(nameAlert, " ").concat(descriptionAlert, " ").concat(stockAlert).concat(priceAlert),
+        icon: 'warning'
+      });
+    } else {
+      saveProductConfig(nameField.value, "name", editableProduct.id);
+      nameField.value = "";
+      saveProductConfig(descriptionField.value, "description", editableProduct.id);
+      descriptionField.value = "";
+      saveProductConfig(selectedCategroyId, "categories_id", editableProduct.id);
+      saveProductConfig(stockField.value, "stock", editableProduct.id);
+      stockField.value = "";
+      saveProductConfig(priceField.value, "price", editableProduct.id);
+      priceField.value = "";
+      saveProductConfig(todayString, "updated_at", editableProduct.id);
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+        text: "".concat(editableProduct.name, " creado con \xE9xito."),
+        timer: "2000",
+        position: "bottom",
+        customClass: {
+          container: "add-to-cart-alert-container",
+          popup: "add-to-cart-alert"
+        }
+      });
+    }
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "modal fade",
     id: "modalProductEditor".concat(editableProduct.id),
@@ -8032,9 +8074,9 @@ var ModalProductEditor = function ModalProductEditor(_ref) {
         className: "modal-content",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "modal-header",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
             "class": "modal-title fw-bold font-h1",
-            children: [" Editar ", editableProduct.name]
+            children: newProduct ? "Crear nuevo producto" : "Editar ".concat(editableProduct.name)
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             type: "button",
             className: "btn-close",
@@ -8194,7 +8236,7 @@ var ModalProductEditor = function ModalProductEditor(_ref) {
             className: "btn btn-dark",
             "data-bs-dismiss": "modal",
             onClick: function onClick() {
-              return console.log('newproduct');
+              return creeateNewProduct();
             },
             children: "Crear Producto"
           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
@@ -8448,7 +8490,8 @@ var ProductsDashboard = function ProductsDashboard(_ref) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(filteredBysearch),
       _useState2 = _slicedToArray(_useState, 2),
       pagintaionProducts = _useState2[0],
-      setProductsPagination = _useState2[1];
+      setProductsPagination = _useState2[1]; // const [newProduct, setNewProduct] = useState(newProductSqueleton)
+
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -8472,6 +8515,7 @@ var ProductsDashboard = function ProductsDashboard(_ref) {
 
               case 2:
                 res = _context.sent;
+                // const newProd = await newProductSqueleton;
                 setProductsPagination(res);
 
               case 4:
@@ -8515,10 +8559,10 @@ var ProductsDashboard = function ProductsDashboard(_ref) {
     }
   }
 
-  function setDefaultCategory(productid) {
+  function setDefaultCategory(productid, categoryId) {
     var parent = document.getElementById("modalProductEditor".concat(productid));
     var selector = parent.querySelector("#backofice-product-category-editor");
-    selector.value = selector.querySelector("[id='".concat(productid, "']")).value;
+    selector.value = selector.querySelector("[id='".concat(categoryId, "']")).value;
   }
 
   function getCategoryId(name) {
@@ -8700,7 +8744,7 @@ var ProductsDashboard = function ProductsDashboard(_ref) {
                           "data-bs-toggle": "modal",
                           "data-bs-target": "#modalProductEditor".concat(product.id),
                           onClick: function onClick() {
-                            setDefaultCategory(product.id);
+                            setDefaultCategory(product.id), product.categories_id;
                           },
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
                             className: "bi bi-pencil fs-7"
@@ -15165,14 +15209,21 @@ function backofficeInventoryReducer(state, action) {
       {
         var editableProduct = state.allProducts.find(function (product) {
           return product.id == action.productId;
-        });
+        }) ? state.allProducts.find(function (product) {
+          return product.id == action.productId;
+        }) : state.newProductSqueleton;
         var returnAllProducts = state.allProducts.filter(function (product) {
           return product.id != action.productId;
         });
         editableProduct[action.editableField] = action.payload;
         returnAllProducts.push(editableProduct);
+        var updateEsqueleton = state.allProducts.find(function (product) {
+          return product.id == action.productId;
+        }) ? state.newProductSqueleton : createNewVirtual(returnAllProducts);
         return _objectSpread(_objectSpread({}, state), {}, {
-          allProducts: sortById(returnAllProducts)
+          allProducts: sortById(returnAllProducts),
+          newProductSqueleton: updateEsqueleton,
+          filteredBysearch: sortById(returnAllProducts)
         });
       }
 
@@ -23310,7 +23361,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#backofice-product-imagen-editor-viewer{\n    height: 200px;\n    width:200px;\n    background-size: cover;\n    border: solid 2px #000;\n    border-radius: 5px;\n    cursor: pointer;\n}\n\n\n#backofice-product-imagen-editor-viewer:hover {\n    border: solid 2px red !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#backofice-product-imagen-editor-viewer{\n    height: 200px;\n    width:200px;\n    background-size: cover;\n    border: solid 2px #000;\n    border-radius: 5px;\n    cursor: pointer;\n    transition: all 0.5s;\n    \n}\n\n\n#backofice-product-imagen-editor-viewer:hover #backofice-product-imagen-editor-viewer-overlay {\n    opacity: 0.7;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
