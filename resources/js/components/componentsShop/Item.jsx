@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ITEM_PRODUCTS } from '../../constants/ConstItem';
 // import Counter from "../../counter";
 import { useReducer } from "react";
-import { cartItemsData, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
+import { cartItemsData, shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import mapDispatcht from "../../shoppingCartUses";
 import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
 import { TYPES } from "../../../../src/actions/shoppingActions";
 import { main } from "@popperjs/core";
-
-
+import ShowAllProducts from "../../helpers/ItemHelpers";
 
 const Item = () => {
   let URL = window.location.pathname;
@@ -19,17 +18,11 @@ const Item = () => {
 
   const urlImg = require.context('../../../asset/product', true);
 
-  let existentProducts = ITEM_PRODUCTS.products.filter(function (item) {
-    const itemDataCut = String(item.id).toUpperCase();
-    const textDataCut = String(URLproduct).toUpperCase();
-    return itemDataCut.indexOf(textDataCut) > -1
-  });
-
-  const mainitem = existentProducts[0]
-
-  const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
+  const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
   const{products, cart} = state;
   
+  const readAllData = mapDispatcht(dispatch).readAllData;
+
   const addToCart = mapDispatcht(dispatch).addToCart;
 
   const addOneToCart = mapDispatcht(dispatch).addOneToCart;
@@ -44,6 +37,20 @@ const Item = () => {
 
   // const decrement = mapDispatcht(dispatch).decrement;
 
+  let existentProducts = products;
+  
+  if(products.length >= 2){
+
+    existentProducts = products.filter(function (item) {
+      const itemDataCut = String(item.id).toUpperCase();
+      const textDataCut = String(URLproduct).toUpperCase();
+      return itemDataCut.indexOf(textDataCut) > -1
+    });
+  
+  }
+
+  const mainitem = existentProducts[0]
+  
   
   let itemInCart = cart.find((item) => item.id === mainitem.id);
 
@@ -59,7 +66,7 @@ const Item = () => {
   let addingButton = document.querySelector(".adding-button");
   let removingButton = document.querySelector(".removing-button");
     
-
+  
 
   // function buttonListener() {
   //   if (aviableStock <= mainitem.stock) {
@@ -85,9 +92,13 @@ const Item = () => {
     setCount(parseInt(count) - 1);
   }
 
-
-
-
+  useEffect(()=> {
+    const showItem = async () => {
+      const res = await ShowAllProducts();
+      readAllData(res);
+    }
+    showItem();
+  },[])
 
   return (
     <div className="row bg-white justify-content-evenly font-p">
@@ -177,3 +188,13 @@ const Item = () => {
 
 
 export default Item;
+
+
+if( document.getElementById("item")){
+  ReactDOM.render(
+    <React.StrictMode>
+      <Item/>
+    </React.StrictMode>,
+    document.getElementById("item")
+  );
+}

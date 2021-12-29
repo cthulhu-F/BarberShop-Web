@@ -41,7 +41,7 @@ const SidebarHeader = () =>{
         
             <div>
                 <div className="d-flex flex-column flex-shrink-0 py-2">
-                    <a href="home" className="d-flex justify-content-center text-decoration-none text-white fs-4 p-2 fw-bold">
+                    <a href="/" className="d-flex justify-content-center text-decoration-none text-white fs-4 p-2 fw-bold">
                     <i className="bi bi-box  ms-1 mx-xl-2 me-xl-2"></i>
                     <div className="d-none d-xl-inline text-color-gradient">BACK OFFICE</div>
                     </a>

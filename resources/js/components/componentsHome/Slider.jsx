@@ -1,21 +1,30 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
-import { ITEM_PRODUCTS } from '../../constants/ConstItem';
+//import { ITEM_PRODUCTS } from '../../constants/ConstItem';
 import SliderItem from './SliderItem';
 
   /*MODAL SHOP IMPORTS*/
 import { useReducer } from 'react';
-import { shoppingReducer, cartItemsData} from '../../../../src/reducers/shoppingReducer';
+import { shoppingReducer, cartItemsData, shoppingInitialState} from '../../../../src/reducers/shoppingReducer';
 import mapDispatcht from '../../shoppingCartUses';
 import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
+import { useEffect } from 'react';
+import ShowAllProducts from '../../helpers/ItemHelpers';
+
+
 
 const Slider = () => {
 
-  
 
   /*MODAL SHOP ASSETS*/
-  const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
+  const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
   const{products, cart} = state;
+
+  /* APPI CRUD */
+
+  const readAllData = mapDispatcht(dispatch).readAllData;
+
+  /* END */
 
   const addToCart = mapDispatcht(dispatch).addToCart;
 
@@ -25,9 +34,15 @@ const Slider = () => {
 
   const cleanCart = mapDispatcht(dispatch).cleanCart;
 
-
   let SliderProducts_1 = products.slice(0, 4);
 
+  useEffect(()=> {
+    const showItem = async () => {
+      const res = await ShowAllProducts();
+      readAllData(res);
+    }
+    showItem();
+  },[])
 
 
   return(

@@ -71,6 +71,14 @@ export const turnStateData = {
 
 export function turnReducer(state, action){
     switch(action.type){
+        case TURN_TYPES.READ_ALL_TURN:{
+            return Object.assign({}, state, { chairs: action.payload })
+        }
+
+        case TURN_TYPES.READ_ALL_DAY:{
+            return Object.assign({}, state, { chairConfigDay: action.payload })
+        }
+
         case TURN_TYPES.GET_AVIABLES_CHAIRS:{
             const activeChairs =[];
             state.chairs.map(chair=> {
@@ -91,16 +99,22 @@ export function turnReducer(state, action){
             if (action.date =="null"){
                 action.date = selecetDay;
             };
-            console.log(action.date)
+            console.log("action");
+            console.log(action.date);
+
             let dateData = action.date.split("-");
             let dt = new Date(dateData) 
             let weekDayIndex = dt.getDay();
             let weekDay =days[weekDayIndex];
             
             let chairAviability = state.chairConfigDay.find(chair=>chair.id === action.payload);
-            console.log(chairAviability)  
+            //console.log(chairAviability)  
+            console.log("chair");
+            console.log(action.payload);
+
             let daySchedule = chairAviability.days[weekDay].split("/");
-            console.log(daySchedule)  
+            //console.log(daySchedule)  
+            
             let turnsAmount = daySchedule[2];
             let open = new Date("December 14, 2021 " + `${daySchedule[0]}` + ":00");
             let colse = new Date("December 14, 2021 "+ `${daySchedule[1]}`+ ":00");
@@ -127,24 +141,24 @@ export function turnReducer(state, action){
         
         case TURN_TYPES.SAVE_TURN:{
             let turnConfirmed = {
-                id: 1,
+                //id: 1,
                 name: state.chairs.find((chair)=>chair.id === state.activeChairId).name,
                 name_client: state.client_data.name_client,
                 email_client: state.client_data.email_client, 
                 phone_client: state.client_data.phone_client, 
                 date: state.selecetDay,
                 time: state.selectedHour,
-                update_at: today, 
-                status: "ACTIVE"
+                //update_at: today, 
+                //status: "ACTIVE"
                 }
-            console.log(turnConfirmed)
-            return state;
+            //console.log(turnConfirmed)
+            return turnConfirmed;
             
         }
 
         case TURN_TYPES.SET_USER_DATA:{
             const {name, phone, email} = action.payload
-            console.log(action.payload.name)
+            //console.log(action.payload.name)
             return {...state, client_data: {
                 name_client: name,
                 phone_client: phone,

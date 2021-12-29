@@ -40,18 +40,19 @@ const Login = () => {
 
         let validate = await Authorization(post);
 
-        console.log(validate.data);
-
-        if(validate.data != 'Unauthenticated'){      
-            window.location.replace(validate.data)
+        console.log(validate.data.message);
+        
+        if(validate.status != 201){      
+            window.location.replace(validate.data.url)
         } else {
             swal.fire({
                 icon: 'error',
                 title: 'Error de autenticacion',
-                text: 'El usuario o contraseña ingresados no existe',
+                text: validate.data.message,
                 showConfirmButton: false,
               })
         }
+        
     }
 
 

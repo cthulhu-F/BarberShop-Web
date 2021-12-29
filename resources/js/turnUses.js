@@ -10,6 +10,19 @@ import { TURN_TYPES } from "../../src/actions/turnActions";
 const turnMapDispatcht = (dispatch) => {
 
     return {
+
+        //API DATA
+
+        readAllTurn: (data) => {
+            dispatch({ type: TURN_TYPES.READ_ALL_TURN, payload: data});
+        },
+
+        readAllDay: (data) => {
+            dispatch({ type: TURN_TYPES.READ_ALL_DAY, payload: data});
+        },
+
+        //END
+
         getChairs: () => {
             dispatch({ type: TURN_TYPES.GET_AVIABLES_CHAIRS});
         },

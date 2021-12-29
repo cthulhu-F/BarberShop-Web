@@ -18,8 +18,9 @@ const Header = () => {
     URLpage ='home';
   }
 
-  let headerClasses ="nav-link link-black";
-  let shopClasses ="nav-link link-black";
+
+  let headerClasses ="nav-link link-black border-0";
+  let shopClasses ="nav-link link-black border-0";
   
   if (URLpage == 'home'){
     headerClasses= "nav-link link-black border-0 border-dark border-bottom";

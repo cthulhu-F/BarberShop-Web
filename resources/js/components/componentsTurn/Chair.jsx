@@ -21,17 +21,18 @@ const setActive = (id)=>{
 };
 
 const Chair = ({data, setActiveChair, getSchedule, selecetDay}) =>{
-    let {id, name, status} = data;
+    let {id, name, status, configDay_id} = data;
+
 
 
     return(
-        <div className="col-md-4 " style={{marginBottom:"20px"}} >
-            <button className="card p-4 chair-item text-dark text-decoration-none" style={{alignItems: "center"}}  id={id} onClick={()=>{setActive(id); setActiveChair(id); getSchedule(id,selecetDay )}}>
-                <div className="d-flex flex-row mb-3">
+        <div className="col-md-4" style={{marginBottom:"20px"}} >
+            <button className="chair-item btn p-4 text-dark text-decoration-none d-flex justify-content-center aling-middle" id={id} onClick={()=>{setActive(id); setActiveChair(id); getSchedule(id,selecetDay )}}>
+                <div className="d-flex">
                     <i className="bi bi-scissors"></i>
-                    <div className="d-flex flex-column ml-2">
+                    <div className="">
                         <span>{name}</span>
-                    </div>
+                </div>
                 </div>
             </button>
         </div>

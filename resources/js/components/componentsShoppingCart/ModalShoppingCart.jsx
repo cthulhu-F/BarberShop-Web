@@ -6,37 +6,36 @@ import swal from'sweetalert2';
 
 
 const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => {
+  const urlImg = require.context('../../../asset/product', true);
 
   let shoppingCartItem = data;
   const buttonsStyle = {
     display: 'unset',
   };
 
-  if (data.length === 0) {
-    shoppingCartItem = [{
-      id: "Sin datos",
-      name: "Sin datos",
-      quantity: 0.00,
-      price: 0.00,
-    }]
-
-    buttonsStyle['display'] = "none";
-  }
 
   const cleanCartConfirmed = ()=>{
-    swal.fire({ 
-      title: "Vaciar carrito",
-      text: "¿Desea vaciar su carrito?",
-      icon:"warning",
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      confirmButtonText: "Sí, vaciar",
-    }).then((result) =>{
-      if (result.isConfirmed){
-        cleanCart();
-        
-      }
-    })
+    if(data.length !== 0 ){
+      swal.fire({ 
+        title: "Vaciar carrito",
+        text: "¿Desea vaciar su carrito?",
+        icon:"warning",
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: "Sí, vaciar",
+      }).then((result) =>{
+        if (result.isConfirmed){
+          cleanCart();
+        }
+      })
+    } else {
+      swal.fire({ 
+        title: "El carrito se encuentra vacio",
+        icon:"error",
+        showCancelButton: false,
+        showConfirmButton: false
+      })
+    }
   }
   
 
@@ -70,11 +69,16 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
                     <tbody style={{verticalAlign: "middle"}}>
 
                       {
+                        data.length !== 0 ?
                         shoppingCartItem.map((item) => (
                           <tr>
                             <td>
                               <div className="d-flex" style={{ height: "50px" }}>
-
+                                  <img 
+                                    src={urlImg(item.img).default}
+                                    className="rounded" 
+                                    alt={item.name}
+                                  />
                               </div>
                             </td>
                             <td className="">
@@ -96,6 +100,12 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
                             </td>
                           </tr>
                         ))
+                        :
+                        (
+                          <tr>
+                            <td colSpan={6}><div className="w-100 aling-middle text-center text-muted">No hay datos</div></td>
+                          </tr>
+                        )
                       }
 
 
@@ -108,8 +118,14 @@ const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => 
           </div>
 
           <div className="modal-footer">
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>cleanCartConfirmed()}>Vaciar carrito </button>
-            <a href="/shoppingCart" className="btn btn-black">Completar compra</a>
+            <div className="row w-100">
+                <div className="col-12 col-xl-6">
+                <button type="button" className="btn btn-danger w-100 my-1" data-bs-dismiss="modal" onClick={()=>cleanCartConfirmed()}>Vaciar carrito </button>
+                </div>
+                <div className="col-12 col-xl-6">
+                <a href="/shoppingCart" className="btn btn-black w-100 my-1">Completar compra</a>
+                </div>
+            </div>
           </div>
 
         </div>

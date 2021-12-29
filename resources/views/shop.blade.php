@@ -31,7 +31,7 @@
   </section>
 
 
-  <footer class="text-center text-lg-start bg-dark text-muted font-h1">
+  <footer class="text-center text-lg-start bg-black text-muted font-h1">
     <div id="footer"></div>
   </footer>
 

@@ -6,17 +6,21 @@ import { TYPES } from "../../../../src/actions/shoppingActions";
 import ShopItem from "./ShopItem";
 
   /*MODAL SHOP IMPORTS*/
-  import { useReducer } from 'react';
-  import { shoppingReducer, cartItemsData} from '../../../../src/reducers/shoppingReducer';
+  import { useReducer, useEffect } from 'react';
+  import { shoppingReducer, cartItemsData, shoppingInitialState} from '../../../../src/reducers/shoppingReducer';
   import mapDispatcht from '../../shoppingCartUses';
   import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
+  import ShowAllProducts from "../../helpers/ItemHelpers";
 
 
 const Shop = () => {
+  
 
   /*MODAL SHOP ASSETS*/
-  const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
+  const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
   const{products, cart} = state;
+
+  const readAllData = mapDispatcht(dispatch).readAllData;
 
   const addToCart = mapDispatcht(dispatch).addToCart;
 
@@ -25,6 +29,14 @@ const Shop = () => {
   const deleteFromCart = mapDispatcht(dispatch).deleteFromCart;
 
   const cleanCart = mapDispatcht(dispatch).cleanCart;
+
+  useEffect(()=> {
+    const showItem = async () => {
+      const res = await ShowAllProducts();
+      readAllData(res);
+    }
+    showItem();
+  },[])
 
 
   return (

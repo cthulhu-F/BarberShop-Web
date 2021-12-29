@@ -12,6 +12,7 @@ import Tab from 'react-bootstrap/Tab';
 // import { Tabs,TabList, Tab, TabPanel } from "react-tabs";
 import Button from "@restart/ui/esm/Button";
 import "../../../css/ModalTurn.css"
+import "../../../css/main.css"
 
 import { useForm } from "react-hook-form";
 
@@ -24,6 +25,8 @@ import swal from "sweetalert2";
 import { parse } from "postcss";
 import { min } from "lodash";
 import { TabList } from "react-tabs";
+import CreateOrderTurn, { ShowConfigDay, ShowConfigTurn } from "../../helpers/TurnHelpers";
+import { useEffect } from "react";
 
 
 const ModalTurn = () => {
@@ -32,6 +35,14 @@ const ModalTurn = () => {
   const {chairs, day, schedule, completeOrder,chairIsSelected, activeChairId, selecetDay, hourIsSelected, selectedHour ,userData, client_data} = turnState;
 
   const {name_client, phone_client, email_client, client_is_registered} = client_data;
+
+  //API
+  
+  const readAllTurn = turnMapDispatcht(dispatch).readAllTurn;
+  
+  const readAllDay = turnMapDispatcht(dispatch).readAllDay;
+
+  //END 
 
   const getChairs = turnMapDispatcht(dispatch).getChairs;
 
@@ -78,7 +89,7 @@ const ModalTurn = () => {
       setUserData(data);
       advancaTab();
     }else{
-      console.log(data);
+      //console.log(data);
     }
   }
 
@@ -123,9 +134,37 @@ const ModalTurn = () => {
   }
 
 
-  const alertAndsaveTurn =(event)=>{
+  const alertAndsaveTurn = async (event)=>{
     event.preventDefault();
-    saveTurn();
+
+    let turnConfirmed = {
+      //id: 1,
+      name: chairs.find((chair)=>chair.id === activeChairId).name,
+      name_client: client_data.name_client,
+      email_client: client_data.email_client, 
+      phone_client: client_data.phone_client, 
+      date: selecetDay,
+      time: selectedHour,
+      //update_at: today, 
+      //status: "ACTIVE"
+    }
+
+    let urlPDF = (
+      "http://127.0.0.1:8000/api/ShiftInvoice?name=" + 
+      turnConfirmed.name_client 
+      + "&email=" +
+      turnConfirmed.email_client
+      + "&phone=" +
+      turnConfirmed.phone_client
+      + "&date=" +
+      turnConfirmed.date
+      + "&time=" +
+      turnConfirmed.time
+      );
+    
+    let response = await CreateOrderTurn(turnConfirmed);
+
+    
     swal.fire({
       title: "Turno guradado con éxito!",
       html: `<span style="font-weight:700;" >Motivo:</span> ${chairs.find((chair)=>chair.id === activeChairId).name} <br><br>
@@ -133,12 +172,31 @@ const ModalTurn = () => {
       <span style="font-weight:700;" >Fecha:</span> ${selecetDay}<br><br>
       <span style="font-weight:700;" >Hora:</span> ${selectedHour}`,
       timer:5000})
-      .then(()=>{}).then(()=>{window.location = ""})
+      .then(()=>{}).then(()=>{
+        window.open(urlPDF)
+        window.location.href = ' ';
+      })
+    
   }
 
 
   const [selectedTab, setSelectedTab] = useState(0);
   const tabCount = 3;
+
+  console.log(activeChairId);
+
+  useEffect(()=>{
+    async function ShowDay(){
+      const resDay = await ShowConfigDay();
+      const resTurn = await ShowConfigTurn();
+      
+      readAllDay(resDay);
+      readAllTurn(resTurn);
+
+    }
+    ShowDay()
+
+  },[])
 
   return(
     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -242,7 +300,7 @@ const ModalTurn = () => {
 
                 </div>
                 <div className="modal-footer" style={{margin:"20px 0px 0px 0px"}}>
-                  <button className="btn btn-black" type="submit" value="submit"  className="btn login_btn" onClick={()=>onSubmit()}>{setTabMessage()}</button>
+                  <button className="btn btn-black" type="submit" value="submit"  className="btn w-100 btn-orangeWeb" onClick={()=>onSubmit()}>{setTabMessage()}</button>
                 </div>
               </form>
             </Tab>
@@ -299,7 +357,7 @@ const ModalTurn = () => {
                 </div>
 
                 <div className="modal-footer" style={{margin:"20px 0px 0px 0px"}}>
-                  <button type="button" className="btn login_btn btn-black"  onClick={()=>setTurnDataValidated()}>Siguiente</button>
+                  <button type="button" className="btn login_btn btn-orangeWeb"  onClick={()=>setTurnDataValidated()}>Siguiente</button>
                 </div>
 
             </Tab>
@@ -356,7 +414,7 @@ const ModalTurn = () => {
 
                 <div className="modal-footer" style={{margin:"20px 0px 0px 0px"}}>
                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" value="submit" className="btn btn-black" onClick={(event)=>{alertAndsaveTurn(event)}}>Generar turno</button>
+                  <button type="submit" value="submit" className="btn btn-orangeWeb" onClick={(event)=>{alertAndsaveTurn(event)}}>Generar turno</button>
                      
                 </div>
               </form>

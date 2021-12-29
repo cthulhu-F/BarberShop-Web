@@ -6,6 +6,10 @@ export const TURN_TYPES ={
     SET_HOUR                :"SET_HOUR",
     SAVE_TURN               : "SAVE_TURN",
     SET_USER_DATA           :"SET_USER_DATA",
-    SET_TURN_DATA           :"SET_TURN_DATA"
-    
+    SET_TURN_DATA           :"SET_TURN_DATA",
+
+    //API ACTIONS
+
+    READ_ALL_DAY            :"READ_ALL_DAY",
+    READ_ALL_TURN           :"READ_ALL_TURN"
 }

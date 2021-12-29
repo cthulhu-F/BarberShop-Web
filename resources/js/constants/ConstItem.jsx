@@ -2,43 +2,26 @@ export const ITEM_PRODUCTS = {
   products: [
     {
       id: 1,
-      name: "Producto 1",
+      name: "producto 1",
+      sku: "",
       img: "./img_product.jpg",
-      description: "Descripcion del producto",
-      quantity: 1,
-      price: "10.99",
-      stock: 10,
-      inmutableStock:10,
+      description: "description",
+      stock: "10",
+      price: "10",
+      categories_id: 1,
+      created_at: "00/00/00",
+      updated_at: "00/00/00",
+      status: "ACTIVE"
     },
-    {
-      id: 2,
-      name: "Producto 2",
-      img: "./img_product.jpg",
-      description: "Descripcion del producto",
-      quantity: 1,
-      price: "10.99",
-      stock: 10,
-      inmutableStock:10,
-    },
-    {
-      id: 3,
-      name: "Producto 3",
-      img: "./img_product.jpg",
-      description: "Descripcion del producto",
-      quantity: 1,
-      price: "10.99",
-      stock: 10,
-      inmutableStock:10,
-    },
-    {
-      id: 4,
-      name: "Producto 4",
-      img: "./img_product.jpg",
-      description: "Descripcion del producto",
-      quantity: 1,
-      price: "10.99",
-      stock: 10,
-      inmutableStock:10,
-    }
   ],
+  categories: [
+    {
+      id: 1,
+      name: "categoria 1",
+      created_at: "00/00/00",
+      updated_at: "00/00/00",
+      status: "ACTIVE"
+    }
+  ]
+
 }

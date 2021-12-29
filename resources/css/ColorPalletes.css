@@ -70,14 +70,60 @@
 
 .btn-orangeWeb{
     background-color:  #FCA311!important;
-    color: #000000;
-    border: 1px solid #E5E5E5!important;
+    color: #E5E5E5!important;
+    border: 1px solid #FCA311!important;
 
     transition: 0.5s;
 }
 
 .btn-orangeWeb:hover{
     color: #E5E5E5!important;
+    border: 1px solid #E5E5E5!important;
+}
+
+.btn-oxfordBlue{
+    color: #E5E5E5!important;
+    background-color: #14213D!important;
+    border: 1px solid #14213D!important;
+
+    transition: 0.5s;
+} 
+
+.btn-oxfordBlue:hover{
+    color: #E5E5E5!important;
+    background-color: #14213D!important;
+    border: 1px solid #E5E5E5!important;
+}
+
+.btn-platinum{
+    color: #000000;
+    background-color: #E5E5E5!important;
+    border: 1px solid #000000;
+
+    transition: 0.5s;
+}
+
+.btn-platinum:hover{
+    color: #000000;
+    background-color: #E5E5E5!important;
+    border: 1px solid #E5E5E5!important;
+
+    transition: 0.5s;
+}
+/* BTN OUTLINE EXTRA*/
+
+.btn-outline-orangeWeb{
+    background-color:  white!important;
+    color: #FCA311!important;
+    border: 1px solid #FCA311!important;
+
+    transition: 0.5s;
+}
+
+.btn-outline-orangeWeb:hover{
+    background-color:  #FCA311!important;
+    color: white!important;
+    border: 1px solid #E5E5E5!important;
 }
 
 /* LINK COLOR EXTRA */
@@ -114,7 +160,7 @@
 
 .navbar-link-primary:hover{
     color: #000000!important;
-    background-color: #E5E5E5!important;
+    background-color:  #f8f9fa!important;
 }
 
 .navbar-link-primary:hover > a{
@@ -123,7 +169,7 @@
 
 .navbar-link-active-primary{
     color: #000000!important;
-    background-color: #E5E5E5!important;
+    background-color:  #f8f9fa!important;
 }
 
 .navbar-link-active-primary>a{

@@ -22,4 +22,29 @@ class HomeController extends Controller
         //$user = User::find(2);
         return view('index');
     }
+
+    public function shop(Request $request)
+    {   
+
+        //$request->user()->authorizeRoles(['user','admin']);
+        //$user = User::find(2);
+        return view('shop');
+    }
+
+    public function shoppingCart(Request $request)
+    {   
+
+        //$request->user()->authorizeRoles(['user','admin']);
+        //$user = User::find(2);
+        return view('shoppingCart');
+    }
+
+    public function item(Request $request, $id)
+    {   
+        //$request->user()->authorizeRoles(['user','admin']);
+        //$user = User::find(2);
+        return view('item');
+    }
+
+    
 }

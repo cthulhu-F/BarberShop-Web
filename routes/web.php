@@ -43,3 +43,6 @@ Route::group([
 */
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/shop', [HomeController::class, 'shop']);
+Route::get('/shoppingCart', [HomeController::class, 'shoppingCart']);
+Route::get('/product/{id}', [HomeController::class, 'item']);

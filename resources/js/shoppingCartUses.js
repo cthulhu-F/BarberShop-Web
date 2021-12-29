@@ -11,6 +11,13 @@ import { TYPES } from "../../src/actions/shoppingActions";
 const mapDispatcht = (dispatch) => {
 
     return {
+        //API CRUD
+
+        readAllData: (data) => {
+            dispatch({ type:TYPES.READ_ALL_DATA, payload: data })
+        },
+
+        //
         addToCart: (id, quantity) => {
             dispatch({ type: TYPES.ADD_TO_CART, payload: id, quantity: quantity });
         },

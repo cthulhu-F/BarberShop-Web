@@ -33,24 +33,24 @@ const Footer = () => {
                                 </div>
 
                                 <div className="col-12 col-xl-3 d-flex justify-content-center">
-                                    <ul className="list-group bg-dark p-1">
-                                        <li className="list-group-item border-0 bg-dark p-1"><a className="text-decoration-none link-white" href="">Informacion</a></li>
-                                        <li className="list-group-item border-0 bg-dark p-1"><a className="text-decoration-none link-white" href="">Quienes somos</a></li>
-                                        <li className="list-group-item border-0 bg-dark p-1"><a className="text-decoration-none link-white" href="">Terminos y condiciones</a></li>
+                                    <ul className="list-group bg-black p-1">
+                                        <li className="list-group-item border-0 bg-black p-1"><a className="text-decoration-none link-white" href="">Informacion</a></li>
+                                        <li className="list-group-item border-0 bg-black p-1"><a className="text-decoration-none link-white" href="">Quienes somos</a></li>
+                                        <li className="list-group-item border-0 bg-black p-1"><a className="text-decoration-none link-white" href="">Terminos y condiciones</a></li>
                                     </ul>
                                 </div>
 
                                 <div className="col-12 col-xl-3 d-flex justify-content-center">
-                                    <ul className="list-group bg-dark p-1">
-                                        <li className="list-group-item border-0 border-white border-bottom bg-dark p-1">
+                                    <ul className="list-group bg-black p-1">
+                                        <li className="list-group-item border-0 border-white border-bottom bg-black p-1">
                                             <a className="text-decoration-none  link-white" href="">Home</a>
                                         </li>
 
-                                        <li className="list-group-item border-0 border-white border-bottom bg-dark p-1">
+                                        <li className="list-group-item border-0 border-white border-bottom bg-black p-1">
                                             <a className="text-decoration-none link-white" href="">Shop</a>
                                         </li>
 
-                                        <li className="list-group-item border-0 bg-dark p-1">
+                                        <li className="list-group-item border-0 bg-black p-1">
                                             <a className="text-decoration-none btn btn-light m-0 fs-6" href="">
                                                 <i className="bi bi-scissors"></i>
                                                 Reserva tu turno
@@ -61,23 +61,23 @@ const Footer = () => {
                                 </div>
 
                                 <div className="col-12 col-xl-3 d-flex justify-content-xl-center justify-content-center">
-                                    <ul className="list-group bg-dark p-1">
+                                    <ul className="list-group bg-black p-1">
 
-                                        <li className="list-group-item  text-xl-start p-0 border-0 bg-dark py-1">
+                                        <li className="list-group-item  text-xl-start p-0 border-0 bg-black py-1">
                                             <a className="text-decoration-none link-white row" href="">
                                                 <i className="bi bi-geo-alt col-3"></i>
                                                 <p className="col-9">Direccion</p>
                                             </a>
                                         </li>
 
-                                        <li className="list-group-item text-xl-start p-0 border-0 bg-dark py-1">
+                                        <li className="list-group-item text-xl-start p-0 border-0 bg-black py-1">
                                             <a className="text-decoration-none link-white row" href="">
                                                 <i className="bi bi-telephone col-3"></i>
                                                 <p className="col-9"> Telefono</p>
                                             </a>
                                         </li>
 
-                                        <li className="list-group-item bg-dark text-xl-start p-0 border-0  py-1">
+                                        <li className="list-group-item bg-black text-xl-start p-0 border-0  py-1">
                                             <a className="text-decoration-none link-white row" href="">
                                                 <i className="bi bi-envelope col-3"></i>
                                                 <p className="col-9" >Correo</p>
@@ -85,14 +85,14 @@ const Footer = () => {
                                         </li>
 
 
-                                        <li className="list-group-item bg-dark text-xl-start p-0 border-0  py-1">
+                                        <li className="list-group-item bg-black text-xl-start p-0 border-0  py-1">
                                             <a className="text-decoration-none link-white row" href="">
                                                 <i className="bi bi-instagram col-3"></i>
                                                 <p className="col-9" >Instagram</p>
                                             </a>
                                         </li>
 
-                                        <li className="list-group-item bg-dark text-xl-start p-0 border-0  py-1">
+                                        <li className="list-group-item bg-black text-xl-start p-0 border-0  py-1">
                                             <a className="text-decoration-none link-white row" href="">
                                                 <i className="bi bi-facebook col-3"></i>
                                                 <p className="col-9" >Facebook</p>

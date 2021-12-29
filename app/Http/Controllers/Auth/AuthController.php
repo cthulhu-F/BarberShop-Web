@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Auth\AuthRequest;
 
 
 use App\Models\Role;
@@ -58,22 +59,37 @@ class AuthController extends Controller
         
     }
 
+
     public function login(Request $request)
     {
-    $credentials = request()->validate([
+
+    $validate = Validator::make($request->all(),[
         'email' => ['required','email','string'],
         'password' => ['required','string','min:6']
     ]);
 
-
-    if (Auth::attempt($credentials)){
-    request()->session()->regenerate();
-
-    return '/backOffice';
-    }
-    return 'Unauthenticated';
+    if($validate->fails()) {
+        return response()->json($validate->errors(), 400);
     }
 
-    
-    
+    $credentials = ([
+        'email' => $request->email,
+        'password' => $request->password
+    ]);
+
+    if(Auth::attempt($credentials)){
+    $request->session()->regenerate();
+
+    return  response()->json([
+        'message' => 'Credenciales correctas',
+        'url' => 'backOffice/turn'
+        ], 200);
+    } 
+
+   return  response()->json([
+    'message' => 'Verifique su email o contraseña ingresados',
+    'user' => $credentials
+    ], 201);
+
+    }
 }
