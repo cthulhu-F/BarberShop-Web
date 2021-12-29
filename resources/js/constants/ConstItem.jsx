@@ -2,29 +2,6 @@ export const ITEM_PRODUCTS = {
   products: [
     {
       id: 1,
-<<<<<<< HEAD
-      name: "producto 1",
-      sku: "",
-      img: "./img_product.jpg",
-      description: "description",
-      stock: "10",
-      price: "10",
-      categories_id: 1,
-      created_at: "00/00/00",
-      updated_at: "00/00/00",
-      status: "ACTIVE"
-    },
-  ],
-  categories: [
-    {
-      id: 1,
-      name: "categoria 1",
-      created_at: "00/00/00",
-      updated_at: "00/00/00",
-      status: "ACTIVE"
-    }
-  ]
-=======
       name: "Producto 1",
       sku: "",
       img: "./img_product.jpg",
@@ -33,7 +10,7 @@ export const ITEM_PRODUCTS = {
       price: "10.99",
       stock: 10,
       inmutableStock:10,
-      categories_id: 1,
+      cagittegories_id: 1,
       created_at: "00/00/00",
       updated_at: "00/00/00",
       status: "NONACTIVE"
@@ -110,6 +87,5 @@ categories: [
 
 
 ]
->>>>>>> ff6489fe (francolobos/frontend/react/modalProductEditorAndSettings)
 
 }
