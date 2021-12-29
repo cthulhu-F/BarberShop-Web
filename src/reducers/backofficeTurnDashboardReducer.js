@@ -56,14 +56,6 @@ export function backofficeTurnDashboardReducer(state, action){
             return allShcheduled
         }
 
-        // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TODAYS_SCHEDULE :{           
-        //     return {...state, dashboardTurns : state.todayScheduled};
-        // }
-
-
-        // case BACKOFFICE_TURN_DASHBOARD_TYPES.GET_TOMOORROW_SCHEDULE :{
-        //     return {...state, dashboardTurns : state.tomorrowScheduled};
-        // }
 
         case BACKOFFICE_TURN_DASHBOARD_TYPES.FILTER_DASHBOARD:{
             let dateMin = action.min.split('-')
@@ -166,8 +158,8 @@ export function backofficeTurnDashboardReducer(state, action){
             let allScheduleSorted =sortByDate(allTurnsScheduled);
             console.log(allScheduleSorted)
             return {...state, allShcheduled: allScheduleSorted,
-                todayScheduled: filteredByActive(state.todayScheduled),
-                tomorrowScheduled: filteredByActive(state.tomorrowScheduled),
+                todayScheduled: filteredByActive(allScheduleSorted.filter((turn)=>turn.date == todayString)),
+                tomorrowScheduled: filteredByActive(allScheduleSorted.filter((turn)=>turn.date != todayString)),
                 dashboardTurns: state.dashboardTurns,
             }
 
