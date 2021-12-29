@@ -180,8 +180,8 @@ const ProductsDashboard = ({allProducts, allCategories, saveProductConfig, filte
                                         }
 
                                     </td> 
-                                <ModalProductSettings key={product.id} editableProduct={product} saveProductConfig={saveProductConfig}/>
-                                <ModalProductEditor key={product.id} editableProduct={product} saveProductConfig={saveProductConfig} allCategories={allCategories}/>
+                                <ModalProductSettings key={product.id+"setting"} editableProduct={product} saveProductConfig={saveProductConfig}/>
+                                <ModalProductEditor key={product.id+"editor"} editableProduct={product} saveProductConfig={saveProductConfig} allCategories={allCategories}/>
 
                                 </tr>
   

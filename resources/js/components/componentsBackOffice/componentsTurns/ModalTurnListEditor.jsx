@@ -62,12 +62,11 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.open(`https://wa.me/${clienWppLink}?text=${msjUrl}`, '_blank');
-                    editTurnSchedule(
-                        date.value == "" ? date.placeholder : date.value,
-                        time.value == "" ? time.placeholder : time.value,
-                        duration.value == "" ? duration.placeholder : duration.value,
-                        turn);
-                    orderByDate();
+                    editTurnSchedule(date.value, time.value, duration.value,turn);
+                    date.value="";
+                    time.value="";
+                    duration.value="";
+
                     swal.fire({
                         text: 'Datos modificados con éxito',
                         timer:"1500", 

@@ -82,7 +82,7 @@ categories: [
     name: "categoria 3",
     created_at: "00/00/00",
     updated_at: "00/00/00",
-    status: "ACTIVE"
+    status: "NONACTIVE"
   }
 
 

@@ -40,13 +40,74 @@ const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
     function saveConfigChanges (){
         const switcher = document.getElementById("chair-inhabilitator");
         let previousValue;
+        let prevMsjStatus;
+        let NewMsjStatus;        
+
         if (switcher.getAttribute("aria-checked") == "true"){
             previousValue ="ACTIVE";
+            prevMsjStatus = "Activo";
+            NewMsjStatus = "Inactivo";
         }
         else{
             previousValue ="NONACTIVE";
+            prevMsjStatus = "Inactivo";
+            NewMsjStatus = "Activo"
         }
-        saveChairConfig(previousValue, document.getElementById('editable-chair-name-2').value);
+
+        const parent = document.getElementById(`modalChairConfig`)
+        const nameInput = parent.querySelector('#editable-chair-name-2')
+        let newName = nameInput.value == "" ? nameInput.placeholder : nameInput.value
+
+        if (previousValue == editableChair.status || nameInput.value != ""){
+
+            let nameAlert     =   nameInput.value == "" ? "" : ` <span style="font-weight:700;" >Nombre </span><br> ${nameInput.placeholder} ---> ${ nameInput.value} <br> <br>  `;
+            let statusAlert     =   previousValue != editableChair.status ? "" : `<span style="font-weight:700;" >Estado </span><br>  ${prevMsjStatus} ---> ${NewMsjStatus} <br><br>`;            
+
+            swal.fire({
+            title: "Atención",
+            html: `Esta seguro que desea modificar los siguientes datos?<br><br> 
+            ${nameAlert} ${statusAlert}`, 
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#000',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `Si, Modificar Producto`   
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    saveChairConfig(previousValue, document.getElementById('editable-chair-name-2').value);
+                    nameInput.value="";
+                    swal.fire({
+                        text: 'Datos modificados con éxito',
+                        timer:"1500", 
+                        position: "bottom",
+                        customClass : {
+                        container: "add-to-cart-alert-container",
+                        popup:"add-to-cart-alert",
+                        }
+                    })
+                }else{
+                    swal.fire({
+                        text: `Ningún dato ha sido modificado.`,
+                        timer:"1500", 
+                        position: "bottom",
+                        customClass : {
+                            container: "add-to-cart-alert-container",
+                            popup:"add-to-cart-alert",
+                        }
+                       });
+                }
+            })
+        } else{
+            swal.fire({
+                text: `Ningún dato ha sido modificado.`,
+                timer:"1500", 
+                position: "bottom",
+                customClass : {
+                    container: "add-to-cart-alert-container",
+                    popup:"add-to-cart-alert",
+                }
+            });
+        }
     }
 
     

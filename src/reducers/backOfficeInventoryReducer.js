@@ -98,7 +98,20 @@ export function backofficeInventoryReducer(state, action){
             }
             return {...state,filteredBysearch: sortById(filteredProducts)}
         }
+        
 
+        case BACKOFFICE_INVENTORY_TYPES.CHANGE_CATEGORY_VALUE :{
+            console.log(action.payload)
+            let editableCategory = state.allCategories.find(category => category.id == action.categoryId)
+            let returnAllCategories = state.allCategories.filter(category => category.id != action.categoryId);
+            editableCategory[action.editableField] =action.payload 
+            returnAllCategories.push(editableCategory);
+            return {...state, allCategories: sortById(returnAllCategories)}
+        }
+
+        case BACKOFFICE_INVENTORY_TYPES.CREATE_NEW_CATEGORY :{
+            console.log(action.payload);
+        }
 
 
         default :{
