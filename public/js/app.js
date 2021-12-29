@@ -11625,35 +11625,9 @@ var Chair = function Chair(_ref) {
 /*!**********************************************!*\
   !*** ./resources/js/constants/ConstItem.jsx ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ITEM_PRODUCTS": () => (/* binding */ ITEM_PRODUCTS)
-/* harmony export */ });
-var ITEM_PRODUCTS = {
-  products: [{
-    id: 1,
-    name: "producto 1",
-    sku: "",
-    img: "./img_product.jpg",
-    description: "description",
-    stock: "10",
-    price: "10",
-    categories_id: 1,
-    created_at: "00/00/00",
-    updated_at: "00/00/00",
-    status: "ACTIVE"
-  }],
-  categories: [{
-    id: 1,
-    name: "categoria 1",
-    created_at: "00/00/00",
-    updated_at: "00/00/00",
-    status: "ACTIVE"
-  }]
-};
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\laragon\\www\\BarberShop-Web\\resources\\js\\constants\\ConstItem.jsx: Unexpected token (5:0)\n\n  3 |     {\n  4 |       id: 1,\n> 5 | <<<<<<< HEAD\n    | ^\n  6 |       name: \"producto 1\",\n  7 |       sku: \"\",\n  8 |       img: \"./img_product.jpg\",\n    at Object._raise (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:541:17)\n    at Object.raiseWithData (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:534:17)\n    at Object.raise (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:495:17)\n    at Object.unexpected (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:3580:16)\n    at Object.parsePropertyName (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:12693:24)\n    at Object.parsePropertyDefinition (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:12544:22)\n    at Object.parseObjectLike (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:12473:21)\n    at Object.parseExprAtom (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:11913:23)\n    at Object.parseExprAtom (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:7477:20)\n    at Object.parseExprSubscripts (C:\\laragon\\www\\BarberShop-Web\\node_modules\\@babel\\parser\\lib\\index.js:11584:23)");
 
 /***/ }),
 

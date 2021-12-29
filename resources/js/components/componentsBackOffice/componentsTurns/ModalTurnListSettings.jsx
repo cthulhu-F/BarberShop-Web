@@ -67,7 +67,7 @@ const ModalTurnListSettings = ({turn, editTurnSchedule, setTurnStatus}) =>{
             <div className="modal-dialog modal-gl">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 class="modal-title">Estado del turno {turn.id}</h5>
+                        <h5 class="modal-title fw-bold font-h1">Estado del turno {turn.id}</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
@@ -77,7 +77,7 @@ const ModalTurnListSettings = ({turn, editTurnSchedule, setTurnStatus}) =>{
                         <div className="col-12" id="timeFin-container">
 
                             <div className="d-flex justify-content-between mb-1" >
-                                <span className="me-2 p-2">Modificar</span>
+                                <span className="me-2 p-2 fw-bold">Modificar</span>
 
                                 <select className="form-select p-2" id="set-turn-status-by-input">
                                     <option key="ACTIVE" id="ACTIVE">Programado</option>
@@ -87,7 +87,7 @@ const ModalTurnListSettings = ({turn, editTurnSchedule, setTurnStatus}) =>{
                             </div>
 
                             <div className="d-flex justify-content-between mb-1" >
-                                <span className="me-2 p-2">Índice</span>
+                                <span className="me-2 p-2 fw-bold">Índice</span>
 
                                 <div className="p-2">
                                     <span className="form-check-label text-secondary">

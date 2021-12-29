@@ -3,13 +3,28 @@ import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../css/main.css';
 
+import ProductsDashboard from "./ProductsDashboard";
 
 const ColumnTitleStyle ={
   overflowWrap: "break-word",
    width: "100px",
 }
 
+import { backofficeInventoryReducer, ProductsData } from "../../../../../src/reducers/backOfficeInventoryReducer";
+import backofficeInventoryMapDispatch from "../../../backOfficeInventoryUses";
+import { useReducer } from "react";
+
 const Inventory = () =>{
+
+    const [inventoryState, dispatch] = useReducer(backofficeInventoryReducer,ProductsData);
+    const {allProducts, allCategories, filteredBysearch,newProductSqueleton} = inventoryState;
+
+    const saveProductConfig = backofficeInventoryMapDispatch(dispatch).saveProductConfig;
+    const filterProducts =backofficeInventoryMapDispatch(dispatch).filterProducts;
+
+
+  
+   
     return(
         
         <div >
@@ -25,130 +40,9 @@ const Inventory = () =>{
 
           <div className="row px-4 g-1">
 
-            <div className="col-12">
-              <div className="row p-2 mb-3">
-                <div className="col-12 p-0">
-                  <div className="font-h1 fs-1 fw-bold">Inventario</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12">
-              <div className="row rounded p-2 mb-3">
-                <div className="col-12 col-xl-4 my-2 p-0">
-                  <div className="d-flex">
-                    <input className="form-control p-2 me-2" type="search" placeholder="Busca tu producto"
-                      aria-label="Search"/>
-                    <button className="btn btn-black p-2" type="submit"><i className="bi bi-search"></i></button>
-                  </div>
-                </div>
-                <div className="col-12 col-xl-6"></div>
-                <div className="col-12 col-xl-2 my-2 p-0">
-                  <div className="text-center d-xl-flex justify-content-end">
-                    <button className="btn btn-black w-100 p-2" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
-                      Agregar producto
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12">
-              <div className="row  p-1 mb-3">
-                <div className="col-12 p-0">
-
-                  <div className="table-responsive">
-                    <table className="table table-hover table-striped bg-white">
-                      <thead className="font-h1 aling-middle">
-                        <tr>
-                          <th scope="col">ID</th>
-                          <th scope="col"></th>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">SKU</th>
-                          <th scope="col">Descripcion</th>
-                          <th scope="col">Categoria</th>
-                          <th scope="col">Stock</th>
-                          <th scope="col">Precio</th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody className="font-p aling-middle">
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>
-                            <div className="d-flex " style={{height: "50px",}}>
-                              <img src="asset/product/img-product.jpg" className=" rounded" alt=""/>
-                            </div>
-                          </td>
-                          <td>
-                            <div style={ColumnTitleStyle}> Producto </div>
-                          </td>
-                          <td>
-                            <div style={ColumnTitleStyle}> 123456789 </div>
-                          </td>
-                          <td>
-                            <div style={ColumnTitleStyle}> Descripcion del producto
-                              productoproductoproducto </div>
-                          </td>
-                          <td>
-                            <div style={ColumnTitleStyle}> Peluqueria </div>
-                          </td>
-                          <td>
-                            <div style={ColumnTitleStyle}> 500 </div>
-                          </td>
-                          <td>
-                            <div style={ColumnTitleStyle}> $10.99 </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                                data-bs-target="#modalAddProduct"><i className="bi bi-pencil fs-7"></i></button>
-                              <button className="btn btn-outline-danger  p-1 me-1"><i className="bi bi-gear"></i></button>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <input className="form-check-input p-2 m-auto" type="checkbox" id="inlineCheckbox1" value="option1"/>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="text-success fs-3 d-flex justify-content-center" title="ACTIVO">
-                              <i className="bi bi-check-circle-fill"></i>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <td className="" colspan="11">
-                            <div className="d-flex justify-content-end">
-                              <nav aria-label="Page navigation example m-0">
-                                <ul className="pagination m-0">
-                                  <li className="page-item">
-                                    <a className="page-link text-black" href="#" aria-label="Previous">
-                                      <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                  </li>
-                                  <li className="page-item"><a className="page-link text-black" href="#">1</a></li>
-                                  <li className="page-item">
-                                    <a className="page-link text-black" href="#" aria-label="Next">
-                                      <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </nav>
-                            </div>
-                          </td>
-                        </tr>
-                      </tfoot>
-                    </table>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+          <ProductsDashboard allProducts={allProducts} allCategories={allCategories}
+          saveProductConfig={saveProductConfig}  filteredBysearch={filteredBysearch}
+          filterProducts={filterProducts} newProductSqueleton={newProductSqueleton}/>
 
             <div className="col-12">
               <div className="row p-2 mb-3">
