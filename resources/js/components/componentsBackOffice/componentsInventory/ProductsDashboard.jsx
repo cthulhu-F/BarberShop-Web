@@ -16,14 +16,12 @@ const ProductsDashboard = ({allProducts, allCategories, saveProductConfig, filte
     /* PAGINATION*/
     
     const [pagintaionProducts, setProductsPagination] = useState(filteredBysearch)
-    // const [newProduct, setNewProduct] = useState(newProductSqueleton)
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(3)
     
     useEffect(() => {
         const fetchTurns = async () => {
         const res = await filteredBysearch;
-        // const newProd = await newProductSqueleton;
         setProductsPagination(res)
         }
         fetchTurns();      
@@ -52,10 +50,10 @@ const ProductsDashboard = ({allProducts, allCategories, saveProductConfig, filte
         }
     }
 
-    function setDefaultCategory(productid, categoryId){
+    function setDefaultCategory(productid){
         const parent = document.getElementById(`modalProductEditor${productid}`)
         const selector = parent.querySelector("#backofice-product-category-editor");
-        selector.value = selector.querySelector(`[id='${categoryId}']`).value;
+        selector.value = selector.querySelector(`[id='${productid}']`).value;
     }
 
     function getCategoryId (name) {
@@ -160,7 +158,7 @@ const ProductsDashboard = ({allProducts, allCategories, saveProductConfig, filte
                                     <td>
                                         <div className="d-flex justify-content-center">
                                         <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                                            data-bs-target={`#modalProductEditor${product.id}`} onClick={()=>{setDefaultCategory(product.id), product.categories_id}}><i className="bi bi-pencil fs-7"></i></button>
+                                            data-bs-target={`#modalProductEditor${product.id}`} onClick={()=>{setDefaultCategory(product.id)}}><i className="bi bi-pencil fs-7"></i></button>
                                         <button className="btn btn-outline-danger  p-1 me-1" data-bs-toggle="modal"
                                             data-bs-target={`#modalProductSettings${product.id}`} onClick={()=>checkproductStatus(product.id)}><i className="bi bi-gear"></i></button>
                                         </div>

@@ -11643,7 +11643,7 @@ var ITEM_PRODUCTS = {
     price: "10.99",
     stock: 10,
     inmutableStock: 10,
-    cagittegories_id: 1,
+    categories_id: 1,
     created_at: "00/00/00",
     updated_at: "00/00/00",
     status: "NONACTIVE"
