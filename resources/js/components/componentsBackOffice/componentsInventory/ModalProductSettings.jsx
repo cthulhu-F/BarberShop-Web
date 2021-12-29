@@ -28,20 +28,78 @@ const ModalProductSettings = ({editableProduct, saveProductConfig})=>{
         const parent = document.getElementById(`modalProductSettings${editableProduct.id}`)
         const switcher = parent.querySelector("#product-inhabilitator");
         let previousValue;
+        let prevMsjStatus;
+        let NewMsjStatus;
         console.log(switcher.checked)
         if (switcher.getAttribute("aria-checked") == "true"){
             previousValue ="ACTIVE";
+            prevMsjStatus = "Activo";
+            NewMsjStatus = "Inactivo";
+            
+            
         }
         else{
             previousValue ="NONACTIVE";
+            prevMsjStatus = "Inactivo";
+            NewMsjStatus = "Activo"
         }
         const nameInput = parent.querySelector('#editable-product-name-2')
         let newName = nameInput.value == "" ? nameInput.placeholder : nameInput.value
 
-        saveProductConfig(previousValue, "status", editableProduct.id);
-        if (nameInput.value == "") {
-            saveProductConfig(newName, "name", editableProduct.id);
+
+        if (previousValue == editableProduct.status || nameInput.value != ""){
+
+            let nameAlert     =   nameInput.value == "" ? "" : ` <span style="font-weight:700;" >Nombre </span><br> ${nameInput.placeholder} ---> ${ nameInput.value} <br> <br>  `;
+            let statusAlert     =   previousValue != editableProduct.status ? "" : `<span style="font-weight:700;" >Estado </span><br>  ${prevMsjStatus} ---> ${NewMsjStatus} <br><br>`;            
+
+            swal.fire({
+            title: "Atención",
+            html: `Esta seguro que desea modificar los siguientes datos?<br><br> 
+            ${nameAlert} ${statusAlert}`, 
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#000',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `Si, Modificar Producto`   
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    saveProductConfig(previousValue, "status", editableProduct.id);
+                    if (nameInput.value != "") {
+                        saveProductConfig(newName, "name", editableProduct.id);
+                    }
+                    swal.fire({
+                        text: 'Datos modificados con éxito',
+                        timer:"1500", 
+                        position: "bottom",
+                        customClass : {
+                        container: "add-to-cart-alert-container",
+                        popup:"add-to-cart-alert",
+                        }
+                    })
+                }else{
+                    swal.fire({
+                        text: `Ningún dato ha sido modificado.`,
+                        timer:"1500", 
+                        position: "bottom",
+                        customClass : {
+                            container: "add-to-cart-alert-container",
+                            popup:"add-to-cart-alert",
+                        }
+                       });
+                }
+            })
+        } else{
+            swal.fire({
+                text: `Ningún dato ha sido modificado.`,
+                timer:"1500", 
+                position: "bottom",
+                customClass : {
+                    container: "add-to-cart-alert-container",
+                    popup:"add-to-cart-alert",
+                }
+            });
         }
+        
     }
 
     

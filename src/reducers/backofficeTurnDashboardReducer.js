@@ -111,6 +111,7 @@ export function backofficeTurnDashboardReducer(state, action){
             let modified = false;
 
             if (action.date != ""){
+                console.log(action.date)
                 let newDay = action.date.split('-')
                 newEditableTurn.date = newDay[2] + '/' + newDay[1] +'/' +newDay[0]
                 modified = true;
@@ -118,6 +119,7 @@ export function backofficeTurnDashboardReducer(state, action){
 
 
             if (action.time != ""){
+                console.log(action.time)
                 newEditableTurn.time = action.time;
                 modified = true;
 

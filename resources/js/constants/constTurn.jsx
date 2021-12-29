@@ -94,7 +94,7 @@ export const ITEM_TURNS = {
     {
       id: 1,
       name: "Silla 1",
-      name_client: "Jose",
+      name_client: "Franco",
       email_client: "jose@gmail.com", 
       phone_client: "+54 3547 506790", 
       date: "14/01/2022",

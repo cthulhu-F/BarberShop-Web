@@ -5,8 +5,6 @@ import ModalTurn from "../../componentsTurn/ModalTurn";
 import ModalTurnListEditor from "./ModalTurnListEditor";
 import ModalTurnListSettings from "./ModalTurnListSettings";
 
-import swal from "sweetalert2";
-
 
 
 const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus}) =>{
@@ -81,8 +79,8 @@ const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus
 
         </td>
 
-        <ModalTurnListEditor turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate}/>
-        <ModalTurnListSettings turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate} setTurnStatus={setTurnStatus}/>
+        <ModalTurnListEditor key={turn.id+"editor"} turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate}/>
+        <ModalTurnListSettings key={turn.id+"setting"} turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate} setTurnStatus={setTurnStatus}/>
 
         <div className="modal fade" id={`modalDataClientList${turn.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="modalChairConfigLabel" aria-hidden="true">
