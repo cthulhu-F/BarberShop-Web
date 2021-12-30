@@ -31,6 +31,7 @@ const Shop = () => {
   let searchValue ="";
   try{
     searchValue = URL[2].split('%20').join(' ')
+    searchValue = searchValue.replace("%C3%A1", "á").replace("%C3%A9", "é").replace("%C3%AD", "í").replace("%C3%B3", "ó").replace("%C3%BA", "ú").replace('%C3%BC', 'ü')
   }catch(error){}
 
   const searchResult = products.filter(

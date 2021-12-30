@@ -12595,8 +12595,23 @@ var Header = function Header() {
   var searchInShop = function searchInShop() {
     var inputField = document.getElementById("global-header-search-in-shop-input");
     var urlSeearch = inputField.value != "" ? inputField.value.split(' ').join('%20') : '';
-    var URL = "/shop/".concat(urlSeearch);
-    window.location.replace(URL);
+    var tester = new RegExp(/^[A-Za-z0-9-ZñÑáéíóúÁÉÍÓÚ\s]+$/g);
+
+    if (tester.test(urlSeearch)) {
+      var _URL = "/shop/".concat(urlSeearch);
+
+      window.location.replace(_URL);
+    } else {
+      swal.fire({
+        text: "Por favor ingrese s\xF3lo car\xE1cteres alfa-num\xE9ricos",
+        timer: "2000",
+        position: "bottom",
+        customClass: {
+          container: "add-to-cart-alert-container",
+          popup: "add-to-cart-alert"
+        }
+      });
+    }
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -13584,6 +13599,7 @@ var Shop = function Shop() {
 
   try {
     searchValue = URL[2].split('%20').join(' ');
+    searchValue = searchValue.replace("%C3%A1", "á").replace("%C3%A9", "é").replace("%C3%AD", "í").replace("%C3%B3", "ó").replace("%C3%BA", "ú").replace('%C3%BC', 'ü');
   } catch (error) {}
 
   var searchResult = products.filter(function (product) {
@@ -14509,7 +14525,7 @@ var ModalTurn = function ModalTurn() {
                         message: "El campo es requerido"
                       },
                       pattern: {
-                        value: /[0-9]{9,12}/,
+                        value: /[0-9]{6,15}/,
                         message: "El formato no es correcto"
                       }
                     }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {

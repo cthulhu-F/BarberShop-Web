@@ -211,7 +211,7 @@ const ModalTurn = () => {
                         message:"El campo es requerido", 
                     },
                     pattern:{
-                        value: /[0-9]{9,12}/,
+                        value: /[0-9]{6,15}/,
                         message: "El formato no es correcto",
                     }
                 })}/>
