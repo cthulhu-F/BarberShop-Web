@@ -12,6 +12,7 @@ export const shoppingInitialState = {
         quantity: -1,
         price: "",
       }],
+    categories:ITEM_PRODUCTS.categories,
 }
 
 import swal from'sweetalert2';

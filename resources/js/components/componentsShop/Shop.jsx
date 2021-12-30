@@ -16,7 +16,7 @@ const Shop = () => {
 
   /*MODAL SHOP ASSETS*/
   const [state, dispatch] =useReducer(shoppingReducer,cartItemsData);
-  const{products, cart} = state;
+  const{products, cart, categories} = state;
 
   const addToCart = mapDispatcht(dispatch).addToCart;
 
@@ -26,8 +26,30 @@ const Shop = () => {
 
   const cleanCart = mapDispatcht(dispatch).cleanCart;
 
+  let URL = window.location.pathname;
+  URL = URL.split('/') ? URL.split('/') : "";
+  let searchValue ="";
+  try{
+    searchValue = URL[2].split('%20').join(' ')
+  }catch(error){}
+
+  const searchResult = products.filter(
+    function(product){
+      const id = toString(product.id)
+      const name = product.name
+      const sku = toString(product.sku)
+      const description = product.description
+      const price = toString(product.price)
+      const category = categories.find(category=> category.id == product.categories_id).name
+      const search = (id+" "+name + " " +sku + " " + description + " " + price + " " + category).toUpperCase()
+      const stringsearched = searchValue.toUpperCase()
+      return search.indexOf(stringsearched) > -1
+    }
+  );
 
   return (
+
+   
     <div className="container-fluid bg-light p-3 min-vh-100">
         <div className="container-md ">
     
@@ -35,12 +57,22 @@ const Shop = () => {
     
             <div className="col-12 col-xl-12 border-0">
               <div className="w-100 text-center fw-bold font-h1">
-                {products.length} Resultados encontrados
+                
+               { searchValue
+
+                ? `${searchResult.length} Resultados encontrados para "${searchValue}"`
+                : ""
+              
+              }
               </div>
             </div>
-    
-            {products.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)}
+            {/* || data.description.includes(searchValue) || data.id.includes(searchValue) || data.sku.includes(searchValue */}
+            { searchValue != ""
+            ? searchResult.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
+            : products.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
 
+          }
+            
           </div>
           </div>
 

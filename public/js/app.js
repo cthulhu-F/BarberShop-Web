@@ -12592,6 +12592,13 @@ var Header = function Header() {
 
   var urlImg = __webpack_require__("./resources/asset/marca sync recursive ^\\.\\/.*$");
 
+  var searchInShop = function searchInShop() {
+    var inputField = document.getElementById("global-header-search-in-shop-input");
+    var urlSeearch = inputField.value != "" ? inputField.value.split(' ').join('%20') : '';
+    var URL = "/shop/".concat(urlSeearch);
+    window.location.replace(URL);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
     className: "container-fluid",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -12663,11 +12670,15 @@ var Header = function Header() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                 className: "form-control me-2",
                 type: "search",
-                placeholder: "Search",
-                "aria-label": "Search"
+                placeholder: "Buscar",
+                "aria-label": "Search",
+                id: "global-header-search-in-shop-input"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                 className: "btn btn-black",
                 type: "submit",
+                onClick: function onClick() {
+                  return searchInShop();
+                },
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
                   className: "bi bi-search"
                 })
@@ -13561,11 +13572,33 @@ var Shop = function Shop() {
       dispatch = _useReducer2[1];
 
   var products = state.products,
-      cart = state.cart;
+      cart = state.cart,
+      categories = state.categories;
   var addToCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_7__["default"])(dispatch).addToCart;
   var addOneToCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_7__["default"])(dispatch).addOneToCart;
   var deleteFromCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_7__["default"])(dispatch).deleteFromCart;
   var cleanCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_7__["default"])(dispatch).cleanCart;
+  var URL = window.location.pathname;
+  URL = URL.split('/') ? URL.split('/') : "";
+  var searchValue = "";
+
+  try {
+    searchValue = URL[2].split('%20').join(' ');
+  } catch (error) {}
+
+  var searchResult = products.filter(function (product) {
+    var id = toString(product.id);
+    var name = product.name;
+    var sku = toString(product.sku);
+    var description = product.description;
+    var price = toString(product.price);
+    var category = categories.find(function (category) {
+      return category.id == product.categories_id;
+    }).name;
+    var search = (id + " " + name + " " + sku + " " + description + " " + price + " " + category).toUpperCase();
+    var stringsearched = searchValue.toUpperCase();
+    return search.indexOf(stringsearched) > -1;
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     className: "container-fluid bg-light p-3 min-vh-100",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
@@ -13574,11 +13607,18 @@ var Shop = function Shop() {
         className: "row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
           className: "col-12 col-xl-12 border-0",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
             className: "w-100 text-center fw-bold font-h1",
-            children: [products.length, " Resultados encontrados"]
+            children: searchValue ? "".concat(searchResult.length, " Resultados encontrados para \"").concat(searchValue, "\"") : ""
           })
-        }), products.map(function (product) {
+        }), searchValue != "" ? searchResult.map(function (product) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            data: product,
+            addToCart: addToCart,
+            addOneToCart: addOneToCart,
+            cart: cart
+          }, product.id);
+        }) : products.map(function (product) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
             data: product,
             addToCart: addToCart,
@@ -16232,7 +16272,8 @@ var shoppingInitialState = {
     name: "",
     quantity: -1,
     price: ""
-  }]
+  }],
+  categories: _resources_js_constants_ConstItem__WEBPACK_IMPORTED_MODULE_1__.ITEM_PRODUCTS.categories
 };
 
 
