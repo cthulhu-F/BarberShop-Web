@@ -6,20 +6,27 @@ import "../../resources/css/sweetAlert.css"
 
 export const shoppingInitialState = {
     products :ITEM_PRODUCTS.products,
-    cart:[],
+    cart:[{
+        id: "",
+        name: "",
+        quantity: -1,
+        price: "",
+      }],
 }
 
 import swal from'sweetalert2';
 import { Container } from 'postcss';
 
+if (!JSON.parse(localStorage.getItem('cartData'))){
+    localStorage.setItem('cartData', JSON.stringify(shoppingInitialState));
+}
 
-const existentCart = JSON.parse(localStorage.getItem('cartData'));
+let existentCart = JSON.parse(localStorage.getItem('cartData'));
+
 
 export const cartItemsData = existentCart
     ? { ...existentCart}
-    : {products:ITEM_PRODUCTS.products,
-            cart:[],
-            };
+    : {...shoppingInitialState}
 
 
 export function shoppingReducer(state, action){
@@ -29,26 +36,26 @@ export function shoppingReducer(state, action){
 
             let itemInCart = state.cart.find(item=> item.id === newItem.id); 
 
-            cartItemsData.cart = itemInCart
+            let cartItemsDataExport = itemInCart
             ? {
                 ...state,
                 cart: state.cart.map((item) => 
                     item.id === newItem.id
-                    ? {...item, quantity : action.quantity, stock: state.stock-action.quantity}
+                    ? {...item, quantity : action.quantity}
                     : item
                 ),
             }:{
                     ...state,
-                    cart: [...state.cart, { ...newItem, quantity: action.quantity, stock: state.stock-action.quantity}],
+                    cart: [...state.cart, { ...newItem, quantity: action.quantity}],
                 };
 
-            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
             swal.fire({ title: "Enhorabuena!",
             text: "Ahora tienes " + action.quantity +" "+ newItem.name +" en tu carrito",
             icon:"success",
             timer:"2000",});
             
-            return cartItemsData.cart;
+            return cartItemsDataExport;
             
             
         }
@@ -59,20 +66,20 @@ export function shoppingReducer(state, action){
 
             const intemToAdd= state.cart.find((item) => item.id === action.payload);
 
-            cartItemsData.cart =intemToAdd
+            let cartItemsDataExport =intemToAdd
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
-                ? {...item, quantity : item.quantity +1, stock: state.stock-1}
+                ? {...item, quantity : item.quantity +1}
                 : item
                 ),
             }
             :{
                 ...state,
-                cart: [...state.cart, { ...newItem, quantity: 1,stock: state.stock-1}],
+                cart: [...state.cart, { ...newItem, quantity: 1}],
             };
 
-            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
 
             
             if(action.alert){
@@ -84,10 +91,12 @@ export function shoppingReducer(state, action){
                     container: "add-to-cart-alert-container",
                     popup:"add-to-cart-alert",
                 },
-            });
+            }).then(()=>{
+                
+            })
             }
             
-            return cartItemsData.cart;
+            return cartItemsDataExport;
 
         } 
 
@@ -95,12 +104,16 @@ export function shoppingReducer(state, action){
         case TYPES.REMOVE_ONE_FROM_CART:{
             const intemToDelete= state.cart.find((item) => item.id === action.payload);
 
+            try{
+                const button = document.getElementById(`add-one-item-${action.payload}-to-cart`);
+                button.disabled = intemToDelete.quantity > intemToDelete.stock ? true : false;
+            }catch(error){}
 
-            cartItemsData.cart =intemToDelete.quantity >1
+            let cartItemsDataExport =intemToDelete.quantity >1
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
-                ? {...item, quantity : item.quantity -1, stock: state.stock+1}
+                ? {...item, quantity : item.quantity -1}
                 : item
                 ),
             }
@@ -110,34 +123,34 @@ export function shoppingReducer(state, action){
             };
 
 
-            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
-            return cartItemsData.cart;
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+            return cartItemsDataExport;
         }
         
         case TYPES.REMOVE_ALL_FROM_CART:{
-            cartItemsData.cart = {...state,
+            let cartItemsDataExport = {...state,
                 cart: state.cart.filter(item => item.id !== action.payload),
                 };
             
-            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
-            return cartItemsData.cart;
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+            return cartItemsDataExport;
         }
 
         case TYPES.CLEAN_CART:{
-            cartItemsData.cart= shoppingInitialState;
-            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
+            let cartItemsDataExport= shoppingInitialState;
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
             swal.fire({
                 text: "El carrito ha sido vaciado",
                 timer:"1200",
                 icon: "success",
             });
-            return cartItemsData.cart;
+            return cartItemsDataExport;
         }
 
         case TYPES.LOAD_DATA:{
-            cartItemsData.cart= {...state};
-            localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart));
-            return cartItemsData.cart;
+            let cartItemsDataExport= {...state};
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+            return cartItemsDataExport;
         }
 
         // case TYPES.INCREMENT:{
@@ -148,6 +161,29 @@ export function shoppingReducer(state, action){
         //     return {...state, count: state.count - 1}
         // }
 
+        case TYPES.QUANTITY_ALERT :{
+            let editableProduct = state.cart.find(product=>product.id == action.payload)
+            if(editableProduct){
+                if(editableProduct.quantity>=editableProduct.stock-1){
+
+                    try{
+                        const button = document.getElementById(`add-one-item-${action.payload}-to-cart`);
+                        button.disabled = true;
+                    }catch(error){}
+                    swal.fire({
+                        text: `Alcanzaste el límite de ${editableProduct.stock} ${editableProduct.name}`,
+                        timer:"2000", 
+                        position: "bottom",
+                        customClass : {
+                            container: "add-to-cart-alert-container",
+                            popup:"add-to-cart-alert",
+                        }
+                    });
+                }
+            }
+           
+            return state;
+        }
         default :{
             return state;
         }
