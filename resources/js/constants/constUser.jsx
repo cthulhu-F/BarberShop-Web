@@ -1,3 +1,27 @@
-export const API_URL_USER = {
-    user: "http://127.0.0.1:8000/api/Users/"
-}
+export const ITEM_USER = {
+    user: [{
+      id: 1,
+      name: "axel",
+      email: "axel@gmail.com",
+      phone: "123456789",
+      created_at: "",
+      updated_at: "",
+      status: "ACTIVE"
+    }],
+    role_user: [{
+      id: 1,
+      name: "admin",
+      description: "Administrador",
+      created_at: "",
+      updated_at: "",
+      status: "ACTIVE"
+    },
+    {
+      id: 1,
+      name: "user",
+      description: "Empleado",
+      created_at: "",
+      updated_at: "",
+      status: "ACTIVE"
+    }]
+  }

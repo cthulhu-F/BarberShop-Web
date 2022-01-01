@@ -18,15 +18,21 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
     }
 
     
-    function handleClickEvent(evt) {
-      let el = evt.target;
-
-      if (el.getAttribute("aria-checked") == "true") {
-          el.setAttribute("aria-checked", "false");
+    function handleClickEvent(element) {
+      if (element.getAttribute("aria-checked") == "true") {
+        element.setAttribute("aria-checked", "false");
       } else {
-          el.setAttribute("aria-checked", "true");
+        element.setAttribute("aria-checked", "true");
       }
       switchDayStatus(editableDay[1]);
+    }
+
+    function handleClickEventGlobalSetting(element) {
+      if (element.getAttribute("aria-checked") == "true") {
+        element.setAttribute("aria-checked", "false");
+      } else {
+        element.setAttribute("aria-checked", "true");
+      }
     }
 
   function checkDayStatus(){
@@ -61,19 +67,19 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
     let day = editableDay.map((day) => {
       switch (day){
         case "mo":
-          return "0"
+          return "day0"
         case "tu":
-          return "1" 
+          return "day1" 
         case "we":
-          return "2" 
+          return "day2" 
         case "th":
-          return "3"
+          return "day3"
         case "fr":
-          return "4"
+          return "day4"
         case "sa":
-          return "5" 
+          return "day5" 
         case "su":
-          return "6"
+          return "day6"
         }
       }
     )
@@ -85,6 +91,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
     allDays.forEach(day =>{
       try{
+          day.classList.add("btn-platinum");
           day.classList.remove("bg-danger");
           day.classList.remove("text-white");
           day.classList.remove("bg-dark");
@@ -93,15 +100,19 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
     if(editableDay[1] == "NONACTIVE"){
       labelMessage.innerHTML = "Día inhabilitado ¿Desea habilitar este dia?"
+      dayActive.classList.remove("btn-platinum");
       dayActive.classList.add("bg-danger","text-white");
     }
     
     else{
+      dayActive.classList.remove("btn-platinum");
       dayActive.classList.add("bg-dark", "text-white");
       labelMessage.innerHTML = "¿Desea inhabilitar este día?";
     }
 
     }, [editableDay[1], editableDay])
+
+
 
 
     return(
@@ -142,13 +153,13 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       </div>
 
                       <div className="col-12">
-                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item" onClick={(event)=>setActiveDay(event.target.id)} id="0">LU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="1">MA</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="2">MI</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="3">JU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="4">VI</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="5">SA</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="6">DO</button>
+                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day0">LU</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day1">MA</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day2">MI</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day3">JU</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day4">VI</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day5">SA</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day6">DO</button>
                       </div>
 
                       <div className="col-12 mb-2">
@@ -190,7 +201,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       <div className="col-12 d-flex">
                         <div className="form-check form-switch">
                           <label className="form-check-label" for="flexSwitchCheckDefault">¿Quieres aplicar estos cambios para todos los dias?</label>
-                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" aria-checked={false} onClick={(e)=>{handleClickEvent(e)}}/>
+                          <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" aria-checked={false} onClick={(e)=>{handleClickEventGlobalSetting(e.target)}}/>
                         </div>
                         
                       </div>
@@ -198,7 +209,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       <div className="col-12 d-flex">
                         <div className="form-check form-switch">
                             <label className="form-check-label" for="desactivate-day" id="labelMessage"></label>
-                            <input className="form-check-input" type="checkbox" role="switch" id="desactivate-day" onClick={(e)=>{handleClickEvent(e)}}/>
+                            <input className="form-check-input" type="checkbox" role="switch" id="desactivate-day" onClick={(e)=>{handleClickEvent(e.target)}}/>
                           </div>
                       </div>
 

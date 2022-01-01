@@ -58,7 +58,7 @@ export const ITEM_TURNS = {
       su: "10:00/12:00/5",
      },
     update_at: "14/12/21",
-    status: "INACTIVE",
+    status: "NONACTIVE",
   },
   {
     id: 3,
@@ -96,9 +96,10 @@ export const ITEM_TURNS = {
       name: "Silla 1",
       name_client: "Franco",
       email_client: "jose@gmail.com", 
-      phone_client: "123456789", 
-      date: "14/12/2021",
+      phone_client: "+54 3547 506790", 
+      date: "14/01/2022",
       time: "08:00",
+      turn_duration: "00:15",
       update_at: "14/12/2021", 
       status: "ACTIVE"
     },
