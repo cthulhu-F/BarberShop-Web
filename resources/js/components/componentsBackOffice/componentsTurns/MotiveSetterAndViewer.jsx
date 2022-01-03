@@ -15,7 +15,6 @@ const MotiveSetterAndViewer= ()=>{
     const [backOfficeTurnState, dispatch] =useReducer(backofficeTurnReducer,BackofficeTurnData);
     const {allChairsSchedule, allChairs, editableChair, turnsPerday, editableDay} = backOfficeTurnState;
   
-  
     const setEditableChair = backofficeTurnMapDispatch(dispatch).setEditableChair;
   
     const setActiveDay =backofficeTurnMapDispatch(dispatch).setActiveDay;
@@ -124,10 +123,10 @@ const MotiveSetterAndViewer= ()=>{
                           <td>
                             <div className="d-flex justify-content-center">
                               <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                                data-bs-target="#modalAddProduct" onClick={()=>{setEditableChair(chair.id); setActiveDay("day0")}}><i className="bi bi-pencil fs-7"></i></button>
+                                data-bs-target="#modalAddProduct" onClick={()=>{setEditableChair(chair.id); setActiveDay("mo")}}><i className="bi bi-pencil fs-7"></i></button>
                               <button type="button" className="btn btn-outline-danger p-1 me-1"
                               data-bs-toggle="modal" data-bs-target="#modalChairConfig"><i className="bi bi-gear"
-                              onClick={()=>{setEditableChair(chair.id); setActiveDay("day0")}}></i></button>
+                              onClick={()=>{setEditableChair(chair.id); setActiveDay("mo")}}></i></button>
                             </div>
                           </td>
                           <td>

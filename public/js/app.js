@@ -7221,7 +7221,7 @@ var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
       resetGlobalSaving();
       dispatch({
         type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY,
-        payload: id[3]
+        payload: id
       });
       dispatch({
         type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT
@@ -10486,25 +10486,25 @@ var MotiveSetter = function MotiveSetter(_ref) {
     var day = editableDay.map(function (day) {
       switch (day) {
         case "mo":
-          return "day0";
+          return "mo";
 
         case "tu":
-          return "day1";
+          return "tu";
 
         case "we":
-          return "day2";
+          return "we";
 
         case "th":
-          return "day3";
+          return "th";
 
         case "fr":
-          return "day4";
+          return "fr";
 
         case "sa":
-          return "day5";
+          return "sa";
 
         case "su":
-          return "day6";
+          return "su";
       }
     });
     var dayActive = document.getElementById(day[0]);
@@ -10589,49 +10589,49 @@ var MotiveSetter = function MotiveSetter(_ref) {
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day0",
+              id: "mo",
               children: "LU"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day1",
+              id: "tu",
               children: "MA"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day2",
+              id: "we",
               children: "MI"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day3",
+              id: "th",
               children: "JU"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day4",
+              id: "fr",
               children: "VI"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day5",
+              id: "sa",
               children: "SA"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day6",
+              id: "su",
               children: "DO"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -11048,7 +11048,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
                                 "data-bs-target": "#modalAddProduct",
                                 onClick: function onClick() {
                                   setEditableChair(chair.id);
-                                  setActiveDay("day0");
+                                  setActiveDay("mo");
                                 },
                                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
                                   className: "bi bi-pencil fs-7"
@@ -11062,7 +11062,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
                                   className: "bi bi-gear",
                                   onClick: function onClick() {
                                     setEditableChair(chair.id);
-                                    setActiveDay("day0");
+                                    setActiveDay("mo");
                                   }
                                 })
                               })]
@@ -16624,8 +16624,8 @@ function backofficeTurnReducer(state, action) {
         var editableChairSchedule = state.allChairsSchedule.find(function (chair) {
           return chair.id == state.editableChair.configDay_id;
         });
-        var editableDayArray = Object.entries(editableChairSchedule.days)[action.payload];
-        console.log(editableDayArray);
+        var editableDayValue = editableChairSchedule.days[action.payload];
+        var editableDayArray = [action.payload, editableDayValue];
         return _objectSpread(_objectSpread({}, state), {}, {
           editableDay: editableDayArray
         });
@@ -16670,10 +16670,20 @@ function backofficeTurnReducer(state, action) {
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT:
       {
         // console.log(state.allChairsSchedule.days["state.editableDay[0]"]);
-        var currentChair = state.allChairsSchedule.find(function (chair) {
-          return chair.id == state.editableChair.configDay_id;
-        });
-        var dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];
+        var dfaultTurnsPerDay;
+        console.log(state.editableDay);
+
+        if (state.editableChair[1] == "NONACTIVE") {
+          dfaultTurnsPerDay = 5;
+        } else {
+          try {
+            var currentChair = state.allChairsSchedule.find(function (chair) {
+              return chair.id == state.editableChair.configDay_id;
+            });
+            dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];
+          } catch (error) {}
+        }
+
         return _objectSpread(_objectSpread({}, state), {}, {
           turnsPerday: dfaultTurnsPerDay
         });
