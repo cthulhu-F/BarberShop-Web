@@ -24,6 +24,9 @@ const backofficeUserDispatch = (dispatch)=>{
 
         createNewUser : (newUserData) =>{
             dispatch ({type: BACKOFFICE_USER_TYPES.CREATE_NEW_USER, payload: newUserData})
+        },
+        changeUserRole : (newRoleId,userId)=>{
+            dispatch ({type: BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE, payload: newRoleId, userId:userId})
         }
     }
 }

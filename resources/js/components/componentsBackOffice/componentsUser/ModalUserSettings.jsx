@@ -1,6 +1,6 @@
 import React from "react";
 
-const ModalUserSettings =({editableUser, saveUserConfig, roles})=>{
+const ModalUserSettings =({editableUser, saveUserConfig, roles,changeUserRole, roleUser})=>{
 
 
     function handleClickEvent(evt) {
@@ -30,10 +30,11 @@ const ModalUserSettings =({editableUser, saveUserConfig, roles})=>{
         let NewMsjStatus;        
 
         const roleField = parent.querySelector("#backofice-user-role-editor");
-        const currentRoleId =  editableUser.role_id;
+        const currentRoleId =  roleUser.find(role => role.user_id == editableUser.id).role_id;
         const selectedRoleId = roleField.options[roleField.selectedIndex].id
-        const currentRoleName = roles.find(role=> role.id ==currentRoleId).name
-        const selectedRoleName = roles.find(role=> role.id ==selectedRoleId).name
+        console.log(roles.find(role=> role.id ==currentRoleId))
+        const currentRoleName = roles.find(role=> role.id ==currentRoleId).description
+        const selectedRoleName = roles.find(role=> role.id ==selectedRoleId).description
 
         if (switcher.getAttribute("aria-checked") == "true"){
             previousValue ="ACTIVE";
@@ -73,7 +74,9 @@ const ModalUserSettings =({editableUser, saveUserConfig, roles})=>{
                         nameInput.value="";
                     }
                     if (selectedRoleId != currentRoleId){
-                        saveUserConfig(selectedRoleId, "role_id", editableUser.id);}
+                        // saveUserConfig(selectedRoleId, "role_id", editableUser.id);
+                        changeUserRole(selectedRoleId, editableUser.id)
+                    }
                         // RESET CATEGORY SELECTOR 
                     swal.fire({
                         text: 'Datos modificados con éxito',
@@ -154,7 +157,7 @@ const ModalUserSettings =({editableUser, saveUserConfig, roles})=>{
                             <select className="w-50 form-select p-2" id="backofice-user-role-editor">
 
                                 {roles.map(role=>
-                                    <option key={role.id} id={role.id} > {role.name}</option>
+                                    <option key={role.id} id={role.id} > {role.description}</option>
                                 )}
                                     
                             </select>

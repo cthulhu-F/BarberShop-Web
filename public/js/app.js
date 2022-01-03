@@ -7337,6 +7337,13 @@ var backofficeUserDispatch = function backofficeUserDispatch(dispatch) {
         type: _src_actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_USER_TYPES.CREATE_NEW_USER,
         payload: newUserData
       });
+    },
+    changeUserRole: function changeUserRole(newRoleId, userId) {
+      dispatch({
+        type: _src_actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE,
+        payload: newRoleId,
+        userId: userId
+      });
     }
   };
 };
@@ -12215,8 +12222,7 @@ var ModalUserEditor = function ModalUserEditor(_ref) {
       id: "NewUser",
       name: "Nuevo usuario",
       email: "example@gmail.com",
-      phone: "+1 (201) 555 0123",
-      role_id: 2
+      phone: "+1 (201) 555 0123"
     };
   }
 
@@ -12498,7 +12504,9 @@ __webpack_require__.r(__webpack_exports__);
 var ModalUserSettings = function ModalUserSettings(_ref) {
   var editableUser = _ref.editableUser,
       saveUserConfig = _ref.saveUserConfig,
-      roles = _ref.roles;
+      roles = _ref.roles,
+      changeUserRole = _ref.changeUserRole,
+      roleUser = _ref.roleUser;
 
   function handleClickEvent(evt) {
     var switcher = evt.target;
@@ -12525,14 +12533,19 @@ var ModalUserSettings = function ModalUserSettings(_ref) {
     var prevMsjStatus;
     var NewMsjStatus;
     var roleField = parent.querySelector("#backofice-user-role-editor");
-    var currentRoleId = editableUser.role_id;
+    var currentRoleId = roleUser.find(function (role) {
+      return role.user_id == editableUser.id;
+    }).role_id;
     var selectedRoleId = roleField.options[roleField.selectedIndex].id;
+    console.log(roles.find(function (role) {
+      return role.id == currentRoleId;
+    }));
     var currentRoleName = roles.find(function (role) {
       return role.id == currentRoleId;
-    }).name;
+    }).description;
     var selectedRoleName = roles.find(function (role) {
       return role.id == selectedRoleId;
-    }).name;
+    }).description;
 
     if (switcher.getAttribute("aria-checked") == "true") {
       previousValue = "ACTIVE";
@@ -12569,7 +12582,8 @@ var ModalUserSettings = function ModalUserSettings(_ref) {
           }
 
           if (selectedRoleId != currentRoleId) {
-            saveUserConfig(selectedRoleId, "role_id", editableUser.id);
+            // saveUserConfig(selectedRoleId, "role_id", editableUser.id);
+            changeUserRole(selectedRoleId, editableUser.id);
           } // RESET CATEGORY SELECTOR 
 
 
@@ -12682,7 +12696,7 @@ var ModalUserSettings = function ModalUserSettings(_ref) {
                 children: roles.map(function (role) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("option", {
                     id: role.id,
-                    children: [" ", role.name]
+                    children: [" ", role.description]
                   }, role.id);
                 })
               })]
@@ -12754,7 +12768,9 @@ var UserListItem = function UserListItem(_ref) {
   var user = _ref.user,
       saveUserConfig = _ref.saveUserConfig,
       users = _ref.users,
-      roles = _ref.roles;
+      roles = _ref.roles,
+      roleUser = _ref.roleUser,
+      changeUserRole = _ref.changeUserRole;
   var ColumnTitleStyle = {
     overflowWrap: "break-word",
     width: "150px"
@@ -12786,6 +12802,11 @@ var UserListItem = function UserListItem(_ref) {
     roleField.value = roleField.querySelector("[id='".concat(roleId, "']")).value;
   }
 
+  console.log(roles.find(function (role) {
+    return role.id == roleUser.find(function (role) {
+      return role.user_id == user.id;
+    }).role_id;
+  }).description);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
       scope: "row",
@@ -12808,11 +12829,13 @@ var UserListItem = function UserListItem(_ref) {
         })
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         style: ColumnTitleStyle,
-        children: [" ", roles.find(function (role) {
-          return role.id == user.role_id;
-        }).name, " "]
+        children: roles.find(function (role) {
+          return role.id == roleUser.find(function (role) {
+            return role.user_id == user.id;
+          }).role_id;
+        }).description
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -12830,7 +12853,9 @@ var UserListItem = function UserListItem(_ref) {
           "data-bs-target": "#modalUserSettings".concat(user.id),
           onClick: function onClick() {
             checkUserStatus(user.id);
-            setDefaultRole(user.id, user.role_id);
+            setDefaultRole(user.id, roleUser.find(function (role) {
+              return role.user_id == user.id;
+            }).role_id);
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
             className: "bi bi-gear"
@@ -12854,7 +12879,9 @@ var UserListItem = function UserListItem(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ModalUserSettings__WEBPACK_IMPORTED_MODULE_1__["default"], {
       editableUser: user,
       saveUserConfig: saveUserConfig,
-      roles: roles
+      roles: roles,
+      changeUserRole: changeUserRole,
+      roleUser: roleUser
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ModalUserEditor__WEBPACK_IMPORTED_MODULE_2__["default"], {
       editableUser: user,
       saveUserConfig: saveUserConfig,
@@ -12918,8 +12945,10 @@ var Users = function Users() {
       dispatch = _useReducer2[1];
 
   var users = usersState.users,
-      roles = usersState.roles;
+      roles = usersState.roles,
+      roleUser = usersState.roleUser;
   var saveUserConfig = (0,_backOfficeUserUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).saveUserConfig;
+  var changeUserRole = (0,_backOfficeUserUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).changeUserRole;
 
   function setNewUserRole(userid, roleId) {
     var parent = document.getElementById("modalUserEditor".concat(userid));
@@ -13032,7 +13061,9 @@ var Users = function Users() {
                   user: user,
                   saveUserConfig: saveUserConfig,
                   users: users,
-                  roles: roles
+                  roles: roles,
+                  roleUser: roleUser,
+                  changeUserRole: changeUserRole
                 }, user.id);
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_ModalUserEditor__WEBPACK_IMPORTED_MODULE_7__["default"], {
                 roles: roles,
@@ -15929,7 +15960,6 @@ var ITEM_USER = {
     phone: "123456789",
     created_at: "",
     updated_at: "",
-    role_id: 1,
     status: "ACTIVE"
   }, {
     id: 2,
@@ -15938,7 +15968,6 @@ var ITEM_USER = {
     phone: "123456789",
     created_at: "",
     updated_at: "",
-    role_id: 2,
     status: "ACTIVE"
   }, {
     id: 3,
@@ -15947,7 +15976,6 @@ var ITEM_USER = {
     phone: "123456789",
     created_at: "",
     updated_at: "",
-    role_id: 1,
     status: "ACTIVE"
   }, {
     id: 4,
@@ -15956,21 +15984,45 @@ var ITEM_USER = {
     phone: "123456789",
     created_at: "",
     updated_at: "",
-    role_id: 2,
     status: "NONACTIVE"
   }],
-  roles: [{
+  role: [{
     id: 1,
-    name: "Administrador",
-    created_at: "00/00/00",
-    updated_at: "00/00/00",
-    status: "ACTIVE"
+    name: "admin",
+    description: "Administrador",
+    created_at: "",
+    updated_at: ""
   }, {
     id: 2,
-    name: "Editor",
-    created_at: "00/00/00",
-    updated_at: "00/00/00",
-    status: "ACTIVE"
+    name: "user",
+    description: "Empleado",
+    created_at: "",
+    updated_at: ""
+  }],
+  role_user: [{
+    id: 1,
+    user_id: 1,
+    role_id: 1,
+    created_at: "",
+    updated_at: ""
+  }, {
+    id: 2,
+    user_id: 2,
+    role_id: 2,
+    created_at: "",
+    updated_at: ""
+  }, {
+    id: 3,
+    user_id: 3,
+    role_id: 1,
+    created_at: "",
+    updated_at: ""
+  }, {
+    id: 4,
+    user_id: 4,
+    role_id: 2,
+    created_at: "",
+    updated_at: ""
   }]
 };
 
@@ -16300,7 +16352,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var BACKOFFICE_USER_TYPES = {
   CHANGE_USER_VALUE: "CHANGE_USER_VALUE",
-  CREATE_NEW_USER: "CREATE_NEW_USER"
+  CREATE_NEW_USER: "CREATE_NEW_USER",
+  CHANGE_USER_ROLE: "CHANGE_USER_ROLE"
 };
 
 /***/ }),
@@ -16883,7 +16936,8 @@ var sortById = function sortById(nonSorted) {
 
 var usersData = {
   users: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.user,
-  roles: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.roles
+  roles: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.role,
+  roleUser: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.role_user
 };
 function userReducer(state, action) {
   switch (action.type) {
@@ -16906,6 +16960,21 @@ function userReducer(state, action) {
       {
         console.log(payload);
         return state;
+      }
+
+    case _actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE:
+      {
+        var editableRoleUser = state.roleUser.find(function (role) {
+          return role.user_id == action.userId;
+        });
+        var allRoleUser = state.roleUser.filter(function (role) {
+          return role.user_id != action.userId;
+        });
+        editableRoleUser.role_id = action.payload;
+        allRoleUser.push(editableRoleUser);
+        return _objectSpread(_objectSpread({}, state), {}, {
+          roleUser: allRoleUser
+        });
       }
 
     default:

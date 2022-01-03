@@ -14,9 +14,10 @@ import ModalUserEditor from "./ModalUserEditor";
 const Users = () =>{
 
   const [usersState, dispatch] = useReducer(userReducer,usersData);
-  const {users, roles} = usersState;
+  const {users, roles,roleUser} = usersState;
 
   const saveUserConfig = backofficeUserDispatch(dispatch).saveUserConfig;
+  const changeUserRole = backofficeUserDispatch(dispatch).changeUserRole;
 
 
   function setNewUserRole(userid, roleId){
@@ -86,7 +87,7 @@ const Users = () =>{
                   </thead>
                   <tbody>
                     {users.map((user)=>
-                      <UserListItem key={user.id} user={user} saveUserConfig={saveUserConfig} users={users} roles={roles}/>
+                      <UserListItem key={user.id} user={user} saveUserConfig={saveUserConfig} users={users} roles={roles} roleUser={roleUser} changeUserRole={changeUserRole}/>
                     
                     )}
                   <ModalUserEditor  roles={roles} newUser={true}/>

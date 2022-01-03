@@ -12,7 +12,6 @@ const ModalUserEditor = ({editableUser, saveUserConfig,roles, newUser =false})=>
             name : "Nuevo usuario",
             email : "example@gmail.com",
             phone : "+1 (201) 555 0123",
-            role_id : 2,
         }
     }
 

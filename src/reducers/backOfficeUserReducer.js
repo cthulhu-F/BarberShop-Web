@@ -25,7 +25,8 @@ const sortById = (nonSorted) =>{
 
 export const usersData = {
     users: ITEM_USER.user,
-    roles: ITEM_USER.roles,
+    roles: ITEM_USER.role,
+    roleUser : ITEM_USER.role_user,
 }
 
 
@@ -45,6 +46,14 @@ export function userReducer(state,action) {
         case BACKOFFICE_USER_TYPES.CREATE_NEW_USER: {
             console.log(payload);
             return state
+        }
+        case BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE : {
+            let editableRoleUser = state.roleUser.find(role=>role.user_id == action.userId)
+            let allRoleUser = state.roleUser.filter(role=>role.user_id != action.userId);
+            editableRoleUser.role_id = action.payload
+            allRoleUser.push(editableRoleUser);
+            
+            return {...state, roleUser :allRoleUser }
         }
 
     

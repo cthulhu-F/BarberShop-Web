@@ -2,7 +2,7 @@ import React from "react";
 import ModalUserSettings from "./ModalUserSettings";
 import ModalUserEditor from "./ModalUserEditor";
 
-const UserListItem = ({user, saveUserConfig, users, roles}) =>{
+const UserListItem = ({user, saveUserConfig, users, roles, roleUser,changeUserRole}) =>{
 
     const ColumnTitleStyle ={
         overflowWrap: "break-word",
@@ -33,7 +33,7 @@ const UserListItem = ({user, saveUserConfig, users, roles}) =>{
     }
 
 
-    
+    console.log(roles.find(role=>role.id == roleUser.find(role => role.user_id == user.id).role_id).description)
 
     return (
         <tr>
@@ -41,13 +41,15 @@ const UserListItem = ({user, saveUserConfig, users, roles}) =>{
         <td><div style={ColumnTitleStyle}> {user.name} </div></td>
         <td><div style={ColumnTitleStyle}> {user.email} </div></td>
         <td><button className="btn btn-black"><i className="bi bi-eye"></i></button></td>
-        <td><div style={ColumnTitleStyle}> {roles.find(role => role.id == user.role_id).name} </div></td>
+        <td><div style={ColumnTitleStyle}>
+            {roles.find(role=>role.id == roleUser.find(role => role.user_id == user.id).role_id).description}
+            </div></td>
         <td>
           <div className="d-flex justify-content-center">
             <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
             data-bs-target={`#modalUserEditor${user.id}`} ><i className="bi bi-pencil fs-7"></i></button>
             <button className="btn btn-outline-danger p-1 me-1" data-bs-toggle="modal"
-            data-bs-target={`#modalUserSettings${user.id}`} onClick={()=>{checkUserStatus(user.id); setDefaultRole(user.id, user.role_id)}}><i className="bi bi-gear"></i></button>
+            data-bs-target={`#modalUserSettings${user.id}`} onClick={()=>{checkUserStatus(user.id); setDefaultRole(user.id, roleUser.find(role => role.user_id == user.id).role_id)}}><i className="bi bi-gear"></i></button>
           </div>
         </td>
         <td>
@@ -63,8 +65,8 @@ const UserListItem = ({user, saveUserConfig, users, roles}) =>{
                 </div>
         }
         </td>
-        <ModalUserSettings editableUser={user} saveUserConfig={saveUserConfig} roles={roles}/>
-        <ModalUserEditor editableUser={user} saveUserConfig={saveUserConfig} roles={roles}/>
+        <ModalUserSettings editableUser={user} saveUserConfig={saveUserConfig} roles={roles} changeUserRole={changeUserRole} roleUser={roleUser}/>
+        <ModalUserEditor editableUser={user} saveUserConfig={saveUserConfig} roles={roles} />
       </tr>
     );
 }
