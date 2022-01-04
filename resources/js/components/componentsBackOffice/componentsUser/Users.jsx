@@ -14,17 +14,21 @@ import ModalUserEditor from "./ModalUserEditor";
 const Users = () =>{
 
   const [usersState, dispatch] = useReducer(userReducer,usersData);
-  const {users, roles,roleUser} = usersState;
+  const {users, roles,roleUser, filteredUsers} = usersState;
 
   const saveUserConfig = backofficeUserDispatch(dispatch).saveUserConfig;
   const changeUserRole = backofficeUserDispatch(dispatch).changeUserRole;
+  const createNewUser = backofficeUserDispatch(dispatch).createNewUser;
+  const filterByName = backofficeUserDispatch(dispatch).filterByName;
 
 
   function setNewUserRole(userid, roleId){
     const parent = document.getElementById(`modalUserEditor${userid}`)
     const roleField = parent.querySelector("#backofice-user-role-editor");
     roleField.value = roleField.querySelector(`[id='${roleId}']`).value;
-}
+  }
+
+  
 
     return(
         
@@ -54,7 +58,7 @@ const Users = () =>{
                 <div className="col-12 col-xl-4 my-2 p-0">
                   <div className="d-flex">
                     <input className="form-control p-2 me-2" type="search" placeholder="Nombre de usuario..."
-                      aria-label="Search"/>
+                      aria-label="Search" onChange={(e)=>filterByName(e.target.value)}/>
                     <button className="btn btn-black p-2" type="submit"><i className="bi bi-search"></i></button>
                   </div>
                 </div>
@@ -62,7 +66,7 @@ const Users = () =>{
                 <div className="col-12 col-xl-2 my-2 p-0">
                   <div className="text-center d-xl-flex justify-content-end">
                     <button className="btn btn-black w-100 p-2" data-bs-toggle="modal"
-                    onClick={()=>setNewUserRole("NewUser",2)} data-bs-target={`#modalUserEditorNewUser`} >
+                    onClick={()=>{setNewUserRole("NewUser",2)}} data-bs-target={`#modalUserEditorNewUser`} >
                       Agregar usuario
                     </button>
                   </div>
@@ -86,11 +90,11 @@ const Users = () =>{
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((user)=>
+                    {filteredUsers.map((user)=>
                       <UserListItem key={user.id} user={user} saveUserConfig={saveUserConfig} users={users} roles={roles} roleUser={roleUser} changeUserRole={changeUserRole}/>
                     
                     )}
-                  <ModalUserEditor  roles={roles} newUser={true}/>
+                  <ModalUserEditor  roles={roles} newUser={true} createNewUser={createNewUser}/>
 
                   </tbody>
                   <tfoot></tfoot>

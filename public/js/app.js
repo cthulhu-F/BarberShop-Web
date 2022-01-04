@@ -7331,18 +7331,26 @@ var backofficeUserDispatch = function backofficeUserDispatch(dispatch) {
         payload: payload,
         userId: userId
       });
+      location.reload();
     },
     createNewUser: function createNewUser(newUserData) {
       dispatch({
         type: _src_actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_USER_TYPES.CREATE_NEW_USER,
         payload: newUserData
       });
+      location.reload();
     },
     changeUserRole: function changeUserRole(newRoleId, userId) {
       dispatch({
         type: _src_actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE,
         payload: newRoleId,
         userId: userId
+      });
+    },
+    filterByName: function filterByName(input) {
+      dispatch({
+        type: _src_actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_USER_TYPES.FILTER_BY_NAME,
+        payload: input
       });
     }
   };
@@ -12204,7 +12212,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -12215,7 +12231,9 @@ var ModalUserEditor = function ModalUserEditor(_ref) {
       saveUserConfig = _ref.saveUserConfig,
       roles = _ref.roles,
       _ref$newUser = _ref.newUser,
-      newUser = _ref$newUser === void 0 ? false : _ref$newUser;
+      newUser = _ref$newUser === void 0 ? false : _ref$newUser,
+      _ref$createNewUser = _ref.createNewUser,
+      createNewUser = _ref$createNewUser === void 0 ? false : _ref$createNewUser;
 
   if (newUser) {
     editableUser = {
@@ -12240,6 +12258,7 @@ var ModalUserEditor = function ModalUserEditor(_ref) {
     var nameField = parent.querySelector("#backofice-user-name-editor");
     var emailField = parent.querySelector("#backofice-user-email-editor");
     var phoneField = parent.querySelector("#backofice-user-phone-editor");
+    if (parent.querySelectorAll(".input-error").length != 0) return;
 
     if (nameField.value != "" || emailField.value != "" || phoneField.value != "") {
       var nameAlert = nameField.value == "" ? "" : " <span style=\"font-weight:700;\" >Nombre </span><br> ".concat(nameField.placeholder, " ---> ").concat(nameField.value, " <br> <br>  ");
@@ -12317,22 +12336,24 @@ var ModalUserEditor = function ModalUserEditor(_ref) {
 
     if (nameField.value == "" || emailField.value == "" || phoneField.value == "") {
       var nameAlert = nameField.value != "" ? "" : " <span style=\"font-weight:700;\" >Nombre </span><br><br>  ";
-      var emailAlert = emailField.value != "" ? "" : "<span style=\"font-weight:700;\" >Descripci\xF3n </span><br><br>";
-      var phoneAlert = phoneField.value != "" ? "" : "<span style=\"font-weight:700;\" >Stock </span><br><br>";
+      var emailAlert = emailField.value != "" ? "" : "<span style=\"font-weight:700;\" >Email </span><br><br>";
+      var phoneAlert = phoneField.value != "" ? "" : "<span style=\"font-weight:700;\" >Tel\xE9fono </span><br><br>";
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
         title: "Atención",
         html: "Para crear un nuevo usuario debe completar los siguientes campos<br><br> \n            ".concat(nameAlert, " ").concat(emailAlert, " ").concat(phoneAlert),
         icon: 'warning'
       });
     } else {
-      // saveUserConfig(nameField.value, "name", editableUser.id);
-      // nameField.value ="";
-      // saveUserConfig(emailField.value, "description", editableUser.id);
-      // emailField.value ="";
-      // saveUserConfig(selectedRoleId, "categories_id", editableUser.id);
-      // saveUserConfig(phoneField.value, "stock", editableUser.id);
-      // phoneField.value ="";
-      // saveUserConfig(todayString, "updated_at", editableUser.id);
+      console.log(parent.querySelectorAll(".input-error"));
+      if (parent.querySelectorAll(".input-error").length != 0) return;
+      var userData = {
+        name: nameField.value,
+        email: emailField.value,
+        phone: phoneField.value,
+        status: "ACTIVE",
+        role_id: selectedRoleId
+      };
+      createNewUser(userData);
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
         text: "".concat(editableUser.name, " creado con \xE9xito."),
         timer: "2000",
@@ -12345,7 +12366,12 @@ var ModalUserEditor = function ModalUserEditor(_ref) {
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+  var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_2__.useForm)(),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.formState.errors;
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "modal fade",
     id: "modalUserEditor".concat(editableUser.id),
     "data-bs-backdrop": "static",
@@ -12353,126 +12379,173 @@ var ModalUserEditor = function ModalUserEditor(_ref) {
     tabindex: "-1",
     "aria-labelledby": "modalUserEditorLabel",
     "aria-hidden": "true",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "modal-dialog modal-gl",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "modal-content",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "modal-header",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
             "class": "modal-title fw-bold font-h1",
             children: newUser ? "Crear nuevo usuario" : "Editar ".concat(editableUser.name)
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             type: "button",
             className: "btn-close",
             "data-bs-dismiss": "modal",
             "aria-label": "Close"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          "class": "modal-body",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "row shadow-sm p-2",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "col-xl-3 mb-3",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "input-group",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                    className: "input-group-text bg-black text-white border border-black fs-9",
-                    id: "basic-addon1",
-                    children: "ID: ".concat(newUser ? "" : editableUser.id)
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+          onSubmit: handleSubmit(creeateNewUser),
+          className: "modal-user-editor-form",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            "class": "modal-body",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "row shadow-sm p-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "col-xl-3 mb-3",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "input-group",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      className: "input-group-text bg-black text-white border border-black fs-9",
+                      id: "basic-addon1",
+                      children: "ID: ".concat(newUser ? "" : editableUser.id)
+                    })
                   })
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "col-xl-9 mb-3",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  className: "input-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                    type: "text",
-                    className: "form-control fs-8",
-                    placeholder: editableUser.name,
-                    "aria-label": "Recipient's username",
-                    "aria-describedby": "basic-addon2",
-                    disabled: true,
-                    id: "backofice-user-name-editor"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                    className: "input-group-text fs-8 bg-black text-white border-black",
-                    id: "basic-addon2",
-                    onClick: function onClick() {
-                      if (document.getElementById("modalUserEditor".concat(editableUser.id)).querySelector('#backofice-user-name-editor').disabled) {
-                        document.getElementById("modalUserEditor".concat(editableUser.id)).querySelector('#backofice-user-name-editor').disabled = false;
-                      } else {
-                        document.getElementById("modalUserEditor".concat(editableUser.id)).querySelector('#backofice-user-name-editor').disabled = true;
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "col-xl-9 mb-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "input-group",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", _objectSpread({
+                      type: "text",
+                      className: "form-control fs-8",
+                      placeholder: editableUser.name,
+                      "aria-label": "Recipient's username",
+                      "aria-describedby": "basic-addon2",
+                      disabled: true,
+                      id: "backofice-user-name-editor"
+                    }, register("name", {
+                      required: {
+                        value: newUser,
+                        message: "El campo es requerido"
+                      },
+                      pattern: {
+                        value: /[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}/i,
+                        message: "El formato no es correcto"
                       }
-                    },
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                      "class": "bi bi-pencil"
+                    }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                      className: "input-group-text fs-8 bg-black text-white border-black",
+                      id: "backofice-user-name-editor-setter",
+                      onClick: function onClick() {
+                        if (document.getElementById("modalUserEditor".concat(editableUser.id)).querySelector('#backofice-user-name-editor').disabled) {
+                          document.getElementById("modalUserEditor".concat(editableUser.id)).querySelector('#backofice-user-name-editor').disabled = false;
+                        } else {
+                          document.getElementById("modalUserEditor".concat(editableUser.id)).querySelector('#backofice-user-name-editor').disabled = true;
+                        }
+                      },
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+                        "class": "bi bi-pencil"
+                      })
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "d-flex justify-content-end w-75 mb-2",
+                    children: errors.name && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      className: errors.name && "input-error",
+                      children: errors.name.message
                     })
                   })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                className: "d-flex justify-content-between mb-1 col-xl-12 mb-3",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                  className: "me-2 p-2 fw-bold ",
-                  children: "Email"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                  type: "text",
-                  placeholder: editableUser.email,
-                  className: "form-control w-50",
-                  id: "backofice-user-email-editor"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                className: "d-flex justify-content-between mb-1 col-xl-12 mb-3",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                  className: "me-2 p-2 fw-bold",
-                  children: "Tel\xE9fono"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                  type: "number",
-                  className: "form-control w-50",
-                  id: "backofice-user-phone-editor",
-                  placeholder: editableUser.phone
-                })]
-              }), newUser ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                className: "d-flex justify-content-between mb-1 col-xl-12 mb-3",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                  className: "me-2 p-2 fw-bold",
-                  children: "Role"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
-                  className: "w-50 form-select p-2",
-                  id: "backofice-user-role-editor",
-                  children: roles.map(function (role) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("option", {
-                      id: role.id,
-                      children: [" ", role.name]
-                    }, role.id);
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "d-flex justify-content-between mb-1 col-xl-12 mb-0",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    className: "me-2 p-2 fw-bold ",
+                    children: "Email"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", _objectSpread({
+                    type: "text",
+                    placeholder: editableUser.email,
+                    className: "form-control w-50",
+                    id: "backofice-user-email-editor"
+                  }, register("email", {
+                    required: {
+                      value: newUser,
+                      message: "El campo es requerido"
+                    },
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      message: "El formato no es correcto"
+                    }
+                  })))]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "d-flex justify-content-end mb-2",
+                  children: errors.email && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    className: errors.email && "input-error",
+                    children: errors.email.message
                   })
-                })]
-              }) : ""]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "d-flex justify-content-between mb-1 col-xl-12 mb-0",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    className: "me-2 p-2 fw-bold",
+                    children: "Tel\xE9fono"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", _objectSpread({
+                    type: "number",
+                    className: "form-control w-50 ",
+                    id: "backofice-user-phone-editor",
+                    placeholder: editableUser.phone
+                  }, register("phone", {
+                    required: {
+                      value: newUser,
+                      message: "El campo es requerido"
+                    },
+                    pattern: {
+                      value: /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/,
+                      message: "El formato no es correcto"
+                    }
+                  })))]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "d-flex justify-content-end mb-2",
+                  children: errors.phone && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    className: errors.phone && "input-error",
+                    children: errors.phone.message
+                  })
+                }), newUser ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "d-flex justify-content-between mb-1 col-xl-12 mb-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    className: "me-2 p-2 fw-bold",
+                    children: "Role"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("select", {
+                    className: "w-50 form-select p-2",
+                    id: "backofice-user-role-editor",
+                    children: roles.map(function (role) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("option", {
+                        id: role.id,
+                        children: [" ", role.description]
+                      }, role.id);
+                    })
+                  })]
+                }) : ""]
+              })
             })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          "class": "modal-footer",
-          children: [newUser ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            type: "button",
-            className: "btn btn-dark",
-            "data-bs-dismiss": "modal",
-            onClick: function onClick() {
-              return creeateNewUser();
-            },
-            children: "Crear Producto"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            type: "button",
-            className: "btn btn-dark",
-            "data-bs-dismiss": "modal",
-            onClick: function onClick() {
-              return saveConfigChanges();
-            },
-            children: "Guardar cambios"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            type: "button",
-            className: "btn btn-secondary",
-            "data-bs-dismiss": "modal",
-            children: "Cancelar"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            "class": "modal-footer",
+            children: [newUser ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              type: "button",
+              className: "btn btn-dark",
+              onClick: function onClick() {
+                creeateNewUser();
+              },
+              children: "Crear Producto"
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              type: "button",
+              className: "btn btn-dark",
+              onClick: function onClick() {
+                return saveConfigChanges();
+              },
+              children: "Guardar cambios"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              type: "button",
+              className: "btn btn-secondary",
+              "data-bs-dismiss": "modal",
+              children: "Cancelar"
+            })]
           })]
         })]
       })
@@ -12802,6 +12875,11 @@ var UserListItem = function UserListItem(_ref) {
     roleField.value = roleField.querySelector("[id='".concat(roleId, "']")).value;
   }
 
+  function activateFormAlerts(userid) {
+    var parent = document.getElementById("modalUserEditor".concat(userid));
+    parent.querySelector("#backofice-user-name-editor-setter").click().click();
+  }
+
   console.log(roles.find(function (role) {
     return role.id == roleUser.find(function (role) {
       return role.user_id == user.id;
@@ -12844,6 +12922,9 @@ var UserListItem = function UserListItem(_ref) {
           className: "btn btn-outline-success p-1 me-1",
           "data-bs-toggle": "modal",
           "data-bs-target": "#modalUserEditor".concat(user.id),
+          onClick: function onClick() {
+            return activateFormAlerts(user.id);
+          },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
             className: "bi bi-pencil fs-7"
           })
@@ -12946,9 +13027,12 @@ var Users = function Users() {
 
   var users = usersState.users,
       roles = usersState.roles,
-      roleUser = usersState.roleUser;
+      roleUser = usersState.roleUser,
+      filteredUsers = usersState.filteredUsers;
   var saveUserConfig = (0,_backOfficeUserUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).saveUserConfig;
   var changeUserRole = (0,_backOfficeUserUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).changeUserRole;
+  var createNewUser = (0,_backOfficeUserUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).createNewUser;
+  var filterByName = (0,_backOfficeUserUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).filterByName;
 
   function setNewUserRole(userid, roleId) {
     var parent = document.getElementById("modalUserEditor".concat(userid));
@@ -12997,7 +13081,10 @@ var Users = function Users() {
                 className: "form-control p-2 me-2",
                 type: "search",
                 placeholder: "Nombre de usuario...",
-                "aria-label": "Search"
+                "aria-label": "Search",
+                onChange: function onChange(e) {
+                  return filterByName(e.target.value);
+                }
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
                 className: "btn btn-black p-2",
                 type: "submit",
@@ -13016,7 +13103,7 @@ var Users = function Users() {
                 className: "btn btn-black w-100 p-2",
                 "data-bs-toggle": "modal",
                 onClick: function onClick() {
-                  return setNewUserRole("NewUser", 2);
+                  setNewUserRole("NewUser", 2);
                 },
                 "data-bs-target": "#modalUserEditorNewUser",
                 children: "Agregar usuario"
@@ -13056,7 +13143,7 @@ var Users = function Users() {
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tbody", {
-              children: [users.map(function (user) {
+              children: [filteredUsers.map(function (user) {
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_UserListItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
                   user: user,
                   saveUserConfig: saveUserConfig,
@@ -13067,7 +13154,8 @@ var Users = function Users() {
                 }, user.id);
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_ModalUserEditor__WEBPACK_IMPORTED_MODULE_7__["default"], {
                 roles: roles,
-                newUser: true
+                newUser: true,
+                createNewUser: createNewUser
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tfoot", {})]
           })
@@ -15278,7 +15366,7 @@ var ModalTurn = function ModalTurn() {
                         message: "El campo es requerido"
                       },
                       pattern: {
-                        value: /[0-9]{6,15}/,
+                        value: /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/,
                         message: "El formato no es correcto"
                       }
                     }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
@@ -16353,7 +16441,8 @@ __webpack_require__.r(__webpack_exports__);
 var BACKOFFICE_USER_TYPES = {
   CHANGE_USER_VALUE: "CHANGE_USER_VALUE",
   CREATE_NEW_USER: "CREATE_NEW_USER",
-  CHANGE_USER_ROLE: "CHANGE_USER_ROLE"
+  CHANGE_USER_ROLE: "CHANGE_USER_ROLE",
+  FILTER_BY_NAME: "FILTER_BY_NAME"
 };
 
 /***/ }),
@@ -16937,7 +17026,8 @@ var sortById = function sortById(nonSorted) {
 var usersData = {
   users: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.user,
   roles: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.role,
-  roleUser: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.role_user
+  roleUser: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.role_user,
+  filteredUsers: _resources_js_constants_constUser__WEBPACK_IMPORTED_MODULE_1__.ITEM_USER.user
 };
 function userReducer(state, action) {
   switch (action.type) {
@@ -16958,7 +17048,7 @@ function userReducer(state, action) {
 
     case _actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_USER_TYPES.CREATE_NEW_USER:
       {
-        console.log(payload);
+        console.log(action.payload);
         return state;
       }
 
@@ -16974,6 +17064,18 @@ function userReducer(state, action) {
         allRoleUser.push(editableRoleUser);
         return _objectSpread(_objectSpread({}, state), {}, {
           roleUser: allRoleUser
+        });
+      }
+
+    case _actions_backofficeUserActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_USER_TYPES.FILTER_BY_NAME:
+      {
+        var searchResult = state.users.filter(function (product) {
+          var search = product.name.toUpperCase();
+          var stringsearched = action.payload.toUpperCase();
+          return search.indexOf(stringsearched) > -1;
+        });
+        return _objectSpread(_objectSpread({}, state), {}, {
+          filteredUsers: searchResult
         });
       }
 

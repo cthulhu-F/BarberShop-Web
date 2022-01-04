@@ -20,13 +20,22 @@ const backofficeUserDispatch = (dispatch)=>{
             if(field !="status") payload = payloadInput;
 
             dispatch ({type: BACKOFFICE_USER_TYPES.CHANGE_USER_VALUE, editableField: field , payload: payload, userId : userId})
+            location.reload();
+
         },
 
         createNewUser : (newUserData) =>{
-            dispatch ({type: BACKOFFICE_USER_TYPES.CREATE_NEW_USER, payload: newUserData})
+            dispatch ({type: BACKOFFICE_USER_TYPES.CREATE_NEW_USER, payload: newUserData});
+            location.reload();
+
         },
         changeUserRole : (newRoleId,userId)=>{
             dispatch ({type: BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE, payload: newRoleId, userId:userId})
+        },
+
+        filterByName : (input) =>{
+            dispatch ({type: BACKOFFICE_USER_TYPES.FILTER_BY_NAME, payload: input})
+
         }
     }
 }

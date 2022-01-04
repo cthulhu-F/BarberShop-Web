@@ -27,6 +27,7 @@ export const usersData = {
     users: ITEM_USER.user,
     roles: ITEM_USER.role,
     roleUser : ITEM_USER.role_user,
+    filteredUsers : ITEM_USER.user
 }
 
 
@@ -44,7 +45,7 @@ export function userReducer(state,action) {
         }
         
         case BACKOFFICE_USER_TYPES.CREATE_NEW_USER: {
-            console.log(payload);
+            console.log(action.payload);
             return state
         }
         case BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE : {
@@ -56,6 +57,16 @@ export function userReducer(state,action) {
             return {...state, roleUser :allRoleUser }
         }
 
+        case BACKOFFICE_USER_TYPES.FILTER_BY_NAME :{
+            const searchResult = state.users.filter(
+                function(product){
+                  const search = (product.name).toUpperCase()
+                  const stringsearched = action.payload.toUpperCase()
+                  return search.indexOf(stringsearched) > -1
+                }
+              );
+            return {...state, filteredUsers: searchResult}
+        }
     
         default:
             return state;

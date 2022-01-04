@@ -32,6 +32,10 @@ const UserListItem = ({user, saveUserConfig, users, roles, roleUser,changeUserRo
         roleField.value = roleField.querySelector(`[id='${roleId}']`).value;
     }
 
+    function activateFormAlerts(userid){
+        const parent = document.getElementById(`modalUserEditor${userid}`)
+        parent.querySelector("#backofice-user-name-editor-setter").click().click();
+    }
 
     console.log(roles.find(role=>role.id == roleUser.find(role => role.user_id == user.id).role_id).description)
 
@@ -47,7 +51,7 @@ const UserListItem = ({user, saveUserConfig, users, roles, roleUser,changeUserRo
         <td>
           <div className="d-flex justify-content-center">
             <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-            data-bs-target={`#modalUserEditor${user.id}`} ><i className="bi bi-pencil fs-7"></i></button>
+            data-bs-target={`#modalUserEditor${user.id}`} onClick={()=>activateFormAlerts(user.id)}><i className="bi bi-pencil fs-7"></i></button>
             <button className="btn btn-outline-danger p-1 me-1" data-bs-toggle="modal"
             data-bs-target={`#modalUserSettings${user.id}`} onClick={()=>{checkUserStatus(user.id); setDefaultRole(user.id, roleUser.find(role => role.user_id == user.id).role_id)}}><i className="bi bi-gear"></i></button>
           </div>
