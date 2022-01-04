@@ -12763,15 +12763,17 @@ var Chair = function Chair(_ref) {
       selecetDay = _ref.selecetDay;
   var id = data.id,
       name = data.name,
-      status = data.status,
-      configDay_id = data.configDay_id;
+      status = data.status;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "col-md-4",
+    className: "col-md-4 ",
     style: {
       marginBottom: "20px"
     },
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      className: "chair-item btn p-4 text-dark text-decoration-none d-flex justify-content-center aling-middle",
+      className: "card p-4 chair-item text-dark text-decoration-none",
+      style: {
+        alignItems: "center"
+      },
       id: id,
       onClick: function onClick() {
         setActive(id);
@@ -12779,11 +12781,11 @@ var Chair = function Chair(_ref) {
         getSchedule(id, selecetDay);
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "d-flex",
+        className: "d-flex flex-row mb-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
           className: "bi bi-scissors"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "",
+          className: "d-flex flex-column ml-2",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
             children: name
           })
