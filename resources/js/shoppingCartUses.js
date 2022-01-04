@@ -17,7 +17,9 @@ const mapDispatcht = (dispatch) => {
 
         addOneToCart: (id, alert = false) => {
 
+            dispatch({type:TYPES.QUANTITY_ALERT, payload:id})
             dispatch({ type: TYPES.ADD_ONE_TO_CART, payload: id, alert: alert })
+
         },
 
         deleteFromCart: (id, all = false) => {
@@ -43,6 +45,10 @@ const mapDispatcht = (dispatch) => {
         // decrement : () =>{
         //     dispatch({type:TYPES.DECREMENT})
         // },
+
+        // quantityAlert:(productId) =>{
+        //     dispatch({type:TYPES.QUANTITY_ALERT, payload:productId})
+        // }
 
     };
 };

@@ -41,6 +41,30 @@ const Header = () => {
 
   const urlImg = require.context('../../../asset/marca', true);
 
+
+  const searchInShop = ()=>{
+    const inputField = document.getElementById("global-header-search-in-shop-input");
+    let urlSeearch = inputField.value != "" ? inputField.value.split(' ').join('%20'): '';
+
+    const tester = new RegExp(/^[A-Za-z0-9-ZñÑáéíóúÁÉÍÓÚ\s]+$/g);
+    if(tester.test(urlSeearch)){
+      let URL = `/shop/${urlSeearch}`;
+      window.location.replace(URL);
+    }else{
+      swal.fire({
+        text: `Por favor ingrese sólo carácteres alfa-numéricos`,
+        timer:"2000", 
+        position: "bottom",
+        customClass : {
+            container: "add-to-cart-alert-container",
+            popup:"add-to-cart-alert",
+        }
+       });
+    }
+    
+  }
+
+
   return(
 
     <div className="container-fluid">
@@ -87,8 +111,9 @@ const Header = () => {
 
             <div className="d-xl-flex d-block my-2">
               <div className="d-flex">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button className="btn btn-black" type="submit"><i className="bi bi-search"></i></button>
+                <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" id="global-header-search-in-shop-input"
+                />
+                <button className="btn btn-black" type="submit" onClick={()=>searchInShop()}><i className="bi bi-search"></i></button>
                 <button className="btn btn-black ms-2" data-bs-toggle="modal" data-bs-target="#shoppingCartModal"><i
                     className="bi bi-cart"></i></button>
               </div>

@@ -45,34 +45,22 @@ const Item = () => {
   // const decrement = mapDispatcht(dispatch).decrement;
 
   
-  let itemInCart = cart.find((item) => item.id === mainitem.id);
+  let itemInCart = cart.find((item) => item.id === mainitem.id) ;
 
   let cartQuantity = itemInCart
   ? itemInCart.quantity
   : 1;
 
-  let aviableStock= mainitem.stock-cartQuantity;
+  let aviableStock= mainitem.stock;
   
   const [count, setCount] = useState(cartQuantity);
+
 
 
   let addingButton = document.querySelector(".adding-button");
   let removingButton = document.querySelector(".removing-button");
     
 
-
-  // function buttonListener() {
-  //   if (aviableStock <= mainitem.stock) {
-  //     addingButton.disabled = true; 
-  //   } 
-  //   if(mainitem.stock == 1){
-  //     removingButton.disabled = true;
-  //   }
-  //   else {
-  //     addingButton.disabled = false;
-  //     removingButton.disabled = false;
-  //   }
-  // }
   
   function increment(){
     loadData();
