@@ -4,7 +4,51 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../css/main.css';
 
 
+import { useReducer,useState, useEffect } from "react";
+import { orderSalesReducer, salesData } from "../../../../../src/reducers/backOfficeOrderSaleReducer";
+import backofficeOrderSalesMapDispatch from "../../../backofficeOrderSaleUses";
+
+import SaleListItem from "./SaleListItem";
+import Pagination from "../componentsTurns/Pagination";
+
 const Sales = () =>{
+
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  const yyyy = today.getFullYear();
+  const yyyymin = parseInt(yyyy)-1;
+  const yyyymax = parseInt(yyyy)+1;
+  const minDate = yyyymin + '-' + mm + '-' + dd;
+  const maxDte = yyyymax + '-' + mm + '-' + dd;
+
+  const[orderSalesState, dispatch] = useReducer(orderSalesReducer,salesData);
+  const{sales, dashboardSales} = orderSalesState;
+
+  const setSaleStatus = backofficeOrderSalesMapDispatch(dispatch).setSaleStatus
+  const filterDashboard = backofficeOrderSalesMapDispatch(dispatch).filterDashboard
+
+
+  /* PAGINATION*/
+    
+  const [pagintaionSales, setSalesPagination] = useState(dashboardSales)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [salesPerPage] = useState(2)
+  
+  useEffect(() => {
+      const fetchSales = async () => {
+      const res = await dashboardSales;
+      setSalesPagination(res)
+      }
+      fetchSales();      
+  }, [dashboardSales, sales])
+
+  const indexOfLastSale = currentPage * salesPerPage;
+  const indexOfFirstSale = indexOfLastSale - salesPerPage;
+  const currentSales = pagintaionSales.slice(indexOfFirstSale, indexOfLastSale)
+  const howManyPages = Math.ceil(pagintaionSales.length/salesPerPage)
+
+      /* PAGINATION END*/
     return(
         
         <div >
@@ -31,22 +75,24 @@ const Sales = () =>{
               <div className="row rounded p-2 mb-3">
                 <div className="col-12 col-xl-4 my-2 my-xl-0 p-0">
                   <div className="d-flex">
-                    <input className="form-control p-2 me-2" type="search" placeholder="Busca una orden de venta"
-                      aria-label="Search"/>
+                    <input className="form-control p-2 me-2" type="search" id="inputSaleSearch" placeholder="Busca una orden de venta"
+                      aria-label="Search" onChange={(e)=>filterDashboard(document.getElementById("inputDateIniFilterSales").value,document.getElementById("inputDateEndFilterSales").value,e.target.value)}/>
                     <button className="btn btn-black pt-0 pb-0 ps-2 pe-2" type="submit"><i className="bi bi-search"></i></button>
                   </div>
                 </div>
 
                 <div className="col-12 col-xl-2 p-0 mx-xl-2">
-                  <input className="form-control p-2" id="inputDateIni" type="date" name="trip-start" value="2021-11-26"
-                    min="2018-01-01" max="2022-12-01"/>
-                  <label for="inputDateIni" className="form-label text-muted fs-9">Fecha de inicio</label>
+                  <input className="form-control p-2" id="inputDateIniFilterSales" type="date" name="trip-start"
+                    onChange={(e)=>filterDashboard(e.target.value, document.getElementById("inputDateEndFilterSales").value, document.getElementById("inputSaleSearch").value)}
+                    min={minDate} max={maxDte}/>
+                  <label for="inputDateIniFilterSales" className="form-label text-muted fs-9">Fecha de inicio</label>
                 </div>
 
                 <div className="col-12 col-xl-2 p-0 mx-xl-2">
-                  <input className="form-control p-2" id="inputDateIni" type="date" name="trip-start" value="2021-11-26"
-                    min="2018-01-01" max="2022-12-01"/>
-                  <label for="inputDateIni" className="form-label text-muted fs-9">Fecha de Fin</label>
+                  <input className="form-control p-2" id="inputDateEndFilterSales" type="date" name="trip-start" 
+                    onChange={(e)=>filterDashboard(document.getElementById("inputDateIniFilterSales").value, e.target.value, document.getElementById("inputSaleSearch").value)}
+                    min={minDate} max={maxDte}/>
+                  <label for="inputDateEndFilterSales" className="form-label text-muted fs-9">Fecha de Fin</label>
                 </div>
               </div>
             </div>
@@ -67,35 +113,22 @@ const Sales = () =>{
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td><button className="btn btn-black" data-bs-toggle="modal" data-bs-target="#modalResume">Desplegar</button></td>
-                      <td>
-                        <div style={{ overflowWrap: "break-word", width: "150px"}}> $10.99 </div>
-                      </td>
-                      <td><button className="btn btn-black" data-bs-toggle="modal" data-bs-target="#modalDataClient">Desplegar</button></td>
-                      <td>10/10/2021</td>
-                      <td>
-                        <div className="d-flex justify-content-center">
-                          <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                            data-bs-target="#modalAddProduct"><i className="bi bi-pencil fs-7"></i></button>
-                          <button className="btn btn-outline-danger  p-1 me-1"><i className="bi bi-gear"></i></button>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-center">
-                          <input className="form-check-input p-2 m-auto" type="checkbox" id="inlineCheckbox1" value="option1"/>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="text-success fs-3 d-flex justify-content-center" title="ACTIVO">
-                          <i className="bi bi-check-circle-fill"></i>
-                        </div>
-                      </td>
-                    </tr>
+                  {currentSales.map(sale=>
+                    <SaleListItem key={sale.id} sale={sale} setSaleStatus={setSaleStatus}/>
+                  )
+                  }
                   </tbody>
                   <tfoot>
+                    <tr>
+                    <td className="" colspan="10">
+                        <div className="d-flex justify-content-end">
+                        <nav aria-label="Page navigation example m-0">
+                            <Pagination setCurrentPage={setCurrentPage} pages={howManyPages}/>
 
+                        </nav>
+                        </div>
+                    </td>
+                    </tr>
                   </tfoot>
                 </table>
               </div>
