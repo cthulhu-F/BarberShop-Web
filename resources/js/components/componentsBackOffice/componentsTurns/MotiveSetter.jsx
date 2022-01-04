@@ -84,7 +84,6 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
       }
     )
 
-
     let dayActive = document.getElementById(day[0]);
     let labelMessage = document.getElementById("labelMessage");
     let allDays = document.querySelectorAll('.day-item');
@@ -153,13 +152,13 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       </div>
 
                       <div className="col-12">
-                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day0">LU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day1">MA</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day2">MI</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day3">JU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day4">VI</button>
+                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day4">VI</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day0">LU</button>
                         <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day5">SA</button>
                         <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day6">DO</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day3">JU</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day1">MA</button>
+                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="day2">MI</button>
                       </div>
 
                       <div className="col-12 mb-2">

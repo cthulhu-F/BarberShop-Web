@@ -16,6 +16,15 @@ var nextYearString = nextYeatr+'-'+ mm +'-'+ dd;
 
 const backofficeTurnDashboardMapDispatch = (dispatch)=>{
     return {
+
+        //API DISPATCH
+
+        readAllOrderTurn: (data) => {
+            dispatch({type: BACKOFFICE_TURN_DASHBOARD_TYPES.READ_ALL_ORDERTURN, payload: data});
+        },
+
+        //END
+
         resetInitialState: () => {
             dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.RESET_INITIAL_STATE});
         },

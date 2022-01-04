@@ -1,10 +1,19 @@
 import React from "react";
 
-const TurnDashboardItem = ({scheduledTurn,setTurnStatus}) =>{
+const TurnDashboardItem = ({ scheduledTurn,setTurnStatus, UpdateOrderTurn }) =>{
 
-    const setConfirmed = (scheduledTurnId) =>{
+    const setConfirmed = async (scheduledTurnId) =>{
 
-        setTurnStatus(scheduledTurnId, "CONFIRMED")
+        setTurnStatus(scheduledTurnId, "CONFIRMED");
+        let put = {
+            id: scheduledTurnId,
+            status: "COMPLETED"
+        }
+
+        const res = UpdateOrderTurn(put);
+
+        console.log(res);
+
             swal.fire({
                 text: 'Turno confirmado con éxito',
                 timer:"1500", 

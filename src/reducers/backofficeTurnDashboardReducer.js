@@ -52,6 +52,16 @@ export const FilteredTurns ={
 
 export function backofficeTurnDashboardReducer(state, action){
     switch(action.type){ 
+        case BACKOFFICE_TURN_DASHBOARD_TYPES.READ_ALL_ORDERTURN :{
+            
+            state.dashboardTurns = sortByDate(action.payload); 
+            state.allShcheduled = sortByDate(action.payload); 
+            state.todayScheduled = filteredByActive(sortByDate(action.payload.filter((turn)=>turn.date == todayString))); 
+            state.tomorrowScheduled = filteredByActive(sortByDate(action.payload.filter((turn)=>turn.date != todayString)));
+            
+            return state
+        }
+
         case BACKOFFICE_TURN_DASHBOARD_TYPES.RESET_INITIAL_STATE :{
             return allShcheduled
         }

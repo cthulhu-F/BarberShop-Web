@@ -115,8 +115,8 @@ export function turnReducer(state, action){
             if (action.date =="null"){
                 action.date = selecetDay;
             };
-            console.log("action");
-            console.log(action.date);
+            //console.log("action");
+            //console.log(action.date);
 
             let dateData = action.date.split("-");
             let dt = new Date(dateData) 
@@ -125,8 +125,8 @@ export function turnReducer(state, action){
             
             let chairAviability = state.chairConfigDay.find(chair=>chair.id === action.payload);
             //console.log(chairAviability)  
-            console.log("chair");
-            console.log(action.payload);
+            //console.log("chair");
+            //console.log(action.payload);
 
             let daySchedule = chairAviability.days[weekDay].split("/");
             //console.log(daySchedule)  

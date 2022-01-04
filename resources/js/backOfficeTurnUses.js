@@ -37,6 +37,16 @@ const resetGlobalSaving = () => {
 
 const backofficeTurnMapDispatch = (dispatch)=>{
     return {
+
+        //API
+
+        readAllData: (configDay, configTurn) => {
+            dispatch({ type: BACKOFFICE_TURN_TYPES.READ_ALL_DATA, dataDay: configDay, dataTurn: configTurn});
+        },
+
+
+        //END
+
         setEditableChair: (id) => {
             dispatch({ type: BACKOFFICE_TURN_TYPES.SET_EDITABLE_CHAIR, payload:id});
             // dispatch({ type: BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY, payload:[0]});

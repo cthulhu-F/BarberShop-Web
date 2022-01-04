@@ -1,7 +1,6 @@
 
 import React from "react";
 import ModalTurn from "../../componentsTurn/ModalTurn";
-
 import ModalTurnListEditor from "./ModalTurnListEditor";
 import ModalTurnListSettings from "./ModalTurnListSettings";
 
@@ -9,9 +8,12 @@ import ModalTurnListSettings from "./ModalTurnListSettings";
 
 const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus}) =>{
 
+
     const addTime = (initial, aditional) =>{
+
         let initialTime = initial.split(":");
         let aditionalTime = aditional.split(":");
+        
     
         let hours = parseInt(initialTime[0])  + parseInt(aditionalTime[0]);
         let minutes = parseInt(initialTime[1]) + parseInt(aditionalTime[1]);
@@ -61,14 +63,14 @@ const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus
         </td>
         <td>
             {
-            turn.status == "CONFIRMED"
+            turn.status == "COMPLETED"
             ?
                 <div className="text-success fs-3 d-flex justify-content-center" title="CONFIRMADO">
                 <i className="bi bi-check-circle-fill"></i>
                 </div>
-            : turn.status == "NONACTIVE"
+            : turn.status == "INACTIVE"
                 ?
-                    <div className="text-danger fs-3 d-flex justify-content-center" title="INACTIVO">
+                    <div className="text-danger fs-3 d-flex justify-content-center" title="CANCELADO">
                     <i class="bi bi-x-circle-fill"></i>
                     </div>
                 :

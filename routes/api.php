@@ -6,13 +6,26 @@ use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\TurnController;
 use App\Http\Controllers\PDF\InvoiceController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes Auth
 |--------------------------------------------------------------------------
 */
 
-Route::post('Register', [AuthController::class, 'register']);
+Route::group([
+  'middleware' => 'auth',
+], function ($router) {
+
+  Route::post('Register', [AuthController::class, 'register']);
+  Route::get('ShowOrderTurn', [TurnController::class, 'showOrderTurn']);
+  Route::put('UpdateOrderTurn', [TurnController::class, 'updateOrderTurn']);
+
+});
+
+
+
+
 
 
 /*
@@ -25,11 +38,17 @@ Route::post('Login', [AuthController::class, 'login']);
 
 /*
 |--------------------------------------------------------------------------
-| API Routes Home
+| API Routes Item
 |--------------------------------------------------------------------------
 */
 
 Route::get('Item', [ItemController::class, 'item']);
+
+/*
+|--------------------------------------------------------------------------
+| API Routes Turn
+|--------------------------------------------------------------------------
+*/
 
 Route::post('CreateOrderTurn', [TurnController::class, 'createOrderTurn']);
 

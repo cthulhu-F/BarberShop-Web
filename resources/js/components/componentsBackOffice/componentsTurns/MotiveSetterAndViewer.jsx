@@ -8,14 +8,21 @@ import backofficeTurnMapDispatch from "../../../backOfficeTurnUses";
 
 import Pagination from "./Pagination";
 import ModalChairsConfig from "./ModalChairsConfig";
+import backofficeTurnDashboardMapDispatch from "../../../backofficeTurnDashboardUses";
+import { ShowConfigDay, ShowConfigTurn } from "../../../helpers/TurnHelpers";
 
 
 const MotiveSetterAndViewer= ()=>{
 
     const [backOfficeTurnState, dispatch] =useReducer(backofficeTurnReducer,BackofficeTurnData);
     const {allChairsSchedule, allChairs, editableChair, turnsPerday, editableDay} = backOfficeTurnState;
+
+    //API
+
+    const readAllData = backofficeTurnMapDispatch(dispatch).readAllData;
   
-  
+    //END
+
     const setEditableChair = backofficeTurnMapDispatch(dispatch).setEditableChair;
   
     const setActiveDay =backofficeTurnMapDispatch(dispatch).setActiveDay;
@@ -34,16 +41,8 @@ const MotiveSetterAndViewer= ()=>{
 
     /* PAGINATION*/
     const [posts, setPosts] = useState(allChairsSchedule)
-    const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage] = useState(2)
-  
-    useEffect(() => {
-      const fetchPosts = async () => {
-        const res = await allChairsSchedule;
-        setPosts(res)
-      }
-      fetchPosts();      
-    }, [allChairs, allChairsSchedule])
+    const [currentPage, setCurrentPage] = useState(0)
+    const [postsPerPage] = useState(4)
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -61,6 +60,23 @@ const MotiveSetterAndViewer= ()=>{
        "sa": "sa",
        "su": "do",
      }
+
+
+     useEffect(() => {
+      const fetchPosts = async () => {
+        const resDay = await ShowConfigDay();
+        const resTurn = await ShowConfigTurn();
+
+        //console.log(resDay);
+        //console.log(resTurn);
+
+        readAllData(resDay, resTurn);
+        //const res = await allChairsSchedule;
+        setPosts(resDay)
+      }
+      
+      fetchPosts(); 
+    },[])
 
     return(
         <div>

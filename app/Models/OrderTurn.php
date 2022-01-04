@@ -20,10 +20,16 @@ class OrderTurn extends Model
         'name_client',
         'email_client',
         'phone_client',
+        'status',
         'date',
         'time',
-        'created_at',
-        'updated_at',
-        'status'
+        'turn_duration'
+    ];
+
+    protected $casts = [
+        'date' => 'date:d-m-Y',
+        'time' => 'datetime:H:00',
+        'created_at' => 'date:d-m-Y',
+        'updated_at' => 'date:d-m-Y',
     ];
 }

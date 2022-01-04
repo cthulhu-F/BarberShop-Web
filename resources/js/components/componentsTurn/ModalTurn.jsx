@@ -25,14 +25,14 @@ import swal from "sweetalert2";
 import { parse } from "postcss";
 import { min } from "lodash";
 import { TabList } from "react-tabs";
-import CreateOrderTurn, { ShowConfigDay, ShowConfigTurn } from "../../helpers/TurnHelpers";
+import  { ShowConfigDay, ShowConfigTurn, CreateOrderTurn } from "../../helpers/TurnHelpers";
 import { useEffect } from "react";
 
 
 const ModalTurn = () => {
 
   const [turnState, dispatch] =useReducer(turnReducer,turnStateData);
-  const {chairs, day, schedule, completeOrder,chairIsSelected, activeChairId, selecetDay, hourIsSelected, selectedHour ,userData, client_data} = turnState;
+  const {chairs, day, schedule, completeOrder,chairIsSelected, activeChairId, selecetDay, turnDuration, hourIsSelected, selectedHour ,userData, client_data} = turnState;
 
   const {name_client, phone_client, email_client, client_is_registered} = client_data;
 
@@ -146,6 +146,7 @@ const ModalTurn = () => {
       phone_client: client_data.phone_client, 
       date: selecetDay,
       time: selectedHour,
+      turn_duration: turnDuration 
       //update_at: today, 
       //status: "ACTIVE"
     }
@@ -162,9 +163,10 @@ const ModalTurn = () => {
       + "&time=" +
       turnConfirmed.time
       );
-    
+
     let response = await CreateOrderTurn(turnConfirmed);
 
+    console.log(response);
     
     swal.fire({
       title: "Turno guradado con éxito!",
@@ -175,7 +177,7 @@ const ModalTurn = () => {
       timer:5000})
       .then(()=>{}).then(()=>{
         window.open(urlPDF)
-        window.location.href = ' ';
+        //window.location.href = ' ';
       })
     
   }
@@ -193,7 +195,6 @@ const ModalTurn = () => {
       
       readAllDay(resDay);
       readAllTurn(resTurn);
-
     }
     ShowDay()
 
