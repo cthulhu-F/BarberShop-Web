@@ -7203,7 +7203,7 @@ var backofficeTurnMapDispatch = function backofficeTurnMapDispatch(dispatch) {
       resetGlobalSaving();
       dispatch({
         type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY,
-        payload: id[3]
+        payload: id
       });
       dispatch({
         type: _src_actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT
@@ -8314,25 +8314,25 @@ var MotiveSetter = function MotiveSetter(_ref) {
     var day = editableDay.map(function (day) {
       switch (day) {
         case "mo":
-          return "day0";
+          return "mo";
 
         case "tu":
-          return "day1";
+          return "tu";
 
         case "we":
-          return "day2";
+          return "we";
 
         case "th":
-          return "day3";
+          return "th";
 
         case "fr":
-          return "day4";
+          return "fr";
 
         case "sa":
-          return "day5";
+          return "sa";
 
         case "su":
-          return "day6";
+          return "su";
       }
     });
     var dayActive = document.getElementById(day[0]);
@@ -8420,50 +8420,50 @@ var MotiveSetter = function MotiveSetter(_ref) {
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day4",
-              children: "VI"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              className: "btn btn-platinum fw-bold day-item",
-              onClick: function onClick(event) {
-                return setActiveDay(event.target.id);
-              },
-              id: "day0",
+              id: "mo",
               children: "LU"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day5",
-              children: "SA"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              className: "btn btn-platinum fw-bold day-item",
-              onClick: function onClick(event) {
-                return setActiveDay(event.target.id);
-              },
-              id: "day6",
-              children: "DO"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              className: "btn btn-platinum fw-bold day-item",
-              onClick: function onClick(event) {
-                return setActiveDay(event.target.id);
-              },
-              id: "day3",
-              children: "JU"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              className: "btn btn-platinum fw-bold day-item",
-              onClick: function onClick(event) {
-                return setActiveDay(event.target.id);
-              },
-              id: "day1",
+              id: "tu",
               children: "MA"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn btn-platinum fw-bold day-item",
               onClick: function onClick(event) {
                 return setActiveDay(event.target.id);
               },
-              id: "day2",
+              id: "we",
               children: "MI"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "btn btn-platinum fw-bold day-item",
+              onClick: function onClick(event) {
+                return setActiveDay(event.target.id);
+              },
+              id: "th",
+              children: "JU"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "btn btn-platinum fw-bold day-item",
+              onClick: function onClick(event) {
+                return setActiveDay(event.target.id);
+              },
+              id: "fr",
+              children: "VI"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "btn btn-platinum fw-bold day-item",
+              onClick: function onClick(event) {
+                return setActiveDay(event.target.id);
+              },
+              id: "sa",
+              children: "SA"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              className: "btn btn-platinum fw-bold day-item",
+              onClick: function onClick(event) {
+                return setActiveDay(event.target.id);
+              },
+              id: "su",
+              children: "DO"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col-12 mb-2",
@@ -8895,7 +8895,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
                                 "data-bs-target": "#modalAddProduct",
                                 onClick: function onClick() {
                                   setEditableChair(chair.id);
-                                  setActiveDay("day0");
+                                  setActiveDay("mo");
                                 },
                                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("i", {
                                   className: "bi bi-pencil fs-7"
@@ -8909,7 +8909,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
                                   className: "bi bi-gear",
                                   onClick: function onClick() {
                                     setEditableChair(chair.id);
-                                    setActiveDay("day0");
+                                    setActiveDay("mo");
                                   }
                                 })
                               })]
@@ -10321,6 +10321,28 @@ var Header = function Header() {
 
   var urlImg = __webpack_require__("./resources/asset/marca sync recursive ^\\.\\/.*$");
 
+  var searchInShop = function searchInShop() {
+    var inputField = document.getElementById("global-header-search-in-shop-input");
+    var urlSeearch = inputField.value != "" ? inputField.value.split(' ').join('%20') : '';
+    var tester = new RegExp(/^[A-Za-z0-9-ZñÑáéíóúÁÉÍÓÚ\s]+$/g);
+
+    if (tester.test(urlSeearch)) {
+      var _URL = "/shop/".concat(urlSeearch);
+
+      window.location.replace(_URL);
+    } else {
+      swal.fire({
+        text: "Por favor ingrese s\xF3lo car\xE1cteres alfa-num\xE9ricos",
+        timer: "2000",
+        position: "bottom",
+        customClass: {
+          container: "add-to-cart-alert-container",
+          popup: "add-to-cart-alert"
+        }
+      });
+    }
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
     className: "container-fluid",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -10392,11 +10414,15 @@ var Header = function Header() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
                 className: "form-control me-2",
                 type: "search",
-                placeholder: "Search",
-                "aria-label": "Search"
+                placeholder: "Buscar",
+                "aria-label": "Search",
+                id: "global-header-search-in-shop-input"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
                 className: "btn btn-black",
                 type: "submit",
+                onClick: function onClick() {
+                  return searchInShop();
+                },
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
                   className: "bi bi-search"
                 })
@@ -11083,7 +11109,7 @@ var Item = function Item() {
     return item.id === mainitem.id;
   });
   var cartQuantity = itemInCart ? itemInCart.quantity : 1;
-  var aviableStock = mainitem.stock - cartQuantity;
+  var aviableStock = mainitem.stock;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(cartQuantity),
       _useState2 = _slicedToArray(_useState, 2),
@@ -11091,18 +11117,7 @@ var Item = function Item() {
       setCount = _useState2[1];
 
   var addingButton = document.querySelector(".adding-button");
-  var removingButton = document.querySelector(".removing-button"); // function buttonListener() {
-  //   if (aviableStock <= mainitem.stock) {
-  //     addingButton.disabled = true; 
-  //   } 
-  //   if(mainitem.stock == 1){
-  //     removingButton.disabled = true;
-  //   }
-  //   else {
-  //     addingButton.disabled = false;
-  //     removingButton.disabled = false;
-  //   }
-  // }
+  var removingButton = document.querySelector(".removing-button");
 
   function increment() {
     loadData();
@@ -11432,15 +11447,23 @@ var Shop = function Shop() {
         className: "row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
           className: "col-12 col-xl-12 border-0",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
             className: "w-100 text-center fw-bold font-h1",
-            children: [products.length, " Resultados encontrados"]
+            children: searchValue ? "".concat(searchResult.length, " Resultados encontrados para \"").concat(searchValue, "\"") : ""
           })
-        }), products.map(function (product) {
+        }), searchValue != "" ? searchResult.map(function (product) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
             data: product,
             addToCart: addToCart,
-            addOneToCart: addOneToCart
+            addOneToCart: addOneToCart,
+            cart: cart
+          }, product.id);
+        }) : products.map(function (product) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            data: product,
+            addToCart: addToCart,
+            addOneToCart: addOneToCart,
+            cart: cart
           }, product.id);
         })]
       })
@@ -11481,16 +11504,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var ShopItem = function ShopItem(_ref) {
   var data = _ref.data,
-      addOneToCart = _ref.addOneToCart;
-  var id = data.id,
-      name = data.name,
-      img = data.img,
-      description = data.description,
-      price = data.price,
-      stock = data.stock,
-      quantity = data.quantity;
+      addOneToCart = _ref.addOneToCart,
+      cart = _ref.cart;
 
+  // let {id, name, img, description, price, stock, quantity } = data;
   var urlImg = __webpack_require__("./resources/asset/product sync recursive ^\\.\\/.*$");
+
+  var compareCartQuantity = function compareCartQuantity(id) {
+    var existent = cart.find(function (item) {
+      return item.id == data.id;
+    });
+    return existent ? existent.quantity > existent.stock - 1 : false;
+  };
+
+  var setAlert = function setAlert(id) {
+    var existent = cart.find(function (item) {
+      return item.id == data.id;
+    });
+    return existent ? existent.quantity < existent.stock - 1 : false;
+  };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "col border-0",
@@ -11499,7 +11531,7 @@ var ShopItem = function ShopItem(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
         className: "w-100 text-center bg-light rounded",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-          src: urlImg(img)["default"],
+          src: urlImg(data.img)["default"],
           className: "card-img-top",
           style: {
             maxWidth: "50%"
@@ -11512,21 +11544,23 @@ var ShopItem = function ShopItem(_ref) {
           className: "fs-7 fw-bold",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
             className: "text-decoration-none text-black",
-            href: "/product/" + id,
-            children: name
+            href: "/product/" + data.id,
+            children: data.name
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
           className: "card-text text-muted fs-9",
-          children: description
+          children: data.description
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "d-flex justify-content-between mt-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
             className: "fw-bold",
-            children: ["$", price]
+            children: ["$", data.price]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
             className: "btn btn-black fs-7 py-1 px-2 ",
+            id: "add-one-item-".concat(data.id, "-to-cart"),
+            disabled: compareCartQuantity(data.id),
             onClick: function onClick() {
-              return addOneToCart(id, true);
+              return addOneToCart(data.id, setAlert(data.id));
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
               className: "bi bi-cart-plus"
@@ -11662,7 +11696,9 @@ var ModalShoppingCart = function ModalShoppingCart(_ref) {
                     style: {
                       verticalAlign: "middle"
                     },
-                    children: data.length !== 0 ? shoppingCartItem.map(function (item) {
+                    children: data.length !== 0 ? shoppingCartItem.filter(function (item) {
+                      return item.quantity > 0;
+                    }).map(function (item) {
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -11726,7 +11762,7 @@ var ModalShoppingCart = function ModalShoppingCart(_ref) {
                               onClick: function onClick() {
                                 return addOneToCart(item.id);
                               },
-                              disabled: item.quantity >= item.inmutableStock,
+                              disabled: item.quantity >= item.stock,
                               style: buttonsStyle,
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
                                 "class": "bi bi-plus-lg"
@@ -11863,7 +11899,9 @@ var ShoppingCart = function ShoppingCart() {
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "col-12 col-xl-8",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      children: [cart.filter(function (item) {
+        return item.quantity > 0;
+      }).length != 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "row font-h1 fw-bold my-2 d-none d-xl-flex justify-content-left",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "col-1"
@@ -11882,23 +11920,40 @@ var ShoppingCart = function ShoppingCart() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "col-1"
         })]
-      }), cart.map(function (item) {
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "col-12",
+          style: {
+            textAlign: "center",
+            margin: "10px"
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+            className: "fw-bold font-h1 fs-4 w-100",
+            children: " Oops! parece que a\xFAn no tienes productos en tu carrito"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "col-12",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
+            href: "/shop",
+            className: "btn btn-dark w-100 fw-bold font-h1 fs-4",
+            children: "Ir al Shop!"
+          })
+        })]
+      }), cart.filter(function (item) {
+        return item.quantity > 0;
+      }).map(function (item) {
         var _jsx2, _jsx3;
 
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-          className: "row g-2 g-xl-3 my-1 py-2 border-0 border-bottom ",
+          className: "row g-2 g-xl-3 my-1 py-2 border-0 border-bottom",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "col-6 col-xl-1 ",
+            className: "col-6 col-xl-1",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-              className: "d-flex aling-middle",
+              className: "d-flex",
               style: {
                 height: "50px"
-              },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-                src: urlImg(item.img)["default"],
-                className: "rounded  mx-auto",
-                alt: item.name
-              })
+              }
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "col-6 col-xl-3",
@@ -11932,8 +11987,9 @@ var ShoppingCart = function ShoppingCart() {
                 style: {
                   zIndex: "2"
                 }
-              }, _defineProperty(_jsx3, "style", buttonsStyle), _defineProperty(_jsx3, "onClick", function onClick() {
-                return addOneToCart(item.id);
+              }, _defineProperty(_jsx3, "style", buttonsStyle), _defineProperty(_jsx3, "disabled", item.quantity >= item.stock), _defineProperty(_jsx3, "onClick", function onClick() {
+                addOneToCart(item.id);
+                console.log(item.quantity + '---' + item.stock);
               }), _defineProperty(_jsx3, "children", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
                 className: "bi bi-plus"
               })), _jsx3))]
@@ -12002,6 +12058,9 @@ var ShoppingCart = function ShoppingCart() {
           className: "col-12",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
             className: "w-100 btn btn-orangeWeb",
+            disabled: cart.filter(function (item) {
+              return item.quantity > 0;
+            }).length <= 0,
             children: "  Finalizar compra "
           })
         })]
@@ -12409,7 +12468,7 @@ var ModalTurn = function ModalTurn() {
                         message: "El campo es requerido"
                       },
                       pattern: {
-                        value: /[0-9]{9,12}/,
+                        value: /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/,
                         message: "El formato no es correcto"
                       }
                     }))), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("span", {
@@ -12820,7 +12879,6 @@ var ITEM_PRODUCTS = {
     quantity: 1,
     price: "10.99",
     stock: 10,
-    inmutableStock: 10,
     categories_id: 1,
     created_at: "00/00/00",
     updated_at: "00/00/00",
@@ -12834,7 +12892,6 @@ var ITEM_PRODUCTS = {
     quantity: 1,
     price: "10.99",
     stock: 10,
-    inmutableStock: 10,
     categories_id: 2,
     created_at: "00/00/00",
     updated_at: "00/00/00",
@@ -12848,7 +12905,6 @@ var ITEM_PRODUCTS = {
     quantity: 1,
     price: "10.99",
     stock: 10,
-    inmutableStock: 10,
     categories_id: 1,
     created_at: "00/00/00",
     updated_at: "00/00/00",
@@ -12862,7 +12918,6 @@ var ITEM_PRODUCTS = {
     quantity: 1,
     price: "10.99",
     stock: 10,
-    inmutableStock: 10,
     categories_id: 2,
     created_at: "00/00/00",
     updated_at: "00/00/00",
@@ -13388,6 +13443,10 @@ var mapDispatcht = function mapDispatcht(dispatch) {
     addOneToCart: function addOneToCart(id) {
       var alert = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       dispatch({
+        type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_3__.TYPES.QUANTITY_ALERT,
+        payload: id
+      });
+      dispatch({
         type: _src_actions_shoppingActions__WEBPACK_IMPORTED_MODULE_3__.TYPES.ADD_ONE_TO_CART,
         payload: id,
         alert: alert
@@ -13423,6 +13482,9 @@ var mapDispatcht = function mapDispatcht(dispatch) {
     // decrement : () =>{
     //     dispatch({type:TYPES.DECREMENT})
     // },
+    // quantityAlert:(productId) =>{
+    //     dispatch({type:TYPES.QUANTITY_ALERT, payload:productId})
+    // }
 
   };
 };
@@ -13591,7 +13653,8 @@ var TYPES = {
   CLEAN_CART: "CLEAN_CART",
   LOAD_DATA: "LOAD_DATA",
   //ACTIONS API ITEM
-  READ_ALL_DATA: "READ_ALL_DATA" // INCREMENT:"INCREMENT",
+  READ_ALL_DATA: "READ_ALL_DATA",
+  QUANTITY_ALERT: "QUANTITY_ALERT" // INCREMENT:"INCREMENT",
   // DECREMENT:"DECREMENT",
 
 };
@@ -13698,7 +13761,7 @@ var BackofficeTurnData = {
   allChairsSchedule: sortById(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay),
   editableChair: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configTurns[0],
   editableDay: Object.entries(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay[0].days)[0],
-  turnsPerday: Object.entries(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay[0].days)[0][1].splaction
+  turnsPerday: Object.entries(_resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay[0].days)[0][1].split('/')[2]
 };
 function backofficeTurnReducer(state, action) {
   switch (action.type) {
@@ -13712,26 +13775,13 @@ function backofficeTurnReducer(state, action) {
         return state;
       }
 
-    case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SET_EDITABLE_CHAIR:
-      {
-        var newEditable = state.allChairs.find(function (chair) {
-          return chair.id == action.payload;
-        });
-        return _objectSpread(_objectSpread({}, state), {}, {
-          editableChair: newEditable
-        });
-      }
-
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY:
       {
         var editableChairSchedule = state.allChairsSchedule.find(function (chair) {
           return chair.id == state.editableChair.configDay_id;
         });
-        var editableDayArray = Object.entries(editableChairSchedule.days)[action.payload];
-        console.log("editableArray");
-        console.log(action.payload);
-        console.log(editableDayArray);
-        console.log(editableChairSchedule);
+        var editableDayValue = editableChairSchedule.days[action.payload];
+        var editableDayArray = [action.payload, editableDayValue];
         return _objectSpread(_objectSpread({}, state), {}, {
           editableDay: editableDayArray
         });
@@ -13755,31 +13805,23 @@ function backofficeTurnReducer(state, action) {
         });
       }
 
-    case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.REST_COUNT:
-      {
-        if (state.turnsPerday <= 1) return state;
-
-        var _newEditableDay = state.editableDay[1].split("/");
-
-        var _editableDayTurnsPerday = _newEditableDay.pop();
-
-        _newEditableDay.push(parseInt(_editableDayTurnsPerday) - 1);
-
-        _newEditableDay = _newEditableDay.join('/');
-        _newEditableDay = [state.editableDay[0], _newEditableDay];
-        return _objectSpread(_objectSpread({}, state), {}, {
-          turnsPerday: parseInt(state.turnsPerday) - 1,
-          editableDay: _newEditableDay
-        });
-      }
-
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT:
       {
-        // //console.log(state.allChairsSchedule.days["state.editableDay[0]"]);
-        var currentChair = state.allChairsSchedule.find(function (chair) {
-          return chair.id == state.editableChair.configDay_id;
-        });
-        var dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];
+        // console.log(state.allChairsSchedule.days["state.editableDay[0]"]);
+        var dfaultTurnsPerDay;
+        console.log(state.editableDay);
+
+        if (state.editableChair[1] == "NONACTIVE") {
+          dfaultTurnsPerDay = 5;
+        } else {
+          try {
+            var currentChair = state.allChairsSchedule.find(function (chair) {
+              return chair.id == state.editableChair.configDay_id;
+            });
+            dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];
+          } catch (error) {}
+        }
+
         return _objectSpread(_objectSpread({}, state), {}, {
           turnsPerday: dfaultTurnsPerDay
         });
@@ -13787,35 +13829,35 @@ function backofficeTurnReducer(state, action) {
 
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SET_START_HOUR:
       {
-        var _newEditableDay2 = state.editableDay[1].split("/");
+        var _newEditableDay = state.editableDay[1].split("/");
 
-        var startHour = _newEditableDay2.shift();
+        var startHour = _newEditableDay.shift();
 
-        _newEditableDay2.unshift(action.payload);
+        _newEditableDay.unshift(action.payload);
 
-        _newEditableDay2 = _newEditableDay2.join('/');
-        _newEditableDay2 = [state.editableDay[0], _newEditableDay2];
+        _newEditableDay = _newEditableDay.join('/');
+        _newEditableDay = [state.editableDay[0], _newEditableDay];
         return _objectSpread(_objectSpread({}, state), {}, {
-          editableDay: _newEditableDay2
+          editableDay: _newEditableDay
         });
       }
 
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SET_END_HOUR:
       {
-        var _newEditableDay3 = state.editableDay[1].split("/");
+        var _newEditableDay2 = state.editableDay[1].split("/");
 
-        var _startHour = _newEditableDay3.shift();
+        var _startHour = _newEditableDay2.shift();
 
-        _newEditableDay3.shift();
+        _newEditableDay2.shift();
 
-        _newEditableDay3.unshift(action.payload);
+        _newEditableDay2.unshift(action.payload);
 
-        _newEditableDay3.unshift(_startHour);
+        _newEditableDay2.unshift(_startHour);
 
-        _newEditableDay3 = _newEditableDay3.join('/');
-        _newEditableDay3 = [state.editableDay[0], _newEditableDay3];
+        _newEditableDay2 = _newEditableDay2.join('/');
+        _newEditableDay2 = [state.editableDay[0], _newEditableDay2];
         return _objectSpread(_objectSpread({}, state), {}, {
-          editableDay: _newEditableDay3
+          editableDay: _newEditableDay2
         });
       }
 
@@ -13906,10 +13948,10 @@ function backofficeTurnReducer(state, action) {
 
     case _actions_backofficeTurnActions__WEBPACK_IMPORTED_MODULE_0__.BACKOFFICE_TURN_TYPES.SWITCH_DAY_STATUS:
       {
-        var _newEditableDay4 = state.editableDay;
-        _newEditableDay4[1] = "".concat(action.payload);
+        var _newEditableDay3 = state.editableDay;
+        _newEditableDay3[1] = "".concat(action.payload);
         return _objectSpread(_objectSpread({}, state), {}, {
-          editableDay: _newEditableDay4
+          editableDay: _newEditableDay3
         });
       }
 
@@ -14171,8 +14213,8 @@ function backofficeTurnDashboardReducer(state, action) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "cartItemsData": () => (/* binding */ cartItemsData),
 /* harmony export */   "shoppingInitialState": () => (/* binding */ shoppingInitialState),
+/* harmony export */   "cartItemsData": () => (/* binding */ cartItemsData),
 /* harmony export */   "shoppingReducer": () => (/* binding */ shoppingReducer)
 /* harmony export */ });
 /* harmony import */ var _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/shoppingActions */ "./src/actions/shoppingActions.js");
@@ -14182,12 +14224,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var postcss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/postcss.mjs");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -14200,19 +14236,36 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
-var existentCart = JSON.parse(localStorage.getItem('cartData'));
-var cartItemsData = existentCart ? _toConsumableArray(existentCart) : [];
+
 var shoppingInitialState = {
   products: _resources_js_constants_ConstItem__WEBPACK_IMPORTED_MODULE_1__.ITEM_PRODUCTS.products,
-  cart: cartItemsData
+  cart: [{
+    id: "",
+    name: "",
+    quantity: -1,
+    price: ""
+  }],
+  categories: _resources_js_constants_ConstItem__WEBPACK_IMPORTED_MODULE_1__.ITEM_PRODUCTS.categories
 };
 
 
+
+if (!JSON.parse(localStorage.getItem('cartData'))) {
+  localStorage.setItem('cartData', JSON.stringify(shoppingInitialState));
+}
+
+var existentCart = JSON.parse(localStorage.getItem('cartData'));
+var cartItemsData = existentCart ? _objectSpread({}, existentCart) : _objectSpread({}, shoppingInitialState);
 function shoppingReducer(state, action) {
   switch (action.type) {
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.READ_ALL_DATA:
@@ -14230,27 +14283,25 @@ function shoppingReducer(state, action) {
         var itemInCart = state.cart.find(function (item) {
           return item.id === newItem.id;
         });
-        cartItemsData.cart = itemInCart ? _objectSpread(_objectSpread({}, state), {}, {
+        var cartItemsDataExport = itemInCart ? _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.map(function (item) {
             return item.id === newItem.id ? _objectSpread(_objectSpread({}, item), {}, {
-              quantity: action.quantity,
-              stock: state.stock - action.quantity
+              quantity: action.quantity
             }) : item;
           })
         }) : _objectSpread(_objectSpread({}, state), {}, {
           cart: [].concat(_toConsumableArray(state.cart), [_objectSpread(_objectSpread({}, newItem), {}, {
-            quantity: action.quantity,
-            stock: state.stock - action.quantity
+            quantity: action.quantity
           })])
         });
-        localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart.cart));
+        localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           title: "Enhorabuena!",
           text: "Ahora tienes " + action.quantity + " " + newItem.name + " en tu carrito",
           icon: "success",
           timer: "2000"
         });
-        return cartItemsData.cart;
+        return cartItemsDataExport;
       }
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.ADD_ONE_TO_CART:
@@ -14262,37 +14313,34 @@ function shoppingReducer(state, action) {
         var intemToAdd = state.cart.find(function (item) {
           return item.id === action.payload;
         });
-        cartItemsData.cart = intemToAdd ? _objectSpread(_objectSpread({}, state), {}, {
+
+        var _cartItemsDataExport = intemToAdd ? _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.map(function (item) {
             return item.id === action.payload ? _objectSpread(_objectSpread({}, item), {}, {
-              quantity: item.quantity + 1,
-              stock: item.stock - 1
+              quantity: item.quantity + 1
             }) : item;
           })
         }) : _objectSpread(_objectSpread({}, state), {}, {
           cart: [].concat(_toConsumableArray(state.cart), [_objectSpread(_objectSpread({}, _newItem), {}, {
-            quantity: 1,
-            stock: _newItem.stock - 1
+            quantity: 1
           })])
         });
-        localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart.cart));
+
+        localStorage.setItem('cartData', JSON.stringify(_cartItemsDataExport));
 
         if (action.alert) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            //icon: 'success',
             text: "Sumaste 1 " + _newItem.name + " en tu carrito",
             timer: "1200",
-            timerProgressBar: true,
             position: "bottom",
-            showConfirmButton: false,
             customClass: {
               container: "add-to-cart-alert-container",
               popup: "add-to-cart-alert"
             }
-          });
+          }).then(function () {});
         }
 
-        return cartItemsData.cart;
+        return _cartItemsDataExport;
       }
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.REMOVE_ONE_FROM_CART:
@@ -14300,11 +14348,16 @@ function shoppingReducer(state, action) {
         var intemToDelete = state.cart.find(function (item) {
           return item.id === action.payload;
         });
-        cartItemsData.cart = intemToDelete.quantity > 1 ? _objectSpread(_objectSpread({}, state), {}, {
+
+        try {
+          var button = document.getElementById("add-one-item-".concat(action.payload, "-to-cart"));
+          button.disabled = intemToDelete.quantity > intemToDelete.stock ? true : false;
+        } catch (error) {}
+
+        var _cartItemsDataExport2 = intemToDelete.quantity > 1 ? _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.map(function (item) {
             return item.id === action.payload ? _objectSpread(_objectSpread({}, item), {}, {
-              quantity: item.quantity - 1,
-              stock: item.stock + 1
+              quantity: item.quantity - 1
             }) : item;
           })
         }) : _objectSpread(_objectSpread({}, state), {}, {
@@ -14312,40 +14365,41 @@ function shoppingReducer(state, action) {
             return item.id !== action.payload;
           })
         });
-        localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart.cart));
-        return cartItemsData.cart;
+
+        localStorage.setItem('cartData', JSON.stringify(_cartItemsDataExport2));
+        return _cartItemsDataExport2;
       }
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.REMOVE_ALL_FROM_CART:
       {
-        cartItemsData.cart = _objectSpread(_objectSpread({}, state), {}, {
+        var _cartItemsDataExport3 = _objectSpread(_objectSpread({}, state), {}, {
           cart: state.cart.filter(function (item) {
             return item.id !== action.payload;
           })
         });
-        localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart.cart));
-        return cartItemsData.cart;
+
+        localStorage.setItem('cartData', JSON.stringify(_cartItemsDataExport3));
+        return _cartItemsDataExport3;
       }
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.CLEAN_CART:
       {
-        cartItemsData.cart = _objectSpread(_objectSpread({}, state), {}, {
-          cart: []
-        });
-        localStorage.clear();
+        var _cartItemsDataExport4 = shoppingInitialState;
+        localStorage.setItem('cartData', JSON.stringify(_cartItemsDataExport4));
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           text: "El carrito ha sido vaciado",
           timer: "1200",
           icon: "success"
         });
-        return cartItemsData.cart;
+        return _cartItemsDataExport4;
       }
 
     case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.LOAD_DATA:
       {
-        cartItemsData.cart = _objectSpread({}, state);
-        localStorage.setItem('cartData', JSON.stringify(cartItemsData.cart.cart));
-        return cartItemsData.cart;
+        var _cartItemsDataExport5 = _objectSpread({}, state);
+
+        localStorage.setItem('cartData', JSON.stringify(_cartItemsDataExport5));
+        return _cartItemsDataExport5;
       }
     // case TYPES.INCREMENT:{
     //     return {...state, count: state.count + 1}
@@ -14353,6 +14407,35 @@ function shoppingReducer(state, action) {
     // case DECREMENT:{
     //     return {...state, count: state.count - 1}
     // }
+
+    case _actions_shoppingActions__WEBPACK_IMPORTED_MODULE_0__.TYPES.QUANTITY_ALERT:
+      {
+        var editableProduct = state.cart.find(function (product) {
+          return product.id == action.payload;
+        });
+
+        if (editableProduct) {
+          if (editableProduct.quantity >= editableProduct.stock - 1) {
+            try {
+              var _button = document.getElementById("add-one-item-".concat(action.payload, "-to-cart"));
+
+              _button.disabled = true;
+            } catch (error) {}
+
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              text: "Alcanzaste el l\xEDmite de ".concat(editableProduct.stock, " ").concat(editableProduct.name),
+              timer: "2000",
+              position: "bottom",
+              customClass: {
+                container: "add-to-cart-alert-container",
+                popup: "add-to-cart-alert"
+              }
+            });
+          }
+        }
+
+        return state;
+      }
 
     default:
       {

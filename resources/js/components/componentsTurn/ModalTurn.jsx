@@ -270,8 +270,8 @@ const ModalTurn = () => {
                         message:"El campo es requerido", 
                     },
                     pattern:{
-                        value: /[0-9]{9,12}/,
-                        message: "El formato no es correcto",
+                      value: /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/,
+                      message: "El formato no es correcto",
                     }
                 })}/>
                     <span className="input-group-text bg-black text-white border border-black" id="basic-addon1"><i

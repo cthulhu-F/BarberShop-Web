@@ -37,8 +37,8 @@ export const BackofficeTurnData = {
     allChairs: sortById(ITEM_TURNS.configTurns),
     allChairsSchedule: sortById(ITEM_TURNS.configDay),
     editableChair: ITEM_TURNS.configTurns[0],
-    editableDay: Object.entries(ITEM_TURNS.configDay[0].days)[0],
-    turnsPerday: Object.entries(ITEM_TURNS.configDay[0].days)[0][1].splaction
+    editableDay:  Object.entries(ITEM_TURNS.configDay[0].days)[0],
+    turnsPerday: Object.entries(ITEM_TURNS.configDay[0].days)[0][1].split('/')[2]
 }
 
 
@@ -55,24 +55,11 @@ export function backofficeTurnReducer(state, action) {
             return state
         }
 
-        case BACKOFFICE_TURN_TYPES.SET_EDITABLE_CHAIR: {
-            let newEditable = state.allChairs.find(chair => chair.id == action.payload);
-            return {
-                ...state,
-                editableChair: newEditable,
-            };
-        }
-
-        case BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY: {
-            let editableChairSchedule = state.allChairsSchedule.find(chair => chair.id == state.editableChair.configDay_id);
-            let editableDayArray = Object.entries(editableChairSchedule.days)[action.payload];
-            
-            console.log("editableArray");
-            console.log(action.payload);
-            console.log(editableDayArray);
-            console.log(editableChairSchedule);
-            
-            return { ...state, editableDay: editableDayArray };
+        case BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY:{
+            let editableChairSchedule = state.allChairsSchedule.find(chair=>chair.id == state.editableChair.configDay_id);
+            let editableDayValue = editableChairSchedule.days[action.payload];
+            let editableDayArray = [action.payload,editableDayValue]
+            return {...state, editableDay: editableDayArray};
         }
         case BACKOFFICE_TURN_TYPES.LOAD_DATA: {
             return state;
@@ -89,23 +76,22 @@ export function backofficeTurnReducer(state, action) {
             newEditableDay = [state.editableDay[0], newEditableDay];
             return { ...state, turnsPerday: parseInt(state.turnsPerday) + 1, editableDay: newEditableDay };
         }
-
-        case BACKOFFICE_TURN_TYPES.REST_COUNT: {
-            if (state.turnsPerday <= 1) return state;
-
-            let newEditableDay = state.editableDay[1].split("/");
-            let editableDayTurnsPerday = newEditableDay.pop();
-            newEditableDay.push(parseInt(editableDayTurnsPerday) - 1);
-            newEditableDay = newEditableDay.join('/');
-            newEditableDay = [state.editableDay[0], newEditableDay];
-            return { ...state, turnsPerday: parseInt(state.turnsPerday) - 1, editableDay: newEditableDay };
-        }
-
-        case BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT: {
-            // //console.log(state.allChairsSchedule.days["state.editableDay[0]"]);
-            let currentChair = state.allChairsSchedule.find((chair) => chair.id == state.editableChair.configDay_id);
-            let dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];
-            return { ...state, turnsPerday: dfaultTurnsPerDay };
+        
+        case BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT:{
+            // console.log(state.allChairsSchedule.days["state.editableDay[0]"]);
+            let dfaultTurnsPerDay;
+            console.log(state.editableDay)
+            if (state.editableChair[1] == "NONACTIVE"){
+                dfaultTurnsPerDay = 5
+            }
+            else{
+                try{
+                    let currentChair = state.allChairsSchedule.find((chair)=>chair.id == state.editableChair.configDay_id);
+                    dfaultTurnsPerDay = currentChair.days[state.editableDay[0]].split('/')[2];        
+                }catch(error){}
+            }
+           
+            return {...state, turnsPerday: dfaultTurnsPerDay};
 
         }
 

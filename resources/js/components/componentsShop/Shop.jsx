@@ -40,6 +40,8 @@ const Shop = () => {
 
 
   return (
+
+   
     <div className="container-fluid bg-light p-3 min-vh-100">
         <div className="container-md ">
     
@@ -47,12 +49,22 @@ const Shop = () => {
     
             <div className="col-12 col-xl-12 border-0">
               <div className="w-100 text-center fw-bold font-h1">
-                {products.length} Resultados encontrados
+                
+               { searchValue
+
+                ? `${searchResult.length} Resultados encontrados para "${searchValue}"`
+                : ""
+              
+              }
               </div>
             </div>
-    
-            {products.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart}/>)}
+            {/* || data.description.includes(searchValue) || data.id.includes(searchValue) || data.sku.includes(searchValue */}
+            { searchValue != ""
+            ? searchResult.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
+            : products.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
 
+          }
+            
           </div>
           </div>
 

@@ -77,7 +77,7 @@ const backofficeTurnMapDispatch = (dispatch)=>{
             resetnameDefault();
             resetTurnDataString();
             resetGlobalSaving();
-            dispatch({ type: BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY, payload:id[3]});
+            dispatch({ type: BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY, payload:id});
             dispatch({ type: BACKOFFICE_TURN_TYPES.GET_DAY_INITAL_COUNT});
         },
 
