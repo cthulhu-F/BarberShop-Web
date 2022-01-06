@@ -7,7 +7,6 @@ import { ITEM_IMG } from '../../../constants/constImg';
 import Carrousel from "./Carrousel";
 
 
-const urlImg = require.context('../../../../asset/slider', true);
 
 const sliderImgsObj = ITEM_IMG.sliderImgs;
 
@@ -15,48 +14,14 @@ const sliderImgArray =  Object.values(sliderImgsObj)
 
 const Settings = () =>{
 
-  function createPreview(file,index) {
-    var imgCodified = URL.createObjectURL(file);
-    const imgViewer = document.querySelector(`#backofice-settings-slider-imagen-editor-viewer-${index}`);
-    imgViewer.style.backgroundImage = `url(${imgCodified})`;
-}
 
-  const validateSizeFile= (event, index)=>{
-    const MAX_BYTES_SIZE = 1000000; // 1MB = 1 millón de bytes
-
-    if (event.target.files.length <= 0) return;
-
-    const file = event.target.files[0];
-    const supportedImages = ["image/jpeg", "image/png", "image/jpg"];
-
-    let incorrectFormatMsj;
-    if (supportedImages.indexOf(file.type) == -1) {
-        incorrectFormatMsj = "<br> <br> Formatos aceptados .jpeg / .png / .jpg"
-    }
-
-    if (file.size > MAX_BYTES_SIZE && supportedImages.indexOf(file.type) == -1) {
-        const mbSize = MAX_BYTES_SIZE / 1000000;
-        swal.fire({
-            html: `El tamaño máximo es ${mbSize} MB. ${incorrectFormatMsj}`,
-            timer:"1500", 
-            position: "bottom",
-            customClass : {
-            container: "add-to-cart-alert-container",
-            popup:"add-to-cart-alert",
-            }
-        })
-        element.value = "";
-    } else {
-        createPreview(file, index)
-    }
-  }
 
   function saveSliderImgs (){
     let allImages = [];
     sliderImgArray.forEach((item,index)=>{
       allImages.push({
         position: index+1,
-        file: document.querySelector(`#backofice-settings-slider-imagen-editor-${index}`).files[0]
+        file: document.getElementById(`backofice-settings-slider-imagen-editor-${index}`).files[0]
       })
     })
     console.log(allImages)
@@ -170,53 +135,9 @@ const Settings = () =>{
                     </div>
 
                     
-                    <Carrousel/>
-
-                      {sliderImgArray.map((img, index)=>
-                    // console.log(urlImg(img).default)
+                    <Carrousel imgArray={sliderImgArray}/>
                     
-                      <div className="d-flex justify-content-center mb-1 col-xl-12 mb-3 text-darx fs-1 row" key={index} >
-                        <div className="col-12 col-xl-12 mb-3 border-bottom">
-                          <span className="fw-bold fs-4 font-h1">Imagen {index+1}</span>
-                        </div>
-                        <div className="col-12 mb-3">
-                          <div style={{ backgroundImage: `url(${urlImg(img).default})`,
-                            backgroundPosition: 'center',
-                            backgroundSize: 'cover',
-                            backgroundRepeat: 'no-repeat',
-                            paddingTop:"23.7%",
-                            width:"100%",
-                            borderRadius:"10px",
-                            border:"solid 2px #000"}}
-                            id={`backofice-settings-slider-imagen-editor-viewer-${index}`}
-                          className="img-responsive w-100"
-                          onClick={()=>document.getElementById(`backofice-settings-slider-imagen-editor-${index}`).click()}>
-                              <div id="backofice-settings-slider-imagen-editor-viewer-overlay" style={{
-                                  opacity:"0.8",
-                                  backgroundColor:"#00000000 !important",
-                                  height: "100%",
-                                  width:"100%",
-                                  display: "flex",
-                                  alignItems: "flex-end",
-                                  justifyContent: "center"}}>
-                                  <i class="bi bi-plus-circle-fill fs-4"></i>
-                              </div>
-
-                          </div>
-                        </div>
-
-                        <div>
-                          <input type="file" accept="image/png, image/jpeg, image/jpg" className="form-control w-100" 
-                            id={`backofice-settings-slider-imagen-editor-${index}`} onChange={(e)=>validateSizeFile(e,index)} style={{display:"none"}}/>
-                        
-                        </div>
-                      </div>
-                    )}
-
-
-                     
-                     
-
+            
                     
                   </div>
                 
