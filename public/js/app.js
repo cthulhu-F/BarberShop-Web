@@ -14308,6 +14308,9 @@ var style = {
 var Footer = function Footer() {
   var urlImg = __webpack_require__("./resources/asset/marca sync recursive ^\\.\\/.*$");
 
+  var bgBlack = {
+    backgroundColor: "#000"
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "container-md",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
@@ -14333,23 +14336,27 @@ var Footer = function Footer() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "col-12 col-xl-3 d-flex justify-content-center",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-                className: "list-group bg-dark p-1",
+                className: "list-group p-1",
+                style: bgBlack,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item border-0 bg-dark p-1",
+                  className: "list-group-item border-0 p-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                     className: "text-decoration-none link-white",
                     href: "",
                     children: "Informacion"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item border-0 bg-dark p-1",
+                  className: "list-group-item border-0 p-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                     className: "text-decoration-none link-white",
                     href: "",
                     children: "Quienes somos"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item border-0 bg-dark p-1",
+                  className: "list-group-item border-0 p-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                     className: "text-decoration-none link-white",
                     href: "",
@@ -14360,23 +14367,27 @@ var Footer = function Footer() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "col-12 col-xl-3 d-flex justify-content-center",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-                className: "list-group bg-dark p-1",
+                className: "list-group p-1",
+                style: bgBlack,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item border-0 border-white border-bottom bg-dark p-1",
+                  className: "list-group-item border-0 border-white border-bottom p-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                     className: "text-decoration-none  link-white",
                     href: "",
                     children: "Home"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item border-0 border-white border-bottom bg-dark p-1",
+                  className: "list-group-item border-0 border-white border-bottom p-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                     className: "text-decoration-none link-white",
                     href: "",
                     children: "Shop"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item border-0 bg-dark p-1",
+                  className: "list-group-item border-0 p-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
                     className: "text-decoration-none btn btn-light m-0 fs-6",
                     href: "",
@@ -14391,9 +14402,11 @@ var Footer = function Footer() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "col-12 col-xl-3 d-flex justify-content-xl-center justify-content-center",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-                className: "list-group bg-dark p-1",
+                className: "list-group p-1",
+                style: bgBlack,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item  text-xl-start p-0 border-0 bg-dark py-1",
+                  className: "list-group-item  text-xl-start p-0 border-0 py-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
                     className: "text-decoration-none link-white row",
                     href: "",
@@ -14405,7 +14418,8 @@ var Footer = function Footer() {
                     })]
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item text-xl-start p-0 border-0 bg-dark py-1",
+                  className: "list-group-item text-xl-start p-0 border-0 py-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
                     className: "text-decoration-none link-white row",
                     href: "",
@@ -14417,7 +14431,8 @@ var Footer = function Footer() {
                     })]
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item bg-dark text-xl-start p-0 border-0  py-1",
+                  className: "list-group-item text-xl-start p-0 border-0 py-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
                     className: "text-decoration-none link-white row",
                     href: "",
@@ -14429,7 +14444,8 @@ var Footer = function Footer() {
                     })]
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item bg-dark text-xl-start p-0 border-0  py-1",
+                  className: "list-group-item text-xl-start p-0 border-0 py-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
                     className: "text-decoration-none link-white row",
                     href: "",
@@ -14441,7 +14457,8 @@ var Footer = function Footer() {
                     })]
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-                  className: "list-group-item bg-dark text-xl-start p-0 border-0  py-1",
+                  className: "list-group-item text-xl-start p-0 border-0 py-1",
+                  style: bgBlack,
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
                     className: "text-decoration-none link-white row",
                     href: "",
@@ -14742,6 +14759,9 @@ var Home = function Home() {
       "data-bs-slide": "prev",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         className: "carousel-control-prev-icon",
+        style: {
+          color: "#000"
+        },
         "aria-hidden": "true"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         className: "visually-hidden",
@@ -14826,8 +14846,12 @@ var Slider = function Slider() {
   var deleteFromCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).deleteFromCart;
   var cleanCart = (0,_shoppingCartUses__WEBPACK_IMPORTED_MODULE_6__["default"])(dispatch).cleanCart;
   var SliderProducts_1 = products.slice(0, 4);
+  var bgBlack = {
+    backgroundColor: "#000"
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-    "class": "row row-cols-1 row-cols-xl-4 bg-light",
+    "class": "row row-cols-1 row-cols-xl-4 border-0 border-bottom pb-5 mb-5",
+    style: bgBlack,
     children: [SliderProducts_1.map(function (item) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_SliderItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
         data: item,
@@ -14877,7 +14901,7 @@ var SliderItem = function SliderItem(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "col border-0 my-2",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-      className: "card border-0 shadow-sm rounded",
+      className: "card border-0 shadow-sm rounded pt-4",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
         className: "w-100 text-center bg-light rounded",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
@@ -15507,15 +15531,18 @@ var Shop = function Shop() {
     return search.indexOf(stringsearched) > -1;
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
-    className: "container-fluid bg-light p-3 min-vh-100",
+    className: "container-fluid p-3 min-vh-100",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-      className: "container-md ",
+      className: "container-md",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
         className: "row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
           className: "col-12 col-xl-12 border-0",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
             className: "w-100 text-center fw-bold font-h1",
+            style: {
+              color: "#fff"
+            },
             children: searchValue ? "".concat(searchResult.length, " Resultados encontrados para \"").concat(searchValue, "\"") : ""
           })
         }), searchValue != "" ? searchResult.map(function (product) {
@@ -15594,7 +15621,7 @@ var ShopItem = function ShopItem(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "col border-0",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-      className: "card border-0 shadow-sm rounded",
+      className: "card border-0 shadow-sm rounded pt-4",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
         className: "w-100 text-center bg-light rounded",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {

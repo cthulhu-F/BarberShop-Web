@@ -29,9 +29,9 @@ Route::get('/shop', function () {
     return view('shop');
 });
 
-// Route::get('/shoppingCart', function () {
-//     return view('shoppingCart');
-// });
+Route::get('/shoppingCart', function () {
+    return view('shoppingCart');
+});
 
 Route::get('/shop/{value}', function ($input) {
     return view('shop', ["value" => $input]);

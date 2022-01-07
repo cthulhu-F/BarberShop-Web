@@ -6,8 +6,8 @@ const SliderItem = ({data, addOneToCart}) => {
 
   return(
 
-    <div className="col border-0 my-2">
-    <div className="card border-0 shadow-sm rounded">
+    <div className="col border-0 my-2" >
+    <div className="card border-0 shadow-sm rounded pt-4">
       <div className="w-100 text-center bg-light rounded">
         <img 
         src={urlImg(img).default}
