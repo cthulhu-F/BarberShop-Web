@@ -51,13 +51,13 @@ const Shop = () => {
   return (
 
    
-    <div className="container-fluid bg-light p-3 min-vh-100">
-        <div className="container-md ">
+    <div className="container-fluid p-3 min-vh-100" >
+        <div className="container-md" >
     
-          <div className="row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p">
+          <div className="row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p" >
     
             <div className="col-12 col-xl-12 border-0">
-              <div className="w-100 text-center fw-bold font-h1">
+              <div className="w-100 text-center fw-bold font-h1" style={{color:"#fff"}}>
                 
                { searchValue
 

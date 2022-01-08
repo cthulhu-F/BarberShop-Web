@@ -17,7 +17,7 @@
     <div id="header"></div>
   </header>
   
-  <section class="container-fluid bg-light p-4 min-vh-100 font-p">
+  <section class="container-fluid p-4 min-vh-100 font-p" style="background-color: #000">
 
   <article>
       <div id="modalTurn"></div>
@@ -30,7 +30,7 @@
   </section>
 
 
-  <footer class="text-center text-lg-start bg-dark text-muted font-h1">
+  <footer class="text-center text-lg-start text-muted font-h1" style="background-color: #000">
     <div id="footer"></div>
   </footer>
 
