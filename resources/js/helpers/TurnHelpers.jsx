@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const UpdateOrderTurn = async (put) => {
-  console.log(put);
+  //console.log(put);
 
   const data = await axios({
     method: 'put',
@@ -41,7 +41,75 @@ export const CreateOrderTurn = async (post) => {
   return data
 }
 
-export const ShowConfigTurn = async () => {
+export const UpdateCondigTurn = async (status, id) => {
+  console.log(status);
+  console.log(id);
+
+  
+  const data = await axios({
+    method: 'put',
+    url: 'http://127.0.0.1:8000/api/UpdateConfigTurn',
+    data: {
+      id: id, 
+      status: status
+    }
+  });
+
+  return data.data
+
+}
+
+export const CreateConfigTurn = async (chair, day) => {
+
+  let dayJSON = {
+    days: JSON.stringify(day),
+    name: chair.name
+  };
+
+  const resDay = await axios({
+    method: 'post',
+    url: 'http://127.0.0.1:8000/api/CreateConfigDay',
+    data: dayJSON
+  }).then((response) => {
+    return response
+  }).catch((response) => {
+    return response
+  });
+
+  const resTurn = await axios({
+    method: 'post',
+    url: 'http://127.0.0.1:8000/api/CreateConfigTurn',
+    data: chair
+  }).then((response) => {
+    return response
+  }).catch((response) => {
+    return response
+  });
+
+  return resTurn.data
+
+}
+
+export const UpdateConfigDay = async (day) => {
+
+  let dayId = day.id;
+  let dayJSON =  JSON.stringify(day.days)
+
+  const data = await axios({
+    method: 'put',
+    url: 'http://127.0.0.1:8000/api/UpdateConfigDay',
+    data: {
+      id: dayId, 
+      days: dayJSON
+    }
+  });
+
+  return data.data
+
+}
+
+
+export const ShowConfigTurn = async (configDay, configTurn) => {
   const data = await axios({
     method: 'get',
     url: 'http://127.0.0.1:8000/api/ShowConfigTurn',
@@ -66,4 +134,4 @@ export const ShowConfigDay = async () => {
 }
 
 
-export default (CreateOrderTurn, ShowConfigTurn, ShowConfigTurn);
+export default (CreateOrderTurn, ShowConfigTurn, ShowConfigTurn, CreateConfigTurn);

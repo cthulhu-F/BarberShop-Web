@@ -1,4 +1,5 @@
 import React from "react"
+import { UpdateCondigTurn } from "../../../helpers/TurnHelpers";
 
 
 const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
@@ -18,13 +19,13 @@ const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
         if(editableChair.status == "NONACTIVE"){
             return "Silla inhabilitada ¿Desea habilitar esta silla?"
         } else{
-            return  "¿Desea inhabilitar esta silla?" 
+            return "¿Desea inhabilitar esta silla?" 
         } 
     }
 
     function checkChairStatus(){
         const switcher = document.getElementById("chair-inhabilitator");
-        if(editableChair.status == "NONACTIVE"){
+        if(editableChair.status == "INACTIVE"){
             switcher.checked = true;
             switcher.setAttribute("aria-checked", "true")
         }
@@ -45,14 +46,15 @@ const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
 
         if (switcher.getAttribute("aria-checked") == "true"){
             previousValue ="ACTIVE";
-            prevMsjStatus = "Activo";
-            NewMsjStatus = "Inactivo";
+            prevMsjStatus = "ACTIVE";
+            NewMsjStatus = "INACTIVE";
         }
         else{
-            previousValue ="NONACTIVE";
-            prevMsjStatus = "Inactivo";
-            NewMsjStatus = "Activo"
+            previousValue ="INACTIVE";
+            prevMsjStatus = "INACTIVE";
+            NewMsjStatus = "ACTIVE"
         }
+
 
         const parent = document.getElementById(`modalChairConfig`)
         const nameInput = parent.querySelector('#editable-chair-name-2')
@@ -72,10 +74,13 @@ const ModalChairsConfig = ({editableChair, saveChairConfig})=>{
             confirmButtonColor: '#000',
             cancelButtonColor: '#d33',
             confirmButtonText: `Si, Modificar Producto`   
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     saveChairConfig(previousValue, document.getElementById('editable-chair-name-2').value);
                     nameInput.value="";
+
+                    let response = await UpdateCondigTurn(NewMsjStatus, editableChair.id);
+
                     swal.fire({
                         text: 'Datos modificados con éxito',
                         timer:"1500", 

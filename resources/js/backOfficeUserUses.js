@@ -24,6 +24,10 @@ const backofficeUserDispatch = (dispatch)=>{
 
         },
 
+        readAllData : (dataUser, dataRole, dataRoleUser) => {
+            dispatch ({type: BACKOFFICE_USER_TYPES.READ_ALL_DATA, dataUser: dataUser, dataRole: dataRole, dataRoleUser: dataRoleUser});
+
+        },
         createNewUser : (newUserData) =>{
             dispatch ({type: BACKOFFICE_USER_TYPES.CREATE_NEW_USER, payload: newUserData});
             location.reload();

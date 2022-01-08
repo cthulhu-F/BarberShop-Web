@@ -1,109 +1,144 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import MotiveSetter from "./MotiveSetter";
 
 /*MODAL TURN IMPORTS*/
 import { useReducer } from 'react';
-import { backofficeTurnReducer, BackofficeTurnData} from '../../../../../src/reducers/backOfficeTurnReducer';
+import { backofficeTurnReducer, BackofficeTurnData } from '../../../../../src/reducers/backOfficeTurnReducer';
 import backofficeTurnMapDispatch from "../../../backOfficeTurnUses";
 
 import Pagination from "./Pagination";
 import ModalChairsConfig from "./ModalChairsConfig";
 import backofficeTurnDashboardMapDispatch from "../../../backofficeTurnDashboardUses";
-import { ShowConfigDay, ShowConfigTurn } from "../../../helpers/TurnHelpers";
+import { CreateConfigTurn, ShowConfigDay, ShowConfigTurn, UpdateConfigDay } from "../../../helpers/TurnHelpers";
+import LoadTable from "../../componentsLoaders/LoadTable";
+import LoadTablePagination from "../../componentsLoaders/LoadTablePagination";
+import LoadMotiveSetter from "../../componentsLoaders/LoadMotiveSetter";
 
 
-const MotiveSetterAndViewer= ()=>{
+const MotiveSetterAndViewer = () => {
 
-    const [backOfficeTurnState, dispatch] =useReducer(backofficeTurnReducer,BackofficeTurnData);
-    const {allChairsSchedule, allChairs, editableChair, turnsPerday, editableDay} = backOfficeTurnState;
+  const [backOfficeTurnState, dispatch] = useReducer(backofficeTurnReducer, BackofficeTurnData);
+  const { allChairsSchedule, allChairs, editableChair, turnsPerday, editableDay, newChair, newDay } = backOfficeTurnState;
 
-    //API
+  //API
 
-    const readAllData = backofficeTurnMapDispatch(dispatch).readAllData;
-  
-    //END
+  const readAllData = backofficeTurnMapDispatch(dispatch).readAllData;
 
-    const setEditableChair = backofficeTurnMapDispatch(dispatch).setEditableChair;
-  
-    const setActiveDay =backofficeTurnMapDispatch(dispatch).setActiveDay;
-    const saveChairSchedule = backofficeTurnMapDispatch(dispatch).saveChairSchedule; 
-  
-    const addCount = backofficeTurnMapDispatch(dispatch).addCount;
-    const restCount = backofficeTurnMapDispatch(dispatch).restCount; 
-  
-    const setStartHour =backofficeTurnMapDispatch(dispatch).setStartHour;
-    const setEndHour =backofficeTurnMapDispatch(dispatch).setEndHour;
+  //END
 
-    const saveChairConfig = backofficeTurnMapDispatch(dispatch).saveChairConfig;
+  const setEditableChair = backofficeTurnMapDispatch(dispatch).setEditableChair;
 
-    const switchDayStatus = backofficeTurnMapDispatch(dispatch).switchDayStatus;
-  
+  const setActiveDay = backofficeTurnMapDispatch(dispatch).setActiveDay;
+  const saveChairSchedule = backofficeTurnMapDispatch(dispatch).saveChairSchedule;
 
-    /* PAGINATION*/
-    const [posts, setPosts] = useState(allChairsSchedule)
-    const [currentPage, setCurrentPage] = useState(0)
-    const [postsPerPage] = useState(4)
+  const addCount = backofficeTurnMapDispatch(dispatch).addCount;
+  const restCount = backofficeTurnMapDispatch(dispatch).restCount;
 
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
-    const howManyPages = Math.ceil(posts.length/postsPerPage)
+  const setStartHour = backofficeTurnMapDispatch(dispatch).setStartHour;
+  const setEndHour = backofficeTurnMapDispatch(dispatch).setEndHour;
 
-     /* PAGINATION END*/
+  const saveChairConfig = backofficeTurnMapDispatch(dispatch).saveChairConfig;
 
-     const days = {
-       "mo": "lu",
-       "tu": "ma",
-       "we": "mi",
-       "th": "ju",
-       "fr": "vi",
-       "sa": "sa",
-       "su": "do",
-     }
+  const switchDayStatus = backofficeTurnMapDispatch(dispatch).switchDayStatus;
+
+  /* PAGINATION*/
+  const [posts, setPosts] = useState(allChairsSchedule)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [postsPerPage] = useState(4)
+
+  let currentPosts;
+  let howManyPages;
+  let indexOfLastPost;
+  let indexOfFirstPost
+
+  if (allChairsSchedule) {
+
+    indexOfLastPost = currentPage * postsPerPage;
+    indexOfFirstPost = indexOfLastPost - postsPerPage;
+    currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+    howManyPages = Math.ceil(posts.length / postsPerPage)
+
+  }
 
 
-     useEffect(() => {
-      const fetchPosts = async () => {
-        const resDay = await ShowConfigDay();
-        const resTurn = await ShowConfigTurn();
 
-        //console.log(resDay);
-        //console.log(resTurn);
 
-        readAllData(resDay, resTurn);
-        //const res = await allChairsSchedule;
-        setPosts(resDay)
+  /* PAGINATION END*/
+
+  const days = {
+    "mo": "lu",
+    "tu": "ma",
+    "we": "mi",
+    "th": "ju",
+    "fr": "vi",
+    "sa": "sa",
+    "su": "do",
+  }
+
+  async function saveChair() {
+    const day = allChairsSchedule.find(chair => chair.id == editableChair.id);
+    const chair = { name: newChair };
+    let response;
+    let existChair = allChairs.find(chair => chair.name == newChair);
+
+    if (!existChair) {
+      //console.log("crear");
+      if (newChair == " ") {
+        swal.fire({
+          text: `El motivo de su turno se encuentra vacio.`,
+          timer: "1500",
+          position: "bottom",
+          customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+          }
+        });
       }
-      
-      fetchPosts(); 
-    },[])
+      response = await CreateConfigTurn(chair, day.days);
+    } else {
+      //console.log("update");
+      day.days[editableDay[0]] = editableDay[1]
+      response = await UpdateConfigDay(day)
+    }
+  }
 
-    return(
-        <div>
-          <div className="row px-3">
-                <div className="col-12 p-1">
-                    <div className="row bg-dark shadow rounded p-0 mb-3">
-                        <div className="col-12">
-                            <div className="font-h1 fs-1"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        <div className="row px-4 g-1">
-          <div className="col-12">
-            <div className="row p-2 mb-3">
-              <div className="col-12 p-0">
-                <div className="font-h1 fs-1 fw-bold">Configurar las Sillas</div>
-              </div>
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const resDay = await ShowConfigDay();
+      const resTurn = await ShowConfigTurn();
+      readAllData(resDay, resTurn);
+      setPosts(resDay)
+    }
+    fetchPosts();
+  }, [])
+
+  return (
+    <div>
+      <div className="row px-3">
+        <div className="col-12 p-1">
+          <div className="row bg-dark shadow rounded p-0 mb-3">
+            <div className="col-12">
+              <div className="font-h1 fs-1"></div>
             </div>
           </div>
+        </div>
+      </div>
 
-        
-          <div className="col-12">
+      <div className="row px-4 g-1">
+        <div className="col-12">
+          <div className="row p-2 mb-3">
+            <div className="col-12 p-0">
+              <div className="font-h1 fs-1 fw-bold">Configurar las Sillas</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="col-12">
           <div className="row">
             <div className="row mb-3">
-           
+
               <div className="col-12 col-xl-8  pe-xl-3 p-0 mb-3">
                 <div className="h-100 p-xl-2 px-3">
                   <div className="table-responsive">
@@ -115,88 +150,124 @@ const MotiveSetterAndViewer= ()=>{
                           <th scope="col">Dias disponibles</th>
                           <th scope="col"></th>
                           <th scope="col"></th>
-                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
-                      {currentPosts.map((chair)=>
-                        <tr>
-                          <th scope="row">
-                            {chair.id}
-                          </th>
-                          <td>
-                            <div style={{ overflowWrap: "break-word", width: "150px"}}> {allChairs.find(chair2=>chair2.configDay_id == chair.id).name} </div>
-                          </td>
-                          <td>
-                            <div style={{ overflowWrap: "break-word", width: "300px"}}>
-                              {/* {Object.entries(chair.days).filter(day => day[1] != "NONACTIVE").map(activeDay=> */}
-                              {Object.entries(chair.days).map(activeDay=>
-                              <span className={activeDay[1]=="NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white" } style={{
-                                padding:"5px", borderRadius:"5px", marginRight:"5px"
-                              }}>{(days[activeDay[0]] + ' ').toUpperCase()}</span>
-                              )}
-                            </div>
-                          </td>
-                          <td>
-                            <div className="d-flex justify-content-center">
-                              <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                                data-bs-target="#modalAddProduct" onClick={()=>{setEditableChair(chair.id); setActiveDay("mo")}}><i className="bi bi-pencil fs-7"></i></button>
-                              <button type="button" className="btn btn-outline-danger p-1 me-1"
-                              data-bs-toggle="modal" data-bs-target="#modalChairConfig"><i className="bi bi-gear"
-                              onClick={()=>{setEditableChair(chair.id); setActiveDay("mo")}}></i></button>
-                            </div>
-                          </td>
-                          <td>
-                            {chair.status == "ACTIVE" ?
-                               <div className="text-success fs-3 d-flex justify-content-center" title="ACTIVO">
-                                <i className="bi bi-check-circle-fill"></i>
-                              </div>
+
+                        {
+                          !allChairsSchedule ?
+
+                            <LoadTable td={4}/>
+
                             :
-                              <div className="text-danger fs-3 d-flex justify-content-center" title="INACTIVO">
-                                <i class="bi bi-x-circle-fill"></i>
-                              </div>
-                            }
-                          </td>
-                        </tr>
-                        
-                      )}
-                      
+
+                            currentPosts.map((chair) =>
+                              <tr>
+                                <th scope="row">
+                                  {chair.id}
+                                </th>
+                                <td>
+                                  <div style={{ overflowWrap: "break-word", width: "150px" }}> {allChairs.find(chair2 => chair2.configDay_id == chair.id).name} </div>
+                                </td>
+                                <td>
+                                  <div style={{ overflowWrap: "break-word", width: "300px" }}>
+                                    {/* {Object.entries(chair.days).filter(day => day[1] != "NONACTIVE").map(activeDay=> */}
+                                    {Object.entries(chair.days).map(activeDay =>
+                                      <span className={activeDay[1] == "NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white"} style={{
+                                        padding: "5px", borderRadius: "5px", marginRight: "5px"
+                                      }}>{(days[activeDay[0]] + ' ').toUpperCase()}</span>
+                                    )}
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="d-flex justify-content-center">
+                                    <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
+                                      data-bs-target="#modalAddProduct" onClick={() => { setEditableChair(chair.id); setActiveDay("mo") }}><i className="bi bi-pencil fs-7"></i></button>
+                                    <button type="button" className="btn btn-outline-danger p-1 me-1"
+                                      data-bs-toggle="modal" data-bs-target="#modalChairConfig"><i className="bi bi-gear"
+                                        onClick={() => { setEditableChair(chair.id); setActiveDay("mo") }}></i></button>
+                                  </div>
+                                </td>
+                                <td>
+                                  {chair.status == "ACTIVE" ?
+                                    <div className="text-success fs-3 d-flex justify-content-center" title="ACTIVO">
+                                      <i className="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    :
+                                    <div className="text-danger fs-3 d-flex justify-content-center" title="INACTIVO">
+                                      <i class="bi bi-x-circle-fill"></i>
+                                    </div>
+                                  }
+                                </td>
+                              </tr>
+
+
+
+                            )}
+
                       </tbody>
                       <tfoot>
-                        <tr>
-                          <td className="" colspan="10">
-                            <div className="d-flex justify-content-end">
-                              <nav aria-label="Page navigation example m-0">
-                                <Pagination setCurrentPage={setCurrentPage} pages={howManyPages}/>
-                              </nav>
-                            </div>
-                          </td>
-                        </tr>
+                        {
+                          !allChairsSchedule ?
+
+                            <LoadTablePagination colspan={5} />
+
+                            :
+
+                            <tr>
+                              <td className="" colSpan={5}>
+                                <div className="d-flex justify-content-end">
+                                  <nav aria-label="Page navigation example m-0">
+                                    <Pagination setCurrentPage={setCurrentPage} pages={howManyPages} />
+                                  </nav>
+                                </div>
+                              </td>
+                            </tr>
+
+                        }
+
                       </tfoot>
                     </table>
                   </div>
                 </div>
               </div>
-           
+
 
               <div className="col-12 col-xl-4 ps-3 mb-3">
 
-               <MotiveSetter editableChair={editableChair} turnsPerday={turnsPerday}
-               setActiveDay={setActiveDay} editableDay={editableDay}
-               saveChairSchedule={saveChairSchedule} addCount={addCount}
-               restCount= {restCount} setStartHour={setStartHour} setEndHour={setEndHour}
-               switchDayStatus={switchDayStatus}
-               />
+                {
+                  !editableChair ?
+
+                    <LoadMotiveSetter/>
+
+                  :
+
+                    <MotiveSetter editableChair={editableChair} turnsPerday={turnsPerday}
+                      setActiveDay={setActiveDay} editableDay={editableDay}
+                      saveChairSchedule={saveChairSchedule} addCount={addCount}
+                      restCount={restCount} setStartHour={setStartHour} setEndHour={setEndHour}
+                      switchDayStatus={switchDayStatus} saveChair={saveChair}
+                    />
+
+                }
+
               </div>
 
             </div>
           </div>
-          </div>
-          <ModalChairsConfig editableChair={editableChair} saveChairConfig={saveChairConfig} />
         </div>
-      </div>
 
-    );
+        {
+          !editableChair?
+          ""
+          :
+          <ModalChairsConfig editableChair={editableChair} saveChairConfig={saveChairConfig} />
+        }
+        
+      </div>
+    </div>
+
+  );
 }
 
 export default MotiveSetterAndViewer

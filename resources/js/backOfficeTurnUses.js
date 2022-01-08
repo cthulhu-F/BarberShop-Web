@@ -105,7 +105,7 @@ const backofficeTurnMapDispatch = (dispatch)=>{
             if (actualStatus == "NONACTIVE"){
                 payloadValue ="ACTIVE";
             }
-            dispatch ({type: BACKOFFICE_TURN_TYPES.SWITCH_CHAIR_STATUS, payload: payloadValue})
+            //dispatch ({type: BACKOFFICE_TURN_TYPES.SWITCH_CHAIR_STATUS, payload: payloadValue})
             dispatch({ type: BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME, newName: newChairName});
         },
 

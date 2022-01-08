@@ -34,7 +34,8 @@ import Turns from "./components/componentsBackOffice/componentsTurns/Turns";
 import ShoppingCart from "./components/componentsShoppingCart/shoppingCart";
 import Shop from "./components/componentsShop/Shop";
 import Item from "./components/componentsShop/Item";
-
+import Inventory from "./components/componentsBackOffice/componentsInventory/Inventory";
+import Users from "./components/componentsBackOffice/componentsUser/Users";
 
 require('./bootstrap');
 

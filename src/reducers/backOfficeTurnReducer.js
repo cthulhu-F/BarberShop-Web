@@ -34,11 +34,13 @@ const sortById = (nonSorted) => {
 
 
 export const BackofficeTurnData = {
-    allChairs: sortById(ITEM_TURNS.configTurns),
-    allChairsSchedule: sortById(ITEM_TURNS.configDay),
-    editableChair: ITEM_TURNS.configTurns[0],
-    editableDay:  Object.entries(ITEM_TURNS.configDay[0].days)[0],
-    turnsPerday: Object.entries(ITEM_TURNS.configDay[0].days)[0][1].split('/')[2]
+    allChairs: null,  //sortById(ITEM_TURNS.configTurns),
+    allChairsSchedule: null,  //sortById(ITEM_TURNS.configDay),
+    editableChair: null, //ITEM_TURNS.configTurns[0],
+    editableDay:  null, //Object.entries(ITEM_TURNS.configDay[0].days)[0],
+    turnsPerday: null, //Object.entries(ITEM_TURNS.configDay[0].days)[0][1].split('/')[2],
+    newChair: null, //ITEM_TURNS.configTurns[0],
+    newDay: []
 }
 
 
@@ -51,8 +53,16 @@ export function backofficeTurnReducer(state, action) {
                 state.editableChair = action.dataTurn[0]
                 state.editableDay = Object.entries(action.dataDay[0].days)[0]
                 state.turnsPerday = Object.entries(action.dataDay[0].days)[0][1].split('/')[2]
+                state.newChair = action.dataTurn[0].name;
 
             return state
+        }
+
+        case BACKOFFICE_TURN_TYPES.SET_EDITABLE_CHAIR:{
+            let newEditable = state.allChairs.find(chair=>chair.id == action.payload);
+            return {...state,
+                editableChair : newEditable, newChair: newEditable.name
+        };
         }
 
         case BACKOFFICE_TURN_TYPES.SET_EDITABLE_DAY:{
@@ -61,10 +71,10 @@ export function backofficeTurnReducer(state, action) {
             let editableDayArray = [action.payload,editableDayValue]
             return {...state, editableDay: editableDayArray};
         }
+
         case BACKOFFICE_TURN_TYPES.LOAD_DATA: {
             return state;
         }
-
 
 
         case BACKOFFICE_TURN_TYPES.ADD_COUNT: {
@@ -132,7 +142,7 @@ export function backofficeTurnReducer(state, action) {
 
             if (!validData(turnDataString)) {
                 swal.fire({
-                    text: 'Por respete el formato "09:00/12:00/5"',
+                    text: 'Por favor respete el formato "09:00/12:00/5"',
                     position: "bottom",
                     customClass: {
                         container: "add-to-cart-alert-container",
@@ -157,16 +167,24 @@ export function backofficeTurnReducer(state, action) {
 
             editableChairSchedule.update_at = todayString;
 
+            //console.log("CHAIR");
             //console.log(editableChairSchedule);
-            return state;
+
+            //state.newDay = editableChairSchedule;
+            return {...state, newDay: editableChairSchedule,};
         }
 
         case BACKOFFICE_TURN_TYPES.SET_CHAIR_NAME: {
-            let newEditableChair = state.editableChair;
+            //let newEditableChair = state.editableChair;
             if (action.newName != "") {
-                newEditableChair.name = action.newName;
-            }
+                state.newChair = action.newName;
+            } 
+            
+            //console.log("NAME CHAIR");
             //console.log(newEditableChair)
+
+            //state.newChari = newEditableChair;
+            //; {...state, newChair: newEditableChair,}
             return state
         }
 
@@ -182,6 +200,8 @@ export function backofficeTurnReducer(state, action) {
             let newAllChairsSchedule = state.allChairsSchedule.filter(chair => chair.id != state.editableChair.id)
             neweditablechairSchedule.status = action.payload
             newAllChairsSchedule.push(neweditablechairSchedule)
+
+            //allChairs: sortById(modifiedScheduled),
 
             return { ...state, editableChair: newEditableChair, allChairs: sortById(modifiedScheduled), allChairsSchedule: sortById(newAllChairsSchedule) }
         }

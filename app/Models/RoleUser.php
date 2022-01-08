@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ConfigDay extends Model
+class RoleUser extends Model
 {
     use HasFactory;
 
-    protected $table='configday';
-
-
-
+    protected $table='role_user';
+    
     protected $fillable= 
     [
         'id',
-        'days',
+        'role_id',  
+        'user_id',
         'created_at',
         'updated_at',
-        'status'
     ];
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useReducer } from "react";
 import ReactDOM from "react-dom";
+import { BACKOFFICE_TURN_TYPES } from "../../src/actions/backofficeTurnActions";
 
 import { BACKOFFICE_INVENTORY_TYPES } from "../../src/actions/backOficeInventoryActions";
 
@@ -20,6 +21,11 @@ const backofficeInventoryMapDispatch = (dispatch)=>{
             dispatch ({type: BACKOFFICE_INVENTORY_TYPES.CHANGE_PRODUCT_VALUE, editableField: field , payload: payload, productId : productId})
         },
 
+        readAllData:(dataProducts, dataCategories) => {
+
+            dispatch({type: BACKOFFICE_INVENTORY_TYPES.READ_ALL_DATA, dataProducts: dataProducts, dataCategories: dataCategories})
+
+        },
 
         filterProducts:(string, categoryId) =>{
             dispatch ({type: BACKOFFICE_INVENTORY_TYPES.FILTERED, payload: string, category: categoryId})

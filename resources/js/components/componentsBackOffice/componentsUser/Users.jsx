@@ -2,13 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../css/main.css';
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 
 import { userReducer,usersData } from "../../../../../src/reducers/backOfficeUserReducer";
 import UserListItem from "./UserListItem";
 import backofficeUserDispatch from "../../../backOfficeUserUses";
 
 import ModalUserEditor from "./ModalUserEditor";
+import { useEffect } from "react";
+import { ShowUserRole } from "../../../helpers/UserHelpers";
+import LoadTable from "../../componentsLoaders/LoadTable";
 
 
 const Users = () =>{
@@ -16,6 +19,7 @@ const Users = () =>{
   const [usersState, dispatch] = useReducer(userReducer,usersData);
   const {users, roles,roleUser, filteredUsers} = usersState;
 
+  const readAllData = backofficeUserDispatch(dispatch).readAllData;
   const saveUserConfig = backofficeUserDispatch(dispatch).saveUserConfig;
   const changeUserRole = backofficeUserDispatch(dispatch).changeUserRole;
   const createNewUser = backofficeUserDispatch(dispatch).createNewUser;
@@ -27,6 +31,18 @@ const Users = () =>{
     const roleField = parent.querySelector("#backofice-user-role-editor");
     roleField.value = roleField.querySelector(`[id='${roleId}']`).value;
   }
+
+  const[filterUser, setFilterUser] = useState(filteredUsers);
+
+  useEffect(() => {
+    async function fetch() {
+      let ITEM_USER = await ShowUserRole();
+      readAllData(ITEM_USER.user, ITEM_USER.role, ITEM_USER.roleUser);
+      setFilterUser(ITEM_USER.user);
+    }
+
+    fetch();
+  },[])
 
   
 
@@ -90,11 +106,30 @@ const Users = () =>{
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredUsers.map((user)=>
-                      <UserListItem key={user.id} user={user} saveUserConfig={saveUserConfig} users={users} roles={roles} roleUser={roleUser} changeUserRole={changeUserRole}/>
+
+                    { 
+
+                      !filterUser?
+
+                      <LoadTable td={7}/>
+
+                      :
+
+                      filterUser.map((user)=>
+                        <UserListItem key={user.id} user={user} saveUserConfig={saveUserConfig} users={users} roles={roles} roleUser={roleUser} changeUserRole={changeUserRole}/>
+                      
+                      )
+                      
+                    }
+
+                    {
+                      !filterUser?
+                      ""
+                      :
+                      <ModalUserEditor  roles={roles} newUser={true} createNewUser={createNewUser}/>
+                    }
+
                     
-                    )}
-                  <ModalUserEditor  roles={roles} newUser={true} createNewUser={createNewUser}/>
 
                   </tbody>
                   <tfoot></tfoot>

@@ -64,7 +64,7 @@ function Pagination({ pages = 2, setCurrentPage }) {
     setCurrentPage(currentButton)
   }, [currentButton])
 
-console.log(arrOfCurrButtons)
+//console.logarrOfCurrButtons)
   return (
     <ul className="pagination m-0">
       <li className="page-item">

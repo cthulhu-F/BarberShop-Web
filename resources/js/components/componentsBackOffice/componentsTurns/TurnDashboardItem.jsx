@@ -12,7 +12,7 @@ const TurnDashboardItem = ({ scheduledTurn,setTurnStatus, UpdateOrderTurn }) =>{
 
         const res = UpdateOrderTurn(put);
 
-        console.log(res);
+        //console.logres);
 
             swal.fire({
                 text: 'Turno confirmado con éxito',

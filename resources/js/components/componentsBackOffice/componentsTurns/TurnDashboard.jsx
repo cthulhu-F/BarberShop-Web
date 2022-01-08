@@ -13,6 +13,8 @@ import ModalTurn from "../../componentsTurn/ModalTurn";
 import swal from 'sweetalert2';
 
 import { ShowOrderTurn, UpdateOrderTurn } from "../../../helpers/TurnHelpers";
+import LoadTable from "../../componentsLoaders/LoadTable";
+import LoadTablePagination from "../../componentsLoaders/LoadTablePagination";
 
 const TurnDashboard = ({ }) => {
 
@@ -38,17 +40,6 @@ const TurnDashboard = ({ }) => {
     const orderByDate = backofficeTurnDashboardMapDispatch(dispatch).orderByDate;
 
     const setTurnStatus = backofficeTurnDashboardMapDispatch(dispatch).setTurnStatus;
-
-
-    // const [todayTurns, setTurns] = useState(todayScheduled)
-
-    // useEffect(() => {
-    //     const fetchPosts = async () => {
-    //       const res = await todayScheduled;
-    //       setTurns(res)
-    //     }
-    //     fetchPosts();      
-    // }, [todayScheduled])
 
 
     let [todayFlag, setTodayFlagSwitch] = useState(true)
@@ -85,16 +76,29 @@ const TurnDashboard = ({ }) => {
 
     /* PAGINATION*/
 
+
     const [paginationTurns, setTurnsPagination] = useState(dashboardTurns)
     const [currentPage, setCurrentPage] = useState(0);
     const [turnsPerPage] = useState(8)
 
+    let indexOfLastTurn;
+    let indexOfFirstTurn;
+    let currentTurns;
+    let howManyPages;
 
-    const indexOfLastTurn = currentPage * turnsPerPage;
-    const indexOfFirstTurn = indexOfLastTurn - turnsPerPage;
-    const currentTurns = paginationTurns.slice(indexOfFirstTurn, indexOfLastTurn);
-    const howManyPages = Math.ceil(paginationTurns.length / turnsPerPage);
-    
+    if (dashboardTurns) {
+
+        indexOfLastTurn = currentPage * turnsPerPage;
+        indexOfFirstTurn = indexOfLastTurn - turnsPerPage;
+        currentTurns = paginationTurns.slice(indexOfFirstTurn, indexOfLastTurn);
+        howManyPages = Math.ceil(paginationTurns.length / turnsPerPage);
+
+    }
+
+
+
+
+
 
     /* PAGINATION END*/
 
@@ -105,7 +109,7 @@ const TurnDashboard = ({ }) => {
             setTurnsPagination(response);
         }
         fetchPosts()
-    },[])
+    }, [])
 
 
 
@@ -152,14 +156,33 @@ const TurnDashboard = ({ }) => {
                                 </button>
                             </div>
                         </div>
-                        <ModalTurn />
+
+                        {
+                            !dashboardTurns ?
+
+                                ""
+
+                                :
+
+                                <ModalTurn />
+                        }
+
+
                     </div>
                 </div>
 
                 <div className="col-12">
                     <div className="row g-1 my-4">
 
+
+
                         {
+                            !dashboardTurns? 
+
+                            ""
+
+                            :
+
                             todayFlag
 
                                 ? todayScheduled.map((scheduledTurn) =>
@@ -183,61 +206,71 @@ const TurnDashboard = ({ }) => {
                     </div>
                 </div>
 
+                {
+                    !dashboardTurns ?
 
-                <div className="col-12">
-                    <div className="row p-2 mb-3 d-flex align-items-end">
-                        <div className="col-12 p-0 col-xl-4 p-0 mx-xl-2">
-                            <div className="font-h1 fs-1 fw-bold">Todos los turnos</div>
-                        </div>
+                        ""
 
-                        <div className="col-12 col-xl-3 p-0 mx-xl-2">
-                            <div className="input-group m-0">
-                                <select className="form-select p-2" id="inputChairSelect" onChange={(e) => filterDashboard(document.getElementById("inputDateIni").value, document.getElementById("inputDateEnd").value, e.target.value, todayFlag)}>
-                                    <option selected>Ver silla</option>
+                        :
 
-                                    {
-                                        allShcheduled.map((scheduledTurn) => {
-                                            if (!existentChairs.includes(scheduledTurn.name)) {
-                                                existentChairs.push(scheduledTurn.name)
+                        <div className="col-12">
+                            <div className="row p-2 mb-3 d-flex align-items-end">
+                                <div className="col-12 p-0 col-xl-4 p-0 mx-xl-2">
+                                    <div className="font-h1 fs-1 fw-bold">Todos los turnos</div>
+                                </div>
+
+                                <div className="col-12 col-xl-3 p-0 mx-xl-2">
+                                    <div className="input-group m-0">
+                                        <select className="form-select p-2" id="inputChairSelect" onChange={(e) => filterDashboard(document.getElementById("inputDateIni").value, document.getElementById("inputDateEnd").value, e.target.value, todayFlag)}>
+                                            <option selected>Ver silla</option>
+
+                                            {
+                                                allShcheduled.map((scheduledTurn) => {
+                                                    if (!existentChairs.includes(scheduledTurn.name)) {
+                                                        existentChairs.push(scheduledTurn.name)
+                                                    }
+                                                })
+
                                             }
-                                        })
-
-                                    }
-                                    {
-                                        existentChairs.map((chairName) =>
-                                            <option value={chairName}>{chairName} </option>
-                                        )
-                                    }
+                                            {
+                                                existentChairs.map((chairName) =>
+                                                    <option value={chairName}>{chairName} </option>
+                                                )
+                                            }
 
 
-                                </select>
-                                <label className="input-group-text btn btn-black border-black" for="inputChairSelect"><i
-                                    className="bi bi-arrow-down"></i></label>
+                                        </select>
+                                        <label className="input-group-text btn btn-black border-black" for="inputChairSelect"><i
+                                            className="bi bi-arrow-down"></i></label>
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-xl-2 p-0 mx-xl-2" >
+                                    <label for="inputDateIni" className="form-label text-muted fs-9">Fecha de inicio</label>
+                                    <input className="form-control p-2" id="inputDateIni" type="date" name="trip-start"
+                                        onChange={(e) => filterDashboard(e.target.value, document.getElementById("inputDateEnd").value, document.getElementById("inputChairSelect").value)}
+                                        // onFocus={(e) => e.currentTarget.type = "date"}
+                                        // onBlur={(e) => e.currentTarget.type = "text"}
+                                        // placeholder={pHolder}
+                                        min={minDate} max={maxDte} />
+                                </div>
+
+                                <div className="col-12 col-xl-2 p-0 mx-xl-2">
+                                    <label for="inputDateEnd" className="form-label text-muted fs-9">Fecha de Fin</label>
+                                    <input className="form-control p-2" id="inputDateEnd" type="date" name="trip-start"
+                                        onChange={(e) => filterDashboard(document.getElementById("inputDateIni").value, e.target.value, document.getElementById("inputChairSelect").value)}
+                                        // onFocus={(e) => e.currentTarget.type = "date"}
+                                        // onBlur={(e) => e.currentTarget.type = "text"}
+                                        // placeholder={pHolder}
+                                        min={minDate} max={maxDte} />
+                                </div>
+
                             </div>
                         </div>
 
-                        <div className="col-12 col-xl-2 p-0 mx-xl-2" >
-                            <label for="inputDateIni" className="form-label text-muted fs-9">Fecha de inicio</label>
-                            <input className="form-control p-2" id="inputDateIni" type="date" name="trip-start"
-                                onChange={(e) => filterDashboard(e.target.value, document.getElementById("inputDateEnd").value, document.getElementById("inputChairSelect").value)}
-                                // onFocus={(e) => e.currentTarget.type = "date"}
-                                // onBlur={(e) => e.currentTarget.type = "text"}
-                                // placeholder={pHolder}
-                                min={minDate} max={maxDte} />
-                        </div>
+                }
 
-                        <div className="col-12 col-xl-2 p-0 mx-xl-2">
-                            <label for="inputDateEnd" className="form-label text-muted fs-9">Fecha de Fin</label>
-                            <input className="form-control p-2" id="inputDateEnd" type="date" name="trip-start"
-                                onChange={(e) => filterDashboard(document.getElementById("inputDateIni").value, e.target.value, document.getElementById("inputChairSelect").value)}
-                                // onFocus={(e) => e.currentTarget.type = "date"}
-                                // onBlur={(e) => e.currentTarget.type = "text"}
-                                // placeholder={pHolder}
-                                min={minDate} max={maxDte} />
-                        </div>
 
-                    </div>
-                </div>
 
 
                 <div className="col-12 p-0">
@@ -274,21 +307,45 @@ const TurnDashboard = ({ }) => {
 
 
                             <tbody>
-                                {currentTurns.map((turn) =>
-                                    <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus} />
-                                )}
+
+                                {
+
+                                    !dashboardTurns ?
+
+                                        <LoadTable td={9}/>
+
+                                        :
+
+                                        currentTurns.map((turn) =>
+                                            <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus} />
+                                        )
+
+                                }
+
+
+
 
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <td className="" colspan="10">
-                                        <div className="d-flex justify-content-end">
-                                            <nav aria-label="Page navigation example m-0">
-                                                 <Pagination setCurrentPage={setCurrentPage} pages={howManyPages} /> 
-                                            </nav>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {
+                                    !dashboardTurns ?
+
+                                        <LoadTablePagination colspan={10} />
+
+                                    :
+
+                                        <tr>
+                                            <td className="" colspan="10">
+                                                <div className="d-flex justify-content-end">
+                                                    <nav aria-label="Page navigation example m-0">
+                                                        <Pagination setCurrentPage={setCurrentPage} pages={howManyPages} />
+                                                    </nav>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                }
+
                             </tfoot>
                         </table>
                     </div>

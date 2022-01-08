@@ -13,8 +13,8 @@ const mapDispatcht = (dispatch) => {
     return {
         //API CRUD
 
-        readAllData: (data) => {
-            dispatch({ type:TYPES.READ_ALL_DATA, payload: data })
+        readAllData: (dataItem, dataCategorie) => {
+            dispatch({ type:TYPES.READ_ALL_DATA, dataItem: dataItem, dataCategorie: dataCategorie })
         },
 
         //

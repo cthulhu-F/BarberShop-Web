@@ -37,7 +37,7 @@ const UserListItem = ({user, saveUserConfig, users, roles, roleUser,changeUserRo
         parent.querySelector("#backofice-user-name-editor-setter").click().click();
     }
 
-    console.log(roles.find(role=>role.id == roleUser.find(role => role.user_id == user.id).role_id).description)
+    //console.log(roles.find(role=>role.id == roleUser.find(role => role.user_id == user.id).role_id).description)
 
     return (
         <tr>

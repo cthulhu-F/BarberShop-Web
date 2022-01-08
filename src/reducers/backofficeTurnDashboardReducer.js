@@ -44,10 +44,10 @@ const filteredByActive = (nonFilteredTurns) =>{
 }
 
 export const FilteredTurns ={
-    allShcheduled : sortByDate(ITEM_TURNS.orderTurns),
-    todayScheduled : filteredByActive(sortByDate(ITEM_TURNS.orderTurns.filter((turn)=>turn.date == todayString))),
-    tomorrowScheduled : filteredByActive(sortByDate(ITEM_TURNS.orderTurns.filter((turn)=>turn.date != todayString))),
-    dashboardTurns : sortByDate(ITEM_TURNS.orderTurns),
+    allShcheduled : null, //sortByDate(ITEM_TURNS.orderTurns),
+    todayScheduled : null, //filteredByActive(sortByDate(ITEM_TURNS.orderTurns.filter((turn)=>turn.date == todayString))),
+    tomorrowScheduled : null, //filteredByActive(sortByDate(ITEM_TURNS.orderTurns.filter((turn)=>turn.date != todayString))),
+    dashboardTurns : null, //sortByDate(ITEM_TURNS.orderTurns),
 }
 
 export function backofficeTurnDashboardReducer(state, action){
@@ -79,9 +79,9 @@ export function backofficeTurnDashboardReducer(state, action){
             let dateMmMax = dateMax[1];
             let dateDdMax = dateMax[2];
             let compartaiveMax = parseInt(dateYyyyMax+dateMmMax+dateDdMax)
-            console.log(compartaiveMin)
-            console.log(compartaiveMax)
-            console.log(action.chairName)
+            //console.logcompartaiveMin)
+            //console.logcompartaiveMax)
+            //console.logaction.chairName)
 
             let filteredByName;
 
@@ -121,7 +121,7 @@ export function backofficeTurnDashboardReducer(state, action){
             let modified = false;
 
             if (action.date != ""){
-                console.log(action.date)
+                //console.logaction.date)
                 let newDay = action.date.split('-')
                 newEditableTurn.date = newDay[2] + '/' + newDay[1] +'/' +newDay[0]
                 modified = true;
@@ -129,7 +129,7 @@ export function backofficeTurnDashboardReducer(state, action){
 
 
             if (action.time != ""){
-                console.log(action.time)
+                //console.logaction.time)
                 newEditableTurn.time = action.time;
                 modified = true;
 
@@ -145,7 +145,7 @@ export function backofficeTurnDashboardReducer(state, action){
                 newEditableTurn.update_at = todayString;
                 allTurnsScheduled = allTurnsScheduled.filter((turn)=>turn.id != action.turn.id);
                 allTurnsScheduled.push(newEditableTurn)
-                console.log(allTurnsScheduled)
+                //console.logallTurnsScheduled)
 
                 let allScheduleSorted = sortByDate(allTurnsScheduled);
                 return {...state, allShcheduled: allScheduleSorted}
@@ -168,7 +168,7 @@ export function backofficeTurnDashboardReducer(state, action){
             allTurnsScheduled.push(editableTurn)
 
             let allScheduleSorted =sortByDate(allTurnsScheduled);
-            console.log(allScheduleSorted)
+            //console.logallScheduleSorted)
             return {...state, allShcheduled: allScheduleSorted,
                 todayScheduled: filteredByActive(allScheduleSorted.filter((turn)=>turn.date == todayString)),
                 tomorrowScheduled: filteredByActive(allScheduleSorted.filter((turn)=>turn.date != todayString)),

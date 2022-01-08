@@ -1,4 +1,7 @@
 import React from "react";
+import { CreateCategory } from "../../../helpers/ItemHelpers";
+import LoadAddCategory from "../../componentsLoaders/LoadAddCategory";
+import LoadTable from "../../componentsLoaders/LoadTable";
 import ModalCategorySettings from "./ModalCategorySettings";
 
 const CategoriesDashboard = ({allCategories, saveCategoryConfig, createNewCategory})=>{
@@ -7,7 +10,7 @@ const CategoriesDashboard = ({allCategories, saveCategoryConfig, createNewCatego
         const parent = document.getElementById(`modalCategorySettings${categoryId}`)
         const switcher = parent.querySelector("#category-inhabilitator");
         const category = allCategories.find(category => category.id==categoryId)
-        if(category.status == "NONACTIVE"){
+        if(category.status == "INACTIVE"){
             switcher.checked = true;
             switcher.setAttribute("aria-checked", "true")
         }
@@ -19,13 +22,16 @@ const CategoriesDashboard = ({allCategories, saveCategoryConfig, createNewCatego
     }
 
 
-    function validateNewCategoryName () {
+    async function validateNewCategoryName () {
         const inputNameField = document.getElementById("backoffice-new-category-input")
 
-    
+        let formData = new FormData();
         if (inputNameField.value !=""){
-            createNewCategory(inputNameField.value)
+            //createNewCategory(inputNameField.value)
+            formData.append('name', inputNameField.value);
         }
+
+        let response = await CreateCategory(formData)
     }
     
 
@@ -51,12 +57,19 @@ const CategoriesDashboard = ({allCategories, saveCategoryConfig, createNewCatego
                             <th scope="col">Nombre</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
 
-                        {allCategories.map((category)=>
+                        {
+
+                          !allCategories?
+
+                          <LoadTable  td={3} />
+
+                          :
+                        
+                        allCategories.map((category)=>
                             <tr>
                                 <th scope="row">{category.id}</th>
                                 <td>
@@ -85,12 +98,15 @@ const CategoriesDashboard = ({allCategories, saveCategoryConfig, createNewCatego
 
                                 <ModalCategorySettings key={category.id} editableCateory={category} saveCategoryConfig={saveCategoryConfig}/>
                             </tr>
-                        )}
+                        )
+                        
+                        
+                        }
                           
                         </tbody>
                         <tfoot>
                           <tr>
-                            <td className="" colspan="10">
+                            <td className="" colspan="4">
                               <div className="d-flex justify-content-end">
                                 <nav aria-label="Page navigation example m-0">
                                   <ul className="pagination m-0">
@@ -118,7 +134,14 @@ const CategoriesDashboard = ({allCategories, saveCategoryConfig, createNewCatego
 
                 <div className="col-12 col-xl-4 ps-3 mb-3">
 
-                  <div className="row shadow-sm p-2">
+                  {
+                    !allCategories?
+
+                    <LoadAddCategory />
+
+                    :
+
+                    <div className="row shadow-sm p-2">
                     <div className="col-xl-12 mb-3">
                       <span className="fw-bold fs-5 font-h1">Agregar nueva categoria</span>
                     </div>
@@ -141,6 +164,8 @@ const CategoriesDashboard = ({allCategories, saveCategoryConfig, createNewCatego
                       </div>
                     </div>
                   </div>
+
+                  }
                 </div>
               </div>
             </div>

@@ -19,14 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthController extends Controller
 {
     
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['login', 'register']]);
-    }
-    
-
     public function register(Request $request)
     {   
+        $request->user()->authorizeRoles(['admin']);
         
         $validate = Validator::make($request->all(),[
             'name' => ['required','string','min:2','max:100'],
@@ -35,7 +30,6 @@ class AuthController extends Controller
             'phone' => ['required','string'],
             'role' => ['required','string'],
         ]);
-        
         
         if($validate->fails()) {
             return response()->json($validate->errors(), 400);

@@ -4,36 +4,37 @@ import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 import { useEffect } from 'react';
 import "../../resources/css/sweetAlert.css"
 
+let existentCart = JSON.parse(localStorage.getItem('cartData'));
+
+export const cartItemsData = existentCart
+    ? [...existentCart]
+    : []
+
 export const shoppingInitialState = {
     products :ITEM_PRODUCTS.products,
-    cart:[{
-        id: "",
-        name: "",
-        quantity: -1,
-        price: "",
-      }],
+    cart: cartItemsData,
     categories:ITEM_PRODUCTS.categories,
 }
 
 import swal from'sweetalert2';
 import { Container } from 'postcss';
 
+/*
 if (!JSON.parse(localStorage.getItem('cartData'))){
     localStorage.setItem('cartData', JSON.stringify(shoppingInitialState));
 }
+*/
 
-let existentCart = JSON.parse(localStorage.getItem('cartData'));
-
-
-export const cartItemsData = existentCart
-    ? { ...existentCart}
-    : {...shoppingInitialState}
 
 
 export function shoppingReducer(state, action) {
     switch (action.type) {
         case TYPES.READ_ALL_DATA: {
-            return Object.assign({}, state, { products: action.payload })
+
+            state.products = action.dataItem;
+            state.categories = action.dataCategorie
+
+            return state
         }
         case TYPES.ADD_TO_CART: {
             let newItem = state.products.find(product => product.id === action.payload);
@@ -53,7 +54,9 @@ export function shoppingReducer(state, action) {
                     cart: [...state.cart, { ...newItem, quantity: action.quantity}],
                 };
 
-            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+                
+
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport.cart));
             swal.fire({ title: "Enhorabuena!",
             text: "Ahora tienes " + action.quantity +" "+ newItem.name +" en tu carrito",
             icon:"success",
@@ -83,7 +86,8 @@ export function shoppingReducer(state, action) {
                 cart: [...state.cart, { ...newItem, quantity: 1}],
             };
 
-            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport.cart));
 
             
             if(action.alert){
@@ -113,7 +117,7 @@ export function shoppingReducer(state, action) {
                 button.disabled = intemToDelete.quantity > intemToDelete.stock ? true : false;
             }catch(error){}
 
-            let cartItemsDataExport =intemToDelete.quantity >1
+            let cartItemsDataExport = intemToDelete.quantity >1
             ?{
                 ...state,
                 cart: state.cart.map(item=> item.id === action.payload 
@@ -127,7 +131,7 @@ export function shoppingReducer(state, action) {
             };
 
 
-            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport.cart));
             return cartItemsDataExport;
         }
         
@@ -136,24 +140,23 @@ export function shoppingReducer(state, action) {
                 cart: state.cart.filter(item => item.id !== action.payload),
                 };
             
-            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport.cart));
             return cartItemsDataExport;
         }
 
         case TYPES.CLEAN_CART:{
-            let cartItemsDataExport= shoppingInitialState;
-            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+            localStorage.clear()
             swal.fire({
                 text: "El carrito ha sido vaciado",
                 timer: "1200",
                 icon: "success",
             });
-            return cartItemsDataExport;
+            return {...state, cart: state.cart = [],};
         }
 
         case TYPES.LOAD_DATA:{
             let cartItemsDataExport= {...state};
-            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport));
+            localStorage.setItem('cartData', JSON.stringify(cartItemsDataExport.cart));
             return cartItemsDataExport;
         }
 

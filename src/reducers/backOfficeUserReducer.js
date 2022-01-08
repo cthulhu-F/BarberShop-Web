@@ -22,17 +22,30 @@ const sortById = (nonSorted) =>{
     return sortedElements
 }
 
+//ITEM_USER.user,
+//ITEM_USER.role,
+//ITEM_USER.role_user,
+//ITEM_USER.user
 
 export const usersData = {
-    users: ITEM_USER.user,
-    roles: ITEM_USER.role,
-    roleUser : ITEM_USER.role_user,
-    filteredUsers : ITEM_USER.user
+    users: null, 
+    roles: null, 
+    roleUser : null, 
+    filteredUsers : null, 
 }
 
 
 export function userReducer(state,action) {
     switch (action.type) {
+        case BACKOFFICE_USER_TYPES.READ_ALL_DATA :{
+
+            state.users= action.dataUser
+            state.roles= action.dataRole
+            state.roleUser = action.dataRoleUser
+            state.filteredUsers = action.dataUser
+
+            return state
+        }
 
         case BACKOFFICE_USER_TYPES.CHANGE_USER_VALUE :{
            
@@ -45,7 +58,7 @@ export function userReducer(state,action) {
         }
         
         case BACKOFFICE_USER_TYPES.CREATE_NEW_USER: {
-            console.log(action.payload);
+            //console.log(action.payload);
             return state
         }
         case BACKOFFICE_USER_TYPES.CHANGE_USER_ROLE : {

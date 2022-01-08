@@ -1,4 +1,5 @@
 import React from "react";
+import { UpdateCategory } from "../../../helpers/ItemHelpers";
 
 const ModalCategorySettings =({editableCateory, saveCategoryConfig})=>{
 
@@ -15,7 +16,7 @@ const ModalCategorySettings =({editableCateory, saveCategoryConfig})=>{
       }
 
     function setLabelMessage()  {
-        if(editableCateory.status == "NONACTIVE"){
+        if(editableCateory.status == "INACTIVE"){
             return "Categoría inhabilitado ¿Desea habilitar esta categoría?"
         } else{
             return  "¿Desea inhabilitar este categoría?" 
@@ -31,13 +32,13 @@ const ModalCategorySettings =({editableCateory, saveCategoryConfig})=>{
 
         if (switcher.getAttribute("aria-checked") == "true"){
             previousValue ="ACTIVE";
-            prevMsjStatus = "Activo";
-            NewMsjStatus = "Inactivo";
+            prevMsjStatus = "ACTIVE";
+            NewMsjStatus = "INACTIVE";
         }
         else{
-            previousValue ="NONACTIVE";
-            prevMsjStatus = "Inactivo";
-            NewMsjStatus = "Activo"
+            previousValue ="INACTIVE";
+            prevMsjStatus = "INACTIVE";
+            NewMsjStatus = "ACTIVE"
         }
         const nameInput = parent.querySelector('#editable-category-name')
         let newName = nameInput.value == "" ? nameInput.placeholder : nameInput.value
@@ -55,22 +56,22 @@ const ModalCategorySettings =({editableCateory, saveCategoryConfig})=>{
             showCancelButton: true,
             confirmButtonColor: '#000',
             cancelButtonColor: '#d33',
-            confirmButtonText: `Si, Modificar Producto`   
-            }).then((result) => {
+            confirmButtonText: `Si, Modificar Categoria`   
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    saveCategoryConfig(previousValue, "status", editableCateoryId);
-                    if (nameInput.value != "") {
-                        saveCategoryConfig(newName, "name", editableCateoryId);
+
+                    let formData = new FormData();
+                    
+                    formData.append('id', editableCateory.id);
+                    formData.append('status',  NewMsjStatus);
+                    //saveCategoryConfig(previousValue, "status", editableCateoryId);
+                    if (nameInput.value != ""){
+                        formData.append('name', newName);
+                        //saveCategoryConfig(newName, "name", editableCateoryId);
                     }
-                    swal.fire({
-                        text: 'Datos modificados con éxito',
-                        timer:"1500", 
-                        position: "bottom",
-                        customClass : {
-                        container: "add-to-cart-alert-container",
-                        popup:"add-to-cart-alert",
-                        }
-                    })
+
+                    let response = await UpdateCategory(formData);
+
                 }else{
                     swal.fire({
                         text: `Ningún dato ha sido modificado.`,

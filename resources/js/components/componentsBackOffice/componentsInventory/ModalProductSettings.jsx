@@ -1,4 +1,5 @@
 import React from "react"
+import { UpdateProduct } from "../../../helpers/ItemHelpers";
 
 
 const ModalProductSettings = ({editableProduct, saveProductConfig})=>{
@@ -15,7 +16,7 @@ const ModalProductSettings = ({editableProduct, saveProductConfig})=>{
       }
    
     function setLabelMessage()  {
-        if(editableProduct.status == "NONACTIVE"){
+        if(editableProduct.status == "INACTIVE"){
             return "Producto inhabilitado ¿Desea habilitar esta producto?"
         } else{
             return  "¿Desea inhabilitar este producto?" 
@@ -33,15 +34,15 @@ const ModalProductSettings = ({editableProduct, saveProductConfig})=>{
         console.log(switcher.checked)
         if (switcher.getAttribute("aria-checked") == "true"){
             previousValue ="ACTIVE";
-            prevMsjStatus = "Activo";
-            NewMsjStatus = "Inactivo";
+            prevMsjStatus = "ACTIVE";
+            NewMsjStatus = "INACTIVE";
             
             
         }
         else{
-            previousValue ="NONACTIVE";
-            prevMsjStatus = "Inactivo";
-            NewMsjStatus = "Activo"
+            previousValue ="INACTIVE";
+            prevMsjStatus = "INACTIVE";
+            NewMsjStatus = "ACTIVE"
         }
         const nameInput = parent.querySelector('#editable-product-name-2')
         let newName = nameInput.value == "" ? nameInput.placeholder : nameInput.value
@@ -61,21 +62,22 @@ const ModalProductSettings = ({editableProduct, saveProductConfig})=>{
             confirmButtonColor: '#000',
             cancelButtonColor: '#d33',
             confirmButtonText: `Si, Modificar Producto`   
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    saveProductConfig(previousValue, "status", editableProduct.id);
+
+                    let formData = new FormData();
+
+                    //saveProductConfig(previousValue, "status", editableProduct.id);
+                    formData.append('id', editableProduct.id);
+                    formData.append('status', NewMsjStatus);
+
                     if (nameInput.value != "") {
-                        saveProductConfig(newName, "name", editableProduct.id);
+                        formData.append('name', newName);
+                        //saveProductConfig(newName, "name", editableProduct.id);
                     }
-                    swal.fire({
-                        text: 'Datos modificados con éxito',
-                        timer:"1500", 
-                        position: "bottom",
-                        customClass : {
-                        container: "add-to-cart-alert-container",
-                        popup:"add-to-cart-alert",
-                        }
-                    })
+
+                    let response = await UpdateProduct(formData)
+
                 }else{
                     swal.fire({
                         text: `Ningún dato ha sido modificado.`,

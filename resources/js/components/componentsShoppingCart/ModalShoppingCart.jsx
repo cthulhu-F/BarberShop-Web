@@ -8,11 +8,13 @@ import swal from'sweetalert2';
 const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => {
   const urlImg = require.context('../../../asset/product', true);
 
+  console.log(data);
+
   let shoppingCartItem = data;
+
   const buttonsStyle = {
     display: 'unset',
   };
-
 
   const cleanCartConfirmed = ()=>{
     if(data.length !== 0 ){

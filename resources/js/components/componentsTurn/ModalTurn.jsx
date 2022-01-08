@@ -177,7 +177,7 @@ const ModalTurn = () => {
       timer:5000})
       .then(()=>{}).then(()=>{
         window.open(urlPDF)
-        //window.location.href = ' ';
+        window.location.href = ' ';
       })
     
   }

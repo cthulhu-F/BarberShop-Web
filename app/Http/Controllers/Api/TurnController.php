@@ -64,8 +64,6 @@ class TurnController extends Controller
         $id = $request->id;
         $status = $request->status;
 
-        
-
         if(!OrderTurn::find($id)){
             return response()->json([
                 'message' => 'Error',
@@ -92,11 +90,143 @@ class TurnController extends Controller
 
     }
 
-    public function showConfigTurn(Request $request){
-        return ConfigTurn::all();
+    public function updateConfigDay(Request $request){
+
+        $request->user()->authorizeRoles(['admin']);
+
+        $validate = Validator::make($request->all(),[
+            'id' => ['required'],
+            'days' => ['required'],
+        ]);
+
+        
+        if($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+         }
+ 
+         $id = $request->id;
+         $days = $request->days;
+
+         if(!ConfigDay::find($id)){
+            return response()->json([
+                'message' => 'Error',
+            ], 400);
+        } 
+
+        $configDay = ConfigDay::find($id);
+
+        $configDay->days = $days;
+
+        $configDay->save();
+
+        return response()->json([
+            'message' => 'order turn successfully update',
+        ], 201);
+    }
+
+    public function createConfigDay(Request $request){
+
+        $request->user()->authorizeRoles(['admin']);
+
+        $validate = Validator::make($request->all(),[
+            'days' => ['required','string'],
+            'name' => ['required','string','unique:configturns','max:50','min:1'],
+        ]);
+
+        if($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        $configDay = ConfigDay::create([
+            'days' => $request->days,
+        ]);
+
+        return response()->json([
+            'message' => 'Days registered',
+            'user' => $configDay
+        ], 201);
+        
     }
 
     public function showConfigDay(Request $request){
         return ConfigDay::all();
-    }   
+    } 
+
+
+    public function createConfigTurn(Request $request){
+
+        $request->user()->authorizeRoles(['admin']);
+
+        $validate = Validator::make($request->all(),[
+            'name' => ['required','string','unique:configturns','max:50','min:1'],
+        ]);
+
+        if($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        $last_configDay = ConfigDay::all('id')->max('id');
+
+        $configTurn = ConfigTurn::create([
+            'name' => $request->name,
+            'configDay_id' => $last_configDay,
+        ]);
+
+        return response()->json([
+            'message' => 'Days registered',
+            'user' => $last_configDay
+        ], 201);
+    }
+
+    public function updateConfigTurn(Request $request){
+
+        $request->user()->authorizeRoles(['admin']);
+        
+        $validate = Validator::make($request->all(),[
+            'id' => ['required'],
+            'status' => ['required','string'],
+        ]);
+
+        if($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        $id = $request->id;
+        $status = $request->status;
+
+        if(!ConfigDay::find($id)){
+            return response()->json([
+                'message' => 'Error',
+            ], 400);
+        } 
+        
+        if(!ConfigTurn::find($id)){
+            return response()->json([
+                'message' => 'Error',
+            ], 400);
+        } 
+
+        $configTurn = ConfigTurn::find($id);
+
+        $configTurn->status = $status;
+
+        $configTurn->save();
+
+
+        $configDay = ConfigDay::find($id);
+
+        $configDay->status = $status;
+
+        $configDay->save();
+
+        return response()->json([
+            'message' => 'order turn successfully update',
+        ], 201);
+    }
+
+    public function showConfigTurn(Request $request){
+        return ConfigTurn::all();
+    }
+
+      
 }

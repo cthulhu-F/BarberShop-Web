@@ -3,7 +3,11 @@ import Chair from "../../componentsTurn/chair";
 
 
 const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
-  saveChairSchedule, addCount, restCount, setStartHour, setEndHour, switchDayStatus}) =>{
+  saveChairSchedule, addCount, restCount, setStartHour, setEndHour, switchDayStatus, saveChair}) =>{
+
+//onClick={()=>saveChairSchedule(document.getElementById('flexSwitchCheckDefault').getAttribute("aria-checked"), document.getElementById('editable-chair-name').value)}
+
+   
 
     function myCopyFunction() {
       var copyText = document.getElementById("turn-data-string");
@@ -16,7 +20,6 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
       }
     }
-
     
     function handleClickEvent(element) {
       if (element.getAttribute("aria-checked") == "true") {
@@ -130,7 +133,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
 
                   <div className="col-xl-9 mb-3">
                     <div className="input-group">
-                      <input type="text" className="form-control fs-8" placeholder={editableChair.name} 
+                      <input type="text" className="form-control fs-8" onChange={() => saveChairSchedule(document.getElementById('flexSwitchCheckDefault').getAttribute("aria-checked"), document.getElementById('editable-chair-name').value)} placeholder={editableChair.name} 
                         aria-label="Recipient's username" aria-describedby="basic-addon2" disabled={true} id="editable-chair-name"/>
                       <button className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"
                         onClick={()=> {
@@ -152,13 +155,13 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                       </div>
 
                       <div className="col-12">
-                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item" onClick={(event)=>setActiveDay(event.target.id)} id="mo">LU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="tu">MA</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="we">MI</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="th">JU</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="fr">VI</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="sa">SA</button>
-                        <button className="btn btn-platinum fw-bold day-item" onClick={(event)=>setActiveDay(event.target.id)} id="su">DO</button>
+                        <button className="btn btn-platinum fw-bold bg-dark text-white day-item me-1" onClick={(event)=>setActiveDay(event.target.id)} id="mo">LU</button>
+                        <button className="btn btn-platinum fw-bold day-item mx-1" onClick={(event)=>setActiveDay(event.target.id)} id="tu">MA</button>
+                        <button className="btn btn-platinum fw-bold day-item mx-1" onClick={(event)=>setActiveDay(event.target.id)} id="we">MI</button>
+                        <button className="btn btn-platinum fw-bold day-item mx-1" onClick={(event)=>setActiveDay(event.target.id)} id="th">JU</button>
+                        <button className="btn btn-platinum fw-bold day-item mx-1" onClick={(event)=>setActiveDay(event.target.id)} id="fr">VI</button>
+                        <button className="btn btn-platinum fw-bold day-item mx-1" onClick={(event)=>setActiveDay(event.target.id)} id="sa">SA</button>
+                        <button className="btn btn-platinum fw-bold day-item mx-1" onClick={(event)=>setActiveDay(event.target.id)} id="su">DO</button>
                       </div>
 
                       <div className="col-12 mb-2">
@@ -221,7 +224,7 @@ const MotiveSetter =({editableChair, turnsPerday, setActiveDay,editableDay,
                           </button>
                         </span>
                         </div>
-                        <button className={editableChair.status =="NONACTIVE" ? "btn btn-danger": "btn btn-orangeWeb"} onClick={()=>saveChairSchedule(document.getElementById('flexSwitchCheckDefault').getAttribute("aria-checked"), document.getElementById('editable-chair-name').value)}
+                        <button className={editableChair.status =="NONACTIVE" ? "btn btn-danger": "btn btn-orangeWeb"} onClick={() => saveChair()}
                         >
                           Guardar
                         </button>

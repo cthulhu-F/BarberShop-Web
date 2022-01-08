@@ -6,11 +6,11 @@ import { TYPES } from "../../../../src/actions/shoppingActions";
 import ShopItem from "./ShopItem";
 
   /*MODAL SHOP IMPORTS*/
-  import { useReducer, useEffect } from 'react';
+  import { useReducer, useEffect, useState } from 'react';
   import { shoppingReducer, cartItemsData, shoppingInitialState} from '../../../../src/reducers/shoppingReducer';
   import mapDispatcht from '../../shoppingCartUses';
   import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
-  import ShowAllProducts from "../../helpers/ItemHelpers";
+  import ShowAllProducts, { ShowAllCategories } from "../../helpers/ItemHelpers";
 
 
 const Shop = () => {
@@ -18,7 +18,7 @@ const Shop = () => {
 
   /*MODAL SHOP ASSETS*/
   const [state, dispatch] =useReducer(shoppingReducer,shoppingInitialState);
-  const{products, cart} = state;
+  const{products, cart, categories} = state;
 
   const readAllData = mapDispatcht(dispatch).readAllData;
 
@@ -30,14 +30,42 @@ const Shop = () => {
 
   const cleanCart = mapDispatcht(dispatch).cleanCart;
 
+  const[item, setItem] = useState(products);
+
   useEffect(()=> {
     const showItem = async () => {
-      const res = await ShowAllProducts();
-      readAllData(res);
+      const resItem = await ShowAllProducts();
+      const resCategorie = await ShowAllCategories();
+      readAllData(resItem, resCategorie);
+      setItem(resItem);
     }
     showItem();
   },[])
 
+  let URL = window.location.pathname;
+  URL = URL.split('/') ? URL.split('/') : "";
+  let searchValue = "";
+  
+  try{
+    searchValue = decodeURI(URL[2]);
+    //searchValue = URL[2].split('%20').join(' ')
+    //searchValue = searchValue.replace("%C3%A1", "á").replace("%C3%A9", "é").replace("%C3%AD", "í").replace("%C3%B3", "ó").replace("%C3%BA", "ú").replace('%C3%BC', 'ü')
+  }catch(error){}
+  
+
+  const searchResult = item.filter(
+    function(product){
+      const id = toString(product.id)
+      const name = product.name
+      const sku = toString(product.sku)
+      const description = product.description
+      const price = toString(product.price)
+      const category = categories.find(category=> category.id == product.categories_id).name
+      const search = (id+" "+name + " " +sku + " " + description + " " + price + " " + category).toUpperCase()
+      const stringsearched = searchValue.toUpperCase()
+      return search.indexOf(stringsearched) > -1
+    }
+  );
 
   return (
 
@@ -61,7 +89,7 @@ const Shop = () => {
             {/* || data.description.includes(searchValue) || data.id.includes(searchValue) || data.sku.includes(searchValue */}
             { searchValue != ""
             ? searchResult.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
-            : products.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
+            : item.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
 
           }
             

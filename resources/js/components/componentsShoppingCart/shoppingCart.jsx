@@ -99,7 +99,7 @@ const ShoppingCart = () => {
 
           <div className="col-6 col-xl-2"><span className="fs-7">${item.price}</span></div>
           <div className="col-5 col-xl-2"><span className="fs-7 fw-bold">${item.price*item.quantity}</span></div>
-          <div className="col-1 col-xl-1 d-inline"><button className="btn btn-danger p-1 fs-7" onClick={()=>deleteFromCart(item.id, true)}><i className="bi bi-trash"></i></button></div>
+          <div className="col-1 col-xl-1 d-inline"><button className="btn btn-danger p-1 fs-7" onClick={()=> deleteFromCart(item.id, true)}><i className="bi bi-trash"></i></button></div>
         </div>
 
     ))
