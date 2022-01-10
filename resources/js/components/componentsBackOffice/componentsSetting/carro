@@ -1,0 +1,56 @@
+ <div>
+            <Carousel activeIndex={index2} onSelect={handleSelect} variant="dark">
+                {img.map((img, index)=>
+                    <Carousel.Item >
+                    <div className="d-flex justify-content-center mb-1 col-xl-12 mb-3 text-darx fs-1 row" key={index} >
+                            
+                                <div className="col-12 mb-3">
+                                <div style={{ backgroundImage: `url(${urlImg(img.url).default})`,
+                                    backgroundPosition: 'center',
+                                    backgroundSize: 'cover',
+                                    backgroundRepeat: 'no-repeat',
+                                    paddingTop:"23.7%",
+                                    width:"100%",
+                                    borderRadius:"10px",
+                                    border:"solid 2px #000"}}
+                                    id={`backofice-settings-slider-imagen-editor-viewer-${index}`}
+                                className="img-responsive w-100"
+                                onClick={()=>document.getElementById(`backofice-settings-slider-imagen-editor-${index}`).click()}>
+                                    <div id="backofice-settings-slider-imagen-editor-viewer-overlay" style={{
+                                        opacity:"0.8",
+                                        backgroundColor:"#00000000 !important",
+                                        height: "100%",
+                                        width:"100%",
+                                        display: "flex",
+                                        alignItems: "flex-end",
+                                        justifyContent: "center"}}>
+                                        {/* <i className="bi bi-plus-circle-fill fs-1"></i> */}
+                                    </div>
+
+                                </div>
+                                </div>
+
+                                <div>
+                                <input type="file" accept="image/png, image/jpeg, image/jpg" className="form-control w-100" 
+                                    id={`backofice-settings-slider-imagen-editor-${index}`} onChange={(e)=>validateSizeFile(e,index)} style={{display:"none"}}/>
+                                
+                                </div>
+                            </div>
+                    <Carousel.Caption>
+                        <i className="bi bi-plus-circle-fill fs-4"></i>
+                        <div className="col-12 col-xl-12 mb-3 border-bottom">
+                            <span className="fw-bold fs-4 font-h1">Imagen {index+1}</span>
+                        </div>
+                        
+                    </Carousel.Caption>
+                    </Carousel.Item>
+                    
+                    )}
+                
+            </Carousel>
+            <style>{`
+                .carousel-indicators {
+                    display : none;
+                    `}
+            </style>
+        </div>

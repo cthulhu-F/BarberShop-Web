@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ConfigTurn extends Model
+class Customer extends Model
 {
     use HasFactory;
 
-    protected $table='config_turn';
-
-
-
+    protected $table='customer';
+    
     protected $fillable= 
     [
         'id',
-        'name', 
-        'configDay_id',
-        'status'
+        'name',  
+        'direction',
+        'phone',
+        'email',
+        'social_networks',
+        'status',
     ];
 
     protected $casts = [

@@ -24,9 +24,12 @@ class User extends Authenticatable{
         'phone',
         'password', 
         'remember_token', 
-        'created_at',
-        'updated_at',
         'status' 
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'updated_at' => 'date:d-m-Y',
     ];
 
     /*

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-//START API CATEGORY
+//START API RESOURCE CATEGORY
 
 export const CreateCategory = async (formData) => {
 
@@ -26,7 +26,6 @@ export const CreateCategory = async (formData) => {
   });
 
 }
-
 
 export const UpdateCategory = async (formData) => {
 
@@ -60,7 +59,9 @@ export const ShowAllCategories = async () => {
   return data.data
 }
 
-//END API CATEGORY
+//END API RESOURCE CATEGORY
+
+//START API RESOURCE PRODUCT
 
 export const ShowAllProducts = async () => {
   const data = await axios({
@@ -125,5 +126,15 @@ export const UpdateProduct = async (formData) => {
 
 }
 
+//END API RESOURCE PRODUCT
 
-export default ShowAllProducts;
+
+export default (
+  CreateCategory, 
+  UpdateCategory, 
+  ShowAllCategories,
+  ShowAllProducts,
+  CreateProduct,
+  UpdateProduct
+)
+

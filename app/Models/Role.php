@@ -19,8 +19,11 @@ class Role extends Model
         'id',
         'name',  
         'description',
-        'created_at',
-        'updated_at',
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'updated_at' => 'date:d-m-Y',
     ];
 
 

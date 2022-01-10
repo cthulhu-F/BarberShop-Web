@@ -17,7 +17,7 @@
     <div id="header"></div>
   </header>
   
-  <section class="container-fluid bg-light p-4 min-vh-100 font-p">
+  <section class="container-fluid p-4 min-vh-100 font-p">
 
   <article>
       <div id="modalTurn"></div>

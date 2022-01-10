@@ -24,9 +24,12 @@ class Item extends Model
         'stock',
         'price',
         'categories_id',
-        'created_at',
-        'updated_at',
         'status'
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'updated_at' => 'date:d-m-Y',
     ];
 
     public function categories(){

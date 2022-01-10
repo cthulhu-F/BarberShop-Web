@@ -9,7 +9,7 @@ class ConfigDay extends Model
 {
     use HasFactory;
 
-    protected $table='configday';
+    protected $table='config_day';
 
 
 
@@ -17,8 +17,11 @@ class ConfigDay extends Model
     [
         'id',
         'days',
-        'created_at',
-        'updated_at',
         'status'
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'updated_at' => 'date:d-m-Y',
     ];
 }

@@ -14,6 +14,8 @@ const Footer = () => {
 
     const urlImg = require.context('../../../asset/marca', true);
 
+    const bgBlack = {backgroundColor: "#000"}
+
     return (
             <div className="container-md">
                 <section className="">

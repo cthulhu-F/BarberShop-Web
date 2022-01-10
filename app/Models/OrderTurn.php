@@ -9,7 +9,7 @@ class OrderTurn extends Model
 {
     use HasFactory;
 
-    protected $table='orderturns';
+    protected $table='order_turn';
 
 
 
@@ -28,7 +28,7 @@ class OrderTurn extends Model
 
     protected $casts = [
         'date' => 'date:d-m-Y',
-        'time' => 'datetime:H:00',
+        'time' => 'datetime:H:i',
         'created_at' => 'date:d-m-Y',
         'updated_at' => 'date:d-m-Y',
     ];

@@ -18,7 +18,7 @@ const ShopItem = ({data, addOneToCart,cart}) => {
   return(
 
       <div className="col border-0">
-              <div className="card border-0 shadow-sm rounded">
+              <div className="card border-0 shadow-sm rounded pt-4" >
                 <div className="w-100 text-center bg-light rounded">
                   <img 
                   src={urlImg(data.img).default}

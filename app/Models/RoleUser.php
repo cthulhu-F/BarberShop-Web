@@ -16,7 +16,10 @@ class RoleUser extends Model
         'id',
         'role_id',  
         'user_id',
-        'created_at',
-        'updated_at',
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'updated_at' => 'date:d-m-Y',
     ];
 }

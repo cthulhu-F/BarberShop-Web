@@ -26,7 +26,6 @@ export const ShowOrderTurn = async () => {
 }
 
 export const CreateOrderTurn = async (post) => {
-  console.log(post);
 
   const data = await axios({
     method: 'post',
@@ -124,13 +123,13 @@ export const ShowConfigDay = async () => {
     url: 'http://127.0.0.1:8000/api/ShowConfigDay',
   })
 
-  let revenew = [];
+  let dataDecode = [];
   data.data.map((item) => {
     item.days = JSON.parse(item.days);
-    revenew.push(item)
+    dataDecode.push(item)
   })
 
-  return revenew
+  return dataDecode
 }
 
 

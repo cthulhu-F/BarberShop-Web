@@ -13,6 +13,8 @@ use App\Models\User;
 class UserController extends Controller
 {
     
+    //START API FUNCTION RESOURCE USER ROLE
+
     public function showUser(Request $request){
 
         $request->user()->authorizeRoles(['admin']);
@@ -30,5 +32,7 @@ class UserController extends Controller
         $request->user()->authorizeRoles(['admin']);
         return RoleUser::all();
     }
+
+    //END API FUNCTION RESOURCE CONFIG DAY
     
 }

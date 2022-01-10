@@ -13,7 +13,7 @@ use App\Models\ConfigTurn;
 class TurnController extends Controller
 {
 
-    
+    //START API FUNCTION RESOURCE ORDER TURN
 
     public function createOrderTurn(Request $request){
         
@@ -90,6 +90,34 @@ class TurnController extends Controller
 
     }
 
+    //END API FUNCTION RESOURCE ORDER TURN
+
+    //START API FUNCTION RESOURCE CONFIG DAY
+
+    public function createConfigDay(Request $request){
+
+        $request->user()->authorizeRoles(['admin']);
+
+        $validate = Validator::make($request->all(),[
+            'days' => ['required','string'],
+            'name' => ['required','string','unique:configturns','max:50','min:1'],
+        ]);
+
+        if($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        $configDay = ConfigDay::create([
+            'days' => $request->days,
+        ]);
+
+        return response()->json([
+            'message' => 'Days registered',
+            'user' => $configDay
+        ], 201);
+        
+    }
+
     public function updateConfigDay(Request $request){
 
         $request->user()->authorizeRoles(['admin']);
@@ -124,34 +152,13 @@ class TurnController extends Controller
         ], 201);
     }
 
-    public function createConfigDay(Request $request){
-
-        $request->user()->authorizeRoles(['admin']);
-
-        $validate = Validator::make($request->all(),[
-            'days' => ['required','string'],
-            'name' => ['required','string','unique:configturns','max:50','min:1'],
-        ]);
-
-        if($validate->fails()) {
-            return response()->json($validate->errors(), 400);
-        }
-
-        $configDay = ConfigDay::create([
-            'days' => $request->days,
-        ]);
-
-        return response()->json([
-            'message' => 'Days registered',
-            'user' => $configDay
-        ], 201);
-        
-    }
-
     public function showConfigDay(Request $request){
         return ConfigDay::all();
     } 
 
+    //END API FUNCTION RESOURCE CONFIG DAY
+    
+    //START API FUNCTION RESOURCE CONFIG TURN
 
     public function createConfigTurn(Request $request){
 
@@ -227,6 +234,8 @@ class TurnController extends Controller
     public function showConfigTurn(Request $request){
         return ConfigTurn::all();
     }
+
+    //END API FUNCTION RESOURCE CONFIG TURN
 
       
 }

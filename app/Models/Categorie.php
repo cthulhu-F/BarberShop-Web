@@ -9,7 +9,7 @@ class Categorie extends Model
 {
     use HasFactory;
 
-    protected $table='categories';
+    protected $table='categorie';
 
 
 
@@ -17,9 +17,12 @@ class Categorie extends Model
     [
         'id',
         'name',
-        'created_at',
-        'updated_at',
         'status'
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'updated_at' => 'date:d-m-Y',
     ];
 
    

@@ -49,10 +49,11 @@ const Slider = () => {
     showItem();
   },[])
 
+  const bgBlack = {backgroundColor: "#000"}
 
   return(
 
-    <div class="row row-cols-1 row-cols-xl-4 bg-light">
+    <div class="row row-cols-1 row-cols-xl-4 border-0 border-bottom pb-5 mb-5">
               
               {SliderProducts_1.map((item) => <SliderItem key={item.id} data={item} addOneToCart={addOneToCart}/>)}
 

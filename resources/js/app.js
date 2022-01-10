@@ -36,6 +36,8 @@ import Shop from "./components/componentsShop/Shop";
 import Item from "./components/componentsShop/Item";
 import Inventory from "./components/componentsBackOffice/componentsInventory/Inventory";
 import Users from "./components/componentsBackOffice/componentsUser/Users";
+import Sales from "./components/componentsBackOffice/componentsOrderSale/Sales";
+import Settings from "./components/componentsBackOffice/componentsSetting/Settings";
 
 require('./bootstrap');
 

@@ -17,7 +17,7 @@
     <div id="header"></div>
   </header>
   
-  <section class="container-fluid bg-light p-4 min-vh-100 font-p">
+  <section class="container-fluid p-4 min-vh-100 font-p">
 
     <article>
       <div id="modalTurn"></div>
@@ -29,9 +29,8 @@
 
     <article class="container-md">
     <div class="d-flex justify-content-left border-0 border-bottom  my-5">
-        <span class="fw-bold fs-3 text-black font-h1">Nuestros productos</span>
+        <span class="fw-bold fs-3 text-dark font-h1">Nuestros productos</span>
       </div>
-
         <div id="slider"></div>
     </article>
 
