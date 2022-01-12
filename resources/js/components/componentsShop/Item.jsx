@@ -38,19 +38,24 @@ const Item = () => {
   // const decrement = mapDispatcht(dispatch).decrement;
 
   let existentProducts = products;
+  let mainitem;
+  let aviableStock;
   
-  if(products.length >= 2){
+  if(products){
 
-    existentProducts = products.filter(function (item) {
-      const itemDataCut = String(item.id).toUpperCase();
-      const textDataCut = String(URLproduct).toUpperCase();
-      return itemDataCut.indexOf(textDataCut) > -1
-    });
+      existentProducts = products.filter(function (item) {
+        const itemDataCut = String(item.id).toUpperCase();
+        const textDataCut = String(URLproduct).toUpperCase();
+        return itemDataCut.indexOf(textDataCut) > -1
+      });
+
+      mainitem = existentProducts[0];
+
+      aviableStock = mainitem.stock;
   
   }
 
-  const mainitem = existentProducts[0]
-  
+   
   
   let itemInCart = cart.find((item) => item.id === mainitem.id) ;
 
@@ -58,11 +63,9 @@ const Item = () => {
   ? itemInCart.quantity
   : 1;
 
-  let aviableStock= mainitem.stock;
+  
   
   const [count, setCount] = useState(cartQuantity);
-
-
 
   let addingButton = document.querySelector(".adding-button");
   let removingButton = document.querySelector(".removing-button");
@@ -92,7 +95,15 @@ const Item = () => {
     <div className="col-12 col-xl-6 p-2">
       <div className="row">
         <div className="col-xl-12">
-          <div className="container-fluid text-start">
+
+        {
+          !products?
+
+          ""
+
+          :
+
+          <div className="container-fluid text-start card">
             <img 
             src={urlImg(mainitem.img).default}
             className="img-thumbnail border-0"
@@ -100,6 +111,9 @@ const Item = () => {
             alt=""
             />
           </div>
+
+        }
+
         </div>
         <div className="col-xl-12">
          <div className="container-fluid">
@@ -121,7 +135,14 @@ const Item = () => {
     <div className="col-12 col-xl-6 p-1 bg-white">
       <div className="container-fluid">
 
-        <ul className="list-group">
+        {
+          !products?
+
+          ""
+
+          :
+
+          <ul className="list-group">
           <li className="list-group-item border-0 border-bottom font-h1">
             <span className="fw-bold fs-3">{mainitem.name}</span>
           </li>
@@ -163,6 +184,8 @@ const Item = () => {
             </ul>
           </li>
         </ul>
+
+        }
       </div>
     </div>
 

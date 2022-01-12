@@ -33,12 +33,12 @@ const Login = () => {
 
     const onSubmit =  async evento => {
 
-        let post = {
-            email: evento.email,
-            password: evento.password
-        }    
+        let dataForm = new FormData();
 
-        let validate = await Authorization(post);
+        dataForm.append('email', evento.email);
+        dataForm.append('password', evento.password);  
+
+        let validate = await Authorization(dataForm);
 
         console.log(validate.data.message);
         

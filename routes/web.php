@@ -10,7 +10,7 @@ use App\Http\Controllers\ViewOffice\BackOfficeController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/login', [HomeController::class, 'login']);
+Route::get('/login', [HomeController::class, 'login'])->middleware("guest");
 
 
 /*

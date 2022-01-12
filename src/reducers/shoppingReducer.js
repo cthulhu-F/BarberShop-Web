@@ -11,9 +11,9 @@ export const cartItemsData = existentCart
     : []
 
 export const shoppingInitialState = {
-    products :ITEM_PRODUCTS.products,
+    products: null, //ITEM_PRODUCTS.products,
     cart: cartItemsData,
-    categories:ITEM_PRODUCTS.categories,
+    categories: null, //ITEM_PRODUCTS.categories,
 }
 
 import swal from'sweetalert2';

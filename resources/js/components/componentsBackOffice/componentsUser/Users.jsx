@@ -23,7 +23,9 @@ const Users = () =>{
   const saveUserConfig = backofficeUserDispatch(dispatch).saveUserConfig;
   const changeUserRole = backofficeUserDispatch(dispatch).changeUserRole;
   const createNewUser = backofficeUserDispatch(dispatch).createNewUser;
-  const filterByName = backofficeUserDispatch(dispatch).filterByName;
+  //const filterByName = backofficeUserDispatch(dispatch).filterByName;
+
+ 
 
 
   function setNewUserRole(userid, roleId){
@@ -33,6 +35,20 @@ const Users = () =>{
   }
 
   const[filterUser, setFilterUser] = useState(filteredUsers);
+
+  const filterByName = (searchValue) => {
+
+    const searchResult = users.filter(
+      function(user){
+        const search = (user.name).toUpperCase()
+        const stringsearched = searchValue.toUpperCase()
+        return search.indexOf(stringsearched) > -1
+      }
+    );
+
+    setFilterUser(searchResult);
+
+  }
 
   useEffect(() => {
     async function fetch() {

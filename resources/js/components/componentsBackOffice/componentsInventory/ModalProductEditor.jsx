@@ -37,7 +37,7 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
         const selectedCategoryName = allCategories.find(category => category.id == selectedCategroyId).name
 
 
-        if (nameField.value != "" || descriptionField.value != "" || selectedCategroyId != currentCategoryId || stockField.value != "" || priceField.value != "" || dataImg) {
+        if (nameField.value != "" || descriptionField.value != "" || selectedCategroyId != currentCategoryId || stockField.value != "" || priceField.value != "" || dataImg || skuField.value != "") {
 
             let nameAlert = nameField.value == "" ? "" : ` <span style="font-weight:700;" >Nombre </span><br> ${nameField.placeholder} ---> ${nameField.value} <br> <br>  `;
             let descriptionAlert = descriptionField.value == "" ? "" : `<span style="font-weight:700;" >Descripción </span><br>  ${descriptionField.placeholder} ---> ${descriptionField.value} <br><br>`;
@@ -48,12 +48,13 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
             let stockAlert = stockField.value == "" ? "" : `<span style="font-weight:700;" >Stock </span><br>  ${stockField.placeholder} ---> ${stockField.value} <br><br>`;
             let priceAlert = priceField.value == "" ? "" : `<span style="font-weight:700;" >Precio </span><br>  ${priceField.placeholder} ---> ${priceField.value} <br><br>`;
             let imgAlert = !dataImg ? "" : `<span style="font-weight:700;" >Precio </span><br>  ${editableProduct.img} ---> ${dataImg.name} <br><br>`;
+            let skuAlert = skuField.value == "" ? "" : `<span style="font-weight:700;" > Sku </span><br>  ${skuField.placeholder} ---> ${skuField.value} <br><br>`;
 
 
             swal.fire({
                 title: "Atención",
                 html: `Esta seguro que desea modificar los siguientes datos?<br><br> 
-            ${nameAlert} ${descriptionAlert} ${categoryAlert}${stockAlert}${priceAlert}${imgAlert}`,
+            ${nameAlert} ${descriptionAlert} ${categoryAlert}${stockAlert}${priceAlert}${imgAlert}${skuAlert}`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#000',
@@ -189,18 +190,19 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
 
         const selectedCategroyId = categoryField.options[categoryField.selectedIndex].id
 
-        if (nameField.value == "" || descriptionField.value == "" || stockField.value == "" || priceField.value == "") {
+        if (nameField.value == "" || descriptionField.value == "" || stockField.value == "" || priceField.value == "" || skuField.value == "") {
 
             let nameAlert = nameField.value != "" ? "" : ` <span style="font-weight:700;" >Nombre </span><br><br>  `;
             let descriptionAlert = descriptionField.value != "" ? "" : `<span style="font-weight:700;" >Descripción </span><br><br>`;
             let stockAlert = stockField.value != "" ? "" : `<span style="font-weight:700;" >Stock </span><br><br>`;
             let priceAlert = priceField.value != "" ? "" : `<span style="font-weight:700;" >Precio </span><br><br>`;
+            let skuAlert = skuField.value != "" ? "" :  `<span style="font-weight:700;" >Sku </span><br><br>`;
 
 
             swal.fire({
                 title: "Atención",
                 html: `Para crear un nuevo producto debe completar los siguientes campos<br><br> 
-            ${nameAlert} ${descriptionAlert} ${stockAlert}${priceAlert}`,
+            ${nameAlert}${descriptionAlert}${stockAlert}${priceAlert}${skuAlert}`,
                 icon: 'warning'
             });
         } else {

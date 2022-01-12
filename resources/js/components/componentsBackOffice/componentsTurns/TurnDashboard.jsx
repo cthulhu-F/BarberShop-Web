@@ -33,7 +33,7 @@ const TurnDashboard = ({ }) => {
 
     const readAllOrderTurn = backofficeTurnDashboardMapDispatch(dispatch).readAllOrderTurn;
 
-    const filterDashboard = backofficeTurnDashboardMapDispatch(dispatch).filterDashboard;
+    //const filterDashboard = backofficeTurnDashboardMapDispatch(dispatch).filterDashboard;
 
     const editTurnSchedule = backofficeTurnDashboardMapDispatch(dispatch).editTurnSchedule;
 
@@ -92,6 +92,50 @@ const TurnDashboard = ({ }) => {
         indexOfFirstTurn = indexOfLastTurn - turnsPerPage;
         currentTurns = paginationTurns.slice(indexOfFirstTurn, indexOfLastTurn);
         howManyPages = Math.ceil(paginationTurns.length / turnsPerPage);
+
+    }
+
+    const filterDashboard = (min, max, searchValue) => {
+
+        let dateMin = min.split('-')
+        let dateYyyy = dateMin[0];
+        let dateMm = dateMin[1];
+        let dateDd = dateMin[2];
+        let compartaiveMin = parseInt(dateYyyy+dateMm+dateDd)
+
+        let dateMax = max.split('-')
+        let dateYyyyMax = dateMax[0];
+        let dateMmMax = dateMax[1];
+        let dateDdMax = dateMax[2];
+        let compartaiveMax = parseInt(dateYyyyMax+dateMmMax+dateDdMax)
+        //console.logcompartaiveMin)
+        //console.logcompartaiveMax)
+        //console.logaction.chairName)
+
+        let filteredByName;
+
+        let FilteredBydate =  dashboardTurns.filter(turn =>
+                parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) >= compartaiveMin && 
+                parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) <= compartaiveMax 
+        );
+
+        if(searchValue != "Ver silla"){
+            if(FilteredBydate.length != 0 ){
+                filteredByName = FilteredBydate.filter(turn=>
+                    turn.name == searchValue
+                )
+            } else {
+                filteredByName = dashboardTurns.filter(turn=>
+                    turn.name == searchValue
+                )
+            }
+        }else {
+
+            filteredByName = FilteredBydate
+        
+        }
+
+        setTurnsPagination(filteredByName)
 
     }
 

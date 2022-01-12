@@ -5,7 +5,6 @@ import axios from "axios"
 export const UpdateCustomer = async (formData) => {
 
   
-
 }
 
 export const ShowCustomer = async () => {
@@ -36,7 +35,7 @@ export const UpdateGlobalImg = async (allImg) => {
 
     const response = await axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/UpdateGlobalImg',
+      url: 'http:/127.0.0.1:8000/api/UpdateGlobalImg',
       data: formData
     }).then((results) => {
       return  swal.fire({

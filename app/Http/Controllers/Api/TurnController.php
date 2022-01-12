@@ -77,7 +77,7 @@ class TurnController extends Controller
         $orderturn->save();
 
         return response()->json([
-            'message' => 'order turn successfully update',
+            'message' => 'El estado de la orden se actualizo con exito!',
         ], 201);
 
     }

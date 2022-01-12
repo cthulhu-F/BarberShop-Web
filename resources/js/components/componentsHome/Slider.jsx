@@ -11,6 +11,7 @@ import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
 import { useEffect } from 'react';
 import {ShowAllProducts, ShowAllCategories} from '../../helpers/ItemHelpers';
 import { useState } from 'react';
+import LoadProduct from '../componentsLoaders/LoadProduct';
 
 
 
@@ -35,9 +36,13 @@ const Slider = () => {
 
   const cleanCart = mapDispatcht(dispatch).cleanCart;
 
-  const[item, setItem] = useState(products)
+  const[item, setItem] = useState(products);
 
-  let SliderProducts_1 = item.slice(0, 4);
+  let SliderProducts_1;
+
+  !products?
+  ""
+  : SliderProducts_1 = item.slice(0, 4)
 
   useEffect(()=> {
     const showItem = async () => {
@@ -55,7 +60,19 @@ const Slider = () => {
 
     <div class="row row-cols-1 row-cols-xl-4 border-0 border-bottom pb-5 mb-5">
               
-              {SliderProducts_1.map((item) => <SliderItem key={item.id} data={item} addOneToCart={addOneToCart}/>)}
+
+
+              {
+
+              !products?
+
+              <LoadProduct cant={3}/>
+              
+              :
+              
+              SliderProducts_1.map((item) => <SliderItem key={item.id} data={item} addOneToCart={addOneToCart}/>)
+              
+              }
 
               <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}  />
               

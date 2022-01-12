@@ -56,7 +56,6 @@ const Sales = () => {
       parseInt(sale.created_at.split('-')[2] + sale.created_at.split('-')[1] + sale.created_at.split('-')[0]) <= compartaiveMax
     );
 
-    console.log(FilteredBydate.length);
 
     if (searchValue != "") {
 
@@ -97,9 +96,6 @@ const Sales = () => {
 
 
       }
-
-      console.log("Resultado");
-      console.log(filteredByName);
 
       setSalesPagination(filteredByName);
 

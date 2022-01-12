@@ -1,7 +1,6 @@
 import axios from "axios"
 
 export const UpdateOrderTurn = async (put) => {
-  //console.log(put);
 
   const data = await axios({
     method: 'put',

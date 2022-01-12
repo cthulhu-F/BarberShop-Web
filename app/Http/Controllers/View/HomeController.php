@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+
+
     public function login(Request $request)
     {   
-
-        //$request->user()->authorizeRoles(['user','admin']);
-
         return view('login');
     }
 

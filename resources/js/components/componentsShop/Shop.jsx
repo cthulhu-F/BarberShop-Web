@@ -10,7 +10,8 @@ import ShopItem from "./ShopItem";
   import { shoppingReducer, cartItemsData, shoppingInitialState} from '../../../../src/reducers/shoppingReducer';
   import mapDispatcht from '../../shoppingCartUses';
   import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
-  import ShowAllProducts, { ShowAllCategories } from "../../helpers/ItemHelpers";
+  import LoadProduct from "../componentsLoaders/LoadProduct";
+  import {ShowAllProducts, ShowAllCategories } from "../../helpers/ItemHelpers";
 
 
 const Shop = () => {
@@ -31,6 +32,8 @@ const Shop = () => {
   const cleanCart = mapDispatcht(dispatch).cleanCart;
 
   const[item, setItem] = useState(products);
+
+  let searchResult;
 
   useEffect(()=> {
     const showItem = async () => {
@@ -53,7 +56,13 @@ const Shop = () => {
   }catch(error){}
   
 
-  const searchResult = item.filter(
+  !products?
+
+  ""
+
+  : 
+
+  searchResult = item.filter(
     function(product){
       const id = toString(product.id)
       const name = product.name
@@ -65,7 +74,7 @@ const Shop = () => {
       const stringsearched = searchValue.toUpperCase()
       return search.indexOf(stringsearched) > -1
     }
-  );
+  )
 
   return (
 
@@ -78,7 +87,15 @@ const Shop = () => {
             <div className="col-12 col-xl-12 border-0">
               <div className="w-100 text-center fw-bold font-h1" style={{color:"#fff"}}>
                 
-               { searchValue
+               { 
+
+                !products?
+
+                ""
+                
+                :
+               
+                searchValue
 
                 ? `${searchResult.length} Resultados encontrados para "${searchValue}"`
                 : ""
@@ -87,11 +104,21 @@ const Shop = () => {
               </div>
             </div>
             {/* || data.description.includes(searchValue) || data.id.includes(searchValue) || data.sku.includes(searchValue */}
-            { searchValue != ""
+
+            {
+            
+            !products?
+
+            <LoadProduct cant={7}/>
+
+            :
+            
+            searchValue != ""
             ? searchResult.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
             : item.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
 
-          }
+            
+            }
             
           </div>
           </div>

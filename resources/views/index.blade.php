@@ -29,8 +29,8 @@
 
     <article class="container-md">
     <div class="d-flex justify-content-left border-0 border-bottom  my-5">
-        <span class="fw-bold fs-3 text-dark font-h1">Nuestros productos</span>
-      </div>
+        <span class="fw-bold fs-3 text-dark font-h1"></span>
+    </div>
         <div id="slider"></div>
     </article>
 

@@ -73,10 +73,6 @@ export const ShowAllProducts = async () => {
 }
 
 export const CreateProduct = async (formData) => {
-
- 
-
- console.log(formData);
   
   const data = await axios({
     method: 'post',
