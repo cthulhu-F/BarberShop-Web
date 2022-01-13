@@ -115,8 +115,8 @@ export function turnReducer(state, action){
             if (action.date =="null"){
                 action.date = selecetDay;
             };
-            //console.log("action");
-            //console.log(action.date);
+            console.log("action");
+            console.log(action);
 
             let dateData = action.date.split("-");
             let dt = new Date(dateData) 
@@ -144,7 +144,10 @@ export function turnReducer(state, action){
                 turn= addTime(turn,turnDuration);
                 aviableTurns[ii]={turn:turn};
             }
+            try{
             document.getElementById("inputGroupSelect02").value="Horarios";
+                
+            }catch(error){}
             return {...state, schedule: aviableTurns, selecetDay : action.date, selectedHour:"", hourIsSelected: false, turnDuration : turnDuration};  
         }
 
@@ -183,6 +186,48 @@ export function turnReducer(state, action){
                 client_is_registered: true,
                 }
             }
+        }
+
+        case TURN_TYPES.GET_BACKOFFICE_SCHEDULE : {
+        
+            console.log("action");
+            console.log(action.payload);
+            console.log(action.date);
+
+            let dateData = action.date.split("-");
+            let dt = new Date(dateData[1] +"-" + dateData[0]+"-" + dateData[2]) 
+            let weekDayIndex = dt.getDay();
+            let weekDay =days[weekDayIndex];
+            
+            let chairCalledId = state.chairs.find(chair=>chair.name === action.payload).id;
+            let chairAviability = state.chairConfigDay.find(chair=>chair.id === chairCalledId);
+
+            
+            let daySchedule = chairAviability.days[weekDay];
+            let dayScheduleSplited= daySchedule != "NONACTIVE" ? daySchedule.split("/") : daySchedule;
+
+            console.log(dayScheduleSplited)
+            if (daySchedule != "NONACTIVE"){
+                let turnsAmount = dayScheduleSplited[2];
+                let open = new Date("December 14, 2021 " + `${dayScheduleSplited[0]}` + ":00");
+                let colse = new Date("December 14, 2021 "+ `${dayScheduleSplited[1]}`+ ":00");
+                let difference = ((colse-open)/1000);
+                let turnDuration = difference/turnsAmount // En segundos
+
+                turnDuration = setHoursAndMinutes(turnDuration);
+                let turn = dayScheduleSplited[0];
+                let aviableTurns= [{turn:turn}];
+                for (let ii = 0; ii<turnsAmount; ii++){
+                    turn= addTime(turn,turnDuration);
+                    aviableTurns[ii]={turn:turn};
+                }
+                try{
+                document.getElementById("inputGroupSelect02").value="Horarios";
+                    
+                }catch(error){}
+            }
+            
+            return {...state, schedule: aviableTurns, selecetDay : action.date, selectedHour:"", hourIsSelected: false, turnDuration : turnDuration};  
         }
 
 

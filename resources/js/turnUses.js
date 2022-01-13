@@ -51,6 +51,10 @@ const turnMapDispatcht = (dispatch) => {
             dispatch({ type: TURN_TYPES.SET_USER_DATA, payload: data});
         },
 
+        getBackofficeSchedule:(chairName, date)=>{
+            dispatch({ type: TURN_TYPES.GET_BACKOFFICE_SCHEDULE , payload:chairName, date:date});            
+        }
+
 
     };
 };

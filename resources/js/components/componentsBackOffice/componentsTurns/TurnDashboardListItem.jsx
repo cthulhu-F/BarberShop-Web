@@ -6,7 +6,7 @@ import ModalTurnListSettings from "./ModalTurnListSettings";
 
 
 
-const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus}) =>{
+const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus, getBackofficeSchedule }) =>{
 
 
     const addTime = (initial, aditional) =>{
@@ -56,9 +56,11 @@ const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus
         <td>
             <div className="d-flex justify-content-center">
             <button className="btn btn-outline-success p-1 me-1" data-bs-toggle="modal"
-                data-bs-target={`#modalTurnConfig${turn.id}`}><i className="bi bi-pencil fs-7"></i></button>
+                data-bs-target={`#modalTurnConfig${turn.id}`} onClick={()=>{
+                getBackofficeSchedule(turn.name, turn.date)
+                }}><i className="bi bi-pencil fs-7"></i></button>
             <button className="btn btn-outline-danger  p-1 me-1" data-bs-toggle="modal"
-                data-bs-target={`#modalTurnSettings${turn.id}`} onClick={()=>setCurrentStatus(turn.status,turn.id)} ><i className="bi bi-gear"></i></button>
+                data-bs-target={`#modalTurnSettings${turn.id}`} onClick={()=>{setCurrentStatus(turn.status,turn.id)}} ><i className="bi bi-gear"></i></button>
             </div>
         </td>
         <td>

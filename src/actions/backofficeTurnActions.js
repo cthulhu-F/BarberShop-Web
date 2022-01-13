@@ -13,6 +13,7 @@ export const BACKOFFICE_TURN_TYPES = {
     SWITCH_DAY_STATUS: "SWITCH_DAY_STATUS",
 
 
+
     //API 
 
     READ_ALL_DATA           :"READ_ALL_DATA",

@@ -140,6 +140,13 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
                                 placeholder={turn.time}
                                 />
                             </div>
+
+                            <div className="d-flex justify-content-between mb-1" >
+                                <span className="me-2 p-2 fw-bold">Hora de inicio</span>
+                                <select className="form-select p-2" id="set-turn-status-by-input">
+                                    {console.log(turn)}
+                                </select>
+                            </div>
                         
                             <div className="d-flex justify-content-between mb-1">
                                 <span className="me-2 p-2 fw-bold">Duración</span>

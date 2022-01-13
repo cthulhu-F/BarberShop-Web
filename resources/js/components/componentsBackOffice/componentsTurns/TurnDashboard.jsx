@@ -5,6 +5,11 @@ import { useReducer, useEffect, useState } from 'react';
 import { backofficeTurnDashboardReducer, FilteredTurns } from "../../../../../src/reducers/backofficeTurnDashboardReducer";
 import backofficeTurnDashboardMapDispatch from "../../../backofficeTurnDashboardUses";
 
+import { turnReducer, turnStateData} from "../../../../../src/reducers/turnReducer";
+import turnMapDispatcht from "../../../turnUses";
+import { ShowConfigDay, ShowConfigTurn} from "../../../helpers/TurnHelpers";
+
+
 import TurnDashboardItem from "./TurnDashboardItem";
 import Pagination from "./Pagination";
 import TurnDashboardListItem from "./TurnDashboardListItem";
@@ -12,7 +17,7 @@ import ModalTurn from "../../componentsTurn/ModalTurn";
 
 import swal from 'sweetalert2';
 
-import { ShowOrderTurn, UpdateOrderTurn } from "../../../helpers/TurnHelpers";
+import { ShowOrderTurn, UpdateOrderTurn} from "../../../helpers/TurnHelpers";
 import LoadTable from "../../componentsLoaders/LoadTable";
 import LoadTablePagination from "../../componentsLoaders/LoadTablePagination";
 
@@ -32,7 +37,7 @@ const TurnDashboard = ({ }) => {
     const { allShcheduled, todayScheduled, tomorrowScheduled, dashboardTurns } = backofficeTurnDashboardState;
 
     const readAllOrderTurn = backofficeTurnDashboardMapDispatch(dispatch).readAllOrderTurn;
-
+    
     //const filterDashboard = backofficeTurnDashboardMapDispatch(dispatch).filterDashboard;
 
     const editTurnSchedule = backofficeTurnDashboardMapDispatch(dispatch).editTurnSchedule;
@@ -40,6 +45,16 @@ const TurnDashboard = ({ }) => {
     const orderByDate = backofficeTurnDashboardMapDispatch(dispatch).orderByDate;
 
     const setTurnStatus = backofficeTurnDashboardMapDispatch(dispatch).setTurnStatus;
+
+
+    // GET DAY CONFIG
+    const [turnState, dispatch2] = useReducer(turnReducer, turnStateData);
+    const {chairs, day, schedule, completeOrder,chairIsSelected, activeChairId, selecetDay, turnDuration, hourIsSelected, selectedHour ,userData, client_data} = turnState;
+
+    const getBackofficeSchedule= turnMapDispatcht(dispatch2).getBackofficeSchedule;
+
+    const readAllDay = turnMapDispatcht(dispatch).readAllDay;
+    const readAllTurn = turnMapDispatcht(dispatch2).readAllTurn;
 
 
     let [todayFlag, setTodayFlagSwitch] = useState(true)
@@ -158,6 +173,18 @@ const TurnDashboard = ({ }) => {
         }
         fetchPosts()
     }, [])
+
+    useEffect(()=>{
+        async function ShowDay(){
+          const resDay = await ShowConfigDay();
+          const resTurn = await ShowConfigTurn();
+          
+          readAllDay(resDay);
+          readAllTurn(resTurn);
+        }
+        ShowDay()
+    
+      },[])
 
 
 
@@ -365,7 +392,7 @@ const TurnDashboard = ({ }) => {
                                         :
 
                                         currentTurns.map((turn) =>
-                                            <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus} />
+                                            <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus} getBackofficeSchedule={getBackofficeSchedule}/>
                                         )
 
                                 }

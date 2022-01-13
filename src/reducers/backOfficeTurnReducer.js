@@ -3,7 +3,6 @@ import { ITEM_TURNS } from '../../resources/js/constants/constTurn';
 import "../../resources/css/sweetAlert.css"
 import { setA } from 'postcss';
 import swal from 'sweetalert2';
-import { BACKOFFICE_TURN_DASHBOARD_TYPES } from '../actions/backofficeTurnDashboardActions';
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -211,6 +210,8 @@ export function backofficeTurnReducer(state, action) {
             newEditableDay[1] = `${action.payload}`;
             return { ...state, editableDay: newEditableDay };
         }
+
+        
 
         default: {
             return state;

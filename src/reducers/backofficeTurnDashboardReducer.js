@@ -79,7 +79,6 @@ export function backofficeTurnDashboardReducer(state, action){
             state.allShcheduled = sortByDate(action.payload); 
             state.todayScheduled = filteredByActive(sortByDate(action.payload.filter((turn)=>turn.date == todayString))); 
             state.tomorrowScheduled = filteredByActive(sortByDate(action.payload.filter((turn)=>getWeekSchedule(turn))));
-            
             return state
         }
 
@@ -197,6 +196,8 @@ export function backofficeTurnDashboardReducer(state, action){
             }
 
         }   
+
+        
 
         default :{
             return state;

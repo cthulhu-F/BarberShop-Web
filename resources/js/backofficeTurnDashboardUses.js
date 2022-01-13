@@ -58,7 +58,9 @@ const backofficeTurnDashboardMapDispatch = (dispatch)=>{
 
         setTurnStatus : (turnId, newStatus) =>{
             dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.SET_TURN_STATUS, newStatus: newStatus, turnId :turnId})
-        }
+        },
+
+        
 
         
     }
