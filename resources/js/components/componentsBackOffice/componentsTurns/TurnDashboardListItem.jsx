@@ -6,7 +6,7 @@ import ModalTurnListSettings from "./ModalTurnListSettings";
 
 
 
-const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus, getBackofficeSchedule }) =>{
+const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus, getBackofficeSchedule,schedule}) =>{
 
 
     const addTime = (initial, aditional) =>{
@@ -83,7 +83,8 @@ const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus
 
         </td>
 
-        <ModalTurnListEditor key={turn.id+"editor"} turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate}/>
+        <ModalTurnListEditor key={turn.id+"editor"} turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate} schedule={schedule}
+        />
         <ModalTurnListSettings key={turn.id+"setting"} turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate} setTurnStatus={setTurnStatus}/>
 
         <div className="modal fade" id={`modalDataClientList${turn.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

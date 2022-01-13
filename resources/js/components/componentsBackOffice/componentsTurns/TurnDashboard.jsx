@@ -392,7 +392,9 @@ const TurnDashboard = ({ }) => {
                                         :
 
                                         currentTurns.map((turn) =>
-                                            <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus} getBackofficeSchedule={getBackofficeSchedule}/>
+                                            <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule}
+                                            orderByDate={orderByDate} setTurnStatus={setTurnStatus} getBackofficeSchedule={getBackofficeSchedule}
+                                            schedule={schedule} />
                                         )
 
                                 }

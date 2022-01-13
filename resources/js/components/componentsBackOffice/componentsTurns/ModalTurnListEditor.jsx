@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState }  from "react";
 
+import { ShowConfigDay, ShowConfigTurn} from "../../../helpers/TurnHelpers";
 
-const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
+const ModalTurnListEditor = ({turn, editTurnSchedule, schedule}) =>{
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -102,6 +103,11 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
 
     }
 
+ 
+    console.log("Schedule")
+    console.log(schedule)
+
+
     return(
         <div className="modal fade" id={`modalTurnConfig${turn.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="modalTurnConfigLabel" aria-hidden="true">
@@ -144,7 +150,10 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
                             <div className="d-flex justify-content-between mb-1" >
                                 <span className="me-2 p-2 fw-bold">Hora de inicio</span>
                                 <select className="form-select p-2" id="set-turn-status-by-input">
-                                    {console.log(turn)}
+                                {/* {schedule.map((turn,index) =>
+                                    <option key={index}>{turn}</option>
+                                )} */}
+                                
                                 </select>
                             </div>
                         

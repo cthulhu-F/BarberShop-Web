@@ -11474,14 +11474,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _helpers_TurnHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers/TurnHelpers */ "./resources/js/helpers/TurnHelpers.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 
 var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
   var turn = _ref.turn,
-      editTurnSchedule = _ref.editTurnSchedule;
+      editTurnSchedule = _ref.editTurnSchedule,
+      schedule = _ref.schedule;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -11569,7 +11572,9 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  console.log("Schedule");
+  console.log(schedule);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "modal fade",
     id: "modalTurnConfig".concat(turn.id),
     "data-bs-backdrop": "static",
@@ -11577,33 +11582,33 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
     tabindex: "-1",
     "aria-labelledby": "modalTurnConfigLabel",
     "aria-hidden": "true",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "modal-dialog modal-gl",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "modal-content",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "modal-header",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h5", {
             "class": "modal-title fw-bold font-h1",
             children: ["Programaci\xF3n del turno ", turn.id]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             type: "button",
             className: "btn-close",
             "data-bs-dismiss": "modal",
             "aria-label": "Close"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           "class": "modal-body",
           id: "modalTurnItemInput".concat(turn.id),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "col-12",
             id: "timeFin-container",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "me-2 p-2 fw-bold",
                 children: "Fecha"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                 className: "form-control  w-50",
                 type: "text",
                 name: "trip-start",
@@ -11621,12 +11626,12 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
                   margin: "10px 0px"
                 }
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "me-2 p-2 fw-bold",
                 children: "Hora de inicio"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                 type: "text",
                 className: "form-control w-50",
                 id: "backofice-turn-time-editor",
@@ -11638,22 +11643,21 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
                 },
                 placeholder: turn.time
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "me-2 p-2 fw-bold",
                 children: "Hora de inicio"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
                 className: "form-select p-2",
-                id: "set-turn-status-by-input",
-                children: console.log(turn)
+                id: "set-turn-status-by-input"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "me-2 p-2 fw-bold",
                 children: "Duraci\xF3n"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                 type: "text",
                 className: "form-control w-50",
                 id: "backofice-turn-duration-editor",
@@ -11667,9 +11671,9 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
               })]
             })]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           "class": "modal-footer",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             type: "button",
             className: "btn btn-primary",
             "data-bs-dismiss": "modal",
@@ -11679,7 +11683,7 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
               setTurnDataValidated(e, turn);
             },
             children: "Modificar programaci\xF3n"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             type: "button",
             className: "btn btn-secondary",
             "data-bs-dismiss": "modal",
@@ -13451,7 +13455,8 @@ var TurnDashboard = function TurnDashboard(_ref) {
                   editTurnSchedule: editTurnSchedule,
                   orderByDate: orderByDate,
                   setTurnStatus: setTurnStatus,
-                  getBackofficeSchedule: getBackofficeSchedule
+                  getBackofficeSchedule: getBackofficeSchedule,
+                  schedule: schedule
                 }, turn.id);
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("tfoot", {
@@ -13749,7 +13754,8 @@ var TurnDashboardListItem = function TurnDashboardListItem(_ref) {
       editTurnSchedule = _ref.editTurnSchedule,
       orderByDate = _ref.orderByDate,
       setTurnStatus = _ref.setTurnStatus,
-      getBackofficeSchedule = _ref.getBackofficeSchedule;
+      getBackofficeSchedule = _ref.getBackofficeSchedule,
+      schedule = _ref.schedule;
 
   var addTime = function addTime(initial, aditional) {
     var initialTime = initial.split(":");
@@ -13850,7 +13856,8 @@ var TurnDashboardListItem = function TurnDashboardListItem(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ModalTurnListEditor__WEBPACK_IMPORTED_MODULE_2__["default"], {
       turn: turn,
       editTurnSchedule: editTurnSchedule,
-      orderByDate: orderByDate
+      orderByDate: orderByDate,
+      schedule: schedule
     }, turn.id + "editor"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ModalTurnListSettings__WEBPACK_IMPORTED_MODULE_3__["default"], {
       turn: turn,
       editTurnSchedule: editTurnSchedule,
@@ -21505,19 +21512,17 @@ function turnReducer(state, action) {
         var open = new Date("December 14, 2021 " + "".concat(daySchedule[0]) + ":00");
         var colse = new Date("December 14, 2021 " + "".concat(daySchedule[1]) + ":00");
         var difference = (colse - open) / 1000;
+        var turnDuration = difference / turnsAmount; // En segundos
 
-        var _turnDuration = difference / turnsAmount; // En segundos
-
-
-        _turnDuration = setHoursAndMinutes(_turnDuration);
+        turnDuration = setHoursAndMinutes(turnDuration);
         var turn = daySchedule[0];
-        var _aviableTurns = [{
+        var aviableTurns = [{
           turn: turn
         }];
 
         for (var ii = 0; ii < turnsAmount; ii++) {
-          turn = addTime(turn, _turnDuration);
-          _aviableTurns[ii] = {
+          turn = addTime(turn, turnDuration);
+          aviableTurns[ii] = {
             turn: turn
           };
         }
@@ -21527,11 +21532,11 @@ function turnReducer(state, action) {
         } catch (error) {}
 
         return _objectSpread(_objectSpread({}, state), {}, {
-          schedule: _aviableTurns,
+          schedule: aviableTurns,
           selecetDay: action.date,
           selectedHour: "",
           hourIsSelected: false,
-          turnDuration: _turnDuration
+          turnDuration: turnDuration
         });
       }
 
@@ -21607,7 +21612,10 @@ function turnReducer(state, action) {
 
         var _daySchedule = _chairAviability.days[_weekDay];
         var dayScheduleSplited = _daySchedule != "NONACTIVE" ? _daySchedule.split("/") : _daySchedule;
-        console.log(dayScheduleSplited);
+
+        var _aviableTurns;
+
+        var _turnDuration;
 
         if (_daySchedule != "NONACTIVE") {
           var _turnsAmount = dayScheduleSplited[2];
@@ -21618,33 +21626,29 @@ function turnReducer(state, action) {
 
           var _difference = (_colse - _open) / 1000;
 
-          var _turnDuration2 = _difference / _turnsAmount; // En segundos
+          _turnDuration = _difference / _turnsAmount; // En segundos
 
-
-          _turnDuration2 = setHoursAndMinutes(_turnDuration2);
+          _turnDuration = setHoursAndMinutes(_turnDuration);
           var _turn = dayScheduleSplited[0];
-          var _aviableTurns2 = [{
+          _aviableTurns = [{
             turn: _turn
           }];
 
           for (var _ii = 0; _ii < _turnsAmount; _ii++) {
-            _turn = addTime(_turn, _turnDuration2);
-            _aviableTurns2[_ii] = {
+            _turn = addTime(_turn, _turnDuration);
+            _aviableTurns[_ii] = {
               turn: _turn
             };
           }
-
-          try {
-            document.getElementById("inputGroupSelect02").value = "Horarios";
-          } catch (error) {}
+        } else {
+          _aviableTurns = "NONACTIVE";
+          _turnDuration = "";
         }
 
         return _objectSpread(_objectSpread({}, state), {}, {
-          schedule: aviableTurns,
-          selecetDay: action.date,
-          selectedHour: "",
+          schedule: _aviableTurns ? _aviableTurns : "NONACTIVE",
           hourIsSelected: false,
-          turnDuration: turnDuration
+          turnDuration: _turnDuration ? _turnDuration : ""
         });
       }
 

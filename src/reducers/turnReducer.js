@@ -206,28 +206,30 @@ export function turnReducer(state, action){
             let daySchedule = chairAviability.days[weekDay];
             let dayScheduleSplited= daySchedule != "NONACTIVE" ? daySchedule.split("/") : daySchedule;
 
-            console.log(dayScheduleSplited)
+            let aviableTurns;
+            let turnDuration;
             if (daySchedule != "NONACTIVE"){
                 let turnsAmount = dayScheduleSplited[2];
                 let open = new Date("December 14, 2021 " + `${dayScheduleSplited[0]}` + ":00");
                 let colse = new Date("December 14, 2021 "+ `${dayScheduleSplited[1]}`+ ":00");
                 let difference = ((colse-open)/1000);
-                let turnDuration = difference/turnsAmount // En segundos
+                turnDuration = difference/turnsAmount // En segundos
 
                 turnDuration = setHoursAndMinutes(turnDuration);
                 let turn = dayScheduleSplited[0];
-                let aviableTurns= [{turn:turn}];
+                aviableTurns= [{turn:turn}];
                 for (let ii = 0; ii<turnsAmount; ii++){
                     turn= addTime(turn,turnDuration);
                     aviableTurns[ii]={turn:turn};
                 }
-                try{
-                document.getElementById("inputGroupSelect02").value="Horarios";
-                    
-                }catch(error){}
+                
             }
-            
-            return {...state, schedule: aviableTurns, selecetDay : action.date, selectedHour:"", hourIsSelected: false, turnDuration : turnDuration};  
+            else {
+                aviableTurns = "NONACTIVE";
+                turnDuration = "";
+
+            }
+            return {...state, schedule: aviableTurns ? aviableTurns : "NONACTIVE", hourIsSelected: false, turnDuration : turnDuration ?turnDuration :"" };  
         }
 
 
