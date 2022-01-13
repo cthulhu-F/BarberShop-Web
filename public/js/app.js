@@ -7540,12 +7540,11 @@ var backofficeTurnDashboardMapDispatch = function backofficeTurnDashboardMapDisp
         });
       }
     },
-    editTurnSchedule: function editTurnSchedule(date, time, duration, turn) {
+    editTurnSchedule: function editTurnSchedule(date, time, turn) {
       dispatch({
         type: _src_actions_backofficeTurnDashboardActions__WEBPACK_IMPORTED_MODULE_3__.BACKOFFICE_TURN_DASHBOARD_TYPES.EDITE_TURN_SCHEDULE,
         date: date,
         time: time,
-        duration: duration,
         turn: turn
       });
     },
@@ -11502,7 +11501,6 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
     var listItemInputs = document.getElementById("modalTurnItemInput".concat(turn.id));
     date = listItemInputs.querySelector("#backofice-turn-date-editor");
     time = listItemInputs.querySelector("#backofice-turn-time-editor");
-    duration = listItemInputs.querySelector("#backofice-turn-duration-editor");
   }
 
   function convertTelToWppLink(tel) {
@@ -11512,20 +11510,19 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
 
   var setTurnDataValidated = function setTurnDataValidated(event, turn, orderByDate) {
     event.preventDefault();
+    var selectedKey = time.options[time.selectedIndex].id;
 
-    if (date.value != "" || time.value != "" || duration.value != "") {
+    if (date.value != "" || selectedKey != turn.time) {
       var dateAlert = date.value == "" ? "" : " <span style=\"font-weight:700;\" >Fecha </span><br> ".concat(date.placeholder, " ---> ").concat(date.value.split('-')[2] + '/' + date.value.split('-')[1] + '/' + date.value.split('-')[0], " <br> <br>  ");
-      var timeAlert = time.value == "" ? "" : "<span style=\"font-weight:700;\" >Horario </span><br>  ".concat(time.placeholder, " ---> ").concat(time.value, " <br><br>");
-      var durationAlert = duration.value == "" ? "" : "<span style=\"font-weight:700;\" >Duraci\xF3n </span><br> ".concat(duration.placeholder, " ---> ").concat(duration.value, "<br><br>");
+      var timeAlert = selectedKey == turn.time ? "" : "<span style=\"font-weight:700;\" >Horario </span><br>  ".concat(turn.time, " ---> ").concat(selectedKey, " <br><br>");
       var wppDateAlert = date.value == "" ? "" : "_Nueva fecha programada_%0A".concat(date.placeholder, " ---> *").concat(date.value.split('-')[2] + '/' + date.value.split('-')[1] + '/' + date.value.split('-')[0], "*.%0A%0A");
-      var wppTimeAlert = time.value == "" ? "" : "_Nuevo horario programado_%0A".concat(time.placeholder, " ---> *").concat(time.value, "*.%0A%0A");
-      var wppTurationAlert = duration.value == "" ? "" : "_Nueva duraci\xF3n estimada_%0A".concat(duration.placeholder, " ---> *").concat(duration.value, "*.%0A%0A");
-      var msjUrl = "Hola ".concat(turn.name_client, ", desde BrothersBarberShop queremos notificarle que por razones de fuerza mayor hemos tenido que modificar la programaci\xF3n de su turno. La nueva programaci\xF3n es la siguiente%0A%0A").concat(wppDateAlert).concat(wppTimeAlert).concat(wppTurationAlert, "Sepa disculpar las molestias, si no dispone de ese horario libre por favor notif\xEDquenos, de lo contrario te esperamos el d\xEDa ").concat(turn.date, " a las ").concat(turn.time, ".%0AMuchas gracias!");
+      var wppTimeAlert = time.value == "" ? "" : "_Nuevo horario programado_%0A".concat(turn.time, " ---> *").concat(selectedKey, "*.%0A%0A");
+      var msjUrl = "Hola ".concat(turn.name_client, ", desde BrothersBarberShop queremos notificarle que por razones de fuerza mayor hemos tenido que modificar la programaci\xF3n de su turno. La nueva programaci\xF3n es la siguiente%0A%0A").concat(wppDateAlert).concat(wppTimeAlert, "Sepa disculpar las molestias, si no dispone de ese horario libre por favor notif\xEDquenos, de lo contrario te esperamos el d\xEDa ").concat(turn.date, " a las ").concat(turn.time, ".%0AMuchas gracias!");
       msjUrl = msjUrl.split(" ").join("%20");
       var clienWppLink = convertTelToWppLink(turn.phone_client);
       swal.fire({
         title: "Atención",
-        html: "Esta seguro que desea modificar los siguientes datos?<br><br> \n            ".concat(dateAlert, " ").concat(timeAlert, " ").concat(durationAlert),
+        html: "Esta seguro que desea modificar los siguientes datos?<br><br> \n            ".concat(dateAlert, " ").concat(timeAlert),
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#000',
@@ -11534,10 +11531,9 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
       }).then(function (result) {
         if (result.isConfirmed) {
           window.open("https://wa.me/".concat(clienWppLink, "?text=").concat(msjUrl), '_blank');
-          editTurnSchedule(date.value, time.value, duration.value, turn);
+          editTurnSchedule(date.value, selectedKey, turn);
           date.value = "";
           time.value = "";
-          duration.value = "";
           swal.fire({
             text: 'Datos modificados con éxito',
             timer: "1500",
@@ -11572,8 +11568,6 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
     }
   };
 
-  console.log("Schedule");
-  console.log(schedule);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "modal fade",
     id: "modalTurnConfig".concat(turn.id),
@@ -11630,44 +11624,17 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
               className: "d-flex justify-content-between mb-1",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "me-2 p-2 fw-bold",
-                children: "Hora de inicio"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                className: "form-control w-50",
-                id: "backofice-turn-time-editor",
-                onFocus: function onFocus(e) {
-                  return e.currentTarget.type = "time";
-                },
-                onBlur: function onBlur(e) {
-                  return e.currentTarget.type = "text";
-                },
-                placeholder: turn.time
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                className: "me-2 p-2 fw-bold",
-                children: "Hora de inicio"
+                children: "Horario"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
-                className: "form-select p-2",
-                id: "set-turn-status-by-input"
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                className: "me-2 p-2 fw-bold",
-                children: "Duraci\xF3n"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "text",
-                className: "form-control w-50",
-                id: "backofice-turn-duration-editor",
-                onFocus: function onFocus(e) {
-                  return e.currentTarget.type = "time";
-                },
-                onBlur: function onBlur(e) {
-                  return e.currentTarget.type = "text";
-                },
-                placeholder: turn.turn_duration
+                className: "form-select p-2  w-50",
+                id: "backofice-turn-time-editor",
+                children: schedule.map(function (hour, index) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                    selected: turn.time == hour.turn,
+                    id: hour.turn,
+                    children: hour.turn
+                  }, index);
+                })
               })]
             })]
           })
@@ -13226,7 +13193,7 @@ var TurnDashboard = function TurnDashboard(_ref) {
     }
 
     ShowDay();
-  }, []);
+  }, [backofficeTurnDashboardState]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("div", {
       className: "row px-3",
@@ -21032,14 +20999,9 @@ function backofficeTurnDashboardReducer(state, action) {
           modified = true;
         }
 
-        if (action.time != "") {
-          //console.logaction.time)
+        if (action.time != action.turn.time) {
+          console.log(action.time);
           newEditableTurn.time = action.time;
-          modified = true;
-        }
-
-        if (action.duration != "") {
-          newEditableTurn.turn_duration = action.duration;
           modified = true;
         }
 

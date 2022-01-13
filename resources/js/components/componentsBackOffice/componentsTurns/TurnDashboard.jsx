@@ -184,7 +184,7 @@ const TurnDashboard = ({ }) => {
         }
         ShowDay()
     
-      },[])
+      },[backofficeTurnDashboardState])
 
 
 

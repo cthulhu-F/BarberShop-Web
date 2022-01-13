@@ -48,8 +48,8 @@ const backofficeTurnDashboardMapDispatch = (dispatch)=>{
             }
         },
 
-        editTurnSchedule : (date, time, duration, turn) => {
-            dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.EDITE_TURN_SCHEDULE, date: date, time: time, duration: duration, turn})
+        editTurnSchedule : (date, time, turn) => {
+            dispatch({ type: BACKOFFICE_TURN_DASHBOARD_TYPES.EDITE_TURN_SCHEDULE, date: date, time: time, turn})
         },
 
         orderByDate : () =>{

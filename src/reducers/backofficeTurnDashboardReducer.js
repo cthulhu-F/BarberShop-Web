@@ -148,18 +148,14 @@ export function backofficeTurnDashboardReducer(state, action){
             }
 
 
-            if (action.time != ""){
-                //console.logaction.time)
+            if (action.time != action.turn.time){
+                console.log(action.time)
                 newEditableTurn.time = action.time;
                 modified = true;
 
             }
 
-            if (action.duration != ""){
-                newEditableTurn.turn_duration = action.duration;
-                modified = true;
-
-            }
+            
 
             if (modified){
                 newEditableTurn.update_at = todayString;
