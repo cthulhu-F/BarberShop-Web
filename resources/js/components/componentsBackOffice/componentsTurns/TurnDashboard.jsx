@@ -114,10 +114,14 @@ const TurnDashboard = ({ }) => {
 
         let filteredByName;
 
-        let FilteredBydate =  dashboardTurns.filter(turn =>
-                parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) >= compartaiveMin && 
-                parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) <= compartaiveMax 
-        );
+        let FilteredBydate =  ! isNaN(compartaiveMin)  ? dashboardTurns.filter(turn =>
+                parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) >= compartaiveMin
+        ): allShcheduled;
+
+        FilteredBydate = ! isNaN(compartaiveMin) ? FilteredBydate.filter(turn =>
+            parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) <= compartaiveMax 
+            ): allShcheduled;
+
 
         if(searchValue != "Ver silla"){
             if(FilteredBydate.length != 0 ){

@@ -18,6 +18,27 @@ var todayString =  dd +'/'+ mm + '/'+yyyy;
 //     dashboardTurns : ITEM_TURNS.orderTurns.filter((turn)=>turn.date == todayString),
 // }
 
+
+const getWeekSchedule = (turn) =>{
+    let today = todayString.split('/')
+    let tdDateYyyy = today[2];
+    let tdDateMm = toString(today[1]).length == 1 ? "0"+today[1] : today[1];
+    let tdDateDd = toString(today[0]).length == 1 ? "0"+today[0] : today[0];
+    let compartaiveToday = parseInt(tdDateYyyy+tdDateMm+tdDateDd)
+
+    let tomorrow = turn.date.split('-')
+    let tmDateYyyy = tomorrow[2];
+    let tmDateMm = toString(tomorrow[1]).length == 1 ? "0"+tomorrow[1] : tomorrow[1];
+    let tmDateDd = toString(tomorrow[0]).length == 1 ? "0"+tomorrow[0] : tomorrow[0];
+    let compartaiveTomorrow = parseInt(tmDateYyyy+tmDateMm+tmDateDd)
+
+    let difference = compartaiveTomorrow - compartaiveToday
+    if ( difference <=  7  && difference > 0 ) {
+        return turn
+    }
+}
+
+
 const sortByDate = (nonSortedTurns) =>{
     const sortedTurns =[];
     let sortedOrder = [];
@@ -57,7 +78,7 @@ export function backofficeTurnDashboardReducer(state, action){
             state.dashboardTurns = sortByDate(action.payload); 
             state.allShcheduled = sortByDate(action.payload); 
             state.todayScheduled = filteredByActive(sortByDate(action.payload.filter((turn)=>turn.date == todayString))); 
-            state.tomorrowScheduled = filteredByActive(sortByDate(action.payload.filter((turn)=>turn.date != todayString)));
+            state.tomorrowScheduled = filteredByActive(sortByDate(action.payload.filter((turn)=>getWeekSchedule(turn))));
             
             return state
         }
@@ -171,7 +192,7 @@ export function backofficeTurnDashboardReducer(state, action){
             //console.logallScheduleSorted)
             return {...state, allShcheduled: allScheduleSorted,
                 todayScheduled: filteredByActive(allScheduleSorted.filter((turn)=>turn.date == todayString)),
-                tomorrowScheduled: filteredByActive(allScheduleSorted.filter((turn)=>turn.date != todayString)),
+                tomorrowScheduled: filteredByActive(allScheduleSorted.filter((turn)=>getWeekSchedule(turn))),
                 dashboardTurns: state.dashboardTurns,
             }
 
