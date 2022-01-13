@@ -10895,8 +10895,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var sliderImgsObj = _constants_constImg__WEBPACK_IMPORTED_MODULE_5__.ITEM_IMG.sliderImgs;
-var sliderImgArray = Object.values(sliderImgsObj);
 
 var Settings = function Settings() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
@@ -10909,16 +10907,45 @@ var Settings = function Settings() {
       allData = _useState4[0],
       setAllData = _useState4[1];
 
+  function saveSettingValue() {
+    return _saveSettingValue.apply(this, arguments);
+  }
+
+  function _saveSettingValue() {
+    _saveSettingValue = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var name, phone, email, direction, instagram, facebook, formData;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              name = document.getElementById("form-data-instagram");
+              phone = document.getElementById("form-data-instagram");
+              email = document.getElementById("form-data-instagram");
+              direction = document.getElementById("form-data-instagram");
+              instagram = document.getElementById("form-data-instagram");
+              facebook = document.getElementById("form-data-facebook");
+              formData = new FormData();
+
+            case 7:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _saveSettingValue.apply(this, arguments);
+  }
+
   function saveSliderImgs() {
     return _saveSliderImgs.apply(this, arguments);
   }
 
   function _saveSliderImgs() {
-    _saveSliderImgs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    _saveSliderImgs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
       var allImages, i, response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               allImages = [];
               i = 1;
@@ -10929,18 +10956,18 @@ var Settings = function Settings() {
                   file: document.getElementById("backofice-settings-slider-imagen-editor-".concat(index)).files[0]
                 });
               });
-              _context2.next = 5;
+              _context3.next = 5;
               return (0,_helpers_CustomerHelpers__WEBPACK_IMPORTED_MODULE_7__.UpdateGlobalImg)(allImages);
 
             case 5:
-              response = _context2.sent;
+              response = _context3.sent;
 
             case 6:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
     return _saveSliderImgs.apply(this, arguments);
   }
@@ -11028,6 +11055,7 @@ var Settings = function Settings() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
                 type: "text",
                 className: "form-control fs-8",
+                id: "form-data-name",
                 placeholder: "Nombre",
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
@@ -11046,6 +11074,7 @@ var Settings = function Settings() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
                 type: "text",
                 className: "form-control fs-8",
+                id: "form-data-direction",
                 placeholder: "Direccion",
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
@@ -11064,6 +11093,7 @@ var Settings = function Settings() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
                 type: "text",
                 className: "form-control fs-8",
+                id: "form-data-phone",
                 placeholder: "Telefono",
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
@@ -11082,6 +11112,7 @@ var Settings = function Settings() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
                 type: "text",
                 className: "form-control fs-8",
+                id: "form-data-email",
                 placeholder: "Correo",
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
@@ -11116,6 +11147,7 @@ var Settings = function Settings() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
                 type: "text",
                 className: "form-control fs-8",
+                id: "form-data-facebook",
                 placeholder: "Facebook",
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
@@ -11134,6 +11166,7 @@ var Settings = function Settings() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
                 type: "text",
                 className: "form-control fs-8",
+                id: "form-data-instagram",
                 placeholder: "Instagram",
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
@@ -11149,6 +11182,9 @@ var Settings = function Settings() {
             className: "col-12 col-xl-12 d-flex justify-content-end",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
               className: "btn btn-orangeWeb",
+              onClick: function onClick() {
+                return saveSettingValue();
+              },
               children: "Guardar"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
@@ -11162,7 +11198,6 @@ var Settings = function Settings() {
                   children: " Slider principal "
                 })
               }), !allImg ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Carrousel__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                imgArray: sliderImgArray,
                 img: allImg
               })]
             })
@@ -18672,10 +18707,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var UpdateCustomer = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(formData) {
+    var response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default()({
+              method: 'post',
+              url: 'http:/127.0.0.1:8000/api/UpdateCustomer',
+              data: formData
+            }).then(function (results) {
+              return swal.fire({
+                text: results.data.message,
+                timer: "1500",
+                position: "bottom",
+                showConfirmButton: false,
+                customClass: {
+                  container: "add-to-cart-alert-container",
+                  popup: "add-to-cart-alert"
+                }
+              });
+            })["catch"](function (results) {
+              return results;
+            });
+
+          case 2:
+            response = _context.sent;
+
+          case 3:
           case "end":
             return _context.stop();
         }

@@ -50,7 +50,6 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
             let imgAlert = !dataImg ? "" : `<span style="font-weight:700;" >Precio </span><br>  ${editableProduct.img} ---> ${dataImg.name} <br><br>`;
             let skuAlert = skuField.value == "" ? "" : `<span style="font-weight:700;" > Sku </span><br>  ${skuField.placeholder} ---> ${skuField.value} <br><br>`;
 
-
             swal.fire({
                 title: "Atención",
                 html: `Esta seguro que desea modificar los siguientes datos?<br><br> 

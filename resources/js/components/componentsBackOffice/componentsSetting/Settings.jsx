@@ -10,17 +10,28 @@ import { ShowCustomer, ShowGlobalImg, UpdateGlobalImg } from "../../../helpers/C
 import { useState } from "react";
 
 
-
-const sliderImgsObj = ITEM_IMG.sliderImgs;
-
-const sliderImgArray = Object.values(sliderImgsObj)
-
-
-
 const Settings = () => {
 
   const [allImg, setAllImg] = useState(null);
   const [allData, setAllData] = useState(null);
+
+  async function saveSettingValue() {
+    
+    let name = document.getElementById("form-data-instagram");
+    let phone = document.getElementById("form-data-instagram");
+    let email = document.getElementById("form-data-instagram");
+    let direction = document.getElementById("form-data-instagram");
+
+    let instagram = document.getElementById("form-data-instagram");
+    let facebook = document.getElementById("form-data-facebook");
+
+    let formData = new FormData();
+
+    
+    
+
+  }
+
 
   async function saveSliderImgs() {
     let allImages = [];
@@ -81,7 +92,7 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" placeholder="Nombre" aria-label="Recipient's username"
+                <input type="text" className="form-control fs-8" id="form-data-name" placeholder="Nombre" aria-label="Recipient's username"
                   aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
@@ -90,7 +101,7 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" placeholder="Direccion" aria-label="Recipient's username"
+                <input type="text" className="form-control fs-8" id="form-data-direction" placeholder="Direccion" aria-label="Recipient's username"
                   aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
@@ -99,7 +110,7 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" placeholder="Telefono" aria-label="Recipient's username"
+                <input type="text" className="form-control fs-8" id="form-data-phone"  placeholder="Telefono" aria-label="Recipient's username"
                   aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
@@ -108,7 +119,7 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" placeholder="Correo" aria-label="Recipient's username"
+                <input type="text" className="form-control fs-8" id="form-data-email" placeholder="Correo" aria-label="Recipient's username"
                   aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
@@ -128,7 +139,7 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" placeholder="Facebook" aria-label="Recipient's username"
+                <input type="text" className="form-control fs-8" id="form-data-facebook" placeholder="Facebook" aria-label="Recipient's username"
                   aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
@@ -137,7 +148,7 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" placeholder="Instagram" aria-label="Recipient's username"
+                <input type="text" className="form-control fs-8" id="form-data-instagram" placeholder="Instagram" aria-label="Recipient's username"
                   aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
@@ -145,7 +156,7 @@ const Settings = () => {
             </div>
 
             <div className="col-12 col-xl-12 d-flex justify-content-end">
-              <button className="btn btn-orangeWeb">Guardar</button>
+              <button className="btn btn-orangeWeb" onClick={() => saveSettingValue()}>Guardar</button>
             </div>
 
             <div className="col-12 col-xl-12 mb-3">
@@ -164,7 +175,7 @@ const Settings = () => {
 
                   :
 
-                  <Carrousel imgArray={sliderImgArray} img={allImg} />
+                  <Carrousel img={allImg} />
 
                 }
 

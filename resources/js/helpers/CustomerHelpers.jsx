@@ -4,6 +4,24 @@ import axios from "axios"
 
 export const UpdateCustomer = async (formData) => {
 
+  const response = await axios({
+    method: 'post',
+    url: 'http:/127.0.0.1:8000/api/UpdateCustomer',
+    data: formData
+  }).then((results) => {
+    return  swal.fire({
+      text: results.data.message,
+      timer:"1500", 
+      position: "bottom",
+      showConfirmButton: false,
+      customClass : {
+      container: "add-to-cart-alert-container",
+      popup:"add-to-cart-alert",
+      }
+  })
+  }).catch((results) => {
+    return results
+  })
   
 }
 
