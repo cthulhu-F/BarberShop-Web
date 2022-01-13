@@ -92,7 +92,6 @@ const Shop = () => {
                 !products?
 
                 ""
-                
                 :
                
                 searchValue
@@ -110,7 +109,7 @@ const Shop = () => {
             !products?
 
             <LoadProduct cant={7}/>
-            
+
             :
             
             searchValue != ""

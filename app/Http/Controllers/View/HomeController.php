@@ -4,6 +4,7 @@ namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class HomeController extends Controller
 {
@@ -44,6 +45,11 @@ class HomeController extends Controller
         //$request->user()->authorizeRoles(['user','admin']);
         //$user = User::find(2);
         return view('item');
+    }
+
+    public function termsAndConditions(Request $request)
+    {  
+        return view('dateTerms/termsAndConditions', compact('content'));
     }
 
     

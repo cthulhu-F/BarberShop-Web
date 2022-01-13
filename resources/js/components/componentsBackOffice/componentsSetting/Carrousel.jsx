@@ -4,10 +4,8 @@ import { useState } from "react";
 
 
 
-const Carrousel = ({ imgArray, img }) => {
+const Carrousel = ({img }) => {
 
-    //console.log(imgArray);
-    console.log(img);
 
     const [index2, setIndex] = useState(0);
 

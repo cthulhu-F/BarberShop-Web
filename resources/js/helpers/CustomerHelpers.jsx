@@ -6,7 +6,7 @@ export const UpdateCustomer = async (formData) => {
 
   const response = await axios({
     method: 'post',
-    url: 'http:/127.0.0.1:8000/api/UpdateCustomer',
+    url: 'http://127.0.0.1:8000/api/UpdateCustomer',
     data: formData
   }).then((results) => {
     return  swal.fire({
@@ -31,6 +31,13 @@ export const ShowCustomer = async () => {
     method: 'get',
     url: 'http://127.0.0.1:8000/api/ShowCustomer',
   });
+
+  let dataDecode = [];
+  
+  data.data.map((item) => {
+    item.social_networks = JSON.parse(item.social_networks);
+    dataDecode.push(item)
+  })
 
   return data.data
 

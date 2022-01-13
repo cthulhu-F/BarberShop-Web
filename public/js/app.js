@@ -10640,10 +10640,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Carrousel = function Carrousel(_ref) {
-  var imgArray = _ref.imgArray,
-      img = _ref.img;
-  //console.log(imgArray);
-  console.log(img);
+  var img = _ref.img;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10913,20 +10910,32 @@ var Settings = function Settings() {
 
   function _saveSettingValue() {
     _saveSettingValue = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var name, phone, email, direction, instagram, facebook, formData;
+      var name, phone, email, direction, instagram, facebook, redesJson, formData, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              name = document.getElementById("form-data-instagram");
-              phone = document.getElementById("form-data-instagram");
-              email = document.getElementById("form-data-instagram");
-              direction = document.getElementById("form-data-instagram");
+              name = document.getElementById("form-data-name");
+              phone = document.getElementById("form-data-phone");
+              email = document.getElementById("form-data-email");
+              direction = document.getElementById("form-data-direction");
               instagram = document.getElementById("form-data-instagram");
               facebook = document.getElementById("form-data-facebook");
+              redesJson = JSON.stringify({
+                facebook: facebook.value,
+                instagram: instagram.value
+              });
               formData = new FormData();
+              formData.append('id', 1);
+              console.log(name.value);
+              name.value != "" ? formData.append("name", name.value) : "";
+              _context2.next = 13;
+              return (0,_helpers_CustomerHelpers__WEBPACK_IMPORTED_MODULE_7__.UpdateCustomer)(formData);
 
-            case 7:
+            case 13:
+              response = _context2.sent;
+
+            case 14:
             case "end":
               return _context2.stop();
           }
@@ -10949,7 +10958,7 @@ var Settings = function Settings() {
             case 0:
               allImages = [];
               i = 1;
-              sliderImgArray.forEach(function (item, index) {
+              allImg.forEach(function (item, index) {
                 allImages.push({
                   //position: index+1,
                   name: "slider_" + i++,
@@ -11056,7 +11065,7 @@ var Settings = function Settings() {
                 type: "text",
                 className: "form-control fs-8",
                 id: "form-data-name",
-                placeholder: "Nombre",
+                placeholder: !allData ? "Nombre" : allData[0].name,
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
@@ -11075,7 +11084,7 @@ var Settings = function Settings() {
                 type: "text",
                 className: "form-control fs-8",
                 id: "form-data-direction",
-                placeholder: "Direccion",
+                placeholder: !allData ? "Direccion" : allData[0].direction,
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
@@ -11094,7 +11103,7 @@ var Settings = function Settings() {
                 type: "text",
                 className: "form-control fs-8",
                 id: "form-data-phone",
-                placeholder: "Telefono",
+                placeholder: !allData ? "Telefono" : allData[0].phone,
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
@@ -11113,7 +11122,7 @@ var Settings = function Settings() {
                 type: "text",
                 className: "form-control fs-8",
                 id: "form-data-email",
-                placeholder: "Correo",
+                placeholder: !allData ? "Correo" : allData[0].email,
                 "aria-label": "Recipient's username",
                 "aria-describedby": "basic-addon2"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
@@ -18715,7 +18724,7 @@ var UpdateCustomer = /*#__PURE__*/function () {
             _context.next = 2;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'post',
-              url: 'http:/127.0.0.1:8000/api/UpdateCustomer',
+              url: 'http://127.0.0.1:8000/api/UpdateCustomer',
               data: formData
             }).then(function (results) {
               return swal.fire({
@@ -18749,7 +18758,7 @@ var UpdateCustomer = /*#__PURE__*/function () {
 }();
 var ShowCustomer = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-    var data;
+    var data, dataDecode;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -18762,9 +18771,14 @@ var ShowCustomer = /*#__PURE__*/function () {
 
           case 2:
             data = _context2.sent;
+            dataDecode = [];
+            data.data.map(function (item) {
+              item.social_networks = JSON.parse(item.social_networks);
+              dataDecode.push(item);
+            });
             return _context2.abrupt("return", data.data);
 
-          case 4:
+          case 6:
           case "end":
             return _context2.stop();
         }

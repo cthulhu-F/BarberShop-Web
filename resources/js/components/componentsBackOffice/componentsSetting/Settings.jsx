@@ -6,7 +6,7 @@ import '../../../../css/main.css';
 import { ITEM_IMG } from '../../../constants/constImg';
 import Carrousel from "./Carrousel";
 import { useEffect } from "react";
-import { ShowCustomer, ShowGlobalImg, UpdateGlobalImg } from "../../../helpers/CustomerHelpers";
+import { ShowCustomer, ShowGlobalImg, UpdateCustomer, UpdateGlobalImg } from "../../../helpers/CustomerHelpers";
 import { useState } from "react";
 
 
@@ -16,19 +16,28 @@ const Settings = () => {
   const [allData, setAllData] = useState(null);
 
   async function saveSettingValue() {
-    
-    let name = document.getElementById("form-data-instagram");
-    let phone = document.getElementById("form-data-instagram");
-    let email = document.getElementById("form-data-instagram");
-    let direction = document.getElementById("form-data-instagram");
 
+    let name = document.getElementById("form-data-name");
+    let phone = document.getElementById("form-data-phone");
+    let email = document.getElementById("form-data-email");
+    let direction = document.getElementById("form-data-direction");
     let instagram = document.getElementById("form-data-instagram");
     let facebook = document.getElementById("form-data-facebook");
 
+    let redesJson = JSON.stringify({
+      facebook: facebook.value,
+      instagram: instagram.value
+    });
+
     let formData = new FormData();
 
-    
-    
+    formData.append('id', 1);
+
+    console.log(name.value);
+
+    name.value != "" ? formData.append("name", name.value) : ""
+
+    let response = await UpdateCustomer(formData);
 
   }
 
@@ -37,7 +46,7 @@ const Settings = () => {
     let allImages = [];
     let i = 1;
 
-    sliderImgArray.forEach((item, index) => {
+    allImg.forEach((item, index) => {
       allImages.push({
         //position: index+1,
         name: "slider_" + i++,
@@ -58,7 +67,7 @@ const Settings = () => {
       setAllData(data);
     }
     fetch();
-  },[])
+  }, [])
 
   return (
 
@@ -92,8 +101,22 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" id="form-data-name" placeholder="Nombre" aria-label="Recipient's username"
-                  aria-describedby="basic-addon2" />
+                <input
+                  type="text"
+                  className="form-control fs-8"
+                  id="form-data-name"
+                  placeholder={
+                    !allData ?
+
+                      "Nombre"
+
+                      :
+
+                      allData[0].name
+                  }
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
               </div>
@@ -101,8 +124,23 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" id="form-data-direction" placeholder="Direccion" aria-label="Recipient's username"
-                  aria-describedby="basic-addon2" />
+                <input 
+                type="text" 
+                className="form-control fs-8" 
+                id="form-data-direction" 
+                placeholder={
+                  !allData?
+
+                  "Direccion"
+
+                  :
+
+                  allData[0].direction
+
+                } 
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2" 
+                />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
               </div>
@@ -110,8 +148,19 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" id="form-data-phone"  placeholder="Telefono" aria-label="Recipient's username"
-                  aria-describedby="basic-addon2" />
+                <input type="text" className="form-control fs-8" id="form-data-phone" 
+                placeholder={
+                  !allData?
+
+                  "Telefono"
+
+                  :
+
+                  allData[0].phone
+
+                }  
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
               </div>
@@ -119,8 +168,19 @@ const Settings = () => {
 
             <div className="col-12 col-xl-6 mb-3">
               <div className="input-group">
-                <input type="text" className="form-control fs-8" id="form-data-email" placeholder="Correo" aria-label="Recipient's username"
-                  aria-describedby="basic-addon2" />
+                <input type="text" className="form-control fs-8" id="form-data-email" 
+                placeholder={
+                  !allData?
+
+                  "Correo"
+
+                  :
+
+                  allData[0].email
+
+                } 
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2" />
                 <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
                   className="bi bi-grid"></i></span>
               </div>
@@ -169,13 +229,13 @@ const Settings = () => {
 
                 {
 
-                  !allImg?
+                  !allImg ?
 
-                  ""
+                    ""
 
-                  :
+                    :
 
-                  <Carrousel img={allImg} />
+                    <Carrousel img={allImg} />
 
                 }
 
