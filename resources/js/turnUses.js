@@ -13,6 +13,10 @@ const turnMapDispatcht = (dispatch) => {
 
         //API DATA
 
+        readAllOrderTurn: (data) => {
+            dispatch({type: TURN_TYPES.READ_ALL_ORDER, payload: data});
+        },
+
         readAllTurn: (data) => {
             dispatch({ type: TURN_TYPES.READ_ALL_TURN, payload: data});
         },

@@ -62,6 +62,8 @@ export const turnStateData = {
     chairs: ITEM_TURNS.configTurns,
     chairConfigDay: ITEM_TURNS.configDay,
     day: ITEM_TURNS.configDay.days,
+    orderTurn: null,
+
     schedule:[
         {turn: "07:00"},
         {turn: "08:00"},
@@ -87,6 +89,9 @@ export const turnStateData = {
 
 export function turnReducer(state, action){
     switch(action.type){
+        case TURN_TYPES.READ_ALL_ORDER:{
+            return Object.assign({}, state, { orderTurn: action.payload })
+        }
 
         case TURN_TYPES.READ_ALL_TURN:{
             return Object.assign({}, state, { chairs: action.payload })

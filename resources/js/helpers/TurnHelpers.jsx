@@ -16,10 +16,18 @@ export const UpdateOrderTurn = async (put) => {
 }
 
 export const ShowOrderTurn = async () => {
-
   const data = await axios({
     method: 'get',
     url: 'http://127.0.0.1:8000/api/ShowOrderTurn',
+  })
+
+  return data.data
+}
+
+export const ShowActiveTurn = async () => {
+  const data = await axios({
+    method: 'get',
+    url: 'http://127.0.0.1:8000/api/ShowActiveTurn',
   })
 
   return data.data
@@ -133,4 +141,9 @@ export const ShowConfigDay = async () => {
 }
 
 
-export default (CreateOrderTurn, ShowConfigTurn, ShowConfigTurn, CreateConfigTurn);
+export default (
+  CreateOrderTurn, 
+  ShowConfigTurn, 
+  ShowConfigTurn, 
+  CreateConfigTurn
+  );

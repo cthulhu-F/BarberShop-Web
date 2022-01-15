@@ -11,5 +11,6 @@ export const TURN_TYPES ={
     //API ACTIONS
 
     READ_ALL_DAY            :"READ_ALL_DAY",
-    READ_ALL_TURN           :"READ_ALL_TURN"
+    READ_ALL_TURN           :"READ_ALL_TURN",
+    READ_ALL_ORDER          :"READ_ALL_ORDER"
 }

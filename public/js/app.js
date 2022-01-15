@@ -17542,6 +17542,7 @@ var ModalTurn = function ModalTurn() {
       email_client = client_data.email_client,
       client_is_registered = client_data.client_is_registered; //API
 
+  var readAllOrderTurn = (0,_turnUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).readAllOrderTurn;
   var readAllTurn = (0,_turnUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).readAllTurn;
   var readAllDay = (0,_turnUses__WEBPACK_IMPORTED_MODULE_5__["default"])(dispatch).readAllDay; //END 
 
@@ -17690,7 +17691,6 @@ var ModalTurn = function ModalTurn() {
       setSelectedTab = _useState4[1];
 
   var tabCount = 3;
-  console.log(activeChairId);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     function ShowDay() {
       return _ShowDay.apply(this, arguments);
@@ -17698,7 +17698,7 @@ var ModalTurn = function ModalTurn() {
 
     function _ShowDay() {
       _ShowDay = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var resDay, resTurn;
+        var resDay, resTurn, resActiveTurn;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -17713,10 +17713,16 @@ var ModalTurn = function ModalTurn() {
 
               case 5:
                 resTurn = _context2.sent;
+                _context2.next = 8;
+                return (0,_helpers_TurnHelpers__WEBPACK_IMPORTED_MODULE_12__.ShowActiveTurn)();
+
+              case 8:
+                resActiveTurn = _context2.sent;
+                readAllOrderTurn(resActiveTurn);
                 readAllDay(resDay);
                 readAllTurn(resTurn);
 
-              case 8:
+              case 12:
               case "end":
                 return _context2.stop();
             }
@@ -19273,6 +19279,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "UpdateOrderTurn": () => (/* binding */ UpdateOrderTurn),
 /* harmony export */   "ShowOrderTurn": () => (/* binding */ ShowOrderTurn),
+/* harmony export */   "ShowActiveTurn": () => (/* binding */ ShowActiveTurn),
 /* harmony export */   "CreateOrderTurn": () => (/* binding */ CreateOrderTurn),
 /* harmony export */   "UpdateCondigTurn": () => (/* binding */ UpdateCondigTurn),
 /* harmony export */   "CreateConfigTurn": () => (/* binding */ CreateConfigTurn),
@@ -19357,14 +19364,43 @@ var ShowOrderTurn = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
-var CreateOrderTurn = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(post) {
+var ShowActiveTurn = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
     var data;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default()({
+              method: 'get',
+              url: 'http://127.0.0.1:8000/api/ShowActiveTurn'
+            });
+
+          case 2:
+            data = _context3.sent;
+            return _context3.abrupt("return", data.data);
+
+          case 4:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function ShowActiveTurn() {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var CreateOrderTurn = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(post) {
+    var data;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'post',
               url: 'http://127.0.0.1:8000/api/CreateOrderTurn',
@@ -19376,31 +19412,31 @@ var CreateOrderTurn = /*#__PURE__*/function () {
             });
 
           case 2:
-            data = _context3.sent;
-            return _context3.abrupt("return", data);
+            data = _context4.sent;
+            return _context4.abrupt("return", data);
 
           case 4:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
       }
-    }, _callee3);
+    }, _callee4);
   }));
 
   return function CreateOrderTurn(_x2) {
-    return _ref3.apply(this, arguments);
+    return _ref4.apply(this, arguments);
   };
 }();
 var UpdateCondigTurn = /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(status, id) {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(status, id) {
     var data;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
             console.log(status);
             console.log(id);
-            _context4.next = 4;
+            _context5.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'put',
               url: 'http://127.0.0.1:8000/api/UpdateConfigTurn',
@@ -19411,33 +19447,33 @@ var UpdateCondigTurn = /*#__PURE__*/function () {
             });
 
           case 4:
-            data = _context4.sent;
-            return _context4.abrupt("return", data.data);
+            data = _context5.sent;
+            return _context5.abrupt("return", data.data);
 
           case 6:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4);
+    }, _callee5);
   }));
 
   return function UpdateCondigTurn(_x3, _x4) {
-    return _ref4.apply(this, arguments);
+    return _ref5.apply(this, arguments);
   };
 }();
 var CreateConfigTurn = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(chair, day) {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(chair, day) {
     var dayJSON, resDay, resTurn;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             dayJSON = {
               days: JSON.stringify(day),
               name: chair.name
             };
-            _context5.next = 3;
+            _context6.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'post',
               url: 'http://127.0.0.1:8000/api/CreateConfigDay',
@@ -19449,8 +19485,8 @@ var CreateConfigTurn = /*#__PURE__*/function () {
             });
 
           case 3:
-            resDay = _context5.sent;
-            _context5.next = 6;
+            resDay = _context6.sent;
+            _context6.next = 6;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'post',
               url: 'http://127.0.0.1:8000/api/CreateConfigTurn',
@@ -19462,31 +19498,31 @@ var CreateConfigTurn = /*#__PURE__*/function () {
             });
 
           case 6:
-            resTurn = _context5.sent;
-            return _context5.abrupt("return", resTurn.data);
+            resTurn = _context6.sent;
+            return _context6.abrupt("return", resTurn.data);
 
           case 8:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
       }
-    }, _callee5);
+    }, _callee6);
   }));
 
   return function CreateConfigTurn(_x5, _x6) {
-    return _ref5.apply(this, arguments);
+    return _ref6.apply(this, arguments);
   };
 }();
 var UpdateConfigDay = /*#__PURE__*/function () {
-  var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(day) {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(day) {
     var dayId, dayJSON, data;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
             dayId = day.id;
             dayJSON = JSON.stringify(day.days);
-            _context6.next = 4;
+            _context7.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'put',
               url: 'http://127.0.0.1:8000/api/UpdateConfigDay',
@@ -19497,39 +19533,10 @@ var UpdateConfigDay = /*#__PURE__*/function () {
             });
 
           case 4:
-            data = _context6.sent;
-            return _context6.abrupt("return", data.data);
-
-          case 6:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6);
-  }));
-
-  return function UpdateConfigDay(_x7) {
-    return _ref6.apply(this, arguments);
-  };
-}();
-var ShowConfigTurn = /*#__PURE__*/function () {
-  var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(configDay, configTurn) {
-    var data;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            _context7.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default()({
-              method: 'get',
-              url: 'http://127.0.0.1:8000/api/ShowConfigTurn'
-            });
-
-          case 2:
             data = _context7.sent;
             return _context7.abrupt("return", data.data);
 
-          case 4:
+          case 6:
           case "end":
             return _context7.stop();
         }
@@ -19537,13 +19544,13 @@ var ShowConfigTurn = /*#__PURE__*/function () {
     }, _callee7);
   }));
 
-  return function ShowConfigTurn(_x8, _x9) {
+  return function UpdateConfigDay(_x7) {
     return _ref7.apply(this, arguments);
   };
 }();
-var ShowConfigDay = /*#__PURE__*/function () {
-  var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-    var data, dataDecode;
+var ShowConfigTurn = /*#__PURE__*/function () {
+  var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(configDay, configTurn) {
+    var data;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
       while (1) {
         switch (_context8.prev = _context8.next) {
@@ -19551,19 +19558,14 @@ var ShowConfigDay = /*#__PURE__*/function () {
             _context8.next = 2;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'get',
-              url: 'http://127.0.0.1:8000/api/ShowConfigDay'
+              url: 'http://127.0.0.1:8000/api/ShowConfigTurn'
             });
 
           case 2:
             data = _context8.sent;
-            dataDecode = [];
-            data.data.map(function (item) {
-              item.days = JSON.parse(item.days);
-              dataDecode.push(item);
-            });
-            return _context8.abrupt("return", dataDecode);
+            return _context8.abrupt("return", data.data);
 
-          case 6:
+          case 4:
           case "end":
             return _context8.stop();
         }
@@ -19571,8 +19573,42 @@ var ShowConfigDay = /*#__PURE__*/function () {
     }, _callee8);
   }));
 
-  return function ShowConfigDay() {
+  return function ShowConfigTurn(_x8, _x9) {
     return _ref8.apply(this, arguments);
+  };
+}();
+var ShowConfigDay = /*#__PURE__*/function () {
+  var _ref9 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+    var data, dataDecode;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            _context9.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default()({
+              method: 'get',
+              url: 'http://127.0.0.1:8000/api/ShowConfigDay'
+            });
+
+          case 2:
+            data = _context9.sent;
+            dataDecode = [];
+            data.data.map(function (item) {
+              item.days = JSON.parse(item.days);
+              dataDecode.push(item);
+            });
+            return _context9.abrupt("return", dataDecode);
+
+          case 6:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    }, _callee9);
+  }));
+
+  return function ShowConfigDay() {
+    return _ref9.apply(this, arguments);
   };
 }();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateOrderTurn, ShowConfigTurn, ShowConfigTurn, CreateConfigTurn);
@@ -19813,6 +19849,12 @@ __webpack_require__.r(__webpack_exports__);
 var turnMapDispatcht = function turnMapDispatcht(dispatch) {
   return {
     //API DATA
+    readAllOrderTurn: function readAllOrderTurn(data) {
+      dispatch({
+        type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.READ_ALL_ORDER,
+        payload: data
+      });
+    },
     readAllTurn: function readAllTurn(data) {
       dispatch({
         type: _src_actions_turnActions__WEBPACK_IMPORTED_MODULE_3__.TURN_TYPES.READ_ALL_TURN,
@@ -20045,7 +20087,8 @@ var TURN_TYPES = {
   SET_TURN_DATA: "SET_TURN_DATA",
   //API ACTIONS
   READ_ALL_DAY: "READ_ALL_DAY",
-  READ_ALL_TURN: "READ_ALL_TURN"
+  READ_ALL_TURN: "READ_ALL_TURN",
+  READ_ALL_ORDER: "READ_ALL_ORDER"
 };
 
 /***/ }),
@@ -21372,6 +21415,7 @@ var turnStateData = {
   chairs: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configTurns,
   chairConfigDay: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay,
   day: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.configDay.days,
+  orderTurn: null,
   schedule: [{
     turn: "07:00"
   }, {
@@ -21401,6 +21445,13 @@ var turnStateData = {
 };
 function turnReducer(state, action) {
   switch (action.type) {
+    case _actions_turnActions__WEBPACK_IMPORTED_MODULE_0__.TURN_TYPES.READ_ALL_ORDER:
+      {
+        return Object.assign({}, state, {
+          orderTurn: action.payload
+        });
+      }
+
     case _actions_turnActions__WEBPACK_IMPORTED_MODULE_0__.TURN_TYPES.READ_ALL_TURN:
       {
         return Object.assign({}, state, {

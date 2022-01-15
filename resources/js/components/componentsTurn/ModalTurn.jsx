@@ -24,7 +24,7 @@ import swal from "sweetalert2";
 import { parse } from "postcss";
 import { min } from "lodash";
 import { TabList } from "react-tabs";
-import  { ShowConfigDay, ShowConfigTurn, CreateOrderTurn } from "../../helpers/TurnHelpers";
+import  { ShowConfigDay, ShowConfigTurn, CreateOrderTurn, ShowActiveTurn } from "../../helpers/TurnHelpers";
 import { useEffect } from "react";
 
 
@@ -36,6 +36,8 @@ const ModalTurn = () => {
   const {name_client, phone_client, email_client, client_is_registered} = client_data;
 
   //API
+
+  const readAllOrderTurn = turnMapDispatcht(dispatch).readAllOrderTurn;
   
   const readAllTurn = turnMapDispatcht(dispatch).readAllTurn;
   
@@ -185,18 +187,17 @@ const ModalTurn = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const tabCount = 3;
 
-  console.log(activeChairId);
-
   useEffect(()=>{
     async function ShowDay(){
       const resDay = await ShowConfigDay();
       const resTurn = await ShowConfigTurn();
+      const resActiveTurn = await ShowActiveTurn();
       
+      readAllOrderTurn(resActiveTurn);
       readAllDay(resDay);
       readAllTurn(resTurn);
     }
     ShowDay()
-
   },[])
 
   return(
