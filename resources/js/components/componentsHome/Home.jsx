@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../css/main.css';
 import { ITEM_IMG } from '../../constants/constImg';
 
 
@@ -7,7 +5,6 @@ import { ITEM_IMG } from '../../constants/constImg';
 const Home = () => {
 
   const urlImg = require.context('../../../asset/slider', true);
-
 
   return (
 

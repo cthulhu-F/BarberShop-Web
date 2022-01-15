@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { ITEM_PRODUCTS } from '../../constants/ConstItem';
-// import Counter from "../../counter";
+
 import { useReducer } from "react";
 import { cartItemsData, shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import mapDispatcht from "../../shoppingCartUses";
 import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
-import { TYPES } from "../../../../src/actions/shoppingActions";
-import { main } from "@popperjs/core";
 import ShowAllProducts from "../../helpers/ItemHelpers";
 
 const Item = () => {

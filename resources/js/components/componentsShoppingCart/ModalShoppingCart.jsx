@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../css/main.css';
 
 import swal from'sweetalert2';
 

@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../css/main.css';
 
 
 const SidebarHeader = () =>{
@@ -10,7 +8,7 @@ const SidebarHeader = () =>{
     URL = URL.split('/');
     let URLpage = URL[2];
  
-    let defaultClases ="nav-item rounded-pill rounded-end ms-0 ms-xl-3 p-0 pe-2 ps-3 p-xl-3 fs-5 my-1 my-xl-2";
+    let defaultClases ="nav-item rounded-pill rounded-end fs-5 p-2 my-1";
   
 
     let menuItems = [
@@ -24,7 +22,7 @@ const SidebarHeader = () =>{
 
     menuItems.forEach(item=>{
       if (URLpage == item.slug){
-        item.classes += " navbar-link-active-primary ";
+        item.classes += " navbar-link-active-primary";
       } else {
         item.classes += " navbar-link-primary ";
       } 
@@ -39,7 +37,8 @@ const SidebarHeader = () =>{
 
     return(
         
-            <div>
+            <div className="">
+
                 <div className="d-flex flex-column flex-shrink-0 py-2">
                     <a href="/" className="d-flex justify-content-center text-decoration-none text-white fs-4 p-2 fw-bold">
                     <i className="bi bi-box  ms-1 mx-xl-2 me-xl-2"></i>
@@ -47,7 +46,7 @@ const SidebarHeader = () =>{
                     </a>
                 </div>
         
-                <ul className="nav nav-pills flex-column m-0 ps-1 ps-xl-0">
+                <ul className="nav nav-pills flex-column ps-3 ps-xl-4">
         
                     <li
                     className={findCalsses("turn")}>

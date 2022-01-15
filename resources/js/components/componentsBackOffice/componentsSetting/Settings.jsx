@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../css/main.css';
 
 import { ITEM_IMG } from '../../../constants/constImg';
 import Carrousel from "./Carrousel";
@@ -21,21 +19,34 @@ const Settings = () => {
     let phone = document.getElementById("form-data-phone");
     let email = document.getElementById("form-data-email");
     let direction = document.getElementById("form-data-direction");
+    let information = document.getElementById("form-data-information");
+    let terms = document.getElementById("form-data-terms");
+
     let instagram = document.getElementById("form-data-instagram");
     let facebook = document.getElementById("form-data-facebook");
 
+    let valueFacebook;
+    let valueInstagram;
+
+    facebook.value != ""? valueFacebook = facebook.value : valueFacebook = allData[0].social_networks.facebook
+    instagram.value != ""? valueInstagram = instagram.value : valueInstagram = allData[0].social_networks.instagram
+
     let redesJson = JSON.stringify({
-      facebook: facebook.value,
-      instagram: instagram.value
+      facebook: valueFacebook,
+      instagram: valueInstagram
     });
 
     let formData = new FormData();
 
     formData.append('id', 1);
-
-    console.log(name.value);
+    formData.append('social_networks', redesJson);
 
     name.value != "" ? formData.append("name", name.value) : ""
+    phone.value != "" ? formData.append("phone", phone.value) : ""
+    email.value != "" ? formData.append("email", email.value) : ""
+    direction.value != "" ? formData.append("direction", direction.value) : ""
+    information.value != "" ? formData.append("information", information.value) : ""
+    terms.value != "" ? formData.append("terms", terms.value) : ""
 
     let response = await UpdateCustomer(formData);
 
@@ -107,18 +118,14 @@ const Settings = () => {
                   id="form-data-name"
                   placeholder={
                     !allData ?
-
                       "Nombre"
-
                       :
-
                       allData[0].name
                   }
                   aria-label="Recipient's username"
                   aria-describedby="basic-addon2"
                 />
-                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
-                  className="bi bi-grid"></i></span>
+                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i class="bi bi-person"></i></span>
               </div>
             </div>
 
@@ -141,8 +148,7 @@ const Settings = () => {
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2" 
                 />
-                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
-                  className="bi bi-grid"></i></span>
+                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i class="bi bi-geo-alt"></i></span>
               </div>
             </div>
 
@@ -161,8 +167,7 @@ const Settings = () => {
                 }  
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2" />
-                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
-                  className="bi bi-grid"></i></span>
+                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i class="bi bi-telephone"></i></span>
               </div>
             </div>
 
@@ -181,16 +186,46 @@ const Settings = () => {
                 } 
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2" />
-                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i
-                  className="bi bi-grid"></i></span>
+                <span className="input-group-text fs-8 bg-black text-white border-black" id="basic-addon2"><i class="bi bi-envelope"></i></span>
               </div>
             </div>
 
             <div className="col-12 col-xl-12 mb-3">
+
               <div className="input-group">
-                <textarea className="form-control" aria-label="With textarea"
-                  placeholder="Describe tu empresa..."></textarea>
+                <textarea className="form-control" style={{height: "200px"}} id="form-data-information" aria-label="With textarea"
+                placeholder={
+                  !allData?
+
+                  "Describe a tu empresa..."
+
+                  :
+
+                  allData[0].information
+
+                } 
+                >
+                </textarea>
               </div>
+
+            </div>
+
+            <div className="col-12 col-xl-12 mb-3 border-bottom">
+              <span className="fw-bold fs-4 font-h1"> Redacte los terminos y condiciones de tu web </span>
+            </div>
+
+            <div className="col-12 col-xl-12 mb-3">
+
+              <div className="input-group">
+                <textarea className="form-control" style={{height: "200px"}} id="form-data-terms" aria-label="With textarea"
+                placeholder="Terminos y condiciones...">
+                </textarea>
+              </div>
+
+              <div className="w-100 d-flex justify-content-end my-2">
+                <a href="/termsAndConditions" target="a_blanck" className="btn btn-success">Ir a terminos y condiciones</a>
+              </div>
+
             </div>
 
             <div className="col-12 col-xl-12 mb-3 border-bottom">

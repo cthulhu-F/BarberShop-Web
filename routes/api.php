@@ -110,6 +110,8 @@ Route::get('ShowCategorie', [ItemController::class, 'showCategorie']);
 
 Route::post('CreateOrderTurn', [TurnController::class, 'createOrderTurn']);
 
+Route::get('ShowActiveTurn', [TurnController::class, 'showActiveTurn']);
+
 Route::get('ShowConfigTurn', [TurnController::class, 'showConfigTurn']);
 
 Route::get('ShowConfigDay', [TurnController::class, 'showConfigDay']);

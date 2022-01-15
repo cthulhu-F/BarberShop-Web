@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import '../../../css/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
+
 import { ITEM_IMG } from '../../constants/constImg';
 
 import { useReducer } from "react";

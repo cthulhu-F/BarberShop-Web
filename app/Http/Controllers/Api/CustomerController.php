@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\GlobalImg;
 use App\Models\Customer;
@@ -24,7 +25,9 @@ class CustomerController extends Controller
             'phone' => ['string','max:80'],
             'email' => ['string','email','max:150'],
             'social_networks' => ['string'],
-            'status' => ['string']
+            'status' => ['string'],
+            'information' => ['string', 'max:1000'],
+            'terms' => ['string', 'max:2000']
         ]);
 
         if($validate->fails()) {
@@ -65,7 +68,17 @@ class CustomerController extends Controller
             $customer->status = $request->status;
         }
 
+        if($request->information){
+            $customer->information = $request->information;
+        }
+
+        if($request->terms){
+            $customer->terms_conditions = $request->terms;
+        }
+
         $customer->save();
+
+       
 
         return response()->json([
             'message' => 'Actualizado con exito!',

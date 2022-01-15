@@ -87,6 +87,7 @@ export const turnStateData = {
 
 export function turnReducer(state, action){
     switch(action.type){
+
         case TURN_TYPES.READ_ALL_TURN:{
             return Object.assign({}, state, { chairs: action.payload })
         }

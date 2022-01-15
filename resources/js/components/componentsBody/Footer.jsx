@@ -1,13 +1,11 @@
 import { start } from '@popperjs/core';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 const style= {
     backgroundColor: "#000000 !important",
     borderRadius: "0px 0px 250px 250px",
     height: "220px",
 }
-import '../../../css/main.css';
+
 import { ITEM_IMG } from '../../constants/constImg';
 
 const Footer = () => {

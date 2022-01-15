@@ -1,9 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../css/main.css';
-//import { ITEM_PRODUCTS } from '../../constants/ConstItem';
 import SliderItem from './SliderItem';
 
-  /*MODAL SHOP IMPORTS*/
+/*MODAL SHOP IMPORTS*/
 import { useReducer } from 'react';
 import { shoppingReducer, cartItemsData, shoppingInitialState} from '../../../../src/reducers/shoppingReducer';
 import mapDispatcht from '../../shoppingCartUses';

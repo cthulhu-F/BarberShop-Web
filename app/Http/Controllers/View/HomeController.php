@@ -47,9 +47,12 @@ class HomeController extends Controller
         return view('item');
     }
 
-    public function termsAndConditions(Request $request)
+    public function terms(Request $request)
     {  
-        return view('dateTerms/termsAndConditions', compact('content'));
+        $content = Customer::find(1);
+        $contents = $content->terms_conditions;
+
+        return view('terms/termsAndConditions', compact('contents'));
     }
 
     

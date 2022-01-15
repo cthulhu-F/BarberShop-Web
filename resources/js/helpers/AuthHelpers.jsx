@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from'sweetalert2';
 
 export const Authorization = async (dataForm) => {
 
@@ -8,7 +9,7 @@ export const Authorization = async (dataForm) => {
     data: dataForm
   }).then(
     result => {
-      return result;
+      return result
     }).catch(
       result => {
         return  swal.fire({

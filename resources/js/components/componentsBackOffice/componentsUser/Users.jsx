@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../css/main.css';
 import { useReducer, useState } from "react";
 
 import { userReducer,usersData } from "../../../../../src/reducers/backOfficeUserReducer";

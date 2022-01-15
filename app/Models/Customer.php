@@ -19,6 +19,8 @@ class Customer extends Model
         'phone',
         'email',
         'social_networks',
+        'information',
+        'terms_conditions',
         'status',
     ];
 

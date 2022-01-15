@@ -83,10 +83,17 @@ class TurnController extends Controller
     }
 
     public function showOrderTurn(Request $request){
-
-        //$request->user()->authorizeRoles(['admin']);
+        $request->user()->authorizeRoles(['admin']);
 
         return OrderTurn::all();
+
+    }
+
+    public function showActiveTurn(Request $request){
+
+        $orderturns = OrderTurn::where('status', 'LIKE', 'ACTIVE')->get(['status','time','date']);
+
+        return $orderturns;
 
     }
 

@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios from "axios";
+import swal from'sweetalert2';
 
 //START API RESOURCE CUSTOMER
 
@@ -20,7 +21,12 @@ export const UpdateCustomer = async (formData) => {
       }
   })
   }).catch((results) => {
-    return results
+    return swal.fire({
+      icon: 'error',
+      title: 'Error de conexion',
+      text: 'Error de conexion, vuelva a intentar mas tarde',
+      showConfirmButton: false,
+    })
   })
   
 }

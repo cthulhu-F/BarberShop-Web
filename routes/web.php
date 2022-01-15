@@ -49,3 +49,5 @@ Route::get('/shop/{search}', [HomeController::class, 'shop']);
 
 Route::get('/shoppingCart', [HomeController::class, 'shoppingCart']);
 Route::get('/product/{id}', [HomeController::class, 'item']);
+
+Route::get('/termsAndConditions', [HomeController::class, 'terms']);

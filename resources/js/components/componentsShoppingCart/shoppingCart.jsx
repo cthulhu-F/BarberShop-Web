@@ -1,8 +1,6 @@
 import React from "react";
 import { useReducer } from "react";
 import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../css/main.css';
 import { cartItemsData, shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import { TYPES } from "../../../../src/actions/shoppingActions";
 import mapDispatcht from "../../shoppingCartUses";

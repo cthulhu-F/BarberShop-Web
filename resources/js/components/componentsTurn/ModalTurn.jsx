@@ -11,8 +11,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 // import { Tabs,TabList, Tab, TabPanel } from "react-tabs";
 import Button from "@restart/ui/esm/Button";
-import "../../../css/ModalTurn.css"
-import "../../../css/main.css"
+import "../../../css/ModalTurn.css";
 
 import { useForm } from "react-hook-form";
 

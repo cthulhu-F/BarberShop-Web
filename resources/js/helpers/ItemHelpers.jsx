@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from'sweetalert2';
 
 //START API RESOURCE CATEGORY
 
