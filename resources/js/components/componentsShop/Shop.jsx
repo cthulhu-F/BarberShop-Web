@@ -82,20 +82,21 @@ const Shop = () => {
           <div className="row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p" >
     
             <div className="col-12 col-xl-12 border-0">
-              <div className="w-100 text-center fw-bold font-h1" style={{color:"#fff"}}>
+              <div className="w-100 text-center fw-bold font-h1" style={{color:"#000"}}>
                 
-               { 
+              { 
 
-                !products?
+              !products?
 
-                ""
-                :
-               
-                searchValue
+              `Cargando ${searchValue != "undefined" ? `resultados para "${searchValue}"`:""}...`
 
-                ? `${searchResult.length} Resultados encontrados para "${searchValue}"`
-                : ""
-              
+              :
+
+              searchValue != "undefined" 
+
+              ? `${searchResult.length} Resultados encontrados para "${searchValue}"`
+              : ""
+
               }
               </div>
             </div>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState }  from "react";
 
+import { ShowConfigDay, ShowConfigTurn} from "../../../helpers/TurnHelpers";
 
-const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
+const ModalTurnListEditor = ({turn, editTurnSchedule, schedule}) =>{
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -21,7 +22,7 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
         const listItemInputs = document.getElementById(`modalTurnItemInput${turn.id}`)
         date = listItemInputs.querySelector("#backofice-turn-date-editor");
         time = listItemInputs.querySelector("#backofice-turn-time-editor");
-        duration = listItemInputs.querySelector("#backofice-turn-duration-editor");
+
     }
 
     function convertTelToWppLink(tel){
@@ -33,19 +34,19 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
     const setTurnDataValidated = (event,turn, orderByDate)=>{
         event.preventDefault();
 
-        if (date.value != "" || time.value != "" || duration.value != "" ){
+        let selectedKey = time.options[time.selectedIndex].id
+   
+
+        if (date.value != "" || selectedKey != turn.time){
 
             let dateAlert     =   date.value == "" ? "" : ` <span style="font-weight:700;" >Fecha </span><br> ${date.placeholder} ---> ${date.value.split('-')[2]+'/'+date.value.split('-')[1]+'/'+date.value.split('-')[0]} <br> <br>  `;
-            let timeAlert     =   time.value == "" ? "" : `<span style="font-weight:700;" >Horario </span><br>  ${time.placeholder} ---> ${time.value} <br><br>`;
-            let durationAlert =   duration.value == "" ? "" : `<span style="font-weight:700;" >Duración </span><br> ${duration.placeholder} ---> ${duration.value}<br><br>`;
+            let timeAlert     =   selectedKey == turn.time ? "" : `<span style="font-weight:700;" >Horario </span><br>  ${turn.time} ---> ${selectedKey} <br><br>`;
             
             let wppDateAlert     =   date.value == "" ? "" : `_Nueva fecha programada_%0A${date.placeholder} ---> *${date.value.split('-')[2]+'/'+date.value.split('-')[1]+'/'+date.value.split('-')[0]}*.%0A%0A`;
-            let wppTimeAlert     =   time.value == "" ? "" : `_Nuevo horario programado_%0A${time.placeholder} ---> *${time.value}*.%0A%0A`;
-            let wppTurationAlert =   duration.value == "" ? "" : `_Nueva duración estimada_%0A${duration.placeholder} ---> *${duration.value}*.%0A%0A`;
-    
+            let wppTimeAlert     =   time.value == "" ? "" : `_Nuevo horario programado_%0A${turn.time} ---> *${selectedKey}*.%0A%0A`;    
 
 
-            let msjUrl =`Hola ${turn.name_client}, desde BrothersBarberShop queremos notificarle que por razones de fuerza mayor hemos tenido que modificar la programación de su turno. La nueva programación es la siguiente%0A%0A${wppDateAlert}${wppTimeAlert}${wppTurationAlert}Sepa disculpar las molestias, si no dispone de ese horario libre por favor notifíquenos, de lo contrario te esperamos el día ${turn.date} a las ${turn.time}.%0AMuchas gracias!`
+            let msjUrl =`Hola ${turn.name_client}, desde BrothersBarberShop queremos notificarle que por razones de fuerza mayor hemos tenido que modificar la programación de su turno. La nueva programación es la siguiente%0A%0A${wppDateAlert}${wppTimeAlert}Sepa disculpar las molestias, si no dispone de ese horario libre por favor notifíquenos, de lo contrario te esperamos el día ${turn.date} a las ${turn.time}.%0AMuchas gracias!`
 
             msjUrl = msjUrl.split(" ").join("%20");
             let clienWppLink = convertTelToWppLink(turn.phone_client);
@@ -53,7 +54,7 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
             swal.fire({
             title: "Atención",
             html: `Esta seguro que desea modificar los siguientes datos?<br><br> 
-            ${dateAlert} ${timeAlert} ${durationAlert}`, 
+            ${dateAlert} ${timeAlert}`, 
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#000',
@@ -62,10 +63,9 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.open(`https://wa.me/${clienWppLink}?text=${msjUrl}`, '_blank');
-                    editTurnSchedule(date.value, time.value, duration.value,turn);
+                    editTurnSchedule(date.value, selectedKey,turn);
                     date.value="";
                     time.value="";
-                    duration.value="";
 
                     swal.fire({
                         text: 'Datos modificados con éxito',
@@ -130,7 +130,7 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
                             </div>
                         
 
-                            <div className="d-flex justify-content-between mb-1" >
+                            {/* <div className="d-flex justify-content-between mb-1" >
                                 <span className="me-2 p-2 fw-bold">Hora de inicio</span>
 
                                 <input type="text" className="form-control w-50" id="backofice-turn-time-editor"
@@ -139,16 +139,19 @@ const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
                                 
                                 placeholder={turn.time}
                                 />
+                            </div> */}
+
+                            <div className="d-flex justify-content-between mb-1" >
+                                <span className="me-2 p-2 fw-bold">Horario</span>
+                                <select className="form-select p-2  w-50" id="backofice-turn-time-editor">
+                                {schedule.map((hour,index) =>
+                                    <option selected={turn.time == hour.turn }  key={index} id={hour.turn}>{hour.turn}</option>
+                                )}
+                                
+                                </select>
                             </div>
                         
-                            <div className="d-flex justify-content-between mb-1">
-                                <span className="me-2 p-2 fw-bold">Duración</span>
-                                <input type="text" className="form-control w-50" id="backofice-turn-duration-editor"
-                                onFocus={(e) => e.currentTarget.type = "time"}
-                                onBlur={(e) => e.currentTarget.type = "text"}
-                                
-                                placeholder={turn.turn_duration}
-                           /></div>
+                        
                         </div>
                       
                     </div>

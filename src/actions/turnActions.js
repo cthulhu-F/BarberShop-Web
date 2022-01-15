@@ -7,7 +7,7 @@ export const TURN_TYPES ={
     SAVE_TURN               : "SAVE_TURN",
     SET_USER_DATA           :"SET_USER_DATA",
     SET_TURN_DATA           :"SET_TURN_DATA",
-
+    GET_BACKOFFICE_SCHEDULE : "GET_BACKOFFICE_SCHEDULE ",
     //API ACTIONS
 
     READ_ALL_DAY            :"READ_ALL_DAY",
