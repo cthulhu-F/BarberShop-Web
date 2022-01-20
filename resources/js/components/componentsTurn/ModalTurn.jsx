@@ -349,11 +349,15 @@ const ModalTurn = () => {
                 <div className="col-12">
                   <div className="input-group">
                     <select className="form-select border-0 border-start border-top border-bottom" id="inputGroupSelect02"
-                    onChange={(event)=>setHour(event.target.value)}>
-                      <option selected>Horarios</option>
-                      {schedule.map((hour)=>
+                    onChange={(event)=>setHour(event.target.value)} disabled={schedule=="NONACTIVE"}>
+                      
+                      <option selected>{schedule!="NONACTIVE" ? "Horarios" : "Horarios no disponibles"}</option>
+                      {schedule!="NONACTIVE"
+                      ?schedule.map((hour)=>
                         <option>{hour.turn}</option>
-                      )}
+                      )
+                      :""
+                      }
                       
                     </select>
                     <label className="input-group-text bg-white border-0 border-end border-top border-bottom"
@@ -362,7 +366,7 @@ const ModalTurn = () => {
                 </div>
 
                 <div className="modal-footer" style={{margin:"20px 0px 0px 0px"}}>
-                  <button type="button" className="btn login_btn btn-orangeWeb"  onClick={()=>setTurnDataValidated()}>Siguiente</button>
+                  <button type="button" className="btn login_btn btn-orangeWeb"  onClick={()=>setTurnDataValidated()} disabled={schedule=="NONACTIVE"}>Siguiente</button>
                 </div>
 
             </Tab>

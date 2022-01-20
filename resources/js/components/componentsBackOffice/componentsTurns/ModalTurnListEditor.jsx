@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from "react";
 
 import { ShowConfigDay, ShowConfigTurn} from "../../../helpers/TurnHelpers";
 
-const ModalTurnListEditor = ({turn, editTurnSchedule, schedule}) =>{
+const ModalTurnListEditor = ({turn, editTurnSchedule, schedule,getBackofficeSchedule}) =>{
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -102,6 +102,12 @@ const ModalTurnListEditor = ({turn, editTurnSchedule, schedule}) =>{
 
     }
 
+    const sortDate = (date) =>{
+        let dateArray = date.split("-");
+        let sortedDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+        return sortedDate;
+    }
+
     return(
         <div className="modal fade" id={`modalTurnConfig${turn.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="modalTurnConfigLabel" aria-hidden="true">
@@ -126,7 +132,9 @@ const ModalTurnListEditor = ({turn, editTurnSchedule, schedule}) =>{
                                 placeholder={turn.date}
                                 min = {minDate} max={maxDte} 
                                 id="backofice-turn-date-editor"
-                                style={{margin:"10px 0px"}}/>
+                                style={{margin:"10px 0px"}}
+                                onChange={e=>getBackofficeSchedule(turn.name, sortDate(e.target.value))}
+                                />
                             </div>
                         
 
@@ -143,10 +151,13 @@ const ModalTurnListEditor = ({turn, editTurnSchedule, schedule}) =>{
 
                             <div className="d-flex justify-content-between mb-1" >
                                 <span className="me-2 p-2 fw-bold">Horario</span>
-                                <select className="form-select p-2  w-50" id="backofice-turn-time-editor">
-                                {schedule.map((hour,index) =>
+                                <select className="form-select p-2  w-50" id="backofice-turn-time-editor" disabled={schedule=="NONACTIVE"}>
+                                {schedule!="NONACTIVE"
+                                ? schedule.map((hour,index) =>
                                     <option selected={turn.time == hour.turn }  key={index} id={hour.turn}>{hour.turn}</option>
-                                )}
+                                )
+                                : <option key={"0"}>{"Día Inhabilitado"}</option>
+                                }
                                 
                                 </select>
                             </div>
@@ -156,14 +167,14 @@ const ModalTurnListEditor = ({turn, editTurnSchedule, schedule}) =>{
                       
                     </div>
                     <div class="modal-footer" >
-                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal"
+                        <button type="button" className={`btn ${schedule=="NONACTIVE" ? "btn-secondary" : "btn-primary"}`} data-bs-dismiss="modal"
                         onClick={(e)=>{
                             e.preventDefault();
                             setInputAsVariables(turn.id);
-                            setTurnDataValidated(e, turn);
-                          
-                                
-                        }}>Modificar programación</button>
+                            setTurnDataValidated(e, turn);        
+                        }}
+                        disabled={schedule=="NONACTIVE"}
+                        >Modificar programación</button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>

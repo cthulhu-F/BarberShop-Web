@@ -82,7 +82,8 @@ export const turnStateData = {
         phone_client: "",
         email_client: "",
         client_is_registered: false,
-        }
+        },
+    activeTurns: ITEM_TURNS.activeTurn,
 }
 
 export function turnReducer(state, action){
@@ -115,8 +116,15 @@ export function turnReducer(state, action){
             if (action.date =="null"){
                 action.date = selecetDay;
             };
-            console.log("action");
-            console.log(action);
+
+            // Get active Day Turns:
+            let givenTurns = [];
+            let SelecedDateArray = action.date.split("-");
+            let SelecedDate = SelecedDateArray[2] + "/" + SelecedDateArray[1] + "/" +SelecedDateArray[0];
+            state.activeTurns.map(actveTurn =>{
+                if (SelecedDate == actveTurn.date && actveTurn.status == "ACTIVE")
+                givenTurns.push(actveTurn.time)
+                });
 
             let dateData = action.date.split("-");
             let dt = new Date(dateData) 
@@ -129,25 +137,40 @@ export function turnReducer(state, action){
             //console.log(action.payload);
 
             let daySchedule = chairAviability.days[weekDay].split("/");
-            //console.log(daySchedule)  
             
-            let turnsAmount = daySchedule[2];
-            let open = new Date("December 14, 2021 " + `${daySchedule[0]}` + ":00");
-            let colse = new Date("December 14, 2021 "+ `${daySchedule[1]}`+ ":00");
-            let difference = ((colse-open)/1000);
-            let turnDuration = difference/turnsAmount // En segundos
+            let aviableTurns;
+            let turnDuration;
+            if (daySchedule != "NONACTIVE" || daySchedule[2] < 1){
+                let turnsAmount = daySchedule[2];
+                let open = new Date("December 14, 2021 " + `${daySchedule[0]}` + ":00");
+                let colse = new Date("December 14, 2021 "+ `${daySchedule[1]}`+ ":00");
+                let difference = ((colse-open)/1000);
+                turnDuration = difference/turnsAmount // En segundos
 
-            turnDuration = setHoursAndMinutes(turnDuration);
-            let turn = daySchedule[0];
-            let aviableTurns= [{turn:turn}];
-            for (let ii = 0; ii<turnsAmount; ii++){
-                turn= addTime(turn,turnDuration);
-                aviableTurns[ii]={turn:turn};
+                turnDuration = setHoursAndMinutes(turnDuration);
+                let turn = daySchedule[0];
+                aviableTurns= [{turn:turn}];
+                for (let ii = 1; ii<turnsAmount; ii++){
+                    turn= addTime(turn,turnDuration);
+                    aviableTurns.push({turn:turn});
+                }
+
+                aviableTurns = aviableTurns.filter(turn =>{
+                    if (!givenTurns.includes(turn.turn))
+                        return turn;
+                })
+
+
+                try{
+                document.getElementById("inputGroupSelect02").value="Horarios";  
+                }catch(error){}
+
             }
-            try{
-            document.getElementById("inputGroupSelect02").value="Horarios";
-                
-            }catch(error){}
+
+            else {
+                aviableTurns = "NONACTIVE";
+                turnDuration = "";
+            }
             return {...state, schedule: aviableTurns, selecetDay : action.date, selectedHour:"", hourIsSelected: false, turnDuration : turnDuration};  
         }
 
@@ -190,25 +213,41 @@ export function turnReducer(state, action){
 
         case TURN_TYPES.GET_BACKOFFICE_SCHEDULE : {
         
-            console.log("action");
-            console.log(action.payload);
-            console.log(action.date);
+            // Get active Day Turns:
+            let givenTurns = [];
+            let SelecedDateArray = action.date.split("-");
+            let SelecedDate = SelecedDateArray[0] + "/" + SelecedDateArray[1] + "/" +SelecedDateArray[2];
+            console.log("SelecedDate")
+            console.log(SelecedDate)
+            state.activeTurns.map(actveTurn =>{
+                console.log("actveTurn.date")
+                console.log(actveTurn.date)
+                if (SelecedDate == actveTurn.date && actveTurn.status == "ACTIVE")
+                givenTurns.push(actveTurn.time)
+                });
+
+            console.log("given turns");
+            console.log(givenTurns)
 
             let dateData = action.date.split("-");
             let dt = new Date(dateData[1] +"-" + dateData[0]+"-" + dateData[2]) 
             let weekDayIndex = dt.getDay();
             let weekDay =days[weekDayIndex];
+
             
             let chairCalledId = state.chairs.find(chair=>chair.name === action.payload).id;
             let chairAviability = state.chairConfigDay.find(chair=>chair.id === chairCalledId);
 
             
             let daySchedule = chairAviability.days[weekDay];
+            console.log("daySchedule")
+            console.log(daySchedule)
+
             let dayScheduleSplited= daySchedule != "NONACTIVE" ? daySchedule.split("/") : daySchedule;
 
             let aviableTurns;
             let turnDuration;
-            if (daySchedule != "NONACTIVE"){
+            if (daySchedule != "NONACTIVE" || dayScheduleSplited[2] < 1){
                 let turnsAmount = dayScheduleSplited[2];
                 let open = new Date("December 14, 2021 " + `${dayScheduleSplited[0]}` + ":00");
                 let colse = new Date("December 14, 2021 "+ `${dayScheduleSplited[1]}`+ ":00");
@@ -217,17 +256,25 @@ export function turnReducer(state, action){
 
                 turnDuration = setHoursAndMinutes(turnDuration);
                 let turn = dayScheduleSplited[0];
+                console.log("turn")
+                console.log(turn)
                 aviableTurns= [{turn:turn}];
-                for (let ii = 0; ii<turnsAmount; ii++){
+                for (let ii = 1; ii<turnsAmount; ii++){
                     turn= addTime(turn,turnDuration);
-                    aviableTurns[ii]={turn:turn};
+                    aviableTurns.push({turn:turn});
                 }
-                
+
+                aviableTurns = aviableTurns.filter(turn =>{
+                    if (!givenTurns.includes(turn.turn))
+                        return turn;
+                })
+    
+                console.log("aviableTurns")
+                console.log(aviableTurns)
             }
             else {
                 aviableTurns = "NONACTIVE";
                 turnDuration = "";
-
             }
             return {...state, schedule: aviableTurns ? aviableTurns : "NONACTIVE", hourIsSelected: false, turnDuration : turnDuration ?turnDuration :"" };  
         }

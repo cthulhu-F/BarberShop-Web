@@ -103,6 +103,34 @@ export const ITEM_TURNS = {
       update_at: "14/12/2021", 
       status: "ACTIVE"
     }
+  ],
+
+  activeTurn: [
+    {
+      status: "ACTIVE",
+      date: "30/01/2022",
+      time: "08:00",
+    },
+    {
+      status: "ACTIVE",
+      date: "20/02/2022",
+      time: "09:00",
+    },
+    {
+      status: "ACTIVE",
+      date: "20/02/2022",
+      time: "10:40",
+    },
+    {
+      status: "ACTIVE",
+      date: "15/01/2022",
+      time: "10:00",
+    },
+    {
+      status: "ACTIVE",
+      date: "22/01/2022",
+      time: "10:48",
+    }
   ]
 
 

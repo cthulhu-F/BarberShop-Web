@@ -84,7 +84,7 @@ const TurnDashboardListItem = ({turn,editTurnSchedule,orderByDate, setTurnStatus
         </td>
 
         <ModalTurnListEditor key={turn.id+"editor"} turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate} schedule={schedule}
-        />
+        getBackofficeSchedule={getBackofficeSchedule}/>
         <ModalTurnListSettings key={turn.id+"setting"} turn={turn} editTurnSchedule={editTurnSchedule}orderByDate={orderByDate} setTurnStatus={setTurnStatus}/>
 
         <div className="modal fade" id={`modalDataClientList${turn.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

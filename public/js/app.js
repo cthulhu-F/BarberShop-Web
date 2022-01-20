@@ -11483,7 +11483,8 @@ __webpack_require__.r(__webpack_exports__);
 var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
   var turn = _ref.turn,
       editTurnSchedule = _ref.editTurnSchedule,
-      schedule = _ref.schedule;
+      schedule = _ref.schedule,
+      getBackofficeSchedule = _ref.getBackofficeSchedule;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -11568,6 +11569,12 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
     }
   };
 
+  var sortDate = function sortDate(date) {
+    var dateArray = date.split("-");
+    var sortedDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+    return sortedDate;
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "modal fade",
     id: "modalTurnConfig".concat(turn.id),
@@ -11618,6 +11625,9 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
                 id: "backofice-turn-date-editor",
                 style: {
                   margin: "10px 0px"
+                },
+                onChange: function onChange(e) {
+                  return getBackofficeSchedule(turn.name, sortDate(e.target.value));
                 }
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -11628,13 +11638,16 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
                 className: "form-select p-2  w-50",
                 id: "backofice-turn-time-editor",
-                children: schedule.map(function (hour, index) {
+                disabled: schedule == "NONACTIVE",
+                children: schedule != "NONACTIVE" ? schedule.map(function (hour, index) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
                     selected: turn.time == hour.turn,
                     id: hour.turn,
                     children: hour.turn
                   }, index);
-                })
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                  children: "Día Inhabilitado"
+                }, "0")
               })]
             })]
           })
@@ -11642,13 +11655,14 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
           "class": "modal-footer",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             type: "button",
-            className: "btn btn-primary",
+            className: "btn ".concat(schedule == "NONACTIVE" ? "btn-secondary" : "btn-primary"),
             "data-bs-dismiss": "modal",
             onClick: function onClick(e) {
               e.preventDefault();
               setInputAsVariables(turn.id);
               setTurnDataValidated(e, turn);
             },
+            disabled: schedule == "NONACTIVE",
             children: "Modificar programaci\xF3n"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             type: "button",
@@ -13824,7 +13838,8 @@ var TurnDashboardListItem = function TurnDashboardListItem(_ref) {
       turn: turn,
       editTurnSchedule: editTurnSchedule,
       orderByDate: orderByDate,
-      schedule: schedule
+      schedule: schedule,
+      getBackofficeSchedule: getBackofficeSchedule
     }, turn.id + "editor"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ModalTurnListSettings__WEBPACK_IMPORTED_MODULE_3__["default"], {
       turn: turn,
       editTurnSchedule: editTurnSchedule,
@@ -17982,14 +17997,15 @@ var ModalTurn = function ModalTurn() {
                     onChange: function onChange(event) {
                       return setHour(event.target.value);
                     },
+                    disabled: schedule == "NONACTIVE",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("option", {
                       selected: true,
-                      children: "Horarios"
-                    }), schedule.map(function (hour) {
+                      children: schedule != "NONACTIVE" ? "Horarios" : "Horarios no disponibles"
+                    }), schedule != "NONACTIVE" ? schedule.map(function (hour) {
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("option", {
                         children: hour.turn
                       });
-                    })]
+                    }) : ""]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("label", {
                     className: "input-group-text bg-white border-0 border-end border-top border-bottom",
                     "for": "inputGroupSelect02",
@@ -18009,6 +18025,7 @@ var ModalTurn = function ModalTurn() {
                   onClick: function onClick() {
                     return setTurnDataValidated();
                   },
+                  disabled: schedule == "NONACTIVE",
                   children: "Siguiente"
                 })
               })]
@@ -18534,6 +18551,27 @@ var ITEM_TURNS = {
     turn_duration: "00:15",
     update_at: "14/12/2021",
     status: "ACTIVE"
+  }],
+  activeTurn: [{
+    status: "ACTIVE",
+    date: "30/01/2022",
+    time: "08:00"
+  }, {
+    status: "ACTIVE",
+    date: "20/02/2022",
+    time: "09:00"
+  }, {
+    status: "ACTIVE",
+    date: "20/02/2022",
+    time: "10:40"
+  }, {
+    status: "ACTIVE",
+    date: "15/01/2022",
+    time: "10:00"
+  }, {
+    status: "ACTIVE",
+    date: "22/01/2022",
+    time: "10:48"
   }]
 };
 
@@ -21410,7 +21448,8 @@ var turnStateData = {
     phone_client: "",
     email_client: "",
     client_is_registered: false
-  }
+  },
+  activeTurns: _resources_js_constants_constTurn__WEBPACK_IMPORTED_MODULE_1__.ITEM_TURNS.activeTurn
 };
 function turnReducer(state, action) {
   switch (action.type) {
@@ -21455,9 +21494,14 @@ function turnReducer(state, action) {
           action.date = selecetDay;
         }
 
-        ;
-        console.log("action");
-        console.log(action);
+        ; // Get active Day Turns:
+
+        var givenTurns = [];
+        var SelecedDateArray = action.date.split("-");
+        var SelecedDate = SelecedDateArray[2] + "/" + SelecedDateArray[1] + "/" + SelecedDateArray[0];
+        state.activeTurns.map(function (actveTurn) {
+          if (SelecedDate == actveTurn.date && actveTurn.status == "ACTIVE") givenTurns.push(actveTurn.time);
+        });
         var dateData = action.date.split("-");
         var dt = new Date(dateData);
         var weekDayIndex = dt.getDay();
@@ -21468,30 +21512,41 @@ function turnReducer(state, action) {
         //console.log("chair");
         //console.log(action.payload);
 
-        var daySchedule = chairAviability.days[weekDay].split("/"); //console.log(daySchedule)  
+        var daySchedule = chairAviability.days[weekDay].split("/");
+        var aviableTurns;
+        var turnDuration;
 
-        var turnsAmount = daySchedule[2];
-        var open = new Date("December 14, 2021 " + "".concat(daySchedule[0]) + ":00");
-        var colse = new Date("December 14, 2021 " + "".concat(daySchedule[1]) + ":00");
-        var difference = (colse - open) / 1000;
-        var turnDuration = difference / turnsAmount; // En segundos
+        if (daySchedule != "NONACTIVE" || daySchedule[2] < 1) {
+          var turnsAmount = daySchedule[2];
+          var open = new Date("December 14, 2021 " + "".concat(daySchedule[0]) + ":00");
+          var colse = new Date("December 14, 2021 " + "".concat(daySchedule[1]) + ":00");
+          var difference = (colse - open) / 1000;
+          turnDuration = difference / turnsAmount; // En segundos
 
-        turnDuration = setHoursAndMinutes(turnDuration);
-        var turn = daySchedule[0];
-        var aviableTurns = [{
-          turn: turn
-        }];
-
-        for (var ii = 0; ii < turnsAmount; ii++) {
-          turn = addTime(turn, turnDuration);
-          aviableTurns[ii] = {
+          turnDuration = setHoursAndMinutes(turnDuration);
+          var turn = daySchedule[0];
+          aviableTurns = [{
             turn: turn
-          };
-        }
+          }];
 
-        try {
-          document.getElementById("inputGroupSelect02").value = "Horarios";
-        } catch (error) {}
+          for (var ii = 1; ii < turnsAmount; ii++) {
+            turn = addTime(turn, turnDuration);
+            aviableTurns.push({
+              turn: turn
+            });
+          }
+
+          aviableTurns = aviableTurns.filter(function (turn) {
+            if (!givenTurns.includes(turn.turn)) return turn;
+          });
+
+          try {
+            document.getElementById("inputGroupSelect02").value = "Horarios";
+          } catch (error) {}
+        } else {
+          aviableTurns = "NONACTIVE";
+          turnDuration = "";
+        }
 
         return _objectSpread(_objectSpread({}, state), {}, {
           schedule: aviableTurns,
@@ -21553,9 +21608,22 @@ function turnReducer(state, action) {
 
     case _actions_turnActions__WEBPACK_IMPORTED_MODULE_0__.TURN_TYPES.GET_BACKOFFICE_SCHEDULE:
       {
-        console.log("action");
-        console.log(action.payload);
-        console.log(action.date);
+        // Get active Day Turns:
+        var _givenTurns = [];
+
+        var _SelecedDateArray = action.date.split("-");
+
+        var _SelecedDate = _SelecedDateArray[0] + "/" + _SelecedDateArray[1] + "/" + _SelecedDateArray[2];
+
+        console.log("SelecedDate");
+        console.log(_SelecedDate);
+        state.activeTurns.map(function (actveTurn) {
+          console.log("actveTurn.date");
+          console.log(actveTurn.date);
+          if (_SelecedDate == actveTurn.date && actveTurn.status == "ACTIVE") _givenTurns.push(actveTurn.time);
+        });
+        console.log("given turns");
+        console.log(_givenTurns);
 
         var _dateData = action.date.split("-");
 
@@ -21573,13 +21641,15 @@ function turnReducer(state, action) {
         });
 
         var _daySchedule = _chairAviability.days[_weekDay];
+        console.log("daySchedule");
+        console.log(_daySchedule);
         var dayScheduleSplited = _daySchedule != "NONACTIVE" ? _daySchedule.split("/") : _daySchedule;
 
         var _aviableTurns;
 
         var _turnDuration;
 
-        if (_daySchedule != "NONACTIVE") {
+        if (_daySchedule != "NONACTIVE" || dayScheduleSplited[2] < 1) {
           var _turnsAmount = dayScheduleSplited[2];
 
           var _open = new Date("December 14, 2021 " + "".concat(dayScheduleSplited[0]) + ":00");
@@ -21592,16 +21662,25 @@ function turnReducer(state, action) {
 
           _turnDuration = setHoursAndMinutes(_turnDuration);
           var _turn = dayScheduleSplited[0];
+          console.log("turn");
+          console.log(_turn);
           _aviableTurns = [{
             turn: _turn
           }];
 
-          for (var _ii = 0; _ii < _turnsAmount; _ii++) {
+          for (var _ii = 1; _ii < _turnsAmount; _ii++) {
             _turn = addTime(_turn, _turnDuration);
-            _aviableTurns[_ii] = {
+
+            _aviableTurns.push({
               turn: _turn
-            };
+            });
           }
+
+          _aviableTurns = _aviableTurns.filter(function (turn) {
+            if (!_givenTurns.includes(turn.turn)) return turn;
+          });
+          console.log("aviableTurns");
+          console.log(_aviableTurns);
         } else {
           _aviableTurns = "NONACTIVE";
           _turnDuration = "";
