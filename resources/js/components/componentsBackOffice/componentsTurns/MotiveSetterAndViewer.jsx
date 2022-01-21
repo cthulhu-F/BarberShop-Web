@@ -102,6 +102,23 @@ const MotiveSetterAndViewer = () => {
     }
   }
 
+  const [selectItemTable, setSelectItemTable] = useState([]);
+
+    function selectItem(id, event) {
+        let array = selectItemTable;
+
+
+        if (event.target.checked) {
+            array = [...array, id];
+            setSelectItemTable(array.splice(" "));
+        } else {
+            let filterArray = array.filter(function (item) {
+                return id !== item;
+            })
+            setSelectItemTable(filterArray);
+        }
+    }
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -150,6 +167,7 @@ const MotiveSetterAndViewer = () => {
                           <th scope="col">Dias disponibles</th>
                           <th scope="col"></th>
                           <th scope="col"></th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -157,7 +175,7 @@ const MotiveSetterAndViewer = () => {
                         {
                           !allChairsSchedule ?
 
-                            <LoadTable td={4}/>
+                            <LoadTable td={4} />
 
                             :
 
@@ -199,7 +217,17 @@ const MotiveSetterAndViewer = () => {
                                     </div>
                                   }
                                 </td>
+
+                                <td>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={(event) => selectItem(chair.id, event)} />
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                    </label>
+                                  </div>
+                                </td>
                               </tr>
+
+
 
 
 
@@ -215,7 +243,7 @@ const MotiveSetterAndViewer = () => {
                             :
 
                             <tr>
-                              <td className="" colSpan={5}>
+                              <td className="" colSpan={6}>
                                 <div className="d-flex justify-content-end">
                                   <nav aria-label="Page navigation example m-0">
                                     <Pagination setCurrentPage={setCurrentPage} pages={howManyPages} />
@@ -238,9 +266,9 @@ const MotiveSetterAndViewer = () => {
                 {
                   !editableChair ?
 
-                    <LoadMotiveSetter/>
+                    <LoadMotiveSetter />
 
-                  :
+                    :
 
                     <MotiveSetter editableChair={editableChair} turnsPerday={turnsPerday}
                       setActiveDay={setActiveDay} editableDay={editableDay}
@@ -258,12 +286,13 @@ const MotiveSetterAndViewer = () => {
         </div>
 
         {
-          !editableChair?
-          ""
-          :
-          <ModalChairsConfig editableChair={editableChair} saveChairConfig={saveChairConfig} />
+            !editableChair ?
+
+            ""
+            :
+            <ModalChairsConfig editableChair={editableChair} saveChairConfig={saveChairConfig} selectItem={selectItem} selectItemTable={selectItemTable} />
         }
-        
+
       </div>
     </div>
 

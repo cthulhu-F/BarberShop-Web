@@ -1,18 +1,63 @@
 import axios from "axios";
 import swal from'sweetalert2';
 
-export const UpdateOrderTurn = async (put) => {
+//START API RESOURCE ORDER TURN
 
-  const data = await axios({
-    method: 'put',
-    url: 'http://127.0.0.1:8000/api/UpdateOrderTurn',
-    data: {
-      id: put.id,
-      status: put.status
-    }
-  });
+export const UpdateOrderTurn = async (formData, selectItem) => {
 
-  return data.data
+
+  if(selectItem == false){
+
+    const data = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/UpdateOrderTurn',
+      data: formData
+    }).then((response) => {
+      return swal.fire({
+        text: response.data.message,
+        timer: "2000",
+        position: "bottom",
+        showConfirmButton: false,
+        customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+        }
+      });
+    }).catch((response) => {
+      return response
+    });
+    return data.data
+
+  } else {
+
+   const data = selectItem.map(async (item) => {
+
+    formData.append('id', item);
+
+    const data = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/UpdateOrderTurn',
+      data: formData
+    }).then((response) => {
+      return swal.fire({
+        text: response.data.message,
+        timer: "2000",
+        position: "bottom",
+        showConfirmButton: false,
+        customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+        }
+      });
+    }).catch((response) => {
+      return response
+    });
+    return data.data
+
+   })
+
+
+  }
 }
 
 export const ShowOrderTurn = async () => {
@@ -48,21 +93,65 @@ export const CreateOrderTurn = async (post) => {
   return data
 }
 
-export const UpdateCondigTurn = async (status, id) => {
-  console.log(status);
-  console.log(id);
+//END API RESOURCE ORDER TURN
 
+//START API RESOURCE CONFIG TURN
+
+export const UpdateConfigTurn = async (formData, selectItem) => {
+
+  if(selectItem == false){
+
+    const data = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/UpdateConfigTurn',
+      data: formData
+    }).then((response) => {
+      return swal.fire({
+        text: response.data.message,
+        timer: "2000",
+        position: "bottom",
+        showConfirmButton: false,
+        customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+        }
+      });
+    }).catch((response) => {
+      return response
+    });
+    return data.data
+
+  } else {
+
+    const data = selectItem.map(async (item) => {
+
+      formData.append('id', item);
+
+      const data = await axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8000/api/UpdateConfigTurn',
+        data: formData
+      }).then((response) => {
+        return swal.fire({
+          text: response.data.message,
+          timer: "2000",
+          position: "bottom",
+          showConfirmButton: false,
+          customClass: {
+              container: "add-to-cart-alert-container",
+              popup: "add-to-cart-alert",
+          }
+        });
+      }).catch((response) => {
+        return response
+      });
+      return data.data
+
+    })
+
+  }
   
-  const data = await axios({
-    method: 'put',
-    url: 'http://127.0.0.1:8000/api/UpdateConfigTurn',
-    data: {
-      id: id, 
-      status: status
-    }
-  });
-
-  return data.data
+  
 
 }
 
@@ -97,6 +186,17 @@ export const CreateConfigTurn = async (chair, day) => {
 
 }
 
+export const ShowConfigTurn = async (configDay, configTurn) => {
+  const data = await axios({
+    method: 'get',
+    url: 'http://127.0.0.1:8000/api/ShowConfigTurn',
+  })
+
+  return data.data
+}
+
+//END API RESOURCE CONFIG DAY
+
 export const UpdateConfigDay = async (day) => {
 
   let dayId = day.id;
@@ -115,15 +215,6 @@ export const UpdateConfigDay = async (day) => {
 
 }
 
-
-export const ShowConfigTurn = async (configDay, configTurn) => {
-  const data = await axios({
-    method: 'get',
-    url: 'http://127.0.0.1:8000/api/ShowConfigTurn',
-  })
-
-  return data.data
-}
 
 export const ShowConfigDay = async () => {
   const data = await axios({

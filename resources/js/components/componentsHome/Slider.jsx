@@ -6,7 +6,7 @@ import { shoppingReducer, cartItemsData, shoppingInitialState} from '../../../..
 import mapDispatcht from '../../shoppingCartUses';
 import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
 import { useEffect } from 'react';
-import {ShowAllProducts, ShowAllCategories} from '../../helpers/ItemHelpers';
+import {ShowActiveProducts, ShowAllCategories} from '../../helpers/ItemHelpers';
 import { useState } from 'react';
 import LoadProduct from '../componentsLoaders/LoadProduct';
 
@@ -43,7 +43,7 @@ const Slider = () => {
 
   useEffect(()=> {
     const showItem = async () => {
-      const resItem = await ShowAllProducts();
+      const resItem = await ShowActiveProducts();
       const resCategorie = await ShowAllCategories();
       readAllData(resItem, resCategorie);
       setItem(resItem);

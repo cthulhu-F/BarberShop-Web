@@ -4,11 +4,11 @@ import { useState } from "react";
 import swal from "sweetalert2";
 
 import "../../../../css/ModalProductEditor.css"
-import { CreateProduct, UpdateProduct } from "../../../helpers/ItemHelpers";
+import { CreateProducts, UpdateProducts } from "../../../helpers/ItemHelpers";
 
 
 
-const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories, newProduct = false }) => {
+const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories, newProduct = false, selectProduct }) => {
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -65,7 +65,6 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
 
                 if (result.isConfirmed) {
 
-                    formData.append('id', editableProduct.id);
 
                     if (nameField.value != "") {
                         formData.append('name', nameField.value);
@@ -107,7 +106,14 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
                     }
                     //priceField.value = "";
 
-                    let response = await UpdateProduct(formData)
+                    let response;
+
+                    if(selectProduct.length > 0){
+                        response = await UpdateProducts(formData, selectProduct);
+                    } else {
+                        formData.append('id', editableProduct.id);
+                        response = await UpdateProducts(formData, false);
+                    }
 
                 } else {
                     swal.fire({
@@ -216,22 +222,7 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
             formData.append('stock', stockField.value);
             formData.append('categories_id', selectedCategroyId);
 
-            let res = CreateProduct(formData);
-
-            /*
-            saveProductConfig(nameField.value, "name", editableProduct.id);
-            nameField.value ="";
-            saveProductConfig(descriptionField.value, "description", editableProduct.id);
-            descriptionField.value ="";
-            saveProductConfig(selectedCategroyId, "categories_id", editableProduct.id);
-            saveProductConfig(stockField.value, "stock", editableProduct.id);
-            stockField.value ="";
-            saveProductConfig(priceField.value, "price", editableProduct.id);
-            priceField.value ="";
-            saveProductConfig(todayString, "updated_at", editableProduct.id);
-            */
-
-
+            let res = CreateProducts(formData);
             
         }
     }
@@ -274,7 +265,7 @@ const ModalProductEditor = ({ editableProduct, saveProductConfig, allCategories,
                                     </div>
                                 </div>
 
-                                <div className="col-xl-9 mb-3">
+                                <div className="col-xl-12 col-12 mb-3">
                                     <div className="input-group">
                                         <input type="text" className="form-control fs-8" placeholder={editableProduct.sku}
                                             aria-label="Recipient's username" aria-describedby="basic-addon2" disabled={true} id="backofice-product-sku-editor" />

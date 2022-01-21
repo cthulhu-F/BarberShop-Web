@@ -101,50 +101,64 @@ const TurnDashboard = ({ }) => {
         let dateYyyy = dateMin[0];
         let dateMm = dateMin[1];
         let dateDd = dateMin[2];
-        let compartaiveMin = parseInt(dateYyyy+dateMm+dateDd)
+        let compartaiveMin = parseInt(dateYyyy + dateMm + dateDd)
 
         let dateMax = max.split('-')
         let dateYyyyMax = dateMax[0];
         let dateMmMax = dateMax[1];
         let dateDdMax = dateMax[2];
-        let compartaiveMax = parseInt(dateYyyyMax+dateMmMax+dateDdMax)
+        let compartaiveMax = parseInt(dateYyyyMax + dateMmMax + dateDdMax)
         //console.logcompartaiveMin)
         //console.logcompartaiveMax)
         //console.logaction.chairName)
 
         let filteredByName;
 
-        let FilteredBydate =  dashboardTurns.filter(turn =>
-                parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) >= compartaiveMin && 
-                parseInt(turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]) <= compartaiveMax 
+        let FilteredBydate = dashboardTurns.filter(turn =>
+            parseInt(turn.date.split('/')[2] + turn.date.split('/')[1] + turn.date.split('/')[0]) >= compartaiveMin &&
+            parseInt(turn.date.split('/')[2] + turn.date.split('/')[1] + turn.date.split('/')[0]) <= compartaiveMax
         );
 
-        if(searchValue != "Ver silla"){
-            if(FilteredBydate.length != 0 ){
-                filteredByName = FilteredBydate.filter(turn=>
+        if (searchValue != "Ver silla") {
+            if (FilteredBydate.length != 0) {
+                filteredByName = FilteredBydate.filter(turn =>
                     turn.name == searchValue
                 )
             } else {
-                filteredByName = dashboardTurns.filter(turn=>
+                filteredByName = dashboardTurns.filter(turn =>
                     turn.name == searchValue
                 )
             }
-        }else {
+        } else {
 
             filteredByName = FilteredBydate
-        
+
         }
 
         setTurnsPagination(filteredByName)
 
     }
 
-
-
-
-
-
     /* PAGINATION END*/
+
+    const [selectItemTable, setSelectItemTable] = useState([]);
+
+    function selectItem(id, event) {
+        let array = selectItemTable;
+
+
+        if (event.target.checked) {
+            array = [...array, id];
+            setSelectItemTable(array.splice(" "));
+        } else {
+            let filterArray = array.filter(function (item) {
+                return id !== item;
+            })
+            setSelectItemTable(filterArray);
+        }
+    }
+
+
 
     useEffect(() => {
         async function fetchPosts() {
@@ -221,21 +235,21 @@ const TurnDashboard = ({ }) => {
 
 
                         {
-                            !dashboardTurns? 
+                            !dashboardTurns ?
 
-                            ""
+                                ""
 
-                            :
+                                :
 
-                            todayFlag
+                                todayFlag
 
-                                ? todayScheduled.map((scheduledTurn) =>
-                                    <TurnDashboardItem key={scheduledTurn.id} scheduledTurn={scheduledTurn} setTurnStatus={setTurnStatus} UpdateOrderTurn={UpdateOrderTurn} />
-                                )
+                                    ? todayScheduled.map((scheduledTurn) =>
+                                        <TurnDashboardItem key={scheduledTurn.id} scheduledTurn={scheduledTurn} setTurnStatus={setTurnStatus} UpdateOrderTurn={UpdateOrderTurn} />
+                                    )
 
-                                : tomorrowScheduled.map((scheduledTurn) =>
-                                    <TurnDashboardItem key={scheduledTurn.id} scheduledTurn={scheduledTurn} setTurnStatus={setTurnStatus} UpdateOrderTurn={UpdateOrderTurn} />
-                                )
+                                    : tomorrowScheduled.map((scheduledTurn) =>
+                                        <TurnDashboardItem key={scheduledTurn.id} scheduledTurn={scheduledTurn} setTurnStatus={setTurnStatus} UpdateOrderTurn={UpdateOrderTurn} />
+                                    )
                         }
 
                     </div>
@@ -329,23 +343,8 @@ const TurnDashboard = ({ }) => {
                                     <th scope="col">Hora</th>
                                     <th scope="col">Hora de salida</th>
                                     <th scope="col"></th>
-                                    <th scope="col" className="row">
-                                        {/* <td className="col-3">
-                                        <input className="form-check-input" type="checkbox" role="switch" key="ACTIVE" id="filter-by-active"/>
-                                        <label className="form-check-label text-secondary" for="filter-by-active"><i class="bi bi-dash-circle-fill"></i></label>
-                                    </td>
-                                    <td className="col-3">
-                                        <input className="form-check-input" type="checkbox" role="switch" key="NONACTIVE" id="filter-by-nonactive"/>
-                                        <label className="form-check-label text-danger" for="filter-by-nonactive"><i class="bi bi-x-circle-fill"></i></label>
-                                    </td>
-                                    <td className="col-3"> 
-                                        <input className="form-check-input" type="checkbox" role="switch" key="CONFIRMED" id="completed"/>
-                                        <label className="form-check-label text-success" for="filter-by-completed"><i className="bi bi-check-circle-fill"></i></label>
-                                    </td> */}
-                                    </th>
-
+                                    <th scope="col" className="row"></th>
                                     <th scope="col"></th>
-
                                 </tr>
                             </thead>
 
@@ -356,12 +355,12 @@ const TurnDashboard = ({ }) => {
 
                                     !dashboardTurns ?
 
-                                        <LoadTable td={9}/>
+                                        <LoadTable td={9} />
 
                                         :
 
                                         currentTurns.map((turn) =>
-                                            <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus} />
+                                            <TurnDashboardListItem key={turn.id} turn={turn} editTurnSchedule={editTurnSchedule} orderByDate={orderByDate} setTurnStatus={setTurnStatus} selectItemTable={selectItemTable} selectItem={selectItem} />
                                         )
 
                                 }
@@ -376,7 +375,7 @@ const TurnDashboard = ({ }) => {
 
                                         <LoadTablePagination colspan={10} />
 
-                                    :
+                                        :
 
                                         <tr>
                                             <td className="" colspan="10">

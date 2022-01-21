@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import { useReducer } from "react";
-import { cartItemsData, shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
+import {shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import mapDispatcht from "../../shoppingCartUses";
 import ModalShoppingCart from "../componentsShoppingCart/ModalShoppingCart";
-import ShowAllProducts from "../../helpers/ItemHelpers";
+import {ShowUnitProduct} from "../../helpers/ItemHelpers";
 
 const Item = () => {
   let URL = window.location.pathname;
@@ -34,24 +34,11 @@ const Item = () => {
   // const decrement = mapDispatcht(dispatch).decrement;
 
   let existentProducts = products;
-  let mainitem;
   let aviableStock;
-  
-  if(products){
 
-      existentProducts = products.filter(function (item) {
-        const itemDataCut = String(item.id).toUpperCase();
-        const textDataCut = String(URLproduct).toUpperCase();
-        return itemDataCut.indexOf(textDataCut) > -1
-      });
+  const[mainItem, setMainItem] = useState(null);
 
-      mainitem = existentProducts[0];
-
-      aviableStock = mainitem.stock;
-  
-  }
-
-   
+  mainItem? aviableStock = mainItem.stock : ""
   
   let itemInCart = cart.find((item) => item.id === mainitem.id) ;
 
@@ -78,10 +65,11 @@ const Item = () => {
     setCount(parseInt(count) - 1);
   }
 
+
   useEffect(()=> {
     const showItem = async () => {
-      const res = await ShowAllProducts();
-      readAllData(res);
+      const response = await ShowUnitProduct(URLproduct);
+      setMainItem(response);
     }
     showItem();
   },[])
@@ -93,7 +81,7 @@ const Item = () => {
         <div className="col-xl-12">
 
         {
-          !products?
+          !mainItem?
 
           ""
 
@@ -101,7 +89,7 @@ const Item = () => {
 
           <div className="container-fluid text-start card">
             <img 
-            src={urlImg(mainitem.img).default}
+            src={urlImg(mainItem.img).default}
             className="img-thumbnail border-0"
             style={{borderRadius: "20px"}}
             alt=""
@@ -132,7 +120,7 @@ const Item = () => {
       <div className="container-fluid">
 
         {
-          !products?
+          !mainItem?
 
           ""
 
@@ -140,12 +128,12 @@ const Item = () => {
 
           <ul className="list-group">
           <li className="list-group-item border-0 border-bottom font-h1">
-            <span className="fw-bold fs-3">{mainitem.name}</span>
+            <span className="fw-bold fs-3">{mainItem.name}</span>
           </li>
           <li className="list-group-item border-0">
             <div>
               <span className="text-muted fs-5">
-                {mainitem.description} </span>
+                {mainItem.description} </span>
             </div>
           </li>
           <li className="list-group-item border-0">
@@ -155,17 +143,17 @@ const Item = () => {
             <span className="text-muted fs-6">Stock: {aviableStock}</span>
           </li>
           <li className="list-group-item border-0">
-            <span className="text-dark fw-bold fs-3">${mainitem.price}</span>
+            <span className="text-dark fw-bold fs-3">${mainItem.price}</span>
           </li>
           <li className="list-group-item border-0">
             <ul className="list-group list-group-horizontal border-0 border-top border-bottom py-4">
               <div className="list-group-item border-0 p-0 pe-1 w-50 d-flex">
                 <button onClick={()=>{decrement()}} disabled={count <= 1} className="btn btn-white border rounded-0 rounded-start fs-3 px-1 px-xl-3 fw-bold removing-button" style={{ zIndex: "2"}}><i className="bi bi-dash"></i></button>
                 <h3 className="form-control h-100 border-0 border-top border-bottom rounded-0 bg-white text-center fs-3">{count}</h3>
-                <button onClick={()=>{increment()}} disabled={count >= mainitem.stock} className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold adding-button" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
+                <button onClick={()=>{increment()}} disabled={count >= mainItem.stock} className="btn btn-white border rounded-0 rounded-end fs-3 px-1 px-xl-3 fw-bold adding-button" style={{zIndex: "2"}}><i className="bi bi-plus"></i></button>
               </div>
               <li className="list-group-item border-0  p-0 ps-1 w-50">
-                <button className="btn btn-dark h-100 w-100 fs-3"onClick={()=>addToCart(mainitem.id,count)} ><i className="bi bi-cart-plus" ></i></button>
+                <button className="btn btn-dark h-100 w-100 fs-3"onClick={()=>addToCart(mainItem.id,count)} ><i className="bi bi-cart-plus" ></i></button>
               </li>
             </ul>
           </li>

@@ -20,14 +20,14 @@ const ProductsDashboard = ({ allProducts, allCategories, saveProductConfig, filt
 
   const [paginationProducts, setProductsPagination] = useState(allProducts);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(5);
+  const [productsPerPage] = useState(15);
 
   let indexOfLastProduct;
   let indexOfFirstProduct;
   let currentProducts;
   let howManyPages;
 
- 
+
 
   if (allProducts) {
 
@@ -37,9 +37,6 @@ const ProductsDashboard = ({ allProducts, allCategories, saveProductConfig, filt
     howManyPages = Math.ceil(allProducts.length / productsPerPage)
 
   }
-
-
-  
 
   /* PAGINATION END*/
 
@@ -70,16 +67,21 @@ const ProductsDashboard = ({ allProducts, allCategories, saveProductConfig, filt
     return name != "Todas las categorías" ? allCategories.find(category => category.name == name).id : -1
   }
 
-  /*
-  useEffect(() => {
-    const fetch = async () => {
-    const res = await filteredBysearch;
-    // const newProd = await newProductSqueleton;
-    setProductsPagination(res)
+  const [selectProduct, setSelectProduct] = useState([]);
+
+  function selectProductSetting(id, event) {
+    let arrayProduct = selectProduct;
+
+    if (event.target.checked) {
+      arrayProduct = [...arrayProduct, id];
+      setSelectProduct(arrayProduct.splice(" "));
+    } else {
+      let deleteArray = arrayProduct.filter(function(product) {
+        return id !== product;
+      })
+      setSelectProduct(deleteArray);
     }
-    fetch();      
-  }, [allProducts, allCategories, filteredBysearch])
-  */
+  }
 
   return (
     <div>
@@ -179,6 +181,7 @@ const ProductsDashboard = ({ allProducts, allCategories, saveProductConfig, filt
                     <th scope="col">Precio</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody className="font-p aling-middle">
@@ -195,10 +198,10 @@ const ProductsDashboard = ({ allProducts, allCategories, saveProductConfig, filt
                           <th scope="row">{product.id}</th>
                           <td>
                             <div className="d-flex " style={{ height: "50px", }}>
-                              <img 
-                               src={urlImg(product.img).default}
-                               className="rounded" 
-                              alt="" 
+                              <img
+                                src={urlImg(product.img).default}
+                                className="rounded"
+                                alt=""
                               />
                             </div>
                           </td>
@@ -218,7 +221,7 @@ const ProductsDashboard = ({ allProducts, allCategories, saveProductConfig, filt
                             <div style={ColumnTitleStyle}> {product.stock} </div>
                           </td>
                           <td>
-                            <div style={ColumnTitleStyle}>{product.price}  </div>
+                            <div style={ColumnTitleStyle}> {product.price}  </div>
                           </td>
                           <td>
                             <div className="d-flex justify-content-center">
@@ -243,8 +246,17 @@ const ProductsDashboard = ({ allProducts, allCategories, saveProductConfig, filt
                             }
 
                           </td>
-                          <ModalProductSettings key={product.id + "setting"} editableProduct={product} saveProductConfig={saveProductConfig} />
-                          <ModalProductEditor key={product.id + "editor"} editableProduct={product} saveProductConfig={saveProductConfig} allCategories={allCategories} />
+
+                          <td>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={(event) => selectProductSetting(product.id, event)} />
+                              <label class="form-check-label" for="flexCheckDefault">
+                              </label>
+                            </div>
+                          </td>
+
+                          <ModalProductSettings key={product.id + "setting"} editableProduct={product} saveProductConfig={saveProductConfig} selectProduct={selectProduct} />
+                          <ModalProductEditor key={product.id + "editor"} editableProduct={product} saveProductConfig={saveProductConfig} allCategories={allCategories} selectProduct={selectProduct} />
 
                         </tr>
 

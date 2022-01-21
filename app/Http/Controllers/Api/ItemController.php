@@ -127,9 +127,43 @@ class ItemController extends Controller
             'user' => $item
         ], 201);
     }
+
+    public function showUnitItem(Request $request){
+
+        $validate = Validator::make($request->all(),[
+            'id' => ['numeric'],
+        ]);   
+
+        if($validate->fails()) {
+            return response()->json($validate->errors(), 400);
+        }
+
+        $id = $request->id;
+
+        if(!Item::find($id)){
+            return response()->json([
+                'message' => 'El producto no existe',
+            ], 400);
+        } 
+
+        $item = Item::find($id);
+
+        return $item;
+
+
+    }
+
+    public function showAllItem(Request $request){
+        $request->user()->authorizeRoles(['admin']);
+
+        return Item::get(['id','name','sku','img','description','stock','price','categories_id','status']);
+
+    }
     
-    public function showItem(){
-        return Item::all();
+    public function showActiveItem(){
+
+        $item = Item::where('status','LIKE','ACTIVE')->get(['id','name','sku','img','description','stock','price','categories_id','status']);
+        return $item;
     }
 
     //END API RESOURCE PRODUCT
@@ -202,7 +236,7 @@ class ItemController extends Controller
 
     public function showCategorie(){
 
-        return Categorie::all();
+        return Categorie::get(['id','name','status']);
     }
     
     //END API RESOURCE CATEGORY

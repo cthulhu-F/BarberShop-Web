@@ -4,7 +4,7 @@ import swal from "sweetalert2";
 import { UpdateOrderTurn } from "../../../helpers/TurnHelpers";
 
 
-const ModalTurnListSettings = ({ turn, editTurnSchedule, setTurnStatus }) => {
+const ModalTurnListSettings = ({ turn, editTurnSchedule, setTurnStatus, selectItemTable }) => {
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -17,8 +17,6 @@ const ModalTurnListSettings = ({ turn, editTurnSchedule, setTurnStatus }) => {
 
 
     const setNewStatusConfirmed = (turn) => {
-
-        console.log(turn);
 
         const parent = document.getElementById(`modalTurnSettings${turn.id}`)
         const childSelector = parent.querySelector("#set-turn-status-by-input")
@@ -43,13 +41,22 @@ const ModalTurnListSettings = ({ turn, editTurnSchedule, setTurnStatus }) => {
                 confirmButtonText: `Si, Modificar!`
             }).then(async (result) => {
                 if (result.isConfirmed) {
+                    
+                    let response;
+                    let formData = new FormData();
 
-                    let put = {
-                        id: turn.id,
-                        status: selectedKey
+                    formData.append('status', selectedKey);
+
+
+                    if(selectItemTable.length > 0){
+                        response = await UpdateOrderTurn(formData, selectItemTable);
+                    } else {
+                        formData.append('id', turn.id);
+                        response = await UpdateOrderTurn(formData, false);
                     }
 
-                    let response = await UpdateOrderTurn(put)
+
+
 
                     swal.fire({
                         text: response.message,
@@ -129,12 +136,12 @@ const ModalTurnListSettings = ({ turn, editTurnSchedule, setTurnStatus }) => {
 
                     </div>
                     <div class="modal-footer" >
-                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal"
+                        <button type="button" className="btn btn-orangeWeb" data-bs-dismiss="modal"
                             onClick={(e) => {
                                 setNewStatusConfirmed(
                                     turn);
 
-                            }}>Modificar estado</button>
+                            }}>Guardar cambios</button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>

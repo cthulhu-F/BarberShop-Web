@@ -5,35 +5,33 @@ import '../../../css/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
 
-import { ITEM_IMG } from '../../constants/constImg';
-
-import { useReducer } from "react";
+import { useReducer, useState, useEffect } from "react";
 import { shoppingInitialState, shoppingReducer } from "../../../../src/reducers/shoppingReducer";
 import { TYPES } from "../../../../src/actions/shoppingActions";
-import { useState } from "react";
+import { ShowGlobalImg } from "../../helpers/CustomerHelpers";
 
 
 const Header = () => {
-  
+
   let URL = window.location.pathname;
   URL = URL.split('/');
   let URLpage = URL[1];
-  if (URLpage ==''){
-    URLpage ='home';
+  if (URLpage == '') {
+    URLpage = 'home';
   }
 
 
-  let headerClasses ="nav-link link-black border-0";
-  let shopClasses ="nav-link link-black border-0";
-  
-  if (URLpage == 'home'){
-    headerClasses= "nav-link link-black border-0 border-dark border-bottom";
+  let headerClasses = "nav-link link-black border-0";
+  let shopClasses = "nav-link link-black border-0";
+
+  if (URLpage == 'home') {
+    headerClasses = "nav-link link-black border-0 border-dark border-bottom";
   }
 
-  if (URLpage == 'shop'){
-    shopClasses= "nav-link link-black border-0 border-dark border-bottom";
+  if (URLpage == 'shop') {
+    shopClasses = "nav-link link-black border-0 border-dark border-bottom";
   }
- 
+
   // function activeSetter(componentsID){
   //   let options = document.querySelectorAll("#" + componentsID);
   //   console.log(options);
@@ -45,15 +43,24 @@ const Header = () => {
   // activeSetter(headerID);
 
   const urlImg = require.context('../../../asset/marca', true);
+  const [img, setImg] = useState(null);
 
-  const[searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState();
 
   const onChangeSearch = (e) => {
     setSearchValue(e.target.value);
   }
 
+  useEffect(() => {
+    async function fetch() {
+      const resImg = await ShowGlobalImg();
+      setImg(resImg);
+    }
+    fetch();
+  }, [])
 
-  return(
+
+  return (
 
     <div className="container-fluid">
       <div className="container-md bg-white">
@@ -64,12 +71,22 @@ const Header = () => {
             <a className="navbar-brand text-dark bg-black p-1 pt-1 mt-0 rounded-0 rounded-circle rounded-top overflow-hidden"
               href="#">
 
-              <img 
-              src={urlImg(ITEM_IMG.logo).default}
-              alt="" 
-              width="70" 
-              height="70"
-              />
+              {
+                !img ?
+
+                  ""
+
+                  :
+
+                  <img
+                    src={urlImg(img[0].url).default}
+                    alt={img[0].name}
+                    width="70"
+                    height="70"
+                  ></img>
+
+              }
+
 
             </a>
 
@@ -101,9 +118,9 @@ const Header = () => {
               <div className="d-flex">
                 <input className="form-control me-2" type="search" onChange={onChangeSearch} placeholder="Buscar" aria-label="Search" id="global-header-search-in-shop-input"
                 />
-                <a href={"/shop/"+searchValue} className="btn btn-black"> <i className="bi bi-search"></i> </a>
+                <a href={"/shop/" + searchValue} className="btn btn-black"> <i className="bi bi-search"></i> </a>
                 <button className="btn btn-black ms-2" data-bs-toggle="modal" data-bs-target="#shoppingCartModal"><i
-                    className="bi bi-cart"></i></button>
+                  className="bi bi-cart"></i></button>
               </div>
             </div>
 

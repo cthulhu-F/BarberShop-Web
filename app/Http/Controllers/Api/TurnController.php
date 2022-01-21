@@ -155,7 +155,7 @@ class TurnController extends Controller
         $configDay->save();
 
         return response()->json([
-            'message' => 'order turn successfully update',
+            'message' => 'Orden de turno actualizada!',
         ], 201);
     }
 
@@ -187,7 +187,7 @@ class TurnController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Days registered',
+            'message' => 'Registro de configuracion exitosa!',
             'user' => $last_configDay
         ], 201);
     }
@@ -226,7 +226,6 @@ class TurnController extends Controller
 
         $configTurn->save();
 
-
         $configDay = ConfigDay::find($id);
 
         $configDay->status = $status;
@@ -234,7 +233,7 @@ class TurnController extends Controller
         $configDay->save();
 
         return response()->json([
-            'message' => 'order turn successfully update',
+            'message' => 'Configuracion actualizada con exito!',
         ], 201);
     }
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const ModalTurnListEditor = ({turn, editTurnSchedule}) =>{
+const ModalTurnListEditor = ({turn, editTurnSchedule, selectItemTable}) =>{
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');

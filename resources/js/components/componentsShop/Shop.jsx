@@ -8,7 +8,7 @@ import ShopItem from "./ShopItem";
   import mapDispatcht from '../../shoppingCartUses';
   import ModalShoppingCart from '../componentsShoppingCart/ModalShoppingCart';
   import LoadProduct from "../componentsLoaders/LoadProduct";
-  import {ShowAllProducts, ShowAllCategories } from "../../helpers/ItemHelpers";
+  import {ShowActiveProducts, ShowAllCategories } from "../../helpers/ItemHelpers";
 
 
 const Shop = () => {
@@ -34,7 +34,7 @@ const Shop = () => {
 
   useEffect(()=> {
     const showItem = async () => {
-      const resItem = await ShowAllProducts();
+      const resItem = await ShowActiveProducts();
       const resCategorie = await ShowAllCategories();
       readAllData(resItem, resCategorie);
       setItem(resItem);

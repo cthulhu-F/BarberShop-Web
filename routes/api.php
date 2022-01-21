@@ -44,6 +44,8 @@ Route::group([
 
   Route::post('CreateCategory', [ItemController::class, 'createCategory']);
   Route::post('UpdateCategory', [ItemController::class, 'updateCategory']);
+
+  Route::get('ShowAllItem', [ItemController::class, 'showAllItem']);
   
 /*
 |--------------------------------------------------------------------------
@@ -52,13 +54,13 @@ Route::group([
 */  
 
   Route::get('ShowOrderTurn', [TurnController::class, 'showOrderTurn']);
-  Route::put('UpdateOrderTurn', [TurnController::class, 'updateOrderTurn']);
+  Route::post('UpdateOrderTurn', [TurnController::class, 'updateOrderTurn']);
   
   Route::post('CreateConfigTurn', [TurnController::class, 'createConfigTurn']);
-  Route::put('UpdateConfigTurn', [TurnController::class, 'updateConfigTurn']);
+  Route::post('UpdateConfigTurn', [TurnController::class, 'updateConfigTurn']);
 
   Route::post('CreateConfigDay', [TurnController::class, 'createConfigDay']);
-  Route::put('UpdateConfigDay', [TurnController::class, 'UpdateConfigDay']);
+  Route::post('UpdateConfigDay', [TurnController::class, 'UpdateConfigDay']);
 
 /*
 |--------------------------------------------------------------------------
@@ -78,11 +80,7 @@ Route::group([
 */
 
   Route::post('UpdateCustomer', [CustomerController::class, 'updateCustomer']);
-  Route::get('ShowCustomer', [CustomerController::class, 'showCustomer']);
-
   Route::post('UpdateGlobalImg', [CustomerController::class, 'updateGlobalImg']);
-  Route::get('ShowGlobalImg', [CustomerController::class, 'showGlobalImg']);
-
 });
 
 /*
@@ -95,11 +93,22 @@ Route::post('Login', [AuthController::class, 'login']);
 
 /*
 |--------------------------------------------------------------------------
+| API Routes Customer
+|--------------------------------------------------------------------------
+*/
+
+
+Route::get('ShowGlobalImg', [CustomerController::class, 'showGlobalImg']);
+Route::get('ShowCustomer', [CustomerController::class, 'showCustomer']);
+
+/*
+|--------------------------------------------------------------------------
 | API Routes Item
 |--------------------------------------------------------------------------
 */
 
-Route::get('ShowItem', [ItemController::class, 'showItem']);
+Route::get('ShowUnitItem', [ItemController::class, 'showUnitItem']);
+Route::get('ShowActiveItem', [ItemController::class, 'showActiveItem']);
 Route::get('ShowCategorie', [ItemController::class, 'showCategorie']);
 
 /*

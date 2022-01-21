@@ -28,26 +28,59 @@ export const CreateCategory = async (formData) => {
 
 }
 
-export const UpdateCategory = async (formData) => {
+export const UpdateCategory = async (formData, selectCategory) => {
 
-  const data = await axios({
-    method: 'post',
-    url: 'http://127.0.0.1:8000/api/UpdateCategory',
-    data: formData
-  }).then((response) => {
-    return swal.fire({
-      text: response.data.message,
-      timer: "2000",
-      position: "bottom",
-      showConfirmButton: false,
-      customClass: {
-          container: "add-to-cart-alert-container",
-          popup: "add-to-cart-alert",
-      }
+  
+  if(selectCategory == false){
+
+    const data = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/UpdateCategory',
+      data: formData
+    }).then((response) => {
+      return swal.fire({
+        text: response.data.message,
+        timer: "2000",
+        position: "bottom",
+        showConfirmButton: false,
+        customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+        }
+      });
+    }).catch((response) => {
+      return response
     });
-  }).catch((response) => {
-    return response
-  });
+
+  }else{
+   const data = selectCategory.map(async (category) => {
+    
+    formData.append('id', category);
+
+    const data = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/UpdateCategory',
+      data: formData
+    }).then((response) => {
+      return swal.fire({
+        text: response.data.message,
+        timer: "2000",
+        position: "bottom",
+        showConfirmButton: false,
+        customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+        }
+      });
+    }).catch((response) => {
+      return response
+    });
+   
+  })
+
+  }
+
+  
 
 }
 
@@ -64,16 +97,35 @@ export const ShowAllCategories = async () => {
 
 //START API RESOURCE PRODUCT
 
-export const ShowAllProducts = async () => {
+export const ShowUnitProduct = async (id) => {
+
   const data = await axios({
     method: 'get',
-    url: 'http://127.0.0.1:8000/api/ShowItem',
+    url: 'http://127.0.0.1:8000/api/ShowUnitItem?id='+id,
   })
 
   return data.data
 }
 
-export const CreateProduct = async (formData) => {
+export const ShowActiveProducts = async () => {
+  const data = await axios({
+    method: 'get',
+    url: 'http://127.0.0.1:8000/api/ShowActiveItem',
+  })
+
+  return data.data
+}
+
+export const ShowAllProducts = async () => {
+  const data = await axios({
+    method: 'get',
+    url: 'http://127.0.0.1:8000/api/ShowAllItem',
+  })
+
+  return data.data
+}
+
+export const CreateProducts = async (formData) => {
   
   const data = await axios({
     method: 'post',
@@ -100,26 +152,61 @@ export const CreateProduct = async (formData) => {
 
 }
 
-export const UpdateProduct = async (formData) => {
+export const UpdateProducts = async (formData, selectProduct) => {
 
-  const data = await axios({
-    method: 'post',
-    url: 'http://127.0.0.1:8000/api/UpdateProduct',
-    data: formData
-  }).then((response) => {
-    return swal.fire({
-      text: response.data.message,
-      timer: "1500",
-      position: "bottom",
-      showConfirmButton: false,
-      customClass: {
-          container: "add-to-cart-alert-container",
-          popup: "add-to-cart-alert",
-      }
-  })
-  }).catch((response) => {
-    return response
-  });
+  if(selectProduct == false){
+
+    const data = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/UpdateProduct',
+      data: formData
+    }).then((response) => {
+      return swal.fire({
+        text: response.data.message,
+        timer: "1500",
+        position: "bottom",
+        showConfirmButton: false,
+        customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+        }
+    })
+    }).catch((response) => {
+      return response
+    });
+
+  } else {
+
+   const data = selectProduct.map(async (product) => {
+
+    formData.append('id', product);
+
+    const data = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/UpdateProduct',
+      data: formData
+    }).then((response) => {
+      return swal.fire({
+        text: response.data.message,
+        timer: "1500",
+        position: "bottom",
+        showConfirmButton: false,
+        customClass: {
+            container: "add-to-cart-alert-container",
+            popup: "add-to-cart-alert",
+        }
+    })
+    }).catch((response) => {
+      return response
+    });
+
+   });
+
+
+
+  }
+
+  
 
 }
 
@@ -130,8 +217,9 @@ export default (
   CreateCategory, 
   UpdateCategory, 
   ShowAllCategories,
+  ShowActiveProducts,
   ShowAllProducts,
-  CreateProduct,
-  UpdateProduct
+  CreateProducts,
+  UpdateProducts
 )
 

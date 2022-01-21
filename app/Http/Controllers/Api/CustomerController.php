@@ -88,7 +88,7 @@ class CustomerController extends Controller
 
     public function showCustomer(Request $request){
 
-        return Customer::all();
+        return Customer::get(['name','direction','phone','email','social_networks','information']);
     }
 
     //END API RESOURCE CUSTOMER
@@ -141,7 +141,9 @@ class CustomerController extends Controller
 
     public function showGlobalImg(Request $request){
 
-        return GlobalImg::all();
+        $globalImg = GlobalImg::get(['name','url']);
+
+        return $globalImg;
     }
 
     //END API RESOURCE GLOBAL 
