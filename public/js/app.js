@@ -10015,7 +10015,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var ModalSaleSettings = function ModalSaleSettings(_ref) {
   var sale = _ref.sale,
-      setSaleStatus = _ref.setSaleStatus;
+      setSaleStatus = _ref.setSaleStatus,
+      selectItemTable = _ref.selectItemTable;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -10049,22 +10050,39 @@ var ModalSaleSettings = function ModalSaleSettings(_ref) {
               switch (_context.prev = _context.next) {
                 case 0:
                   if (!result.isConfirmed) {
-                    _context.next = 9;
+                    _context.next = 15;
                     break;
                   }
 
                   formData = new FormData();
-                  formData.append('id', sale.id);
                   formData.append('status', selectedKey);
+
+                  if (!(selectItemTable.length > 0)) {
+                    _context.next = 9;
+                    break;
+                  }
+
                   _context.next = 6;
-                  return (0,_helpers_SaleHelpers__WEBPACK_IMPORTED_MODULE_3__.UpdateOrderSale)(formData);
+                  return (0,_helpers_SaleHelpers__WEBPACK_IMPORTED_MODULE_3__.UpdateOrderSale)(formData, selectItemTable);
 
                 case 6:
                   response = _context.sent;
-                  _context.next = 10;
+                  _context.next = 13;
                   break;
 
                 case 9:
+                  formData.append('id', sale.id);
+                  _context.next = 12;
+                  return (0,_helpers_SaleHelpers__WEBPACK_IMPORTED_MODULE_3__.UpdateOrderSale)(formData, false);
+
+                case 12:
+                  response = _context.sent;
+
+                case 13:
+                  _context.next = 16;
+                  break;
+
+                case 15:
                   sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                     text: "Ning\xFAn dato ha sido modificado.",
                     timer: "1500",
@@ -10075,7 +10093,7 @@ var ModalSaleSettings = function ModalSaleSettings(_ref) {
                     }
                   });
 
-                case 10:
+                case 16:
                 case "end":
                   return _context.stop();
               }
@@ -10218,7 +10236,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var SaleListItem = function SaleListItem(_ref) {
   var sale = _ref.sale,
-      setSaleStatus = _ref.setSaleStatus;
+      setSaleStatus = _ref.setSaleStatus,
+      selectItem = _ref.selectItem,
+      selectItemTable = _ref.selectItemTable;
 
   var setCurrentStatus = function setCurrentStatus(saleStatus, saleId) {
     var parent = document.getElementById("modalSaleSettings".concat(saleId));
@@ -10288,6 +10308,22 @@ var SaleListItem = function SaleListItem(_ref) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
           "class": "bi bi-dash-circle-fill"
         })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        "class": "form-check",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          "class": "form-check-input",
+          type: "checkbox",
+          value: "",
+          id: "flexCheckDefault",
+          onClick: function onClick(event) {
+            return selectItem(sale.id, event);
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          "class": "form-check-label",
+          "for": "flexCheckDefault"
+        })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "modal fade",
@@ -10385,7 +10421,8 @@ var SaleListItem = function SaleListItem(_ref) {
       sale: sale
     }, sale.id), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ModalSaleSettings__WEBPACK_IMPORTED_MODULE_2__["default"], {
       sale: sale,
-      setSaleStatus: setSaleStatus
+      setSaleStatus: setSaleStatus,
+      selectItemTable: selectItemTable
     }, sale.id)]
   });
 };
@@ -10422,6 +10459,14 @@ __webpack_require__.r(__webpack_exports__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -10549,6 +10594,25 @@ var Sales = function Sales() {
   /* PAGINATION END*/
 
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      selectItemTable = _useState8[0],
+      setSelectItemTable = _useState8[1];
+
+  function selectItem(id, event) {
+    var array = selectItemTable;
+
+    if (event.target.checked) {
+      array = [].concat(_toConsumableArray(array), [id]);
+      setSelectItemTable(array.splice(" "));
+    } else {
+      var filterArray = array.filter(function (item) {
+        return id !== item;
+      });
+      setSelectItemTable(filterArray);
+    }
+  }
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var fetch = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -10562,11 +10626,11 @@ var Sales = function Sales() {
 
               case 2:
                 data = _context.sent;
-                console.log(data);
+                //console.log(data);
                 readAllData(data);
                 setSalesPagination(data);
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -10698,6 +10762,8 @@ var Sales = function Sales() {
                   scope: "col"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("th", {
                   scope: "col"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("th", {
+                  scope: "col"
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("tbody", {
@@ -10706,7 +10772,9 @@ var Sales = function Sales() {
               }) : currentSales.map(function (sale) {
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_SaleListItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
                   sale: sale,
-                  setSaleStatus: setSaleStatus
+                  setSaleStatus: setSaleStatus,
+                  selectItem: selectItem,
+                  selectItemTable: selectItemTable
                 }, sale.id);
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("tfoot", {
@@ -19838,19 +19906,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var UpdateOrderSale = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(formData) {
-    var data;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(formData, selectItem) {
+    var data, _data;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
-            _context.next = 2;
+            if (!(selectItem == false)) {
+              _context2.next = 6;
+              break;
+            }
+
+            _context2.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_1___default()({
               method: 'post',
               url: 'http://127.0.0.1:8000/api/UpdateOrderSale',
               data: formData
             }).then(function (results) {
-              sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                 text: results.data.message,
                 timer: "1500",
                 position: "bottom",
@@ -19860,48 +19934,70 @@ var UpdateOrderSale = /*#__PURE__*/function () {
                   popup: "add-to-cart-alert"
                 }
               });
+            })["catch"](function (results) {
+              return results;
             });
 
-          case 2:
-            data = _context.sent;
-            return _context.abrupt("return", data.data);
-
-          case 4:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function UpdateOrderSale(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-var ShowOrderSale = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-    var data, dataDecode;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default()({
-              method: 'get',
-              url: 'http://127.0.0.1:8000/api/ShowOrderSale'
-            });
-
-          case 2:
+          case 3:
             data = _context2.sent;
-            dataDecode = [];
-            data.data.map(function (item) {
-              item.resumen = JSON.parse(item.resumen);
-              item.dataClient = JSON.parse(item.dataClient);
-              dataDecode.push(item);
-            });
-            return _context2.abrupt("return", dataDecode);
+            _context2.next = 7;
+            break;
 
           case 6:
+            _data = selectItem.map( /*#__PURE__*/function () {
+              var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(item) {
+                var data;
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        formData.append('id', item);
+                        _context.next = 3;
+                        return axios__WEBPACK_IMPORTED_MODULE_1___default()({
+                          method: 'post',
+                          url: 'http://127.0.0.1:8000/api/UpdateOrderSale',
+                          data: formData
+                        }).then(function (results) {
+                          return sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                            text: results.data.message,
+                            timer: "1500",
+                            position: "bottom",
+                            showConfirmButton: false,
+                            customClass: {
+                              container: "add-to-cart-alert-container",
+                              popup: "add-to-cart-alert"
+                            }
+                          });
+                        })["catch"](function (results) {
+                          return sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                            text: 'Se a producido un error! vuelva a intentarlo mas tarde.',
+                            timer: "1500",
+                            position: "bottom",
+                            showConfirmButton: false,
+                            customClass: {
+                              container: "add-to-cart-alert-container",
+                              popup: "add-to-cart-alert"
+                            }
+                          });
+                        });
+
+                      case 3:
+                        data = _context.sent;
+
+                      case 4:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee);
+              }));
+
+              return function (_x3) {
+                return _ref2.apply(this, arguments);
+              };
+            }());
+
+          case 7:
           case "end":
             return _context2.stop();
         }
@@ -19909,8 +20005,43 @@ var ShowOrderSale = /*#__PURE__*/function () {
     }, _callee2);
   }));
 
+  return function UpdateOrderSale(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var ShowOrderSale = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+    var data, dataDecode;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default()({
+              method: 'get',
+              url: 'http://127.0.0.1:8000/api/ShowOrderSale'
+            });
+
+          case 2:
+            data = _context3.sent;
+            dataDecode = [];
+            data.data.map(function (item) {
+              item.resumen = JSON.parse(item.resumen);
+              item.dataClient = JSON.parse(item.dataClient);
+              dataDecode.push(item);
+            });
+            return _context3.abrupt("return", dataDecode);
+
+          case 6:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
   return function ShowOrderSale() {
-    return _ref2.apply(this, arguments);
+    return _ref3.apply(this, arguments);
   };
 }();
 

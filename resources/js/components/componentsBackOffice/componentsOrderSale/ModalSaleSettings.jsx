@@ -4,7 +4,8 @@ import swal from "sweetalert2";
 import { UpdateOrderSale } from "../../../helpers/SaleHelpers";
 
 
-const ModalSaleSettings = ({sale,setSaleStatus}) =>{
+const ModalSaleSettings = ({sale,setSaleStatus, selectItemTable}) =>{
+
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -36,10 +37,18 @@ const ModalSaleSettings = ({sale,setSaleStatus}) =>{
                     if (result.isConfirmed) {
                         
                         let formData = new FormData();
-                        formData.append('id', sale.id);
+                        
                         formData.append('status', selectedKey);
+                        
+                        let response;
 
-                        let response = await UpdateOrderSale(formData);
+                        if(selectItemTable.length > 0){
+                            response = await UpdateOrderSale(formData, selectItemTable);
+                        }else {
+                            formData.append('id', sale.id);
+                            response = await UpdateOrderSale(formData, false);
+                        }
+
 
                     }else{
                         swal.fire({
