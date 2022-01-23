@@ -181,6 +181,7 @@ export function shoppingReducer(state, action) {
                         text: `Alcanzaste el límite de ${editableProduct.stock} ${editableProduct.name}`,
                         timer:"2000", 
                         position: "bottom",
+                        showConfirmButton: false,
                         customClass : {
                             container: "add-to-cart-alert-container",
                             popup:"add-to-cart-alert",
