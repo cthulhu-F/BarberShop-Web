@@ -13,6 +13,8 @@ import ShopItem from "./ShopItem";
   import LoadProduct from "../componentsLoaders/LoadProduct";
   import {ShowAllProducts, ShowAllCategories } from "../../helpers/ItemHelpers";
 
+import Pagination from "../componentsBackOffice/componentsTurns/Pagination";
+
 
 const Shop = () => {
   
@@ -76,6 +78,29 @@ const Shop = () => {
     }
   )
 
+  /* PAGINATION*/
+
+  const [paginationProducts, setProductsPagination] = useState(searchResult);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(2);
+
+  let indexOfLastProduct;
+  let indexOfFirstProduct;
+  let currentProducts;
+  let howManyPages;
+
+ 
+
+  if (searchResult) {
+
+    indexOfLastProduct = currentPage * productsPerPage;
+    indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    currentProducts = searchResult.slice(indexOfFirstProduct, indexOfLastProduct)
+    howManyPages = Math.ceil(searchResult.length / productsPerPage)
+
+  }
+  /* PAGINATION END*/
+
   return (
 
    
@@ -114,13 +139,20 @@ const Shop = () => {
             :
             
             searchValue != ""
-            ? searchResult.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
+            ? currentProducts.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
             : item.map((product)=><ShopItem key={product.id} data={product} addToCart={addToCart} addOneToCart={addOneToCart} cart={cart}/>)
 
             
             }
             
           </div>
+          <Pagination importedStyle={
+            {padding:"20px",
+            display:"flex",
+            justifyContent: "center",
+          }
+            } setCurrentPage={setCurrentPage} pages={howManyPages} />
+
           </div>
 
           <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}  />

@@ -42,20 +42,35 @@ const getWeekSchedule = (turn) =>{
 const sortByDate = (nonSortedTurns) =>{
     const sortedTurns =[];
     let sortedOrder = [];
+    let spliter;
     nonSortedTurns.map((turn)=>
-        sortedOrder.push(
-            {order : turn.date.split('/')[2]+turn.date.split('/')[1]+turn.date.split('/')[0]+turn.time.split(':')[0]+turn.time.split(':')[1], id: turn.id}
-        )
+        {spliter = turn.date.includes("-") ? "-" : "/";
+            console.log(turn.date.includes("-"))
+            sortedOrder.push(
+            {order : turn.date.split(spliter)[2]+turn.date.split(spliter)[1]+turn.date.split(spliter)[0]+turn.time.split(':')[0]+turn.time.split(':')[1], id: turn.id}
+        )}
     )
+
+
     sortedOrder.sort(function(a, b) {
         return a.order - b.order;
     });
+
 
     sortedOrder.map(sortedId=>
         sortedTurns.push(
             ...nonSortedTurns.filter(turn => turn.id == sortedId.id)
         )
     )
+
+    console.log("sortedOrder");
+    console.log(sortedOrder)
+
+    console.log("sortedTurns");
+    console.log(sortedTurns)
+
+    console.log("nonsortedTurns");
+    console.log(nonSortedTurns)
 
     return sortedTurns
 }
@@ -119,7 +134,7 @@ export function backofficeTurnDashboardReducer(state, action){
                 filteredByName = FilteredBydate
             }
             
-            return {...state, dashboardTurns : filteredByName};
+            return {...state, dashboardTurns : sortByDate(filteredByName)};
 
         }
 
@@ -131,7 +146,7 @@ export function backofficeTurnDashboardReducer(state, action){
                 filteredByChair = state.allShcheduled
             }
 
-            return {...state, dashboardTurns : filteredByChair};
+            return {...state, dashboardTurns : sortByDate(filteredByChair)};
         }
 
 
@@ -188,7 +203,7 @@ export function backofficeTurnDashboardReducer(state, action){
             return {...state, allShcheduled: allScheduleSorted,
                 todayScheduled: filteredByActive(allScheduleSorted.filter((turn)=>turn.date == todayString)),
                 tomorrowScheduled: filteredByActive(allScheduleSorted.filter((turn)=>getWeekSchedule(turn))),
-                dashboardTurns: state.dashboardTurns,
+                dashboardTurns: sortByDate(state.dashboardTurns),
             }
 
         }   

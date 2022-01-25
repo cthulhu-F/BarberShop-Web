@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 
 import "../../../../css/pagination.css"
 
-function Pagination({ pages = 2, setCurrentPage }) {
+function Pagination({ pages = 2, setCurrentPage, importedStyle={}}) {
 
   //Set number of pages
   const numberOfPages = []
+
+
   for (let i = 1; i <= pages; i++) {
     numberOfPages.push(i)
   }
@@ -62,11 +64,12 @@ function Pagination({ pages = 2, setCurrentPage }) {
 
     setArrOfCurrButtons(tempNumberOfPages)
     setCurrentPage(currentButton)
-  }, [currentButton])
+  }, [currentButton, pages])
 
+  
 //console.logarrOfCurrButtons)
   return (
-    <ul className="pagination m-0">
+    <ul className="pagination m-0" style={{...importedStyle, display: pages === 1? "none" : importedStyle.display}} >
       <li className="page-item">
         <a
           href="javascript:void"

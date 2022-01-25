@@ -1,6 +1,8 @@
 import React, { useEffect, useState }  from "react";
 
 import { ShowConfigDay, ShowConfigTurn} from "../../../helpers/TurnHelpers";
+ 
+import swal from "sweetalert2";
 
 const ModalTurnListEditor = ({turn, editTurnSchedule, schedule,getBackofficeSchedule}) =>{
 

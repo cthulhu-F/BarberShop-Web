@@ -12,7 +12,7 @@ const ShopItem = ({data, addOneToCart,cart}) => {
 
   const setAlert = (id)=>{
     let existent = cart.find(item => item.id == data.id);
-    return existent ? existent.quantity<existent.stock-1 : false;
+    return existent ? existent.quantity<existent.stock-1 : true;
   }
 
   return(

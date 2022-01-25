@@ -113,6 +113,15 @@ const MotiveSetterAndViewer = () => {
     fetchPosts();
   }, [])
 
+
+  const sortByDay=(week) =>{
+    let sortedWeek = {};    
+    Object.entries(days).map(day=>{
+      sortedWeek[day[0]] = week[day[0]]
+    })
+    return sortedWeek
+  }
+
   return (
     <div>
       <div className="row px-3">
@@ -172,7 +181,7 @@ const MotiveSetterAndViewer = () => {
                                 <td>
                                   <div style={{ overflowWrap: "break-word", width: "300px" }}>
                                     {/* {Object.entries(chair.days).filter(day => day[1] != "NONACTIVE").map(activeDay=> */}
-                                    {Object.entries(chair.days).map(activeDay =>
+                                    {Object.entries(sortByDay(chair.days)).map(activeDay =>
                                       <span className={activeDay[1] == "NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white"} style={{
                                         padding: "5px", borderRadius: "5px", marginRight: "5px"
                                       }}>{(days[activeDay[0]] + ' ').toUpperCase()}</span>

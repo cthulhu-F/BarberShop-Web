@@ -11474,7 +11474,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _helpers_TurnHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers/TurnHelpers */ "./resources/js/helpers/TurnHelpers.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -11521,7 +11524,7 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
       var msjUrl = "Hola ".concat(turn.name_client, ", desde BrothersBarberShop queremos notificarle que por razones de fuerza mayor hemos tenido que modificar la programaci\xF3n de su turno. La nueva programaci\xF3n es la siguiente%0A%0A").concat(wppDateAlert).concat(wppTimeAlert, "Sepa disculpar las molestias, si no dispone de ese horario libre por favor notif\xEDquenos, de lo contrario te esperamos el d\xEDa ").concat(turn.date, " a las ").concat(turn.time, ".%0AMuchas gracias!");
       msjUrl = msjUrl.split(" ").join("%20");
       var clienWppLink = convertTelToWppLink(turn.phone_client);
-      swal.fire({
+      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
         title: "Atención",
         html: "Esta seguro que desea modificar los siguientes datos?<br><br> \n            ".concat(dateAlert, " ").concat(timeAlert),
         icon: 'warning',
@@ -11535,7 +11538,7 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
           editTurnSchedule(date.value, selectedKey, turn);
           date.value = "";
           time.value = "";
-          swal.fire({
+          sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
             text: 'Datos modificados con éxito',
             timer: "1500",
             position: "bottom",
@@ -11545,7 +11548,7 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
             }
           });
         } else {
-          swal.fire({
+          sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
             text: "Ning\xFAn dato ha sido modificado.",
             timer: "1500",
             position: "bottom",
@@ -11557,7 +11560,7 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
         }
       });
     } else {
-      swal.fire({
+      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
         text: "Ning\xFAn dato ha sido modificado.",
         timer: "1500",
         position: "bottom",
@@ -11575,7 +11578,7 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
     return sortedDate;
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "modal fade",
     id: "modalTurnConfig".concat(turn.id),
     "data-bs-backdrop": "static",
@@ -11583,33 +11586,33 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
     tabindex: "-1",
     "aria-labelledby": "modalTurnConfigLabel",
     "aria-hidden": "true",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "modal-dialog modal-gl",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "modal-content",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "modal-header",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h5", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h5", {
             "class": "modal-title fw-bold font-h1",
             children: ["Programaci\xF3n del turno ", turn.id]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             type: "button",
             className: "btn-close",
             "data-bs-dismiss": "modal",
             "aria-label": "Close"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           "class": "modal-body",
           id: "modalTurnItemInput".concat(turn.id),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col-12",
             id: "timeFin-container",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                 className: "me-2 p-2 fw-bold",
                 children: "Fecha"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 className: "form-control  w-50",
                 type: "text",
                 name: "trip-start",
@@ -11630,30 +11633,30 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
                   return getBackofficeSchedule(turn.name, sortDate(e.target.value));
                 }
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "d-flex justify-content-between mb-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                 className: "me-2 p-2 fw-bold",
                 children: "Horario"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("select", {
                 className: "form-select p-2  w-50",
                 id: "backofice-turn-time-editor",
                 disabled: schedule == "NONACTIVE",
                 children: schedule != "NONACTIVE" ? schedule.map(function (hour, index) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
                     selected: turn.time == hour.turn,
                     id: hour.turn,
                     children: hour.turn
                   }, index);
-                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
                   children: "Día Inhabilitado"
                 }, "0")
               })]
             })]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           "class": "modal-footer",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             type: "button",
             className: "btn ".concat(schedule == "NONACTIVE" ? "btn-secondary" : "btn-primary"),
             "data-bs-dismiss": "modal",
@@ -11664,7 +11667,7 @@ var ModalTurnListEditor = function ModalTurnListEditor(_ref) {
             },
             disabled: schedule == "NONACTIVE",
             children: "Modificar programaci\xF3n"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             type: "button",
             className: "btn btn-secondary",
             "data-bs-dismiss": "modal",
@@ -12586,6 +12589,15 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
 
     fetchPosts();
   }, []);
+
+  var sortByDay = function sortByDay(week) {
+    var sortedWeek = {};
+    Object.entries(days).map(function (day) {
+      sortedWeek[day[0]] = week[day[0]];
+    });
+    return sortedWeek;
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
       className: "row px-3",
@@ -12670,7 +12682,7 @@ var MotiveSetterAndViewer = function MotiveSetterAndViewer() {
                                 overflowWrap: "break-word",
                                 width: "300px"
                               },
-                              children: Object.entries(chair.days).map(function (activeDay) {
+                              children: Object.entries(sortByDay(chair.days)).map(function (activeDay) {
                                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
                                   className: activeDay[1] == "NONACTIVE" ? "bg-danger text-white" : "bg-dark text-white",
                                   style: {
@@ -12794,6 +12806,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _css_pagination_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../css/pagination.css */ "./resources/css/pagination.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -12822,7 +12840,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Pagination(_ref) {
   var _ref$pages = _ref.pages,
       pages = _ref$pages === void 0 ? 2 : _ref$pages,
-      setCurrentPage = _ref.setCurrentPage;
+      setCurrentPage = _ref.setCurrentPage,
+      _ref$importedStyle = _ref.importedStyle,
+      importedStyle = _ref$importedStyle === void 0 ? {} : _ref$importedStyle;
   //Set number of pages
   var numberOfPages = [];
 
@@ -12874,10 +12894,13 @@ function Pagination(_ref) {
 
     setArrOfCurrButtons(tempNumberOfPages);
     setCurrentPage(currentButton);
-  }, [currentButton]); //console.logarrOfCurrButtons)
+  }, [currentButton, pages]); //console.logarrOfCurrButtons)
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
     className: "pagination m-0",
+    style: _objectSpread(_objectSpread({}, importedStyle), {}, {
+      display: pages === 1 ? "none" : importedStyle.display
+    }),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
       className: "page-item",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
@@ -16710,7 +16733,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _componentsShoppingCart_ModalShoppingCart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../componentsShoppingCart/ModalShoppingCart */ "./resources/js/components/componentsShoppingCart/ModalShoppingCart.jsx");
 /* harmony import */ var _componentsLoaders_LoadProduct__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../componentsLoaders/LoadProduct */ "./resources/js/components/componentsLoaders/LoadProduct.jsx");
 /* harmony import */ var _helpers_ItemHelpers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helpers/ItemHelpers */ "./resources/js/helpers/ItemHelpers.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _componentsBackOffice_componentsTurns_Pagination__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../componentsBackOffice/componentsTurns/Pagination */ "./resources/js/components/componentsBackOffice/componentsTurns/Pagination.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -16736,6 +16760,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /*MODAL SHOP IMPORTS*/
+
 
 
 
@@ -16826,40 +16851,78 @@ var Shop = function Shop() {
     var stringsearched = searchValue.toUpperCase();
     return search.indexOf(stringsearched) > -1;
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+  /* PAGINATION*/
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(searchResult),
+      _useState4 = _slicedToArray(_useState3, 2),
+      paginationProducts = _useState4[0],
+      setProductsPagination = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentPage = _useState6[0],
+      setCurrentPage = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2),
+      _useState8 = _slicedToArray(_useState7, 1),
+      productsPerPage = _useState8[0];
+
+  var indexOfLastProduct;
+  var indexOfFirstProduct;
+  var currentProducts;
+  var howManyPages;
+
+  if (searchResult) {
+    indexOfLastProduct = currentPage * productsPerPage;
+    indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    currentProducts = searchResult.slice(indexOfFirstProduct, indexOfLastProduct);
+    howManyPages = Math.ceil(searchResult.length / productsPerPage);
+  }
+  /* PAGINATION END*/
+
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
     className: "container-fluid p-3 min-vh-100",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
       className: "container-md",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
         className: "row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
           className: "col-12 col-xl-12 border-0",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
             className: "w-100 text-center fw-bold font-h1",
             style: {
               color: "#000"
             },
             children: !products ? "Cargando ".concat(searchValue != "undefined" ? "resultados para \"".concat(searchValue, "\"") : "", "...") : searchValue != "undefined" ? "".concat(searchResult.length, " Resultados encontrados para \"").concat(searchValue, "\"") : ""
           })
-        }), !products ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_componentsLoaders_LoadProduct__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        }), !products ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_componentsLoaders_LoadProduct__WEBPACK_IMPORTED_MODULE_10__["default"], {
           cant: 7
-        }) : searchValue != "" ? searchResult.map(function (product) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }) : searchValue != "" ? currentProducts.map(function (product) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
             data: product,
             addToCart: addToCart,
             addOneToCart: addOneToCart,
             cart: cart
           }, product.id);
         }) : item.map(function (product) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_ShopItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
             data: product,
             addToCart: addToCart,
             addOneToCart: addOneToCart,
             cart: cart
           }, product.id);
         })]
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_componentsShoppingCart_ModalShoppingCart__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_componentsBackOffice_componentsTurns_Pagination__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        importedStyle: {
+          padding: "20px",
+          display: "flex",
+          justifyContent: "center"
+        },
+        setCurrentPage: setCurrentPage,
+        pages: howManyPages
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_componentsShoppingCart_ModalShoppingCart__WEBPACK_IMPORTED_MODULE_9__["default"], {
       data: cart,
       deleteFromCart: deleteFromCart,
       addOneToCart: addOneToCart,
@@ -16872,8 +16935,8 @@ var Shop = function Shop() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Shop);
 
 if (document.getElementById("shop")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.StrictMode, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(Shop, {})
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.StrictMode, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(Shop, {})
   }), document.getElementById("shop"));
 }
 
@@ -16913,7 +16976,7 @@ var ShopItem = function ShopItem(_ref) {
     var existent = cart.find(function (item) {
       return item.id == data.id;
     });
-    return existent ? existent.quantity < existent.stock - 1 : false;
+    return existent ? existent.quantity < existent.stock - 1 : true;
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
@@ -20921,9 +20984,12 @@ var getWeekSchedule = function getWeekSchedule(turn) {
 var sortByDate = function sortByDate(nonSortedTurns) {
   var sortedTurns = [];
   var sortedOrder = [];
+  var spliter;
   nonSortedTurns.map(function (turn) {
-    return sortedOrder.push({
-      order: turn.date.split('/')[2] + turn.date.split('/')[1] + turn.date.split('/')[0] + turn.time.split(':')[0] + turn.time.split(':')[1],
+    spliter = turn.date.includes("-") ? "-" : "/";
+    console.log(turn.date.includes("-"));
+    sortedOrder.push({
+      order: turn.date.split(spliter)[2] + turn.date.split(spliter)[1] + turn.date.split(spliter)[0] + turn.time.split(':')[0] + turn.time.split(':')[1],
       id: turn.id
     });
   });
@@ -20935,6 +21001,12 @@ var sortByDate = function sortByDate(nonSortedTurns) {
       return turn.id == sortedId.id;
     })));
   });
+  console.log("sortedOrder");
+  console.log(sortedOrder);
+  console.log("sortedTurns");
+  console.log(sortedTurns);
+  console.log("nonsortedTurns");
+  console.log(nonSortedTurns);
   return sortedTurns;
 };
 
@@ -21003,7 +21075,7 @@ function backofficeTurnDashboardReducer(state, action) {
         }
 
         return _objectSpread(_objectSpread({}, state), {}, {
-          dashboardTurns: filteredByName
+          dashboardTurns: sortByDate(filteredByName)
         });
       }
 
@@ -21020,7 +21092,7 @@ function backofficeTurnDashboardReducer(state, action) {
         }
 
         return _objectSpread(_objectSpread({}, state), {}, {
-          dashboardTurns: filteredByChair
+          dashboardTurns: sortByDate(filteredByChair)
         });
       }
 
@@ -21089,7 +21161,7 @@ function backofficeTurnDashboardReducer(state, action) {
           tomorrowScheduled: filteredByActive(_allScheduleSorted.filter(function (turn) {
             return getWeekSchedule(turn);
           })),
-          dashboardTurns: state.dashboardTurns
+          dashboardTurns: sortByDate(state.dashboardTurns)
         });
       }
 
