@@ -8,7 +8,7 @@ import { ITEM_IMG } from '../../constants/constImg';
 import { useForm } from "react-hook-form";
 import  { Authorization} from "../../helpers/AuthHelpers";
 import swal from'sweetalert2';
-
+import {Helmet} from "react-helmet";
 
 const passwordVisible = (iconId, inputId) => {
 
@@ -62,6 +62,16 @@ const Login = () => {
 
     return (
         <div className="container h-100">
+            <Helmet>
+                <title data-react-helmet="true" > Login</title>
+                <meta name="description" content="
+                    Accedé al panel de control
+                "/>    
+                <meta name="keywords" content="
+                    login, iniciar sesion, acceder, loguearse, sing up
+                "/>
+                <meta http-equiv="expires" content="86400"/>    
+            </Helmet>
             <div className="d-flex justify-content-center align-self-center h-100">
                 <div className="user_card">
                     <div className="d-flex justify-content-center">

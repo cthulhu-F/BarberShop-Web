@@ -14,7 +14,7 @@ import ShopItem from "./ShopItem";
   import {ShowAllProducts, ShowAllCategories } from "../../helpers/ItemHelpers";
 
 import Pagination from "../componentsBackOffice/componentsTurns/Pagination";
-
+import { Helmet } from "react-helmet";
 
 const Shop = () => {
   
@@ -101,10 +101,21 @@ const Shop = () => {
   }
   /* PAGINATION END*/
 
+  
+  let statcTags = "barbería, peluquería, república dominicana, productos de belleza, cuidado facial, cuidado del cabello, productos de barbería, aceites para barba";
+  
   return (
 
    
     <div className="container-fluid p-3 min-vh-100" >
+        <Helmet >
+          <title data-react-helmet="true" >Shop</title>
+          <meta name="description" content=
+          "En Brothers Barbershop tambíen podés comprar tus productos favoritos, simplemente sumalos al carrito y listo! podés abobnar con todas las tarjetas"
+          />    
+          <meta name="keywords" content={products ? statcTags + ', ' +currentProducts.map(product=> product.name): statcTags}/>
+          <meta http-equiv="expires" content="86400"/>    
+        </Helmet>
         <div className="container-md" >
     
           <div className="row row-cols-2 row-cols-xl-4 g-3 g-xl-5 font-p" >
@@ -155,7 +166,7 @@ const Shop = () => {
 
           </div>
 
-          <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}  />
+          <ModalShoppingCart data={cart} deleteFromCart={deleteFromCart} addOneToCart={addOneToCart} addToCart={addToCart} cleanCart={cleanCart}/>
 
         </div>
   );

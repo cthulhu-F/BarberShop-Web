@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/main.css';
 
 import swal from'sweetalert2';
+import {Helmet} from 'react-helmet';
 
 
 const ModalShoppingCart = ({ data, deleteFromCart, addOneToCart, cleanCart}) => {

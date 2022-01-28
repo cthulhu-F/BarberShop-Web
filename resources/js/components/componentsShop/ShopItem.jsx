@@ -15,6 +15,7 @@ const ShopItem = ({data, addOneToCart,cart}) => {
     return existent ? existent.quantity<existent.stock-1 : true;
   }
 
+
   return(
 
       <div className="col border-0">
